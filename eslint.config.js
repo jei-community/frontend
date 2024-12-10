@@ -1,8 +1,9 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+import js from '@eslint/js';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -19,17 +20,14 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       eqeqeq: [2, 'allow-null'], // == 금지
-      'array-element-newline': [
-        'error',
-        {
-          ArrayExpression: { multiline: true, minItems: 3 }, // 배열의 요소가 5개 이상일 경우, 각각 한줄씩
-        },
-      ],
+      // 'array-element-newline': [
+      //   'error',
+      //   {
+      //     ArrayExpression: { multiline: true, minItems: 3 }, // 배열의 요소가 5개 이상일 경우, 각각 한줄씩
+      //   },
+      // ],
       quotes: [2, 'single', { avoidEscape: false }], // ', `만 허용
       'padding-line-between-statements': [
         'error',
@@ -43,4 +41,4 @@ export default tseslint.config(
       '@typescript-eslint/explicit-module-boundary-types': 0, // 명시적 모듈 바운더리 타입 허용
     },
   },
-)
+);
