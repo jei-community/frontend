@@ -31,6 +31,7 @@
     "globals": "^15.12.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
+    "msw": "^2.6.8",
     "prettier": "3.4.2",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.15.0",
@@ -40,6 +41,11 @@
     "*.{js,jsx,ts,tsx}": [
       "prettier --config --cache --write",
       "eslint --cache --fix"
+    ]
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
     ]
   }
 }
