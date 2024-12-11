@@ -12,10 +12,11 @@ export default function App() {
   return (
     <Suspense>
       <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <Layout>
-          <Outlet />
-        </Layout>
+        <GlobalStyle>
+          <Layout>
+            <Outlet />
+          </Layout>
+        </GlobalStyle>
       </QueryClientProvider>
     </Suspense>
   );
