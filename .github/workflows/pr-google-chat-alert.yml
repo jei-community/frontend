@@ -3,6 +3,9 @@ name: Deploy ## 21
 # 명시된 브랜치 목록들을 base branch로 하는 PR이 [생성, 재생성, head 브랜치 동기화, PR 리뷰 준비 완료] 이벤트 발생 시 워크플로우 동작
 on:
   pull_request:
+    branches:
+      - main
+      - develop
     types: [opened, reopened, synchronize, ready_for_review] # 해당 타입들은 github webhook payload 타입 목록을 따릅니다
 
 jobs:
