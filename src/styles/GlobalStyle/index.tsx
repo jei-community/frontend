@@ -1,11 +1,16 @@
-import { Global, css } from '@emotion/react';
+import { PropsWithChildren } from 'react';
 
-export default function GlobalStyle() {
+import { Global, ThemeProvider, css } from '@emotion/react';
+
+import theme from '../theme';
+
+export default function GlobalStyle({ children }: PropsWithChildren) {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Global styles={ResetStyle} />
       <Global styles={BaseStyle} />
-    </>
+      {children}
+    </ThemeProvider>
   );
 }
 
@@ -139,5 +144,6 @@ const ResetStyle = css`
 const BaseStyle = css`
   html {
     font-size: 10px;
+    font-family: 'Pretendard', sans-serif;
   }
 `;
