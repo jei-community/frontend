@@ -1,0 +1,29 @@
+name: Deploy ## 21
+
+# 명시된 브랜치 목록들을 base branch로 하는 PR이 [생성, 재생성, head 브랜치 동기화, PR 리뷰 준비 완료] 이벤트 발생 시 워크플로우 동작
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [opened, reopened, synchronize, ready_for_review] # 해당 타입들은 github webhook payload 타입 목록을 따릅니다
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 워크플로우가 실행될 GitHub Actions 러너의 OS를 지정합니다.
+
+    steps:
+      - name: Notify Google Chat on Pull Request
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          PR_USER_ID="${{ github.event.pull_request.user.id }}"
+          PR_USER_LOGIN="${{ github.event.pull_request.user.login }}"
+
+          # GitHub Actions의 시간은 UTC로 제공되므로, Asia/Seoul로 변환
+          CURRENT_TIME_KST=$(TZ="Asia/Seoul" date '+%Y-%m-%d %H:%M:%S')
+
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -d "{\"text\": \"🐬 [Platform-Monitoring]\n\n${PR_USER_LOGIN} 님이 Pull Request 를 생성하였습니다.\n\n- PR 제목: ${PR_TITLE}\n- PR 내용: ${PR_BODY}\n- 시각: ${CURRENT_TIME_KST}\"}" \
+          "${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}"
