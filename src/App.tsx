@@ -1,18 +1,22 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
 
+import Layout from '@/components/Layout';
+
+import GlobalStyle from '@/styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <div>
-      <Suspense>
-        <QueryClientProvider client={queryClient}>
+    <Suspense>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <Layout>
           <Outlet />
-        </QueryClientProvider>
-      </Suspense>
-    </div>
+        </Layout>
+      </QueryClientProvider>
+    </Suspense>
   );
 }
