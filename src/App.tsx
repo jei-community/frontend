@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
 
+import Layout from '@/components/Layout';
+
 import GlobalStyle from '@/styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -11,7 +13,9 @@ export default function App() {
     <Suspense>
       <QueryClientProvider client={queryClient}>
         <GlobalStyle />
-        <Outlet />
+        <Layout>
+          <Outlet />
+        </Layout>
       </QueryClientProvider>
     </Suspense>
   );
