@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main # main 브랜치로 푸시될 때 실행
+      - deploy-test
 
 jobs:
   deploy:
