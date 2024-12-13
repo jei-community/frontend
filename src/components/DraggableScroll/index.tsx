@@ -1,7 +1,7 @@
 import { PropsWithChildren, useRef } from 'react';
 
 import useDraggable from './hooks/useDraggable';
-import { S } from './styles';
+import { S } from './style';
 
 export default function DraggableScroller({ children }: PropsWithChildren) {
   const containerRef = useRef<HTMLDivElement>(null);

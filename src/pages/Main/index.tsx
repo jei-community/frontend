@@ -1,6 +1,6 @@
 import DraggableScroller from '@/components/DraggableScroll';
 
-import { S } from './styles';
+import { S } from './style';
 
 export default function Main() {
   return (
