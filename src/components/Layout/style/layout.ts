@@ -15,15 +15,15 @@ export const S = {
 
   ContentContainer: styled.div`
     display: flex;
-    justify-content: center;
-
-    flex: 1;
     width: 120rem;
+    min-height: calc(100dvh - 6.4rem);
+    max-height: calc(100dvh - 6.4rem);
+
+    overflow-y: auto;
+    background-color: white;
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}) {
       width: 100%;
     }
-
-    background-color: white;
   `,
 };
