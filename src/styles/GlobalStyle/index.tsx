@@ -145,5 +145,12 @@ const BaseStyle = css`
   html {
     font-size: 10px;
     font-family: 'Pretendard', sans-serif;
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
   }
 `;

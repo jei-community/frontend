@@ -1,31 +1,42 @@
+import DraggableScroller from '@/components/DraggableScroll';
+
+import { S } from './style';
+
 export default function Main() {
   return (
-    <div>
-      {/* <S.Button>heelo</S.Button>
-      <Button>world</Button> */}
-    </div>
+    <>
+      <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
+      <DraggableScroller>
+        <S.MyProject.Wrapper $color='gray'>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+          <S.MyProject.Item>123</S.MyProject.Item>
+        </S.MyProject.Wrapper>
+      </DraggableScroller>
+
+      <S.CategoryTitle>아티클</S.CategoryTitle>
+      <DraggableScroller>
+        <S.Article.Wrapper>
+          <S.Article.Item>123</S.Article.Item>
+          <S.Article.Item>123</S.Article.Item>
+          <S.Article.Item>123</S.Article.Item>
+        </S.Article.Wrapper>
+      </DraggableScroller>
+
+      <S.CategoryTitle>최신 포스트</S.CategoryTitle>
+      <S.Post.Wrapper>
+        <S.Post.Item>1</S.Post.Item>
+        <S.Post.Item>1</S.Post.Item>
+        <S.Post.Item>1</S.Post.Item>
+        <S.Post.Item>1</S.Post.Item>
+      </S.Post.Wrapper>
+    </>
   );
 }
-
-// const S = {
-//   Button: styled.button`
-//     ${({ theme }) => `
-//     color: ${theme.colors.primary[500]};
-//     background-color: ${theme.colors.secondary[500]};
-//     font-family: ${theme.typography.title.fontFamily};
-//     font-size: ${theme.typography.title.fontSize};
-//     font-weight: ${theme.typography.title.fontWeight};
-//     line-height: ${theme.typography.title.lineHeight};
-//   `}
-//     padding: 10rem;
-//   `,
-// };
-
-// const Button = styled.button`
-//   color: hotpink;
-// `;
-
-// 객체형으로 Emotion 지정하는 예시:: 공식 홈페이지에서 추천하는 방법
-// const test = styled.div(({ theme }) => ({
-//   color: theme.colors.primary[500],
-// }));
