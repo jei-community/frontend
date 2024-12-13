@@ -59,7 +59,7 @@ export const S = {
       backgroundColor: 'white',
       borderRadius: '0.5rem',
       padding: '1.2rem',
-      border: '2px solid #E0E0E0',
+      border: `2px solid ${theme.colors.gray[200]}`,
       width: '18.8rem',
       height: '3.9rem',
       gap: '1.9rem',
