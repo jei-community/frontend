@@ -5,6 +5,8 @@ import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
 import SignIn from '@/pages/SignIn';
 
+import Swagger from './pages/Swagger';
+
 export default function Router() {
   return (
     <Routes>
@@ -12,6 +14,7 @@ export default function Router() {
       <Route path='/' element={<App />}>
         <Route path='/' element={<Main />} />
       </Route>
+      <Route path='/api' element={<Swagger />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );
