@@ -12,13 +12,13 @@ export default function SignIn() {
     <GlobalStyle>
       <S.WhiteDim />
       <S.Container>
-        <S.SignInForm>
+        <S.SignInContainer>
           <S.Logo src={Logo} alt='EVERYDEI' />
-          <S.GoogleLogin.Button>
+          <S.GoogleLogin.Container>
             <S.GoogleLogin.Logo src={GoogleLogo} alt='Google' />
             <S.GoogleLogin.Text>Google 계정으로 로그인</S.GoogleLogin.Text>
-          </S.GoogleLogin.Button>
-        </S.SignInForm>
+          </S.GoogleLogin.Container>
+        </S.SignInContainer>
       </S.Container>
     </GlobalStyle>
   );

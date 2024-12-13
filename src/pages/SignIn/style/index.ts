@@ -3,7 +3,9 @@ import styled from '@emotion/styled';
 
 import backgroundImage from './assets/background.png';
 
+/** 로그인 페이지 스타일 */
 export const S = {
+  /** 로그인 페이지 컨테이너 스타일 */
   Container: styled.div({
     display: 'flex',
     flexDirection: 'column',
@@ -12,10 +14,10 @@ export const S = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-
     width: '100vw',
     height: '100vh',
   }),
+  /** 흰색 딤 스타일 */
   WhiteDim: styled.div({
     position: 'absolute',
     top: 0,
@@ -26,7 +28,8 @@ export const S = {
     width: '100vw',
     height: '100vh',
   }),
-  SignInForm: styled.div({
+  /** 로그인 컨테이너 스타일 */
+  SignInContainer: styled.div({
     position: 'absolute',
     display: 'flex',
     top: '50%',
@@ -47,8 +50,10 @@ export const S = {
     height: '2.3rem',
     objectFit: 'contain',
   }),
+  /** 구글로그인 관련 스타일 */
   GoogleLogin: {
-    Button: styled.button({
+    /** 구글로그인 버튼 컨테이너 스타일 */
+    Container: styled.button({
       display: 'flex',
       alignItems: 'center',
       backgroundColor: 'white',
@@ -59,13 +64,15 @@ export const S = {
       height: '3.9rem',
       gap: '1.9rem',
     }),
+    /** 구글로그인 버튼 로고 스타일 */
     Logo: styled.img({
       width: '2rem',
       height: '2rem',
       objectFit: 'contain',
     }),
+    /** 구글로그인 버튼 텍스트 스타일 */
     Text: styled.p({
-      color: '#000000',
+      color: 'black',
       ...theme.typography.body4,
     }),
   },
