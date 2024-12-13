@@ -1,7 +1,7 @@
 import theme from '@/styles/theme';
 import styled from '@emotion/styled';
 
-import backgroundImage from './assets/background.png';
+import backgroundImage from '../assets/background.png';
 
 /** 로그인 페이지 스타일 */
 export const S = {
@@ -59,7 +59,7 @@ export const S = {
       backgroundColor: 'white',
       borderRadius: '0.5rem',
       padding: '1.2rem',
-      border: '0.2rem solid #E0E0E0',
+      border: '2px solid #E0E0E0',
       width: '18.8rem',
       height: '3.9rem',
       gap: '1.9rem',
