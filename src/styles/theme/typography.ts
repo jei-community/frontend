@@ -30,6 +30,18 @@ const typography = {
     fontSize: '16px',
     lineHeight: '24px',
   },
+  body3: {
+    fontFamily: "'Pretendard', sans-serif",
+    fontWeight: 400,
+    fontSize: '12px',
+    lineHeight: '18px',
+  },
+  body4: {
+    fontFamily: "'Pretendard', sans-serif",
+    fontWeight: 600,
+    fontSize: '12px',
+    lineHeight: '18px',
+  },
   caption1: {
     fontFamily: "'Pretendard', sans-serif",
     fontWeight: 400,
