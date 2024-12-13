@@ -1,14 +1,6 @@
 import { MouseEvent, RefObject, useCallback, useState } from 'react';
 
-const throttle = (func: () => void, delay: number) => {
-  let timer;
-  if (!timer) {
-    timer = setTimeout(function () {
-      timer = null;
-      func();
-    }, delay);
-  }
-};
+import { throttle } from '@/utils';
 
 type DraggableHook = {
   onMouseDown: (e: MouseEvent) => void;
@@ -17,7 +9,7 @@ type DraggableHook = {
   onMouseLeave: (e: MouseEvent) => void;
 };
 
-export const useDraggable = (scrollerRef: RefObject<HTMLElement>): DraggableHook => {
+export default function useDraggable(scrollerRef: RefObject<HTMLElement>): DraggableHook {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [totalX, setTotalX] = useState<number>(0);
@@ -80,4 +72,4 @@ export const useDraggable = (scrollerRef: RefObject<HTMLElement>): DraggableHook
     onMouseUp: onDragEnd,
     onMouseLeave: onDragEnd,
   };
-};
+}
