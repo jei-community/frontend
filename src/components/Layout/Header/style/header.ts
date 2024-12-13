@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 
 export const S = {
-  Header: styled.header({
+  Header: styled.header(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
 
     width: '100%',
     height: '6.4rem',
 
-    borderBottom: '1px solid #E0E0E0',
-  }),
+    borderBottom: `1px solid ${theme.colors.gray[200]}`,
+  })),
 
   Content: styled.div({
     display: 'flex',

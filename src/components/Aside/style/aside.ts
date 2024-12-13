@@ -7,8 +7,8 @@ export const S = {
 
     flex: 1;
 
-    border-left: ${({ $position }) => $position === 'right' && '1px solid #E0E0E0'};
-    border-right: ${({ $position }) => $position === 'left' && '1px solid #E0E0E0'};
+    border-left: ${({ theme, $position }) => $position === 'right' && `1px solid ${theme.colors.gray[200]}`};
+    border-right: ${({ theme, $position }) => $position === 'left' && `1px solid ${theme.colors.gray[200]}`};
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}) {
       display: none;
