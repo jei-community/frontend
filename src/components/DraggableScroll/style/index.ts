@@ -11,7 +11,7 @@ export const S = {
     '&::-webkit-scrollbar': {
       display: 'none', // 크롬, 사파리
     },
-    '-ms-overflow-style': 'none', // IE, Edge
-    'scrollbar-width': 'none', // Firefox
+    msOverflowStyle: 'none', // IE, Edge (camelCase로 수정)
+    scrollbarWidth: 'none', // Firefox
   }),
 };

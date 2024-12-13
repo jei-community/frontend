@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
 export const S = {
+  Container: styled.div({
+    width: '100%',
+    padding: '6.4rem',
+  }),
   CategoryTitle: styled.div(({ theme }) => ({
     color: theme.colors.gray[900],
     ...theme.typography.subtitle,
@@ -11,11 +15,12 @@ export const S = {
     Wrapper: styled.div<{ $color: string }>(({ $color }) => ({
       display: 'flex',
       columnGap: '2rem',
+      maxWidth: '100%',
       backgroundColor: $color,
       margin: '0 0 4rem 0',
     })),
     Item: styled.div(({ theme }) => ({
-      flex: '0 0 auto', // 고정 크기와 줄어들지 않음
+      flex: '0 0 auto',
       width: '20rem',
       height: '20rem',
       padding: '1rem',
@@ -25,12 +30,12 @@ export const S = {
 
   Article: {
     Wrapper: styled.div({
-      display: 'flex',
+      // display: 'flex',
       columnGap: '2rem',
       margin: '0 0 4rem 0',
     }),
     Item: styled.div(({ theme }) => ({
-      flex: '0 0 auto', // 고정 크기와 줄어들지 않음
+      flex: '0 0 auto',
       width: '40rem',
       height: '20rem',
       backgroundColor: theme.colors.gray[200],
@@ -39,13 +44,13 @@ export const S = {
 
   Post: {
     Wrapper: styled.div({
-      display: 'flex',
+      // display: 'flex',
       flexDirection: 'column',
       rowGap: '2rem',
       margin: '0 0 4rem 0',
     }),
     Item: styled.div(({ theme }) => ({
-      flex: '0 0 auto', // 고정 크기와 줄어들지 않음
+      // flex: '0 0 auto',
       width: '100%',
       height: '40rem',
       backgroundColor: theme.colors.gray[200],
