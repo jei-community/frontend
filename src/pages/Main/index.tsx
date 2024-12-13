@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export default function Main() {
   return (
     <div>
-      <S.Button>heelo</S.Button>
+      <S.Button>hello</S.Button>
       <Button>world</Button>
     </div>
   );
