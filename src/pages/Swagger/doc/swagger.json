@@ -1,0 +1,2201 @@
+{
+  "openapi": "3.1.0",
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local Server"
+    }
+  ],
+  "info": {
+    "version": "0.0.1",
+    "title": "jei-community-backend",
+    "description": "Backend for JEI Community",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "paths": {
+    "/auth/social-login": {
+      "post": {
+        "summary": "소셜로그인 API",
+        "tags": [
+          "AUTH API"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "로그아웃 API",
+        "tags": [
+          "AUTH API"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/auth/auto-login": {
+      "post": {
+        "summary": "자동로그인 API",
+        "description": "API 서버에서 발급받은 Access-Token을 검증합니다.",
+        "tags": [
+          "AUTH API"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITokenPayload"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/token-refresh": {
+      "post": {
+        "summary": "토큰 재발급 API",
+        "tags": [
+          "AUTH API"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ITokenRefreshReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ITokenRefreshResDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/aws/s3/presigned-url": {
+      "post": {
+        "summary": "Presigned-URL 발급 API",
+        "tags": [
+          "AWS API"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPostS3PresignedUrlResDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/albums": {
+      "post": {
+        "summary": "앨범 생성 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPostAlbumReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPostAlbumResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/albums/{albumId}/replies": {
+      "post": {
+        "summary": "앨범 댓글 작성 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPostAlbumReplyReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPostAlbumReplyResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/albums/{albumId}/replies/{replyId}": {
+      "patch": {
+        "summary": "앨범 댓글 수정 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          },
+          {
+            "name": "replyId",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPatchAlbumReplyReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "앨범 댓글 삭제 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          },
+          {
+            "name": "replyId",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/albums/{albumId}": {
+      "put": {
+        "summary": "앨범 수정 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPutAlbumReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "앨범 삭제 API",
+        "tags": [
+          "ALBUM API"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/boards": {
+      "post": {
+        "summary": "포스팅 생성 API",
+        "description": "포스팅을 생성할 수 있는 기능입니다.",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPostBoardReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IPostBoardResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "포스팅 리스트 조회 API",
+        "description": "포스팅 전체 리스트를 조회할 수 있는 기능입니다.",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "조회 페이지 번호"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "조회 페이지 당 조회 개수"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IOffsetPageIBoardListResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/boards/{boardId}/details": {
+      "get": {
+        "summary": "포스팅 상세조회 API",
+        "description": "특정 포스팅을 상세조회 할 수 있는 기능입니다.",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IBoardDetailResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/boards/{boardId}": {
+      "put": {
+        "summary": "포스팅 수정 API",
+        "description": "특정 포스팅을 수정할 수 있는 기능입니다.",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPutBoardReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "포스팅 삭제 API",
+        "description": "특정 포스팅을 삭제할 수 있는 기능입니다.",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/boards/{boardId}/replies": {
+      "post": {
+        "summary": "포스팅 댓글 작성 API",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPostBoardReplyReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "포스팅 댓글 조회 API",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/boards/{boardId}/replies/{replyId}": {
+      "patch": {
+        "summary": "포스팅 댓글 수정 API",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          },
+          {
+            "name": "replyId",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPatchBoardReplyReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "포스팅 댓글 삭제 API",
+        "tags": [
+          "BOARD API"
+        ],
+        "parameters": [
+          {
+            "name": "boardId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          },
+          {
+            "name": "replyId",
+            "in": "path",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/projects/assets": {
+      "get": {
+        "summary": "프로젝트 에셋 리스트 조회 API",
+        "description": "프로젝트 생성시 필요한 에셋들을 조회할 수 있는 기능입니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IProjectAssetListResDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/projects": {
+      "post": {
+        "summary": "프로젝트 생성 API",
+        "description": "- 프로젝트를 생성할 수 있는 기능입니다.<br/>\n- 프로젝트는 승인된 관리자만 생성이 가능합니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPostProjectReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "내 프로젝트 조회 API",
+        "description": "- 해당 유저의 프로젝트 목록을 키워드와 함께 조회할 수 있습니다.<br/>\n- Offset-based Pagination 적용 예정입니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "required": false,
+            "description": "검색 키워드"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "조회 페이지 번호"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false,
+            "description": "조회 페이지 당 조회 개수"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IOffsetPageIProjectListResDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectId}/details": {
+      "get": {
+        "summary": "프로젝트 상세조회 API",
+        "description": "특정 프로젝트의 상세 정보를 확인할 수 있습니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IProjectDetailResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/projects/{projectId}/configurations": {
+      "get": {
+        "summary": "특정 프로젝트 환경변수 조회 API",
+        "description": "- 특정 프로젝트의 ENV FILE을 조회할 수 있는 기능입니다.<br/>\n- 조회 시 로그를 남깁니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IProjectConfigurationResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/projects/{projectId}": {
+      "put": {
+        "summary": "프로젝트 수정 API",
+        "description": "승인된 관리자만 프로젝트를 수정할 수 있습니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IPutProjectReqDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "프로젝트 삭제 API",
+        "description": "승인된 관리자만 프로젝트를 삭제할 수 있습니다.",
+        "tags": [
+          "PROJECT API"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/users/main-page": {
+      "get": {
+        "summary": "메인페이지 조회 API",
+        "tags": [
+          "USER API"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IMainPageResDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ITokenPayload": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "사용자(연구원) ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "사용자(연구원) 이름"
+          },
+          "role": {
+            "type": "string",
+            "description": "사용자(연구원) 권한 (RESEARCHER / ADMIN)"
+          },
+          "profileImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "사용자(연구원) 프로필 이미지 경로"
+          }
+        },
+        "required": [
+          "userId",
+          "name",
+          "role",
+          "profileImageUrl"
+        ],
+        "description": "Access-Token Payload 내용"
+      },
+      "IHeaders": {
+        "type": "object",
+        "properties": {
+          "Authorization": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Authorization"
+        ]
+      },
+      "ITokenRefreshResDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ]
+      },
+      "ITokenRefreshReqDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "description": "API서버에서 제공받은 Refresh-Token"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "IPostS3PresignedUrlResDto": {
+        "type": "object",
+        "properties": {
+          "signedUrl": {
+            "type": "string",
+            "format": "url",
+            "description": "제공받은 Presigned-URL"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "업로드 파일 이름 (Key)"
+          }
+        },
+        "required": [
+          "signedUrl",
+          "fileName"
+        ]
+      },
+      "IPostAlbumResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "IPostAlbumReqDto": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "url"
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "앨범 이미지 리스트 (최대 5장) - 이미지 URL 리스트"
+          },
+          "content": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "앨범 내용"
+          }
+        },
+        "required": [
+          "images",
+          "content"
+        ]
+      },
+      "IPostAlbumReplyResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "PK (AUTO_INCREMENT)"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "IPostAlbumReplyReqDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "depth": {
+            "type": "number",
+            "minimum": 0
+          },
+          "albumReplyId": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "number",
+                "minimum": 1
+              }
+            ]
+          }
+        },
+        "required": [
+          "content",
+          "depth",
+          "albumReplyId"
+        ]
+      },
+      "IPatchAlbumReplyReqDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "IPutAlbumReqDto": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "url"
+            },
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "앨범 이미지 리스트 (최대 5장) - 이미지 URL 리스트"
+          },
+          "content": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "앨범 내용"
+          }
+        },
+        "required": []
+      },
+      "IPostBoardResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "IPostBoardReqDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "포스팅 제목"
+          },
+          "content": {
+            "type": "string",
+            "description": "포스팅 내용"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ]
+      },
+      "IOffsetPageIBoardListResDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBoardListResDto"
+            },
+            "description": "페이지네이션 적용후 도출된 결과"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/IOffsetPage.IOffsetResponse",
+            "description": "페이지네이션 메타 정보"
+          }
+        },
+        "required": [
+          "data",
+          "pagination"
+        ]
+      },
+      "IBoardListResDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/IBoardWriterInfo",
+            "description": "포스팅의 사용자 정보"
+          },
+          "board": {
+            "$ref": "#/components/schemas/IBoardInfo",
+            "description": "포스팅 정보"
+          }
+        },
+        "required": [
+          "user",
+          "board"
+        ]
+      },
+      "IBoardWriterInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "profileImageUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "profileImageUrl",
+          "name",
+          "role"
+        ]
+      },
+      "IBoardInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "title": {
+            "type": "string",
+            "description": "포스팅 제목"
+          },
+          "content": {
+            "type": "string",
+            "description": "포스팅 내용"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "생성일자"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "content",
+          "createdAt"
+        ]
+      },
+      "IOffsetPage.IOffsetResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "description": "조회 결과 개수"
+          },
+          "page": {
+            "type": "integer",
+            "description": "조회된 페이지 번호"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "페이지의 컨텐츠 개수"
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "다음 페이지 여부"
+          }
+        },
+        "required": [
+          "totalCount",
+          "page",
+          "limit",
+          "hasNext"
+        ]
+      },
+      "IOffsetPage.IOffsetRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "조회 페이지 번호"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "조회 페이지 당 조회 개수"
+          }
+        },
+        "required": [],
+        "description": "Offset-based Pagination Request data"
+      },
+      "IBoardDetailResDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/IBoardWriterInfo",
+            "description": "포스팅의 사용자 정보"
+          },
+          "board": {
+            "$ref": "#/components/schemas/IBoardInfo",
+            "description": "포스팅 정보"
+          }
+        },
+        "required": [
+          "user",
+          "board"
+        ]
+      },
+      "IPutBoardReqDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "포스팅 제목"
+          },
+          "content": {
+            "type": "string",
+            "description": "포스팅 내용"
+          }
+        },
+        "required": []
+      },
+      "IPostBoardReplyReqDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "댓글 내용"
+          },
+          "depth": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "댓글 깊이"
+          },
+          "boardReplyId": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer",
+                "minimum": 1
+              }
+            ],
+            "description": "(대댓글인 경우) 포스팅 댓글ID"
+          }
+        },
+        "required": [
+          "content",
+          "depth",
+          "boardReplyId"
+        ]
+      },
+      "IPatchBoardReplyReqDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "댓글 내용"
+          }
+        },
+        "required": [
+          "content"
+        ]
+      },
+      "IProjectAssetListResDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "에셋 URL"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "LINK"
+              },
+              {
+                "const": "TECH"
+              }
+            ],
+            "description": "에셋 타입 (링크: LINK, 기술스택: TECH)"
+          },
+          "tag": {
+            "type": "string",
+            "description": "태그 (e.g: REACT)"
+          },
+          "key": {
+            "type": "string",
+            "description": "에셋 Key"
+          },
+          "extension": {
+            "type": "string",
+            "description": "확장자 (e.g: png, jpg, jpeg, svg)"
+          }
+        },
+        "required": [
+          "url",
+          "id",
+          "type",
+          "tag",
+          "key",
+          "extension"
+        ]
+      },
+      "IPostProjectReqDto": {
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "type": "string",
+            "minLength": 1,
+            "description": "환경변수 정보"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "프로젝트 제목"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "LIVE"
+              },
+              {
+                "const": "DEVELOP"
+              },
+              {
+                "const": "STOP"
+              }
+            ],
+            "description": "프로젝트 상태 (서비스: LIVE, 개발: DEVELOP, 서비스 중단: STOP)"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "프로젝트 설명"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 시작 날짜"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 종료 날짜"
+          },
+          "metadata": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IMetadata"
+              }
+            ],
+            "description": "메타데이터 (기술스택, 링크 등)"
+          },
+          "thumbnailImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "url"
+              }
+            ],
+            "description": "프로젝트 썸네일 이미지 URL"
+          }
+        },
+        "required": [
+          "configuration",
+          "title",
+          "status",
+          "description",
+          "startDate",
+          "endDate",
+          "metadata",
+          "thumbnailImageUrl"
+        ]
+      },
+      "IMetadata": {
+        "type": "object",
+        "properties": {
+          "tech": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/T_PROJECT_ASSET.IMetaTech"
+                }
+              }
+            ],
+            "description": "기술스택 리스트"
+          },
+          "link": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/T_PROJECT_ASSET.IMetaLink"
+                }
+              }
+            ],
+            "description": "링크 리스트"
+          }
+        },
+        "required": [
+          "tech",
+          "link"
+        ]
+      },
+      "T_PROJECT_ASSET.IMetaTech": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "oneOf": [
+              {
+                "const": "BACKEND"
+              },
+              {
+                "const": "FRONTEND"
+              }
+            ],
+            "description": "에셋에 해당하는 포지션 (BACKEND, FRONTEND)"
+          },
+          "url": {
+            "type": "string",
+            "description": "에셋 URL"
+          },
+          "tag": {
+            "type": "string",
+            "description": "태그 (e.g: REACT)"
+          }
+        },
+        "required": [
+          "position",
+          "url",
+          "tag"
+        ],
+        "description": "기술스택 리스트"
+      },
+      "T_PROJECT_ASSET.IMetaLink": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "에셋 링크"
+          },
+          "tag": {
+            "type": "string",
+            "description": "태그 (e.g: REACT)"
+          }
+        },
+        "required": [
+          "url",
+          "tag"
+        ],
+        "description": "링크 리스트"
+      },
+      "IOffsetPageIProjectListResDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IProjectListResDto"
+            },
+            "description": "페이지네이션 적용후 도출된 결과"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/IOffsetPage.IOffsetResponse.o1",
+            "description": "페이지네이션 메타 정보"
+          }
+        },
+        "required": [
+          "data",
+          "pagination"
+        ]
+      },
+      "IProjectListResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "프로젝트 제목"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "LIVE"
+              },
+              {
+                "const": "DEVELOP"
+              },
+              {
+                "const": "STOP"
+              }
+            ],
+            "description": "프로젝트 상태 (서비스: LIVE, 개발: DEVELOP, 서비스 중단: STOP)"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "프로젝트 설명"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 시작 날짜"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 종료 날짜"
+          },
+          "thumbnailImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "url"
+              }
+            ],
+            "description": "프로젝트 썸네일 이미지 URL"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "description",
+          "startDate",
+          "endDate",
+          "thumbnailImageUrl"
+        ],
+        "description": "내 프로젝트 조회 결과"
+      },
+      "IOffsetPage.IOffsetResponse.o1": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "description": "조회 결과 개수"
+          },
+          "page": {
+            "type": "integer",
+            "description": "조회된 페이지 번호"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "페이지의 컨텐츠 개수"
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "다음 페이지 여부"
+          }
+        },
+        "required": [
+          "totalCount",
+          "page",
+          "limit",
+          "hasNext"
+        ]
+      },
+      "IProjectListReqDto": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "minLength": 1,
+            "description": "검색 키워드"
+          },
+          "page": {
+            "type": "integer",
+            "description": "조회 페이지 번호"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "조회 페이지 당 조회 개수"
+          }
+        },
+        "required": []
+      },
+      "IProjectDetailResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "프로젝트 제목"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "LIVE"
+              },
+              {
+                "const": "DEVELOP"
+              },
+              {
+                "const": "STOP"
+              }
+            ],
+            "description": "프로젝트 상태 (서비스: LIVE, 개발: DEVELOP, 서비스 중단: STOP)"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "프로젝트 설명"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 시작 날짜"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 종료 날짜"
+          },
+          "metadata": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IMetadata"
+              }
+            ],
+            "description": "메타데이터 (기술스택, 링크 등)"
+          },
+          "thumbnailImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "url"
+              }
+            ],
+            "description": "프로젝트 썸네일 이미지 URL"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "description",
+          "startDate",
+          "endDate",
+          "metadata",
+          "thumbnailImageUrl"
+        ]
+      },
+      "IProjectConfigurationResDto": {
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "type": "string",
+            "description": "해당 프로젝트의 환경변수"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          }
+        },
+        "required": [
+          "configuration",
+          "id"
+        ]
+      },
+      "IPutProjectReqDto": {
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "type": "string",
+            "minLength": 1,
+            "description": "환경변수 정보"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "프로젝트 제목"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "LIVE"
+              },
+              {
+                "const": "DEVELOP"
+              },
+              {
+                "const": "STOP"
+              }
+            ],
+            "description": "프로젝트 상태 (서비스: LIVE, 개발: DEVELOP, 서비스 중단: STOP)"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ],
+            "description": "프로젝트 설명"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 시작 날짜"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "프로젝트 종료 날짜"
+          },
+          "metadata": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IMetadata"
+              }
+            ],
+            "description": "메타데이터 (기술스택, 링크 등)"
+          },
+          "thumbnailImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "url"
+              }
+            ],
+            "description": "프로젝트 썸네일 이미지 URL"
+          }
+        },
+        "required": []
+      },
+      "IMainPageResDto": {
+        "type": "object",
+        "properties": {
+          "projectList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IProjectDataInMainPage"
+            }
+          },
+          "articleList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IArticleDataInMainPage"
+            }
+          },
+          "boardList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IBaordDataInMainPage"
+            }
+          }
+        },
+        "required": [
+          "projectList",
+          "articleList",
+          "boardList"
+        ],
+        "description": "메인 페이지 데이터"
+      },
+      "IProjectDataInMainPage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "프로젝트 제목"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "const": "LIVE"
+              },
+              {
+                "const": "DEVELOP"
+              },
+              {
+                "const": "STOP"
+              }
+            ],
+            "description": "프로젝트 상태 (서비스: LIVE, 개발: DEVELOP, 서비스 중단: STOP)"
+          },
+          "thumbnailImageUrl": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "format": "url"
+              }
+            ],
+            "description": "프로젝트 썸네일 이미지 URL"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "thumbnailImageUrl"
+        ],
+        "description": "메인페이지 -> 내 프로젝트 리스트 부분"
+      },
+      "IArticleDataInMainPage": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "description": "메인페이지 -> 아티클 부분"
+      },
+      "IBaordDataInMainPage": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/PickUserEntityidnameprofileImageUrlrole"
+          },
+          "board": {
+            "$ref": "#/components/schemas/PickBoardEntityidtitleuserIdcreatedAtcontent"
+          }
+        },
+        "required": [
+          "user",
+          "board"
+        ],
+        "description": "메인페이지 -> 게시판 부분"
+      },
+      "PickUserEntityidnameprofileImageUrlrole": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "name": {
+            "type": "string"
+          },
+          "profileImageUrl": {
+            "type": "string",
+            "format": "url"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "profileImageUrl",
+          "role"
+        ],
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
+      "PickBoardEntityidtitleuserIdcreatedAtcontent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "PK (UUID)"
+          },
+          "title": {
+            "type": "string",
+            "description": "포스팅 제목"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "포스팅 작성자 ID"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "생성일자"
+          },
+          "content": {
+            "type": "string",
+            "description": "포스팅 내용"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "userId",
+          "createdAt",
+          "content"
+        ],
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Authorization"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AUTH API"
+    },
+    {
+      "name": "AWS API"
+    },
+    {
+      "name": "ALBUM API"
+    },
+    {
+      "name": "BOARD API"
+    },
+    {
+      "name": "PROJECT API"
+    },
+    {
+      "name": "USER API"
+    }
+  ],
+  "x-samchon-emended": true
+}
