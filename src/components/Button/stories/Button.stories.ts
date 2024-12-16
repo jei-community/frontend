@@ -24,9 +24,9 @@ export const SmallPrimaryButton: Story = {
   },
 };
 
-export const IconNeutralButton: Story = {
+export const IconNeutralOutlineButton: Story = {
   args: {
-    variant: 'filled',
+    variant: 'outlined',
     size: 'icon',
     color: 'neutral',
     disabled: false,
@@ -43,5 +43,16 @@ export const FullDisabledButton: Story = {
     disabled: true,
     isLoading: false,
     children: 'fullllllllllll',
+  },
+};
+
+export const LargeLoadingButton: Story = {
+  args: {
+    variant: 'filled',
+    size: 'large',
+    color: 'success',
+    disabled: true,
+    isLoading: true,
+    children: 'loading...',
   },
 };
