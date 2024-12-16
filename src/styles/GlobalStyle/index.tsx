@@ -157,4 +157,8 @@ const BaseStyle = css`
   a {
     text-decoration: none;
   }
+
+  button {
+    border: none;
+  }
 `;
