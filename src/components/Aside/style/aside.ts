@@ -1,13 +1,10 @@
-import { ASIDE_WIDTH } from '@/constants/style';
-
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
 
 export const S = {
   Aside: styled.aside<{ $position: string }>`
     display: flex;
-
-    width: ${ASIDE_WIDTH}rem;
+    flex: 1;
 
     border-left: ${({ $position }) => $position === 'right' && '1px solid'};
     border-right: ${({ $position }) => $position === 'left' && '1px solid'};
