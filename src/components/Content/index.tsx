@@ -1,11 +1,10 @@
 import { PropsWithChildren } from 'react';
 
+import { useAsideCount } from '@/components/Content/hooks';
 import { S } from '@/components/Content/style';
 
-interface Props extends PropsWithChildren {
-  asideCount?: number;
-}
+export default function Content({ children }: PropsWithChildren) {
+  const asideCount = useAsideCount();
 
-export default function Content({ asideCount = 2, children }: Props) {
   return <S.Content $asideCount={asideCount}>{children}</S.Content>;
 }

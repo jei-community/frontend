@@ -15,7 +15,7 @@ export const S = {
   Content: styled.article<{ $asideCount: number }>`
     width: ${({ $asideCount }) => WIDTH[$asideCount]};
 
-    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}) {
+    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       width: 100%;
     }
   `,

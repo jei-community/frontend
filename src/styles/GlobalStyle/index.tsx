@@ -153,4 +153,8 @@ const BaseStyle = css`
   *::after {
     box-sizing: inherit;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;

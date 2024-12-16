@@ -13,18 +13,24 @@ export const S = {
     height: '100vh',
   }),
 
+  Wrapper: styled.div({
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+
+    overflowY: 'auto',
+  }),
+
   ContentContainer: styled.div`
     display: flex;
-    justify-content: center;
 
-    width: 100%;
+    width: 120rem;
     min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
     max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
-    overflow-y: auto;
     background-color: white;
 
-    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}) {
+    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       width: 100%;
     }
   `,
