@@ -7,7 +7,9 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <S.Container>
       <Header />
-      <S.ContentContainer>{children}</S.ContentContainer>
+      <S.Wrapper>
+        <S.ContentContainer>{children}</S.ContentContainer>
+      </S.Wrapper>
     </S.Container>
   );
 }
