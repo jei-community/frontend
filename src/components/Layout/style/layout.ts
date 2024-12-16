@@ -17,6 +17,8 @@ export const S = {
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+
+    overflowY: 'auto',
   }),
 
   ContentContainer: styled.div`
@@ -26,7 +28,6 @@ export const S = {
     min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
     max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
-    overflow-y: auto;
     background-color: white;
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
