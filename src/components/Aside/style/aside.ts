@@ -9,10 +9,11 @@ export const S = {
 
     width: ${ASIDE_WIDTH}rem;
 
-    border-left: ${({ theme, $position }) => $position === 'right' && `1px solid ${theme.colors.gray[200]}`};
-    border-right: ${({ theme, $position }) => $position === 'left' && `1px solid ${theme.colors.gray[200]}`};
+    border-left: ${({ $position }) => $position === 'right' && '1px solid'};
+    border-right: ${({ $position }) => $position === 'left' && '1px solid'};
+    border-color: ${({ theme }) => theme.colors.gray[200]};
 
-    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}) {
+    @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       display: none;
     }
   `,
@@ -24,7 +25,7 @@ export const S = {
     flex: 1;
     padding: 1.6rem;
 
-    @media (max-width: ${MEDIA_QUERY.DESKTOP_M}) {
+    @media (max-width: ${MEDIA_QUERY.DESKTOP_M}px) {
       display: none;
     }
   `,
