@@ -1,3 +1,5 @@
+import { HEADER_HEIGHT } from '@/components/Layout/constants/style';
+
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
 
@@ -9,15 +11,15 @@ export const S = {
 
     width: '100vw',
     height: '100vh',
-
-    backgroundColor: 'gray',
   }),
 
   ContentContainer: styled.div`
     display: flex;
-    width: 120rem;
-    min-height: calc(100dvh - 6.4rem);
-    max-height: calc(100dvh - 6.4rem);
+    justify-content: center;
+
+    width: 100%;
+    min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
+    max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
     overflow-y: auto;
     background-color: white;
