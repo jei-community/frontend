@@ -4,10 +4,9 @@ import Content from '@/components/Content';
 import Divider from '@/components/Divider';
 
 import { MEDIA_QUERY } from '@/constants';
+import { GlassSVG, LeftChevronFirstSVG, LeftChevronSVG, RightChevronLastSVG, RightChevronSVG } from '@/pages/Projects/assets/icons';
 import Project from '@/pages/Projects/components/Project';
 import styled from '@emotion/styled';
-
-import GlassSVG from './assets/icons/glass.svg';
 
 export default function Projects() {
   return (
@@ -38,7 +37,32 @@ export default function Projects() {
             );
           })}
         </S.Projects>
-        <S.Pagination></S.Pagination>
+        <Divider direction='horizontal' />
+        <S.Pagination>
+          <S.PaginationButton>
+            <img src={LeftChevronFirstSVG} />
+          </S.PaginationButton>
+          <S.PaginationButton>
+            <img src={LeftChevronSVG} />
+          </S.PaginationButton>
+          <S.PaginationNumberList>
+            {Array.from({ length: 9 }, (_, index) => {
+              return (
+                <li key={index}>
+                  <S.PaginationButton>
+                    <S.PaginationNumber $isClicked={false}>{index + 1}</S.PaginationNumber>
+                  </S.PaginationButton>
+                </li>
+              );
+            })}
+          </S.PaginationNumberList>
+          <S.PaginationButton>
+            <img src={RightChevronSVG} />
+          </S.PaginationButton>
+          <S.PaginationButton>
+            <img src={RightChevronLastSVG} />
+          </S.PaginationButton>
+        </S.Pagination>
       </S.Container>
     </Content>
   );
@@ -51,6 +75,8 @@ const S = {
 
     gap: '1.6rem',
     padding: '3.2rem 1.6rem',
+
+    userSelect: 'none',
   }),
 
   TopContainer: styled.div({
@@ -108,6 +134,7 @@ const S = {
   Projects: styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
 
     gap: 4.4rem;
 
@@ -129,5 +156,31 @@ const S = {
     width: 'fit-content',
   }),
 
-  Pagination: styled.div({}),
+  Pagination: styled.div({
+    display: 'flex',
+    justifyContent: 'center',
+
+    width: '100%',
+
+    gap: '0.8rem',
+  }),
+
+  PaginationNumberList: styled.ul({
+    display: 'flex',
+
+    gap: '0.8rem',
+  }),
+
+  PaginationButton: styled.button({
+    width: '3.2rem',
+    height: '3.2rem',
+
+    border: 'none',
+    backgroundColor: 'transparent',
+  }),
+
+  PaginationNumber: styled.p<{ $isClicked: boolean }>(({ theme, $isClicked }) => ({
+    color: $isClicked ? theme.colors.white : theme.colors.gray[800],
+    ...theme.typography.body2,
+  })),
 };
