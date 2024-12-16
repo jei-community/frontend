@@ -9,6 +9,11 @@ interface ButtonStyleProps {
   $isLoading: boolean;
 }
 
+interface LoadingSpinnerStyleProps {
+  $variant: ButtonVariant;
+  $color: ButtonColor;
+}
+
 export const S = {
   /** 공통 버튼 컴포넌트 스타일 */
   Button: styled.button<ButtonStyleProps>`
@@ -21,6 +26,9 @@ export const S = {
       return '100%';
     }};
     height: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: ${({ theme, $variant, $color }) => {
       if ($variant === 'filled') return '2px solid transparent';
 
@@ -58,11 +66,12 @@ export const S = {
       return theme.colors.gray[600];
     }};
     font-size: ${({ theme }) => theme.typography.body4};
-    cursor: pointer;
+    cursor: ${({ $isLoading }) => ($isLoading ? 'not-allowed' : 'pointer')};
     transition: all 0.15s;
 
     &:hover {
-      background-color: ${({ theme, $variant, $color }) => {
+      background-color: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'outlined') return 'transparent';
 
         if ($color === 'primary') return theme.colors.primary[300];
@@ -72,7 +81,8 @@ export const S = {
 
         return theme.colors.gray[300];
       }};
-      border: ${({ theme, $variant, $color }) => {
+      border: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'filled') return '2px solid transparent';
 
         let strokeColor: string;
@@ -84,7 +94,8 @@ export const S = {
 
         return `2px solid ${strokeColor}`;
       }};
-      color: ${({ theme, $variant, $color }) => {
+      color: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'filled') {
           if ($color === 'warning') return theme.colors.gray[900];
           else return theme.colors.white;
@@ -103,7 +114,8 @@ export const S = {
       outline: '2px solid ${({ theme }) => theme.colors.error[700]}';
     }
     &:active {
-      background-color: ${({ theme, $variant, $color }) => {
+      background-color: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'outlined') {
           if ($color === 'primary') return theme.colors.primary[300];
           if ($color === 'success') return theme.colors.success[300];
@@ -119,7 +131,8 @@ export const S = {
 
         return theme.colors.gray[700];
       }};
-      border: ${({ theme, $variant, $color }) => {
+      border: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'filled') return '2px solid transparent';
 
         let strokeColor: string;
@@ -131,7 +144,8 @@ export const S = {
 
         return `2px solid ${strokeColor}`;
       }};
-      color: ${({ theme, $variant, $color }) => {
+      color: ${({ theme, $variant, $color, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'filled') {
           if ($color === 'warning') return theme.colors.gray[900];
           else return theme.colors.white;
@@ -146,19 +160,51 @@ export const S = {
       }};
     }
     &:disabled {
-      background-color: ${({ theme, $variant }) => {
+      background-color: ${({ theme, $variant, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'outlined') return 'transparent';
         else return theme.colors.gray[100];
       }};
-      border: ${({ theme, $variant }) => {
+      border: ${({ theme, $variant, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'outlined') return `2px solid ${theme.colors.gray[300]}`;
         else return '2px solid transparent';
       }};
-      color: ${({ theme, $variant }) => {
+      color: ${({ theme, $variant, $isLoading }) => {
+        if ($isLoading) return;
         if ($variant === 'outlined') return theme.colors.gray[300];
         else return theme.colors.gray[400];
       }};
       cursor: not-allowed; // 사용 불가 커서 (UX적으로 더 직관적이라고 판단)
+    }
+  `,
+  /** 로딩 스피너 스타일 */
+  LoadingSpinner: styled.div<LoadingSpinnerStyleProps>`
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 2px solid
+      ${({ theme, $variant, $color }) => {
+        if ($variant === 'filled') return theme.colors.white;
+
+        if ($color === 'primary') return theme.colors.primary[500];
+        if ($color === 'success') return theme.colors.success[500];
+        if ($color === 'warning') return theme.colors.warning[500];
+        if ($color === 'error') return theme.colors.error[500];
+
+        return theme.colors.gray[600];
+      }};
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
   `,
 };

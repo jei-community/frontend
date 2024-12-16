@@ -14,10 +14,9 @@ interface Props extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement
  * 공통 버튼 컴포넌트
  */
 export default function Button({ variant = 'filled', size = 'full', color = 'primary', isLoading = false, children, ...p }: Props) {
-  // TODO(성찬): 버튼 로딩 중 스타일 적용
   return (
-    <S.Button {...p} $variant={variant} $size={size} $color={color} $isLoading={isLoading}>
-      {children}
+    <S.Button {...p} $variant={variant} $size={size} $color={color} $isLoading={isLoading} disabled={isLoading || p.disabled}>
+      {isLoading ? <S.LoadingSpinner $variant={variant} $color={color} /> : children}
     </S.Button>
   );
 }
