@@ -2,6 +2,7 @@ import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import DraggableScroller from '@/components/DraggableScroll';
 
+import MyProjectItem from './components/Project/Item';
 import { S } from './style';
 
 export default function Main() {
@@ -12,17 +13,12 @@ export default function Main() {
         <div>
           <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
           <DraggableScroller>
-            <S.MyProject.Wrapper $color='gray'>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
+            <S.MyProject.Wrapper>
+              <MyProjectItem status={'03'} thumbnail={'01'} title='코코블' />
+              <MyProjectItem status={'02'} thumbnail={'01'} title='코코블' />
+              <MyProjectItem status={'01'} thumbnail={'01'} title='코코블' />
+              <MyProjectItem status={'02'} thumbnail={'01'} title='코코블' />
+              <MyProjectItem status={'03'} thumbnail={'01'} title='코코블' />
             </S.MyProject.Wrapper>
           </DraggableScroller>
 

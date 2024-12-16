@@ -12,13 +12,11 @@ export const S = {
   })),
 
   MyProject: {
-    Wrapper: styled.div<{ $color: string }>(({ $color }) => ({
+    Wrapper: styled.div({
       display: 'flex',
-      columnGap: '2rem',
+      columnGap: '1.6rem',
       maxWidth: '100%',
-      backgroundColor: $color,
-      margin: '0 0 4rem 0',
-    })),
+    }),
     Item: styled.div(({ theme }) => ({
       flex: '0 0 auto',
       width: '20rem',
