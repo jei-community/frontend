@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 
+export const HEADER_HIGHT = 6.4;
+
 export const S = {
   Header: styled.header(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
 
     width: '100%',
-    height: '6.4rem',
+    height: `${HEADER_HIGHT}rem`,
 
     borderBottom: `1px solid ${theme.colors.gray[200]}`,
   })),
