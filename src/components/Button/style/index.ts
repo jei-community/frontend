@@ -69,6 +69,7 @@ export const S = {
     cursor: ${({ $isLoading }) => ($isLoading ? 'not-allowed' : 'pointer')};
     transition: all 0.15s;
 
+    // 버튼에 마우스를 올렸을 때 스타일
     &:hover {
       background-color: ${({ theme, $variant, $color, $isLoading }) => {
         if ($isLoading) return;
@@ -109,10 +110,14 @@ export const S = {
         return theme.colors.gray[400];
       }};
     }
+
+    // 버튼 포커스 상태일 때 스타일
     // TODO(성찬): 버튼 포커스 상태일 때 스타일이 안바뀌는 문제 수정
     &:focus {
       outline: '2px solid ${({ theme }) => theme.colors.error[700]}';
     }
+
+    // 버튼 클릭 상태일 때 스타일
     &:active {
       background-color: ${({ theme, $variant, $color, $isLoading }) => {
         if ($isLoading) return;
@@ -159,6 +164,8 @@ export const S = {
         return theme.colors.gray[800];
       }};
     }
+
+    // 버튼 비활성화 상태일 때 스타일
     &:disabled {
       background-color: ${({ theme, $variant, $isLoading }) => {
         if ($isLoading) return;
