@@ -15,7 +15,8 @@ export const S = {
 
   ContentContainer: styled.div`
     display: flex;
-    width: 120rem;
+    width: 100vw;
+    justify-content: center;
     min-height: calc(100dvh - 6.4rem);
     max-height: calc(100dvh - 6.4rem);
 

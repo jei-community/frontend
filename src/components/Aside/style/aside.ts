@@ -6,7 +6,7 @@ export const S = {
     display: flex;
 
     flex: 1;
-
+    max-width: 26.2rem;
     border-left: ${({ theme, $position }) => $position === 'right' && `1px solid ${theme.colors.gray[200]}`};
     border-right: ${({ theme, $position }) => $position === 'left' && `1px solid ${theme.colors.gray[200]}`};
 
