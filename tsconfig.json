@@ -6,9 +6,10 @@
       "@/*": ["./src/*"]
     },
 
-    "types": ["vitest"]
+    "types": ["vitest", "vite-plugin-svgr/client"]
   },
 
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "include": ["svg.d.ts"]
 }
