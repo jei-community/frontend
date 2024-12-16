@@ -1,4 +1,4 @@
-import { HEADER_HIGHT } from '@/components/Layout/Header/style/header';
+import { HEADER_HEIGHT } from '@/components/Layout/constants/style';
 
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
@@ -18,8 +18,8 @@ export const S = {
     justify-content: center;
 
     width: 100%;
-    min-height: calc(100dvh - ${HEADER_HIGHT}rem);
-    max-height: calc(100dvh - ${HEADER_HIGHT}rem);
+    min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
+    max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
     overflow-y: auto;
     background-color: white;

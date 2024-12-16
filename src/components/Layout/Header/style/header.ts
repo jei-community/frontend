@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import { HEADER_HEIGHT } from '@/components/Layout/constants/style';
 
-export const HEADER_HIGHT = 6.4;
+import styled from '@emotion/styled';
 
 export const S = {
   Header: styled.header(({ theme }) => ({
@@ -8,7 +8,7 @@ export const S = {
     justifyContent: 'center',
 
     width: '100%',
-    height: `${HEADER_HIGHT}rem`,
+    height: `${HEADER_HEIGHT}rem`,
 
     borderBottom: `1px solid ${theme.colors.gray[200]}`,
   })),

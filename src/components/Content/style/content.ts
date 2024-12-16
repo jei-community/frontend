@@ -1,4 +1,4 @@
-import { ASIDE_WIDTH } from '@/components/Aside/style/aside';
+import { ASIDE_WIDTH } from '@/constants/style';
 
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';

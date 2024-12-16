@@ -1,7 +1,7 @@
+import { ASIDE_WIDTH } from '@/constants/style';
+
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
-
-export const ASIDE_WIDTH = 27;
 
 export const S = {
   Aside: styled.aside<{ $position: string }>`
