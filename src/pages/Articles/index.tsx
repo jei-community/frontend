@@ -6,7 +6,7 @@ import { S } from './style';
 /**
  * 아티클 포스트 페이지
  */
-export default function Article() {
+export default function Articles() {
   return (
     <Content>
       <S.Container>
