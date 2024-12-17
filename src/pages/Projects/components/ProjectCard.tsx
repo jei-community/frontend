@@ -2,7 +2,7 @@ import { S } from '@/pages/Projects/components/style';
 
 import GlassSVG from '../assets/icons/glass.svg';
 
-export default function Project() {
+export default function ProjectCard() {
   return (
     <S.Container>
       <S.Title>EVERYDEI</S.Title>

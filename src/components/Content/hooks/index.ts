@@ -1,1 +1,1 @@
-export { useAsideCount } from './useAsideCount';
+export { useAsideInfo } from './useAsideInfo';

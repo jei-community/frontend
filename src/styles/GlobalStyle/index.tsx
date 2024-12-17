@@ -181,4 +181,10 @@ const BaseStyle = css`
   a {
     text-decoration: none;
   }
+
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
 `;

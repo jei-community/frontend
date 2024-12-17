@@ -1,17 +1,14 @@
-import { ASIDE_WIDTH } from '@/constants/style';
+import { ASIDE_WIDTH } from '@/components/Layout/constants/style';
 
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
 
 export const S = {
-  Aside: styled.aside<{ $position: string }>`
+  Aside: styled.aside`
     display: flex;
 
-    width: ${ASIDE_WIDTH}rem;
-
-    border-left: ${({ $position }) => $position === 'right' && '1px solid'};
-    border-right: ${({ $position }) => $position === 'left' && '1px solid'};
-    border-color: ${({ theme }) => theme.colors.gray[200]};
+    flex: 1;
+    max-width: ${ASIDE_WIDTH}rem;
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       display: none;
@@ -22,8 +19,8 @@ export const S = {
     display: flex;
     flex-direction: column;
 
-    flex: 1;
-    padding: 1.6rem;
+    width: 100%;
+    height: 100%;
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_M}px) {
       display: none;
