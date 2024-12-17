@@ -1,10 +1,14 @@
 import { PropsWithChildren } from 'react';
 
-import { useAsideCount } from '@/components/Content/hooks';
+import { useAsideInfo } from '@/components/Content/hooks';
 import { S } from '@/components/Content/style';
 
 export default function Content({ children }: PropsWithChildren) {
-  const asideCount = useAsideCount();
+  const { targetRef, asideCount, asidePosition } = useAsideInfo();
 
-  return <S.Content $asideCount={asideCount}>{children}</S.Content>;
+  return (
+    <S.Article ref={targetRef} $asideCount={asideCount} $asidePosition={asidePosition}>
+      {children}
+    </S.Article>
+  );
 }

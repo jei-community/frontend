@@ -1,8 +1,10 @@
+import { AsidePosition } from '@/components/Content/types';
+import { ASIDE_WIDTH } from '@/components/Layout/constants/style';
+
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
 
-const DEFAULT_CONTENT_WIDTH = 66;
-const ASIDE_WIDTH = 27;
+const DEFAULT_CONTENT_WIDTH = 76.8;
 
 const WIDTH: Record<number, string> = {
   0: '100%',
@@ -17,8 +19,13 @@ const DESKTOP_M_WIDTH: Record<number, string> = {
 };
 
 export const S = {
-  Content: styled.article<{ $asideCount: number }>`
+  Article: styled.article<{ $asideCount: number; $asidePosition: AsidePosition }>`
     width: ${({ $asideCount }) => WIDTH[$asideCount]};
+    min-height: fit-content;
+
+    border-right: ${({ $asidePosition }) => $asidePosition.right && '1px solid'};
+    border-left: ${({ $asidePosition }) => $asidePosition.left && '1px solid'};
+    border-color: ${({ theme }) => theme.colors.gray[200]};
 
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       width: 100%;
