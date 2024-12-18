@@ -6,7 +6,7 @@ import TextField from '..';
 const meta = {
   component: TextField,
   tags: ['autodocs', '!dev'],
-  args: { heightSize: 'medium', placeholder: 'TextField', isError: false, onKeyDown: fn(), onFocus: fn(), onBlur: fn() },
+  args: { heightSize: 'medium', placeholder: 'TextField', isError: false, disabled: false, onKeyDown: fn(), onFocus: fn(), onBlur: fn() },
 } satisfies Meta<typeof TextField>;
 
 export default meta;
