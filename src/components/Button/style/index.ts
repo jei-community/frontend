@@ -16,7 +16,7 @@ interface LoadingSpinnerStyleProps {
 }
 
 /** 버튼 사이즈 프로퍼티에 따른 너비 사이즈 리터럴 값 */
-const WIDTH = {
+const WIDTH: { [key in ButtonSize]: string } = {
   icon: '3.2rem',
   small: '6.4rem',
   medium: '9.6rem',
@@ -115,6 +115,7 @@ export const S = {
     align-items: center;
     border-radius: 0.4rem;
     font-size: ${({ theme }) => theme.typography.body4};
+    outline: none;
     cursor: pointer;
     transition: all 0.15s;
 
@@ -128,9 +129,8 @@ export const S = {
     }}
 
     // 버튼 포커스 상태일 때 스타일
-    // TODO(성찬): 버튼 포커스 상태일 때 스타일이 안바뀌는 문제 수정
     &:focus {
-      outline: '2px solid ${({ theme }) => theme.colors.error[700]}';
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.gray[700]};
     }
   `,
   /** 로딩 스피너 스타일 */
