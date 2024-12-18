@@ -16,7 +16,7 @@ interface LoadingSpinnerStyleProps {
 }
 
 /** 버튼 사이즈 프로퍼티에 따른 너비 사이즈 리터럴 값 */
-const WIDTH = {
+const WIDTH: { [key in ButtonSize]: string } = {
   icon: '3.2rem',
   small: '6.4rem',
   medium: '9.6rem',
