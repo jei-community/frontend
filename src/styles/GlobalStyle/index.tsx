@@ -141,7 +141,31 @@ const ResetStyle = css`
   }
 `;
 
+/**
+ * Pretendard 폰트 페이스를 반환하는 함수
+ * @returns 배열 형태의 폰트 페이스 템플릿 리터럴
+ */
+const getFontFaces = () => {
+  const weights = ['ExtraLight', 'Light', 'Regular', 'Medium', 'SemiBold', 'Bold', 'ExtraBold', 'Black'];
+  const fontFaces = weights.map(
+    (weight, index) => `
+      @font-face {
+        font-family: 'Pretendard';
+        font-weight: ${(index + 2) * 100};
+        font-display: swap;
+        src:
+          local('Pretendard ${weight}'),
+          url(../assets/fonts/woff2/Pretendard-${weight}.woff2) format('woff2');
+      }
+    `,
+  );
+
+  return fontFaces;
+};
+
 const BaseStyle = css`
+  ${getFontFaces()}
+
   html {
     font-size: 10px;
     font-family: 'Pretendard', sans-serif;
@@ -156,5 +180,11 @@ const BaseStyle = css`
 
   a {
     text-decoration: none;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
   }
 `;

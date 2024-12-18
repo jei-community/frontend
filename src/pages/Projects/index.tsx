@@ -2,7 +2,7 @@ import Content from '@/components/Content';
 import Divider from '@/components/Divider';
 
 import { GlassSVG, LeftChevronFirstSVG, LeftChevronSVG, RightChevronLastSVG, RightChevronSVG } from '@/pages/Projects/assets';
-import Project from '@/pages/Projects/components/Project';
+import ProjectCard from '@/pages/Projects/components/ProjectCard';
 import { S } from '@/pages/Projects/style';
 
 export default function Projects() {
@@ -28,7 +28,7 @@ export default function Projects() {
               // TODO(증훈): 프로젝트 상세페이지로 연결
               <S.ProjectItem key={index}>
                 <S.CustomLink to='/'>
-                  <Project />
+                  <ProjectCard />
                 </S.CustomLink>
               </S.ProjectItem>
             );
