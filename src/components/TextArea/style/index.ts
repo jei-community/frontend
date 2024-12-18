@@ -20,6 +20,7 @@ export const S = {
 
     // 폰트 스타일
     ${({ theme }) => theme.typography.body1}
+    color: ${({ theme }) => theme.colors.gray[900]};
 
     // 배경 및 테두리 스타일
     background-color: ${({ theme }) => theme.colors.white};
@@ -42,7 +43,7 @@ export const S = {
     &:disabled {
       background-color: ${({ theme }) => theme.colors.gray[100]};
       border: 2px solid ${({ theme }) => theme.colors.gray[200]};
-      color: ${({ theme }) => theme.colors.gray[200]};
+      color: ${({ theme }) => theme.colors.gray[400]};
       cursor: not-allowed;
     }
     &:disabled:hover {

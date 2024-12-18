@@ -15,6 +15,12 @@ const HEIGHT: { [key in TextFieldHeightSize]: string } = {
   large: '4.4rem',
 };
 
+/**
+ * 공통 텍스트 필드의 폰트 스타일을 반환하는 함수
+ * @param theme 전역 테마 객체 (색상만 사용)
+ * @param heightSize 높이 사이즈 프로퍼티
+ * @returns `heightSize`에 따른 폰트 스타일
+ */
 const getFontSize = (theme: Theme, heightSize: TextFieldHeightSize) => {
   if (heightSize === 'small') return theme.typography.body3;
   else if (heightSize === 'medium') return theme.typography.body1;
@@ -36,6 +42,7 @@ export const S = {
 
     // 폰트 스타일
     ${({ theme, $heightSize }) => getFontSize(theme, $heightSize)}
+    color: ${({ theme }) => theme.colors.gray[900]};
 
     // 배경 및 테두리 스타일
     background-color: ${({ theme }) => theme.colors.white};
@@ -58,7 +65,7 @@ export const S = {
     &:disabled {
       background-color: ${({ theme }) => theme.colors.gray[100]};
       border: 2px solid ${({ theme }) => theme.colors.gray[200]};
-      color: ${({ theme }) => theme.colors.gray[200]};
+      color: ${({ theme }) => theme.colors.gray[400]};
       cursor: not-allowed;
     }
     &:disabled:hover {
