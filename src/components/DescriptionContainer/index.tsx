@@ -15,5 +15,3 @@ export default function DescriptionContainer({ ref, children }: Props) {
     </S.DescriptionContainer>
   );
 }
-
-DescriptionContainer.Text = Text;
