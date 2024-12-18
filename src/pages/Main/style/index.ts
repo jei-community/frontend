@@ -42,17 +42,10 @@ export const S = {
 
   Post: {
     Wrapper: styled.div({
-      // display: 'flex',
+      display: 'flex',
       flexDirection: 'column',
-      rowGap: '2rem',
-      margin: '0 0 4rem 0',
+      rowGap: '3.2rem',
     }),
-    Item: styled.div(({ theme }) => ({
-      // flex: '0 0 auto',
-      width: '100%',
-      height: '40rem',
-      backgroundColor: theme.colors.gray[200],
-    })),
   },
 
   Divider: styled.div(({ theme }) => ({
