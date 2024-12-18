@@ -2,8 +2,7 @@ import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import DraggableScroller from '@/components/DraggableScroll';
 
-import { ArticleItem, MyProjectItem } from './components';
-import PostItem from './components/Post/Item';
+import { ArticleItem, MyProjectItem, PostItem } from './components';
 import { S } from './style';
 
 export default function Main() {
