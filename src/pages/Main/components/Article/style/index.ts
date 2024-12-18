@@ -23,7 +23,7 @@ export const S = {
     Avatar: styled.img({
       width: '3.2rem',
       height: '3.2rem',
-      borderRadius: '999rem',
+      borderRadius: '100%',
       objectFit: 'contain',
       marginRight: '2px',
     }),
