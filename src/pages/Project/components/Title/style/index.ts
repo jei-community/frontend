@@ -11,8 +11,8 @@ export const S = {
   }),
 
   Thumbnail: styled.img({
-    width: '10rem',
-    height: '10rem',
+    maxWidth: '10rem',
+    maxHeight: '10rem',
 
     borderRadius: 8,
   }),

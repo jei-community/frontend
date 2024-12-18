@@ -1,9 +1,9 @@
 import Divider from '@/components/Divider';
 
-import { S } from '@/pages/Project/components/TitleContainer/style';
+import { S } from '@/pages/Project/components/Title/style';
 
 // TODO(증훈): 서버 데이터로 교체
-export default function TitleContainer() {
+export default function Title() {
   return (
     <S.Container>
       <S.Thumbnail src='https://via.placeholder.com/100' alt='thumbnail' />
@@ -14,7 +14,8 @@ export default function TitleContainer() {
             <S.BadgeText>서비스</S.BadgeText>
           </S.Badge>
         </S.TitleContainer>
-        <Divider direction='horizontal' />
+
+        <Divider />
         <S.MemberAndDateContainer>
           <S.MemberInfoContainer>
             <S.AvatarContainer>
