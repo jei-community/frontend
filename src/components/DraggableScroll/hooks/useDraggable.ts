@@ -9,7 +9,7 @@ type DraggableHook = {
   onMouseLeave: (e: MouseEvent) => void;
 };
 
-export default function useDraggable(scrollerRef: RefObject<HTMLElement>): DraggableHook {
+export default function useDraggable(scrollerRef: RefObject<HTMLElement | null>): DraggableHook {
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [startX, setStartX] = useState<number>(0);
   const [totalX, setTotalX] = useState<number>(0);
