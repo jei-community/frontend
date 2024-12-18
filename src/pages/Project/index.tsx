@@ -3,13 +3,16 @@ import { useRef } from 'react';
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
+import ProjectContentContainer from '@/components/ProjectContentContainer';
+import ProjectSideContainer from '@/components/ProjectSideContainer';
 
-import DescriptionContainer from '@/pages/Project/components/DescriptionContainer';
-import HyperlinkList from '@/pages/Project/components/HyperlinkList';
+import Description from '@/pages/Project/components/Description';
+import EditorLink from '@/pages/Project/components/EditorLink';
+import Env from '@/pages/Project/components/Env';
 import TableOfContent from '@/pages/Project/components/TableOfContent';
-import TechStackAndEnvContainer from '@/pages/Project/components/TechStackAndEnvContainer';
-import TitleContainer from '@/pages/Project/components/TitleContainer';
-import { S } from '@/pages/Project/style';
+import TechStack from '@/pages/Project/components/TechStack';
+import Title from '@/pages/Project/components/Title';
+import TooltipList from '@/pages/Project/components/TooltipList';
 
 export default function Project() {
   const linkRef = useRef<HTMLUListElement | null>(null);
@@ -20,21 +23,23 @@ export default function Project() {
   return (
     <>
       <Content>
-        <S.Container>
-          <TitleContainer />
-          <DescriptionContainer ref={descriptionRef} />
-          <TechStackAndEnvContainer techStackRef={techStackRef} envRef={envRef} />
-        </S.Container>
+        <ProjectContentContainer>
+          <Title />
+
+          <Description ref={descriptionRef} />
+
+          <TechStack ref={techStackRef} />
+
+          <Env ref={envRef} />
+        </ProjectContentContainer>
       </Content>
       <Aside>
-        <S.SideContainer>
-          <HyperlinkList ref={linkRef} />
-          <S.EditLink to='/projects/editor'>
-            <S.EditText>프로젝트 수정</S.EditText>
-          </S.EditLink>
-          <Divider direction='horizontal' />
+        <ProjectSideContainer>
+          <TooltipList ref={linkRef} />
+          <EditorLink />
+          <Divider />
           <TableOfContent linkRef={linkRef} descriptionRef={descriptionRef} techStackRef={techStackRef} envRef={envRef} />
-        </S.SideContainer>
+        </ProjectSideContainer>
       </Aside>
     </>
   );
