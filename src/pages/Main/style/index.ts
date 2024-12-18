@@ -28,9 +28,9 @@ export const S = {
 
   Article: {
     Wrapper: styled.div({
-      // display: 'flex',
-      columnGap: '2rem',
-      margin: '0 0 4rem 0',
+      display: 'flex',
+      columnGap: '1.6rem',
+      maxWidth: '100%',
     }),
     Item: styled.div(({ theme }) => ({
       flex: '0 0 auto',
@@ -54,4 +54,10 @@ export const S = {
       backgroundColor: theme.colors.gray[200],
     })),
   },
+
+  Divider: styled.div(({ theme }) => ({
+    height: '1px',
+    backgroundColor: theme.colors.gray[200], // 구분선 색상 설정
+    margin: '2.4rem 0', // 구분선의 위/아래 여백
+  })),
 };
