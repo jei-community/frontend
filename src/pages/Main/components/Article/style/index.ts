@@ -43,10 +43,12 @@ export const S = {
     ...theme.typography.body3,
   }),
 
-  /** 포스트 내용 */
   Description: {
     title: styled.div({
       ...theme.typography.body2,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
     }),
 
     content: styled.div<ContentProps>(({ theme, $isClamped }) => ({

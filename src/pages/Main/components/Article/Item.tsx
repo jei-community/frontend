@@ -23,11 +23,11 @@ export default function ArticleItem() {
       <S.ArticleMetaWrapper>
         <S.AuthorInfo.Wrapper>
           <S.AuthorInfo.Avatar src={Thumbnail} />
-          <S.AuthorInfo.Name>123</S.AuthorInfo.Name>
+          <S.AuthorInfo.Name>임범규</S.AuthorInfo.Name>
         </S.AuthorInfo.Wrapper>
         <S.Time>5시간 전</S.Time>
       </S.ArticleMetaWrapper>
-      <S.Description.title>123 </S.Description.title>
+      <S.Description.title>React version 19 has been released! React version 19 has been released!</S.Description.title>
       <S.Description.content ref={contentRef} $isClamped={isClamped}>
         Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada.
         Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris
