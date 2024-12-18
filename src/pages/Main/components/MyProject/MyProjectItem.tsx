@@ -3,7 +3,7 @@ import theme from '@/styles/theme';
 import { Thumbnail } from '../../assets';
 import { S } from './style';
 
-type Status = '01' | '02' | '03';
+type Status = 'LIVE' | 'DEVELOP' | 'STOP';
 interface StatusStyle {
   text: string;
   bgColor: keyof typeof theme.colors;
@@ -18,9 +18,9 @@ export default function MyProjectItem({ status, thumbnail, title }: Props) {
   console.log(thumbnail);
   const getStatusStyle = (status: Status): StatusStyle => {
     switch (status) {
-      case '01':
+      case 'LIVE':
         return { text: '서비스', bgColor: 'success' as keyof typeof theme.colors, textColor: 'white' as keyof typeof theme.colors };
-      case '02':
+      case 'DEVELOP':
         return { text: '개발', bgColor: 'warning' as keyof typeof theme.colors, textColor: 'black' as keyof typeof theme.colors };
       default:
         return { text: '서비스 중단', bgColor: 'error' as keyof typeof theme.colors, textColor: 'white' as keyof typeof theme.colors };

@@ -13,11 +13,12 @@ export default function Main() {
         <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
         <DraggableScroller>
           <S.MyProject.Wrapper>
-            <MyProjectItem status={'03'} thumbnail={'01'} title='코코블' />
-            <MyProjectItem status={'02'} thumbnail={'01'} title='코코블' />
-            <MyProjectItem status={'01'} thumbnail={'01'} title='코코블' />
-            <MyProjectItem status={'02'} thumbnail={'01'} title='코코블' />
-            <MyProjectItem status={'03'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'DEVELOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'DEVELOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'STOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'STOP'} thumbnail={'01'} title='코코블' />
           </S.MyProject.Wrapper>
         </DraggableScroller>
 
