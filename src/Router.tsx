@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router';
 
+import { PATH } from '@/constants/path';
+
 import App from '@/App';
 import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
@@ -13,16 +15,16 @@ import Swagger from './pages/Swagger';
 export default function Router() {
   return (
     <Routes>
-      <Route path='/sign-in' element={<SignIn />} />
-      <Route path='/' element={<App />}>
-        <Route path='/' element={<Main />} />
-        <Route path='/daily-check' element={<Articles />} />
-        <Route path='/articles' element={<Articles />} />
-        <Route path='/projects' element={<Projects />} />
-        <Route path='projects/:projectId' element={<Project />} />
+      <Route path={PATH.SIGN_IN} element={<SignIn />} />
+      <Route path={PATH.APP} element={<App />}>
+        <Route path={PATH.MAIN} element={<Main />} />
+        <Route path={PATH.DAILY_CHECK} element={<Articles />} />
+        <Route path={PATH.ARTICLES} element={<Articles />} />
+        <Route path={PATH.PROJECTS} element={<Projects />} />
+        <Route path={PATH.GET_PROJECT_WITH_ID('/:projectId')} element={<Project />} />
       </Route>
-      <Route path='/api' element={<Swagger />} />
-      <Route path='*' element={<NotFound />} />
+      <Route path={PATH.SWAGGER} element={<Swagger />} />
+      <Route path={PATH.NOT_FOUND} element={<NotFound />} />
     </Routes>
   );
 }
