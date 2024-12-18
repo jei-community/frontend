@@ -24,7 +24,7 @@ const getFontSize = (theme: Theme, heightSize: TextFieldHeightSize) => {
 export const S = {
   /** 공통 텍스트 필드 컴포넌트 스타일 */
   TextField: styled.input<TextFieldStyleProps>`
-    width: '100%';
+    width: 100%;
     height: ${({ $heightSize }) => HEIGHT[$heightSize]};
     padding: 0.8rem 1.2rem;
     display: flex;
