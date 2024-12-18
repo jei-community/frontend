@@ -1,3 +1,5 @@
+import { PATH } from '@/constants/path';
+
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
 
@@ -13,7 +15,7 @@ export default function Projects() {
           <S.Title>내 프로젝트</S.Title>
           <S.Button>프로젝트 생성</S.Button>
         </S.TopContainer>
-        <Divider direction='horizontal' />
+        <Divider />
         <S.SearchWrapper>
           <S.InputContainer>
             <S.Input placeholder='프로젝트명을 입력해주세요' />
@@ -27,14 +29,14 @@ export default function Projects() {
             return (
               // TODO(증훈): 프로젝트 상세페이지로 연결
               <S.ProjectItem key={index}>
-                <S.CustomLink to='/'>
+                <S.CustomLink to={PATH.GET_PROJECT_WITH_ID('/1')}>
                   <ProjectCard />
                 </S.CustomLink>
               </S.ProjectItem>
             );
           })}
         </S.Projects>
-        <Divider direction='horizontal' />
+        <Divider />
         <S.Pagination>
           <S.PaginationButton>
             <img src={LeftChevronFirstSVG} />
