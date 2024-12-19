@@ -185,5 +185,6 @@ const BaseStyle = css`
     padding: 0;
     margin: 0;
     border: none;
+    background: none;
   }
 `;
