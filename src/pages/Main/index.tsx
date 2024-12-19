@@ -2,49 +2,82 @@ import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import DraggableScroller from '@/components/DraggableScroll';
 
+import { ArticleItem, MyProjectItem, PostItem } from './components';
 import { S } from './style';
 
 export default function Main() {
   return (
     <>
-      <Aside position='left'>123</Aside>
+      <Aside>123</Aside>
       <Content>
-        <div>
-          <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
-          <DraggableScroller>
-            <S.MyProject.Wrapper $color='gray'>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-              <S.MyProject.Item>123</S.MyProject.Item>
-            </S.MyProject.Wrapper>
-          </DraggableScroller>
+        <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
+        <DraggableScroller>
+          <S.MyProject.Wrapper>
+            <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'DEVELOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'DEVELOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'STOP'} thumbnail={'01'} title='코코블' />
+            <MyProjectItem status={'STOP'} thumbnail={'01'} title='코코블' />
+          </S.MyProject.Wrapper>
+        </DraggableScroller>
 
-          <S.CategoryTitle>아티클</S.CategoryTitle>
-          <DraggableScroller>
-            <S.Article.Wrapper>
-              <S.Article.Item>123</S.Article.Item>
-              <S.Article.Item>123</S.Article.Item>
-              <S.Article.Item>123</S.Article.Item>
-            </S.Article.Wrapper>
-          </DraggableScroller>
+        <S.Divider />
 
-          <S.CategoryTitle>최신 포스트</S.CategoryTitle>
-          <S.Post.Wrapper>
-            <S.Post.Item>1</S.Post.Item>
-            <S.Post.Item>1</S.Post.Item>
-            <S.Post.Item>1</S.Post.Item>
-            <S.Post.Item>1</S.Post.Item>
-          </S.Post.Wrapper>
-        </div>
+        <S.CategoryTitle>아티클</S.CategoryTitle>
+        <DraggableScroller>
+          <S.Article.Wrapper>
+            <ArticleItem />
+            <ArticleItem />
+            <ArticleItem />
+          </S.Article.Wrapper>
+        </DraggableScroller>
+
+        <S.Divider />
+
+        <S.CategoryTitle>최신 포스트</S.CategoryTitle>
+        <S.Post.Wrapper>
+          <PostItem
+            name='임범규'
+            position='연구원'
+            title='REACT19 알아보기'
+            description='Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada.
+        Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris
+        euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie
+        egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet
+        at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In
+        convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis
+        facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada.
+        Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris
+        euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie
+        egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet
+        at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In
+        convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis
+        facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur.'
+            date='2024. 12. 12'
+          />
+          <PostItem
+            name='임범규'
+            position='연구원'
+            title='REACT19 알아보기'
+            description='Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada.
+        Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris
+        euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie
+        egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet
+        at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In
+        convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis
+        facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada.
+        Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris
+        euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie
+        egestas placerat. Lorem ipsum dolor sit amet consectetur. In convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet
+        at malesuada. Vestibulum hac vulputate praesent venenatis facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur. In
+        convallis mi mauris euismod risus vitae gravida libero. Suspendisse nec in amet at malesuada. Vestibulum hac vulputate praesent venenatis
+        facilisi molestie egestas placerat. Lorem ipsum dolor sit amet consectetur.'
+            date='2024. 12. 12'
+          />
+        </S.Post.Wrapper>
       </Content>
-      <Aside position='right'>123</Aside>
+      <Aside>1234</Aside>
     </>
   );
 }

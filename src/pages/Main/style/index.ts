@@ -12,13 +12,11 @@ export const S = {
   })),
 
   MyProject: {
-    Wrapper: styled.div<{ $color: string }>(({ $color }) => ({
+    Wrapper: styled.div({
       display: 'flex',
-      columnGap: '2rem',
+      columnGap: '1.6rem',
       maxWidth: '100%',
-      backgroundColor: $color,
-      margin: '0 0 4rem 0',
-    })),
+    }),
     Item: styled.div(({ theme }) => ({
       flex: '0 0 auto',
       width: '20rem',
@@ -30,9 +28,9 @@ export const S = {
 
   Article: {
     Wrapper: styled.div({
-      // display: 'flex',
-      columnGap: '2rem',
-      margin: '0 0 4rem 0',
+      display: 'flex',
+      columnGap: '1.6rem',
+      maxWidth: '100%',
     }),
     Item: styled.div(({ theme }) => ({
       flex: '0 0 auto',
@@ -44,16 +42,15 @@ export const S = {
 
   Post: {
     Wrapper: styled.div({
-      // display: 'flex',
+      display: 'flex',
       flexDirection: 'column',
-      rowGap: '2rem',
-      margin: '0 0 4rem 0',
+      rowGap: '3.2rem',
     }),
-    Item: styled.div(({ theme }) => ({
-      // flex: '0 0 auto',
-      width: '100%',
-      height: '40rem',
-      backgroundColor: theme.colors.gray[200],
-    })),
   },
+
+  Divider: styled.div(({ theme }) => ({
+    height: '1px',
+    backgroundColor: theme.colors.gray[200], // 구분선 색상 설정
+    margin: '2.4rem 0', // 구분선의 위/아래 여백
+  })),
 };
