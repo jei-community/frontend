@@ -7,8 +7,7 @@ import theme from '../theme';
 export default function GlobalStyle({ children }: PropsWithChildren) {
   return (
     <ThemeProvider theme={theme}>
-      <Global styles={ResetStyle} />
-      <Global styles={BaseStyle} />
+      <Global styles={[ResetStyle, BaseStyle]} />
       {children}
     </ThemeProvider>
   );
