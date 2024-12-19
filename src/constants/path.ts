@@ -2,7 +2,7 @@ export const PATH = {
   SIGN_IN: '/sign-in',
   APP: '/',
   MAIN: '/',
-  DAILY_CHECK: '/articles',
+  DAILY_CHECK: '/daily-check',
   ARTICLES: '/articles',
   PROJECTS: '/projects',
   GET_PROJECT_WITH_ID: (id: string | number) => `/projects${id}`,
