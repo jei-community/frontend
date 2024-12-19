@@ -22,7 +22,7 @@ export default function Title() {
               {Array.from({ length: 5 }, (_, index) => {
                 return (
                   <li key={index}>
-                    <S.Avatar src='https://via.placeholder.com/50' alt='avatar' />
+                    <S.Avatar src='https://via.placeholder.com/32' alt='avatar' />
                   </li>
                 );
               })}
