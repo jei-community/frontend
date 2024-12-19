@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import { PATH } from '@/constants/path';
 
@@ -10,6 +10,9 @@ import Projects from '@/pages/Projects';
 import SignIn from '@/pages/SignIn';
 
 import Articles from './pages/Articles';
+import PostPage from './pages/Post';
+import PostEditor from './pages/Post/components/Editor';
+import PostList from './pages/Post/components/List';
 import Swagger from './pages/Swagger';
 
 export default function Router() {
@@ -22,6 +25,14 @@ export default function Router() {
         <Route path={PATH.ARTICLES} element={<Articles />} />
         <Route path={PATH.PROJECTS} element={<Projects />} />
         <Route path={PATH.GET_PROJECT_WITH_ID('/:projectId')} element={<Project />} />
+        <Route path={PATH.POSTPAGE} element={<PostPage />}>
+          {/* `/posts`를 `/posts/list`로 리다이렉트 */}
+          <Route index element={<Navigate to={`${PATH.POSTPAGE}/${PATH.LIST}`} replace />} />
+          <Route path={PATH.LIST} element={<PostList />} />
+          <Route path={PATH.EDITOR} element={<PostEditor />} />
+          {/* 기타 모든 경로를 `/posts/list`로 리다이렉트 */}
+          <Route path='*' element={<Navigate to={`${PATH.POSTPAGE}/${PATH.LIST}`} replace />} />
+        </Route>
       </Route>
       <Route path={PATH.SWAGGER} element={<Swagger />} />
       <Route path={PATH.NOT_FOUND} element={<NotFound />} />
