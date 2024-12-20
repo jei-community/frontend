@@ -13,6 +13,7 @@ export default function Main() {
         <S.CategoryTitle>내 프로젝트</S.CategoryTitle>
         <DraggableScroller>
           <S.MyProject.Wrapper>
+            {/* TODO(범규): constants STATUS_TEXT 사용하기 */}
             <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
             <MyProjectItem status={'LIVE'} thumbnail={'01'} title='코코블' />
             <MyProjectItem status={'DEVELOP'} thumbnail={'01'} title='코코블' />
