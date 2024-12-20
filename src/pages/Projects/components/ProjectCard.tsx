@@ -1,12 +1,10 @@
 import { S } from '@/pages/Projects/components/style';
 
-import GlassSVG from '../assets/icons/glass.svg';
-
 export default function ProjectCard() {
   return (
     <S.Container>
       <S.Title>EVERYDEI</S.Title>
-      <S.Thumbnail src={GlassSVG}></S.Thumbnail>
+      <S.Thumbnail src='https://via.placeholder.com/312'></S.Thumbnail>
       <S.ContentContainer>
         <S.Date>2024. 00. 00 ~ 2024. 00. 00</S.Date>
         <S.ProjectState />
