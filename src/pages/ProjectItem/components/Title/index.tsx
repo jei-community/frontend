@@ -1,17 +1,28 @@
+import { Status } from '@/types/project';
+
+import { STATUS_TEXT } from '@/constants/project';
+
 import Divider from '@/components/Divider';
 
 import { S } from '@/pages/ProjectItem/components/Title/style';
 
-// TODO(증훈): 서버 데이터로 교체
-export default function Title() {
+interface Props {
+  thumbnailImageUrl: string;
+  title: string;
+  status: Status;
+  startDate: string;
+  endDate: string;
+}
+
+export default function Title({ thumbnailImageUrl, title, status, startDate, endDate }: Props) {
   return (
     <S.Container>
-      <S.Thumbnail src='https://via.placeholder.com/100' alt='thumbnail' />
+      <S.Thumbnail src={thumbnailImageUrl} alt={`${title} 썸네일 이미지`} />
       <S.RightContainer>
         <S.TitleContainer>
-          <S.Title>EVERYDEI</S.Title>
+          <S.Title>{title}</S.Title>
           <S.Badge>
-            <S.BadgeText>서비스</S.BadgeText>
+            <S.BadgeText>{STATUS_TEXT[status]}</S.BadgeText>
           </S.Badge>
         </S.TitleContainer>
 
@@ -29,7 +40,11 @@ export default function Title() {
             </S.AvatarContainer>
             <S.MemberCountText>+n명</S.MemberCountText>
           </S.MemberInfoContainer>
-          <S.DateText>2024. 00. 00 ~ 2024. 00. 00</S.DateText>
+          <S.DataContainer>
+            <S.DateText>{startDate}</S.DateText>
+            <S.DateText>~</S.DateText>
+            <S.DateText>{endDate}</S.DateText>
+          </S.DataContainer>
         </S.MemberAndDateContainer>
       </S.RightContainer>
     </S.Container>
