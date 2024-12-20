@@ -1,6 +1,6 @@
 import { Status } from '@/types/project';
 
-import { STATUS_TEXT } from '@/constants/project';
+import { STATUS_TEXT } from '@/constants/common';
 
 import Divider from '@/components/Divider';
 
