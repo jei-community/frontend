@@ -10,7 +10,7 @@ export default function DeleteButton() {
   const deleteProject = () => {
     if (confirm('프로젝트를 삭제하시겠습니까?')) {
       console.log('삭제');
-      navigate(PATH.PROJECTS);
+      navigate(PATH.PROJECT.ABSOLUTE.LIST.INDEX);
     }
   };
 
