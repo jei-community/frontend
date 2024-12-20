@@ -29,11 +29,11 @@ export default function Router() {
         <Route path={PATH.GET_PROJECT_WITH_ID('/:projectId')} element={<Project />} />
         <Route path={PATH.POSTPAGE} element={<PostPage />}>
           {/* `/posts`를 `/posts/list`로 리다이렉트 */}
-          <Route index element={<Navigate to={`${PATH.POSTPAGE}/${PATH.LIST}`} replace />} />
-          <Route path={PATH.LIST} element={<PostList />} />
-          <Route path={PATH.EDITOR} element={<PostEditor />} />
+          <Route index element={<Navigate to={`${PATH.POSTPAGE}/${PATH.POSTPAGE_LIST}`} replace />} />
+          <Route path={PATH.POSTPAGE_LIST} element={<PostList />} />
+          <Route path={PATH.POSTPAGE_EDITOR} element={<PostEditor />} />
           {/* 기타 모든 경로를 `/posts/list`로 리다이렉트 */}
-          <Route path='*' element={<Navigate to={`${PATH.POSTPAGE}/${PATH.LIST}`} replace />} />
+          <Route path='*' element={<Navigate to={`${PATH.POSTPAGE}/${PATH.POSTPAGE_LIST}`} replace />} />
         </Route>
       </Route>
       <Route path={PATH.SWAGGER} element={<Swagger />} />
