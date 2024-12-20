@@ -25,7 +25,7 @@ export const S = {
     gap: '1.2rem',
   }),
 
-  MyProjectText: styled.p(({ theme }) => ({
+  MyProjectLabelText: styled.label(({ theme }) => ({
     color: theme.colors.gray[900],
     ...theme.typography.body1,
   })),

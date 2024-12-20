@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+import { mockProjectConfigurations, mockProjectDetails } from '@/mocks/data/project';
+
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
@@ -19,23 +21,25 @@ export default function ProjectItem() {
   const descriptionRef = useRef<HTMLHeadingElement | null>(null);
   const techStackRef = useRef<HTMLHeadingElement | null>(null);
   const envRef = useRef<HTMLHeadingElement | null>(null);
+  const { thumbnailImageUrl, title, status, startDate, endDate, description, metadata } = mockProjectDetails;
+  const { configuration } = mockProjectConfigurations;
 
   return (
     <>
       <Content>
         <ProjectContentContainer>
-          <Title />
+          <Title thumbnailImageUrl={thumbnailImageUrl} title={title} status={status} startDate={startDate} endDate={endDate} />
 
-          <Description ref={descriptionRef} />
+          <Description ref={descriptionRef} description={description} />
 
-          <TechStack ref={techStackRef} />
+          <TechStack ref={techStackRef} techStacks={metadata.tech} />
 
-          <Env ref={envRef} />
+          <Env ref={envRef} configuration={configuration} />
         </ProjectContentContainer>
       </Content>
       <Aside>
         <ProjectSideContainer>
-          <TooltipList ref={linkRef} />
+          <TooltipList ref={linkRef} links={metadata.link} />
           <EditorLink />
           <Divider />
           <TableOfContent linkRef={linkRef} descriptionRef={descriptionRef} techStackRef={techStackRef} envRef={envRef} />

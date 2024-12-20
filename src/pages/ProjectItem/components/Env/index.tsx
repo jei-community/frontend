@@ -6,30 +6,16 @@ import { S } from '@/pages/ProjectItem/components/Env/style';
 
 interface Props {
   ref: RefObject<HTMLHeadingElement | null>;
+  configuration: string;
 }
 
-// TODO(증훈): 서버 데이터로 교체
-export default function Env({ ref }: Props) {
+export default function Env({ ref, configuration }: Props) {
   const [isEnvOpen, setIsEnvOpen] = useState(false);
-
-  const handleOpenEnv = () => setIsEnvOpen(!isEnvOpen);
 
   return (
     <EnvContainer ref={ref}>
       <S.EnvBoard>
-        {isEnvOpen ? (
-          <ul>
-            {Array.from({ length: 4 }, (_, index) => {
-              return (
-                <li key={index}>
-                  <S.EnvText>VITE_APP_COCOA=https://example.com</S.EnvText>
-                </li>
-              );
-            })}{' '}
-          </ul>
-        ) : (
-          <S.EnvButton onClick={handleOpenEnv}>내용 표시</S.EnvButton>
-        )}
+        {isEnvOpen ? <S.EnvText>{configuration}</S.EnvText> : <S.EnvButton onClick={() => setIsEnvOpen(!isEnvOpen)}>내용 표시</S.EnvButton>}
       </S.EnvBoard>
     </EnvContainer>
   );

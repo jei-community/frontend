@@ -1,27 +1,27 @@
 import { RefObject } from 'react';
 
+import { LinkItem } from '@/types/project';
+
 import DraggableScroller from '@/components/DraggableScroll';
 
 import { S } from '@/pages/ProjectItem/components/TooltipList/style';
 
 interface Props {
+  links: LinkItem[];
   ref?: RefObject<HTMLUListElement | null>;
 }
 
-// TODO(증훈): 서버 데이터로 교체
-
-export default function TooltipList({ ref }: Props) {
+export default function TooltipList({ links, ref }: Props) {
   return (
     <S.TooltipList ref={ref}>
       <DraggableScroller>
-        {Array.from({ length: 5 }, (_, index) => {
+        {links.map(({ url, tag }) => {
+          console.log(url);
+
           return (
-            <li key={index}>
+            <li key={tag}>
               <S.TooltipContainer>
-                <S.TooltipImage
-                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Google_Docs_2020_Logo.svg/120px-Google_Docs_2020_Logo.svg.png'
-                  alt='tooltip'
-                />
+                <S.TooltipImage src={tag} alt={`${tag} 이미지`} />
               </S.TooltipContainer>
             </li>
           );

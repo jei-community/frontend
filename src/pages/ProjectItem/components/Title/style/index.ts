@@ -89,6 +89,11 @@ export const S = {
     ...theme.typography.body4,
   })),
 
+  DataContainer: styled.div({
+    display: 'flex',
+    gap: '0.4rem',
+  }),
+
   DateText: styled.p(({ theme }) => ({
     color: theme.colors.gray[500],
     ...theme.typography.body1,
