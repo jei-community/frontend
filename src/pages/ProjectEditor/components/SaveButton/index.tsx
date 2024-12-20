@@ -11,7 +11,7 @@ export default function SaveButton() {
     // TODO(증훈): 세이브 로직 작성 필요
     if (confirm('저장하시겠습니까?')) {
       console.log('Save');
-      navigate(PATH.GET_PROJECT_ITEM('/newId'));
+      navigate(PATH.PROJECT.ABSOLUTE.LIST.GET_PROJECT_ITEM('newId'));
     }
   };
 
