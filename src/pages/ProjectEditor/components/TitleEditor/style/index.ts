@@ -1,4 +1,4 @@
-import { S as TitleStyle } from '@/pages/Project/components/Title/style';
+import { S as TitleStyle } from '@/pages/ProjectItem/components/Title/style';
 import styled from '@emotion/styled';
 
 export const S = {

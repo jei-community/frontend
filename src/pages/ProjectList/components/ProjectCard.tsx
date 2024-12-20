@@ -1,4 +1,4 @@
-import { S } from '@/pages/Projects/components/style';
+import { S } from '@/pages/ProjectList/components/style';
 
 export default function ProjectCard() {
   return (
