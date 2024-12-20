@@ -23,9 +23,9 @@ export default function TechStackList({ techStacks, display = 'flex' }: Props) {
       {display === 'flex' ? (
         <S.TechStackImgFlexList>
           <DraggableScroller>
-            {techStacks.map(({ src, alt }) => {
+            {techStacks.map(({ src, alt }, index) => {
               return (
-                <li key={src}>
+                <li key={index}>
                   <S.TechStackImg src={src} alt={alt} />
                 </li>
               );
@@ -34,9 +34,9 @@ export default function TechStackList({ techStacks, display = 'flex' }: Props) {
         </S.TechStackImgFlexList>
       ) : (
         <S.TechStackImgGridList>
-          {techStacks.map(({ src, alt }) => {
+          {techStacks.map(({ src, alt }, index) => {
             return (
-              <li key={src}>
+              <li key={index}>
                 <S.TechStackImg src={src} alt={alt} />
               </li>
             );

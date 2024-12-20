@@ -1,27 +1,35 @@
+import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react';
+import { useNavigate } from 'react-router';
+
 import { PATH } from '@/constants/path';
 
+import Button from '@/components/Button';
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
+import TextField from '@/components/TextField';
 
-import { GlassSVG, LeftChevronFirstSVG, LeftChevronSVG, RightChevronLastSVG, RightChevronSVG } from '@/pages/Projects/assets';
 import ProjectCard from '@/pages/Projects/components/ProjectCard';
 import { S } from '@/pages/Projects/style';
 
 export default function Projects() {
+  const navigate = useNavigate();
+
   return (
     <Content>
       <S.Container>
         <S.TopContainer>
           <S.Title>내 프로젝트</S.Title>
-          <S.Button>프로젝트 생성</S.Button>
+          <Button size='large' onClick={() => navigate(PATH.PROJECT_EDITOR)}>
+            프로젝트 생성
+          </Button>
         </S.TopContainer>
         <Divider />
         <S.SearchWrapper>
           <S.InputContainer>
-            <S.Input placeholder='프로젝트명을 입력해주세요' />
-            <S.InputButton>
-              <img src={GlassSVG} alt='검색 버튼' />
-            </S.InputButton>
+            <TextField placeholder='프로젝트명을 입력해 주세요' heightSize='small' />
+            <Button size='icon'>
+              <SearchIcon />
+            </Button>
           </S.InputContainer>
         </S.SearchWrapper>
         <S.Projects>
@@ -39,10 +47,10 @@ export default function Projects() {
         <Divider />
         <S.Pagination>
           <S.PaginationButton>
-            <img src={LeftChevronFirstSVG} />
+            <ChevronFirstIcon />
           </S.PaginationButton>
           <S.PaginationButton>
-            <img src={LeftChevronSVG} />
+            <ChevronLeftIcon />
           </S.PaginationButton>
           <S.PaginationNumberList>
             {Array.from({ length: 9 }, (_, index) => {
@@ -56,10 +64,10 @@ export default function Projects() {
             })}
           </S.PaginationNumberList>
           <S.PaginationButton>
-            <img src={RightChevronSVG} />
+            <ChevronRightIcon />
           </S.PaginationButton>
           <S.PaginationButton>
-            <img src={RightChevronLastSVG} />
+            <ChevronLastIcon />
           </S.PaginationButton>
         </S.Pagination>
       </S.Container>

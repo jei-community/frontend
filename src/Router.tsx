@@ -6,6 +6,7 @@ import App from '@/App';
 import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
 import Project from '@/pages/Project';
+import ProjectEditor from '@/pages/ProjectEditor';
 import Projects from '@/pages/Projects';
 import SignIn from '@/pages/SignIn';
 
@@ -21,6 +22,7 @@ export default function Router() {
         <Route path={PATH.DAILY_CHECK} element={<Articles />} />
         <Route path={PATH.ARTICLES} element={<Articles />} />
         <Route path={PATH.PROJECTS} element={<Projects />} />
+        <Route path={PATH.PROJECT_EDITOR} element={<ProjectEditor />} />
         <Route path={PATH.GET_PROJECT_WITH_ID('/:projectId')} element={<Project />} />
       </Route>
       <Route path={PATH.SWAGGER} element={<Swagger />} />
