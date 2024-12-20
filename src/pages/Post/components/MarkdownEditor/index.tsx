@@ -12,14 +12,15 @@ interface Props {
 export default function MarkdownEditor({ title, value, setValue }: Props) {
   const [valueWithTitle, setValueWithTitle] = useState<string>();
 
-  useEffect(() => {
-    // 제목이 변경될 때 첫 줄에 삽입
-    setValueWithTitle(() => {
-      if (!title) return value;
+  /** 제목과 내용에 따라 미리보기에 보여줄 내용을 바꾸는 함수 */
+  const handleValueWithTitle = (title: string, value: string | undefined) => {
+    if (!title) setValueWithTitle(value);
+    else setValueWithTitle(`# ${title}\n${value}`); // 제목이 있는 경우 첫 줄에 제목 삽입
+  };
 
-      return `# ${title}\n${value}`;
-    });
-  }, [title, value, valueWithTitle]);
+  useEffect(() => {
+    handleValueWithTitle(title, value);
+  }, [title, value]);
 
   return (
     <>
