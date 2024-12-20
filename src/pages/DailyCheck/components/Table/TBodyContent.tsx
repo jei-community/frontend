@@ -65,7 +65,7 @@ export default function TBodyContent({ col, row }: Props) {
         <S.TBody.Td>
           <S.Icon.Container ref={memoTooltipRef}>
             {row[col]?.length > 0 ? <S.Icon.Memo onClick={handleMemoBtnClick} /> : <S.Icon.Plus onClick={handleMemoBtnClick} />}
-            {isMemoTooltipOpen && <Tooltip type={'MEMO'} value={row[col]} />}
+            {isMemoTooltipOpen && <Tooltip type={'MEMO'} row={row} col={col} />}
           </S.Icon.Container>
         </S.TBody.Td>
       );
@@ -78,7 +78,7 @@ export default function TBodyContent({ col, row }: Props) {
         <S.TBody.Td>
           <S.Icon.Container ref={checkTooltipRef}>
             <CheckBox status={STATUS[row[col]] ?? 'INCOMPLETE'} isToday={true} handleTooltipOpen={handleCheckTooltip} />
-            {isCheckTooltipOpen && <Tooltip type={'CHECK'} value={STATUS[row[col]]} />}
+            {isCheckTooltipOpen && <Tooltip type={'CHECK'} row={row} col={col} />}
           </S.Icon.Container>
         </S.TBody.Td>
       );

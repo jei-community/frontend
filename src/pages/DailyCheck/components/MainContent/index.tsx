@@ -1,6 +1,6 @@
 import { use } from 'react';
 
-import { DailyCheckResponse } from '@/apis/dailyCheck';
+import { DailyCheckResponse } from '@/apis/dailyCheck/type';
 
 import Table from '../Table';
 import EmptyContent from './EmptyContent';

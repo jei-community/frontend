@@ -1,4 +1,4 @@
-import { DailyCheckResponse } from '@/apis/dailyCheck';
+import { DailyCheckResponse } from '@/apis/dailyCheck/type';
 
 import { COLUMN_WIDTHS } from '../../constant';
 import TBodyContent from './TBodyContent';
