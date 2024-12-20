@@ -10,7 +10,7 @@ interface Props {
 
 /** 마크다운 작성 컴포넌트 */
 export default function MarkdownEditor({ title, value, setValue }: Props) {
-  const [valueWithTitle, setValueWithTitle] = useState<string | undefined>('');
+  const [valueWithTitle, setValueWithTitle] = useState<string>();
 
   useEffect(() => {
     // 제목이 변경될 때 첫 줄에 삽입

@@ -10,7 +10,7 @@ import { S } from './style';
 /** 포스트 작성 페이지 */
 export default function PostEditor() {
   const [title, setTitle] = useState<string>('');
-  const [value, setValue] = useState<string | undefined>('');
+  const [value, setValue] = useState<string>();
 
   /** 제목 입력값이 변경될 때 호출되는 핸들러 */
   const handleChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
