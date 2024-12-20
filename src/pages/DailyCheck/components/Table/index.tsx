@@ -1,6 +1,6 @@
 import { DailyCheckResponse } from '@/apis/dailyCheck';
 
-import { COLUMN_WIDTHS } from '../constant';
+import { COLUMN_WIDTHS } from '../../constant';
 import TBodyContent from './TBodyContent';
 import { S } from './style';
 

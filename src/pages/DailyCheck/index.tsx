@@ -16,6 +16,7 @@ export default function DailyCheck() {
   return (
     <>
       <Content>
+        {/* TODO(지애) : 로딩 컴포넌트 */}
         <Suspense fallback={'loading...'}>
           <MainContent dailyCheckPromise={dailyCheckPromise} userName={userName} />
         </Suspense>

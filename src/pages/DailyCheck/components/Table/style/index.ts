@@ -73,5 +73,11 @@ export const S = {
       height: '2.4rem',
       cursor: 'pointer',
     })),
+    /** 아이콘 클릭 시 툴팁이 있는 경우 사용 */
+    Container: styled.span`
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+    `,
   },
 };

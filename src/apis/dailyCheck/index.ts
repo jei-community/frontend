@@ -8,7 +8,7 @@ export interface DailyCheckResponse {
 /** 일일점검 데이터 호출 */
 export const getDailyCheck = async (userName: string): Promise<DailyCheckResponse | null> => {
   /** apps script url */
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwZAIQn6XlNbFfJjo1Z3Ayy-Tq9yaOji7YfAa2byZ7-pQwIVoqiLaM-eWQE-YQ-wn5O/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyrMjee3dwdJXjypbREvAZCp9m3g6mYRvxdZsig0Buq334QSV-RcT_TwKvYbgUTGIhVlQ/exec';
 
   try {
     const response = await fetch(`${scriptURL}?userName=${encodeURIComponent(userName)}`);
