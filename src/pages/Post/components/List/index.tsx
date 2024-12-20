@@ -8,7 +8,7 @@ export default function PostList() {
   return (
     <>
       <Aside>1234</Aside>
-      <Content>1234</Content>
+      <Content>{/* TODO(범규): 포스트 리스트 UI 구현 필요 */}</Content>
       <Aside>
         <PostingLink />
       </Aside>

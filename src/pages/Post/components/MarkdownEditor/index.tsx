@@ -23,6 +23,7 @@ export default function MarkdownEditor({ title, value, setValue }: Props) {
 
   return (
     <>
+      {/* TODO(범규): 이미지 드래그 앤 드롭 기능 구현 검토  */}
       <S.MDEditor value={value} onChange={setValue} data-color-mode='light' preview='edit' textareaProps={{ placeholder: '내용을 입력해주세요.' }} />
       {(title || value) && <S.Markdown source={valueWithTitle} />}
     </>
