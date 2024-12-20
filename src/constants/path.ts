@@ -7,6 +7,9 @@ export const PATH = {
   PROJECTS: '/projects',
   GET_PROJECT_WITH_ID: (id: string | number) => `/projects${id}`,
   PROJECT_EDITOR: '/projects/editor',
+  POSTPAGE: '/posts',
+  LIST: 'list',
+  EDITOR: 'editor',
   SWAGGER: '/api',
   NOT_FOUND: '*',
 };
