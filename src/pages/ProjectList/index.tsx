@@ -8,10 +8,10 @@ import Content from '@/components/Content';
 import Divider from '@/components/Divider';
 import TextField from '@/components/TextField';
 
-import ProjectCard from '@/pages/Projects/components/ProjectCard';
-import { S } from '@/pages/Projects/style';
+import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
+import { S } from '@/pages/ProjectList/style';
 
-export default function Projects() {
+export default function ProjectList() {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +19,7 @@ export default function Projects() {
       <S.Container>
         <S.TopContainer>
           <S.Title>내 프로젝트</S.Title>
-          <Button size='large' onClick={() => navigate(PATH.PROJECT_EDITOR)}>
+          <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
             프로젝트 생성
           </Button>
         </S.TopContainer>
@@ -37,7 +37,7 @@ export default function Projects() {
             return (
               // TODO(증훈): 프로젝트 상세페이지로 연결
               <S.ProjectItem key={index}>
-                <S.CustomLink to={PATH.GET_PROJECT_WITH_ID('/1')}>
+                <S.CustomLink to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM('1')}>
                   <ProjectCard />
                 </S.CustomLink>
               </S.ProjectItem>

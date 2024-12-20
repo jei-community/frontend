@@ -1,6 +1,6 @@
 import { PATH } from '@/constants/path';
 
-import { S } from '@/pages/Project/components/EditorLink/style';
+import { S } from '@/pages/ProjectItem/components/EditorLink/style';
 
 export default function EditorLink() {
   return (

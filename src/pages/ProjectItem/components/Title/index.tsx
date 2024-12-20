@@ -1,6 +1,6 @@
 import Divider from '@/components/Divider';
 
-import { S } from '@/pages/Project/components/Title/style';
+import { S } from '@/pages/ProjectItem/components/Title/style';
 
 // TODO(증훈): 서버 데이터로 교체
 export default function Title() {

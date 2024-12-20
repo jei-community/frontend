@@ -3,7 +3,7 @@ import { RefObject, useState } from 'react';
 import DescriptionContainer from '@/components/DescriptionContainer';
 import MoreButton from '@/components/MoreButton';
 
-import { S } from '@/pages/Project/components/Description/style';
+import { S } from '@/pages/ProjectItem/components/Description/style';
 
 interface Props {
   ref: RefObject<HTMLHeadingElement | null>;
