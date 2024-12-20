@@ -1,5 +1,6 @@
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 
 import { PATH } from '@/constants/path';
 
@@ -12,39 +13,51 @@ import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
 import { S } from '@/pages/ProjectList/style';
 
 export default function ProjectList() {
+  const [isMyProjectSelected, setIsMyProjectSelected] = useState(false);
   const navigate = useNavigate();
+
+  const toggleMyProjectSelected = () => setIsMyProjectSelected(!isMyProjectSelected);
 
   return (
     <Content>
       <S.Container>
-        <S.TopContainer>
-          <S.Title>내 프로젝트</S.Title>
-          <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
-            프로젝트 생성
-          </Button>
-        </S.TopContainer>
-        <Divider />
-        <S.SearchWrapper>
-          <S.InputContainer>
-            <TextField placeholder='프로젝트명을 입력해 주세요' heightSize='small' />
+        <S.HeaderContainer>
+          <S.ToggleContainer>
+            {/* 공통 토글 스위치 컴포넌트 구현되면 교체 예정 */}
+            <input type='radio' checked={!isMyProjectSelected} onChange={toggleMyProjectSelected} />
+            <input type='radio' checked={isMyProjectSelected} onChange={toggleMyProjectSelected} />
+            <S.MyProjectText>내 프로젝트만 보기</S.MyProjectText>
+          </S.ToggleContainer>
+          <S.SearchContainer>
+            <S.TextFieldWrapper>
+              <TextField placeholder='프로젝트명을 입력해 주세요' heightSize='small' />
+            </S.TextFieldWrapper>
             <Button size='icon'>
               <SearchIcon />
             </Button>
-          </S.InputContainer>
-        </S.SearchWrapper>
-        <S.Projects>
+            <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
+              프로젝트 생성
+            </Button>
+          </S.SearchContainer>
+        </S.HeaderContainer>
+
+        <Divider />
+
+        <S.ProjectList>
           {Array.from({ length: 6 }, (_, index) => {
             return (
               // TODO(증훈): 프로젝트 상세페이지로 연결
-              <S.ProjectItem key={index}>
-                <S.CustomLink to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM('1')}>
+              <li key={index}>
+                <Link to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM('1')}>
                   <ProjectCard />
-                </S.CustomLink>
-              </S.ProjectItem>
+                </Link>
+              </li>
             );
           })}
-        </S.Projects>
+        </S.ProjectList>
+
         <Divider />
+
         <S.Pagination>
           <S.PaginationButton>
             <ChevronFirstIcon />
