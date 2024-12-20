@@ -2,7 +2,7 @@ import { RefObject, useState } from 'react';
 
 import EnvContainer from '@/components/EnvContainer';
 
-import { S } from '@/pages/Project/components/Env/style';
+import { S } from '@/pages/ProjectItem/components/Env/style';
 
 interface Props {
   ref: RefObject<HTMLHeadingElement | null>;

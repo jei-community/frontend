@@ -1,6 +1,6 @@
 import { RefObject, useState } from 'react';
 
-import { S } from '@/pages/Project/components/TableOfContent/style';
+import { S } from '@/pages/ProjectItem/components/TableOfContent/style';
 
 interface FocusedScroll {
   link: boolean;

@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 
 import DraggableScroller from '@/components/DraggableScroll';
 
-import { S } from '@/pages/Project/components/TooltipList/style';
+import { S } from '@/pages/ProjectItem/components/TooltipList/style';
 
 interface Props {
   ref?: RefObject<HTMLUListElement | null>;
