@@ -1,9 +1,10 @@
 import { InputHTMLAttributes, PropsWithChildren } from 'react';
 
 import { S } from './style';
+import type { TextFieldHeightSize } from './types';
 
 interface Props extends PropsWithChildren<InputHTMLAttributes<HTMLInputElement>> {
-  heightSize?: 'small' | 'medium' | 'large';
+  heightSize?: TextFieldHeightSize;
   isError?: boolean;
 }
 

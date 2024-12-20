@@ -1,7 +1,7 @@
 import { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { TextFieldHeightSize } from '../types';
+import type { TextFieldHeightSize } from '../types';
 
 interface TextFieldStyleProps {
   $heightSize: TextFieldHeightSize;
