@@ -13,9 +13,26 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const DefaultTextButton: Story = {
+export const PrimaryMediumTextButton: Story = {
   args: {
     color: 'primary',
     size: 'medium',
+  },
+};
+
+export const NeutralSmallTextButton: Story = {
+  args: {
+    color: 'neutral',
+    size: 'small',
+    children: 'Small',
+  },
+};
+
+export const PrimarySmallDisabledTextButton: Story = {
+  args: {
+    color: 'primary',
+    size: 'small',
+    disabled: true,
+    children: 'Disabled',
   },
 };

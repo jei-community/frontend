@@ -10,6 +10,7 @@ interface TextButtonStyleProps {
 export const S = {
   /** 공통 텍스트 버튼 컴포넌트 스타일 */
   TextButton: styled.button<TextButtonStyleProps>`
+    height: ${({ $size }) => ($size === 'small' ? '18px' : '24px')};
     cursor: pointer;
     outline: none;
     border-bottom: 2px solid transparent;
