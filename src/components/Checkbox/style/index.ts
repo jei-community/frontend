@@ -16,17 +16,13 @@ interface CheckboxStyleProps {
  * @returns 조건에 따른 체크박스 기본 스타일 템플릿 리터털
  */
 const getDefaultStyle = (theme: Theme, checked?: boolean, disabled?: boolean) => {
-  if (disabled) {
-    return `
-      background-color: ${checked ? theme.colors.gray[200] : 'transparent'};
-      border: 2px solid ${theme.colors.gray[200]};
-    `;
-  } else {
-    return `
-      background-color: ${checked ? theme.colors.primary[500] : 'transparent'};
-      border: 2px solid ${checked ? 'transparent' : theme.colors.gray[900]};
-    `;
-  }
+  const backgroundColor = disabled ? theme.colors.gray[200] : theme.colors.primary[500];
+  const borderColor = checked ? 'transparent' : theme.colors.gray[900];
+
+  return `
+    background-color: ${checked ? backgroundColor : 'transparent'};
+    border: 2px solid ${disabled ? theme.colors.gray[200] : borderColor};
+  `;
 };
 
 /**
