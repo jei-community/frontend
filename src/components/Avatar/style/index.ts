@@ -26,6 +26,7 @@ export const S = {
     cursor: ${({ $onClick }) => ($onClick ? 'pointer' : 'default')};
     background-color: ${({ theme }) => theme.colors.gray[300]};
     background-image: ${({ $src }) => ($src ? `url(${$src})` : 'none')};
+    background-size: cover;
     outline: none;
     transition: all 0.15s;
   `,
