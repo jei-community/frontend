@@ -12,11 +12,11 @@ interface Props {
 export default function Env({ ref, configuration }: Props) {
   const [isEnvOpen, setIsEnvOpen] = useState(false);
 
-  const handleOpenEnv = () => setIsEnvOpen(!isEnvOpen);
-
   return (
     <EnvContainer ref={ref}>
-      <S.EnvBoard>{isEnvOpen ? <S.EnvText>{configuration}</S.EnvText> : <S.EnvButton onClick={handleOpenEnv}>내용 표시</S.EnvButton>}</S.EnvBoard>
+      <S.EnvBoard>
+        {isEnvOpen ? <S.EnvText>{configuration}</S.EnvText> : <S.EnvButton onClick={() => setIsEnvOpen(!isEnvOpen)}>내용 표시</S.EnvButton>}
+      </S.EnvBoard>
     </EnvContainer>
   );
 }
