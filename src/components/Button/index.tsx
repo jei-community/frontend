@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 import { S } from './style';
-import { ButtonColor, ButtonSize, ButtonVariant } from './types';
+import type { ButtonColor, ButtonSize, ButtonVariant } from './types';
 
 interface Props extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   variant?: ButtonVariant;
