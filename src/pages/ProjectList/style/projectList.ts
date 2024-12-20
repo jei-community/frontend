@@ -1,5 +1,3 @@
-import { Link } from 'react-router';
-
 import { MEDIA_QUERY } from '@/constants';
 import styled from '@emotion/styled';
 
@@ -14,7 +12,7 @@ export const S = {
     userSelect: 'none',
   }),
 
-  TopContainer: styled.div({
+  HeaderContainer: styled.div({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -22,41 +20,24 @@ export const S = {
     width: '100%',
   }),
 
-  Title: styled.h1(({ theme }) => ({
-    ...theme.typography.title,
-  })),
-
-  Button: styled.button(({ theme }) => ({
-    width: '12.8rem',
-    height: '3.2rem',
-    backgroundColor: theme.colors.primary[500],
-    color: theme.colors.white,
-    border: 'none',
-
-    ...theme.typography.body4,
-  })),
-
-  SearchWrapper: styled.div({
+  ToggleContainer: styled.div({
     display: 'flex',
-    justifyContent: 'end',
-
-    width: '100%',
+    gap: '1.2rem',
   }),
 
-  InputContainer: styled.div({
+  MyProjectText: styled.p(({ theme }) => ({
+    color: theme.colors.gray[900],
+    ...theme.typography.body1,
+  })),
+
+  SearchContainer: styled.div({
     display: 'flex',
     gap: '0.8rem',
   }),
 
-  Input: styled.input(({ theme }) => ({
-    width: '25.6rem',
-    height: '3.2rem',
-
-    padding: '0 1.2rem',
-
-    border: '1px solid',
-    borderColor: theme.colors.gray[300],
-  })),
+  TextFieldWrapper: styled.div({
+    width: '34rem',
+  }),
 
   InputButton: styled.button(({ theme }) => ({
     width: '3.2rem',
@@ -66,7 +47,7 @@ export const S = {
     border: 'none',
   })),
 
-  Projects: styled.ul`
+  ProjectList: styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
@@ -81,15 +62,6 @@ export const S = {
       grid-template-columns: repeat(1, 1fr);
     }
   `,
-
-  ProjectItem: styled.li({
-    width: 'fit-content',
-  }),
-
-  CustomLink: styled(Link)({
-    display: 'block',
-    width: 'fit-content',
-  }),
 
   Pagination: styled.div({
     display: 'flex',

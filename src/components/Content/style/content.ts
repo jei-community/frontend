@@ -27,7 +27,6 @@ export const S = {
     border-left: ${({ $asidePosition }) => $asidePosition.left && '1px solid'};
     border-color: ${({ theme }) => theme.colors.gray[200]};
 
-    padding: 2.4rem;
     @media (max-width: ${MEDIA_QUERY.DESKTOP_S}px) {
       width: 100%;
     }
