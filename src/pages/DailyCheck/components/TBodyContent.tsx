@@ -1,3 +1,5 @@
+import HtmlParser from '@/components/HtmlParser';
+
 import { STATUS } from '../constant';
 import CheckBox from './CheckBox';
 import { S } from './style';
@@ -13,7 +15,11 @@ interface Props {
 export default function TBodyContent({ col, row }: Props) {
   switch (col) {
     case '구분':
-      return <S.TBody.TdTodo>{row[col]}</S.TBody.TdTodo>;
+      return (
+        <S.TBody.TdTodo>
+          <HtmlParser htmlString={row[col]} />
+        </S.TBody.TdTodo>
+      );
 
     case '메모':
       return <S.TBody.Td>{row[col]?.length > 0 ? <S.Icon.Memo /> : <S.Icon.Plus />}</S.TBody.Td>;
