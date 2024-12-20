@@ -33,6 +33,7 @@ export const S = {
   })),
 
   EnvText: styled.p(({ theme }) => ({
+    whiteSpace: 'pre-wrap',
     color: theme.colors.gray[800],
     ...theme.typography.body1,
   })),
