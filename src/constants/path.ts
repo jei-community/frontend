@@ -25,8 +25,13 @@ export const PATH = {
   DAILY_CHECK: '/daily-check',
   ARTICLES: '/articles',
   PROJECT: PROJECT,
-  POST: {
+  POSTS: {
     INDEX: '/posts',
+    LIST: 'list',
+    EDITOR: 'editor',
+  },
+  ALBUMS: {
+    INDEX: '/albums',
     LIST: 'list',
     EDITOR: 'editor',
   },

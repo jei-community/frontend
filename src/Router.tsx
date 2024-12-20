@@ -3,6 +3,9 @@ import { Navigate, Route, Routes } from 'react-router';
 import { PATH } from '@/constants/path';
 
 import App from '@/App';
+import AlbumPage from '@/pages/Albums';
+import AlbumEditor from '@/pages/Albums/components/Editor';
+import AlbumList from '@/pages/Albums/components/List';
 import Articles from '@/pages/Articles';
 import DailyCheck from '@/pages/DailyCheck';
 import Main from '@/pages/Main';
@@ -37,13 +40,22 @@ export default function Router() {
           <Route path={PATH.PROJECT.RELATIVE.EDITOR} element={<ProjectEditor />} />
         </Route>
 
-        <Route path={PATH.POST.INDEX} element={<PostPage />}>
+        <Route path={PATH.POSTS.INDEX} element={<PostPage />}>
           {/* `/posts`를 `/posts/list`로 리다이렉트 */}
-          <Route index element={<Navigate to={`${PATH.POST.INDEX}/${PATH.POST.LIST}`} replace />} />
-          <Route path={PATH.POST.INDEX} element={<PostList />} />
-          <Route path={PATH.POST.EDITOR} element={<PostEditor />} />
+          <Route index element={<Navigate to={`${PATH.POSTS.INDEX}/${PATH.POSTS.LIST}`} replace />} />
+          <Route path={PATH.POSTS.LIST} element={<PostList />} />
+          <Route path={PATH.POSTS.EDITOR} element={<PostEditor />} />
           {/* 기타 모든 경로를 `/posts/list`로 리다이렉트 */}
-          <Route path='*' element={<Navigate to={`${PATH.POST.INDEX}/${PATH.POST.LIST}`} replace />} />
+          <Route path='*' element={<Navigate to={`${PATH.POSTS.INDEX}/${PATH.POSTS.LIST}`} replace />} />
+        </Route>
+
+        <Route path={PATH.ALBUMS.INDEX} element={<AlbumPage />}>
+          {/* `/albums`를 `/albums/list`로 리다이렉트 */}
+          <Route index element={<Navigate to={`${PATH.ALBUMS.INDEX}/${PATH.ALBUMS.LIST}`} replace />} />
+          <Route path={PATH.ALBUMS.LIST} element={<AlbumList />} />
+          <Route path={PATH.ALBUMS.EDITOR} element={<AlbumEditor />} />
+          {/* 기타 모든 경로를 `/albums/list`로 리다이렉트 */}
+          <Route path='*' element={<Navigate to={`${PATH.ALBUMS.INDEX}/${PATH.ALBUMS.LIST}`} replace />} />
         </Route>
       </Route>
       <Route path={PATH.SWAGGER} element={<Swagger />} />
