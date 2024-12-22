@@ -3,6 +3,7 @@ import Content from '@/components/Content';
 import DraggableScroller from '@/components/DraggableScroll';
 
 import { ArticleItem, MyProjectItem, PostItem } from './components';
+import DailyCheck from './components/DailyCheck';
 import { S } from './style';
 
 export default function Main() {
@@ -77,7 +78,9 @@ export default function Main() {
           />
         </S.Post.Wrapper>
       </Content>
-      <Aside>1234</Aside>
+      <Aside>
+        <DailyCheck />
+      </Aside>
     </>
   );
 }
