@@ -1,7 +1,8 @@
 /** 일일점검 상태값 */
-export const STATUS: Record<string, 'COMPLETE' | 'VACATION'> = {
-  O: 'COMPLETE',
-  '-': 'VACATION',
+export const STATUS: Record<'COMPLETE' | 'VACATION' | 'INCOMPLETE', string> = {
+  COMPLETE: 'O',
+  VACATION: '-',
+  INCOMPLETE: '',
 };
 
 /** 컬럼 사이즈 */

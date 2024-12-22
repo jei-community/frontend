@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 
+import { SHEET_CONFIG } from '@/apis/dailyCheck/constant';
 import { SheetKey } from '@/apis/dailyCheck/type';
 
 interface CurrSheetState {
-  currSheet: SheetKey;
+  currSheet: keyof typeof SHEET_CONFIG;
   setCurrSheet: (value: SheetKey) => void;
 }
 
