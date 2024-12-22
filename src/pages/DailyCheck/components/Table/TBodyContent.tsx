@@ -8,20 +8,24 @@ import CheckBox from './CheckBox';
 import { S } from './style';
 
 interface Props {
-  col: string;
-  row: Record<string, string>;
+  /** 컬럼명 */ col: string | number;
+  /** 행 내 데이터 정보 (컬럼명 : 데이터) */ row: Record<string, string>;
+  /** 데이터를 업데이트하는 함수 */ handleUpdateData: (targetName: string, targetCol: string | number, value: string) => void;
 }
 
 /**
  * 테이블 바디 컨텐츠
  */
-export default function TBodyContent({ col, row }: Props) {
+export default function TBodyContent({ col, row, handleUpdateData }: Props) {
   const memoTooltipRef = useRef<HTMLDivElement>(null);
   const checkTooltipRef = useRef<HTMLDivElement>(null);
 
   // 툴팁 상태 관리
   const [isMemoTooltipOpen, setIsMemoTooltipOpen] = useState(false);
   const [isCheckTooltipOpen, setIsCheckTooltipOpen] = useState(false);
+
+  /** 오늘 날짜(일) */
+  const today = new Date().getDate();
 
   /** 메모 툴팁을 열거나 닫는다. */
   const handleMemoTooltip = () => setIsMemoTooltipOpen((prev) => !prev);
@@ -47,11 +51,6 @@ export default function TBodyContent({ col, row }: Props) {
     };
   }, [memoTooltipRef, checkTooltipRef]);
 
-  /** 메모 버튼 클릭 시 동작한다. */
-  const handleMemoBtnClick = () => {
-    handleMemoTooltip();
-  };
-
   switch (col) {
     case '구분':
       return (
@@ -64,8 +63,17 @@ export default function TBodyContent({ col, row }: Props) {
       return (
         <S.TBody.Td>
           <S.Icon.Container ref={memoTooltipRef}>
-            {row[col]?.length > 0 ? <S.Icon.Memo onClick={handleMemoBtnClick} /> : <S.Icon.Plus onClick={handleMemoBtnClick} />}
-            {isMemoTooltipOpen && <Tooltip type={'MEMO'} row={row} col={col} />}
+            {row[col]?.length > 0 ? <S.Icon.Memo onClick={handleMemoTooltip} /> : <S.Icon.Plus onClick={handleMemoTooltip} />}
+            {isMemoTooltipOpen && (
+              <Tooltip
+                type={'MEMO'}
+                row={row}
+                col={col}
+                targetName={row['담당자']}
+                handleClose={handleMemoTooltip}
+                handleUpdateData={handleUpdateData}
+              />
+            )}
           </S.Icon.Container>
         </S.TBody.Td>
       );
@@ -77,8 +85,17 @@ export default function TBodyContent({ col, row }: Props) {
       return (
         <S.TBody.Td>
           <S.Icon.Container ref={checkTooltipRef}>
-            <CheckBox status={STATUS[row[col]] ?? 'INCOMPLETE'} isToday={true} handleTooltipOpen={handleCheckTooltip} />
-            {isCheckTooltipOpen && <Tooltip type={'CHECK'} row={row} col={col} />}
+            <CheckBox status={STATUS[row[col]] ?? 'INCOMPLETE'} isToday={col === today} handleTooltipOpen={handleCheckTooltip} />
+            {isCheckTooltipOpen && (
+              <Tooltip
+                type={'CHECK'}
+                row={row}
+                col={col}
+                targetName={row['담당자']}
+                handleClose={handleCheckTooltip}
+                handleUpdateData={handleUpdateData}
+              />
+            )}
           </S.Icon.Container>
         </S.TBody.Td>
       );
