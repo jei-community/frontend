@@ -5,7 +5,7 @@ import { postNoteForUser } from '@/apis/dailyCheck';
 import Button from '@/components/Button';
 import TextArea from '@/components/TextArea';
 
-import { useCurrSheetStore } from '../store';
+import { useCurrSheetStore } from '../../store';
 import { S } from './style';
 
 interface Props {

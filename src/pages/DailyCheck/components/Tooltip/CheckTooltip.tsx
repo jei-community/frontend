@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { postCellForUser } from '@/apis/dailyCheck';
 
 import { STATUS } from '../../constant';
-import { useCurrSheetStore } from '../store';
+import { useCurrSheetStore } from '../../store';
 import { S } from './style';
 
 interface Props {

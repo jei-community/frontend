@@ -8,7 +8,7 @@ import Content from '@/components/Content';
 
 import MainContent from './components/MainContent';
 import SideContent from './components/SIdeContent';
-import { useCurrSheetStore } from './components/store';
+import { useCurrSheetStore } from './store';
 
 // 임시 데이터
 const userName = '김지애';

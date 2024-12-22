@@ -3,7 +3,7 @@ import { SheetKey } from '@/apis/dailyCheck/type';
 
 import TextButton from '@/components/TextButton';
 
-import { useCurrSheetStore } from '../store';
+import { useCurrSheetStore } from '../../store';
 import { S } from './style';
 
 /** 일일점검 페이지 우측 사이드 컨텐츠 */
