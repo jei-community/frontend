@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { postCellForUser } from '@/apis/dailyCheck';
 
 import { STATUS } from '../../constant';
+import { useCurrSheetStore } from '../store';
 import { S } from './style';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 
 /** 일일점검 체크박스 상태변경 툴팁 */
 export default function Tooltip({ value, col, targetName, handleClose, handleUpdateData }: Props) {
+  const { currSheet } = useCurrSheetStore();
   const [currentValue, setCurrentValue] = useState(value);
 
   const incomplete = currentValue !== 'COMPLETE' && currentValue !== 'VACATION';
@@ -24,7 +26,7 @@ export default function Tooltip({ value, col, targetName, handleClose, handleUpd
   const handleCheckBoxClick = (value: string) => {
     setCurrentValue(value);
     const statusKey = Object.keys(STATUS).find((key) => STATUS[key] === value) || '';
-    postCellForUser(targetName, col, statusKey);
+    postCellForUser(currSheet, targetName, col, statusKey);
     handleUpdateData(targetName, col, statusKey);
     handleClose();
   };

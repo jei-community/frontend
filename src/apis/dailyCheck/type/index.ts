@@ -1,3 +1,8 @@
+import { SHEET_CONFIG } from '../constant';
+
+/** script url Key */
+export type SheetKey = keyof typeof SHEET_CONFIG;
+
 /** 일일점검 전체 응답 데이터 */
 export interface DailyCheckResponse {
   /** 일일점검 타이틀 */ title: string;

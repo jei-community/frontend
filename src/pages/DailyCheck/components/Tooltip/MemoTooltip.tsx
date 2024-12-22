@@ -5,6 +5,7 @@ import { postNoteForUser } from '@/apis/dailyCheck';
 import Button from '@/components/Button';
 import TextArea from '@/components/TextArea';
 
+import { useCurrSheetStore } from '../store';
 import { S } from './style';
 
 interface Props {
@@ -16,18 +17,19 @@ interface Props {
 
 /** 메모 수정 툴팁 */
 export default function MemoTooltip({ value, targetName, handleClose, handleUpdateData }: Props) {
+  const { currSheet } = useCurrSheetStore();
   const [note, setNote] = useState(value);
 
   /** 메모 저장 버튼을 클릭하면 실행된다. */
   const handleSaveMemoClick = () => {
-    postNoteForUser(targetName, note);
+    postNoteForUser(currSheet, targetName, note);
     handleUpdateData(targetName, '메모', note);
     handleClose();
   };
 
   /** 메모 삭제 버튼을 클릭하면 실행된다. */
   const handleDeleteMemoClick = () => {
-    postNoteForUser(targetName, '');
+    postNoteForUser(currSheet, targetName, '');
     handleUpdateData(targetName, '메모', '');
     handleClose();
   };
