@@ -33,6 +33,10 @@ export default function TBodyContent({ col, row, handleUpdateData }: Props) {
   /** 체크박스 툴팁을 열거나 닫는다 */
   const handleCheckTooltip = () => setIsCheckTooltipOpen((prev) => !prev);
 
+  /** 일일점검 상태 키를 찾는다 */
+  const statusKey: keyof typeof STATUS =
+    (Object.keys(STATUS).find((key) => STATUS[key as keyof typeof STATUS] === row[col]) as keyof typeof STATUS) || 'INCOMPLETE';
+
   useEffect(() => {
     /** 툴팁 외부 클릭 시 툴팁을을 닫는다. */
     const handleClickOutside = (event: MouseEvent) => {
@@ -85,7 +89,7 @@ export default function TBodyContent({ col, row, handleUpdateData }: Props) {
       return (
         <S.TBody.Td>
           <S.Icon.Container ref={checkTooltipRef}>
-            <CheckBox status={STATUS[row[col]] ?? 'INCOMPLETE'} isToday={col === today} handleTooltipOpen={handleCheckTooltip} />
+            <CheckBox status={statusKey} isToday={col === today} handleTooltipOpen={handleCheckTooltip} />
             {isCheckTooltipOpen && (
               <Tooltip
                 type={'CHECK'}

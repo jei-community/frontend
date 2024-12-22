@@ -1,14 +1,18 @@
-import { ACTION, SHEET_CONFIG } from './constant';
+import { ACTION, SCRIPT_URL, SHEET_CONFIG } from './constant';
 import { DailyCheckResponse, SheetKey, TodayCheckResponse } from './type';
 
-// TODO(지애) : Query key관리 및 loader에서 데이터 관리
+// TODO(지애) : React-Query로 관리하기
 
 /** 일일점검 데이터 호출
  * @param key 구글 스크립트 키
  */
 export const getDailyCheck = async (key: SheetKey, userName: string): Promise<DailyCheckResponse | null> => {
   try {
-    const response = await fetch(`${SHEET_CONFIG[key].url}?userName=${encodeURIComponent(userName)}`);
+    const response = await fetch(`${SCRIPT_URL}?fileId=${encodeURIComponent(SHEET_CONFIG[key].id)}&userName=${encodeURIComponent(userName)}`, {
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+    });
     if (!response.ok) throw new Error('HTTP error!');
 
     return response.json();
@@ -19,12 +23,17 @@ export const getDailyCheck = async (key: SheetKey, userName: string): Promise<Da
   }
 };
 
-/** 일일점검 데이터 호출
+/** 메인화면 내 일일점검 데이터 호출
  * @param userName 유저 이름
  */
-export const getTodayCheck = async (key: SheetKey, userName: string): Promise<TodayCheckResponse | null> => {
+export const getTodayCheck = async (userName: string): Promise<TodayCheckResponse | null> => {
+  const fileIds = Object.values(SHEET_CONFIG).map((item) => item.id);
   try {
-    const response = await fetch(`${SHEET_CONFIG[key].url}?userName=${encodeURIComponent(userName)}&action=${ACTION.TODAY}`);
+    const response = await fetch(`${SCRIPT_URL}?fileIds=${fileIds}$userName=${encodeURIComponent(userName)}&action=${ACTION.TODAY}`, {
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+    });
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
     return response.json();
@@ -43,7 +52,12 @@ export const getTodayCheck = async (key: SheetKey, userName: string): Promise<To
 export const postCellForUser = async (key: SheetKey, userName: string, colName: string | number, checkStatus: string) => {
   try {
     await fetch(
-      `${SHEET_CONFIG[key].url}?userName=${encodeURIComponent(userName)}&action=${ACTION.UPDATE_CELL}&colName=${colName}&checkStatus=${checkStatus}`,
+      `${SCRIPT_URL}?fileId=${encodeURIComponent(SHEET_CONFIG[key].id)}&userName=${encodeURIComponent(userName)}&action=${ACTION.UPDATE_CELL}&colName=${colName}&checkStatus=${checkStatus}`,
+      {
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+      },
     );
   } catch (error) {
     console.error('Fetch error:', error);
@@ -56,7 +70,14 @@ export const postCellForUser = async (key: SheetKey, userName: string, colName: 
  */
 export const postNoteForUser = async (key: SheetKey, userName: string, note: string) => {
   try {
-    await fetch(`${SHEET_CONFIG[key].url}?userName=${encodeURIComponent(userName)}&action=${ACTION.UPDATE_NOTE}&note=${note}`);
+    await fetch(
+      `${SCRIPT_URL}?fileId=${encodeURIComponent(SHEET_CONFIG[key].id)}?userName=${encodeURIComponent(userName)}&action=${ACTION.UPDATE_NOTE}&note=${note}`,
+      {
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+      },
+    );
   } catch (error) {
     console.error('Fetch error:', error);
   }

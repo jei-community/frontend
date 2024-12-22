@@ -23,11 +23,11 @@ export default function Tooltip({ value, col, targetName, handleClose, handleUpd
   const incomplete = currentValue !== 'COMPLETE' && currentValue !== 'VACATION';
 
   /** 일일점검 상태 버튼을 클릭하면 실행된다. */
-  const handleCheckBoxClick = (value: string) => {
+  const handleCheckBoxClick = (key: keyof typeof STATUS) => {
+    const status = STATUS[key];
     setCurrentValue(value);
-    const statusKey = Object.keys(STATUS).find((key) => STATUS[key] === value) || '';
-    postCellForUser(currSheet, targetName, col, statusKey);
-    handleUpdateData(targetName, col, statusKey);
+    postCellForUser(currSheet, targetName, col, status);
+    handleUpdateData(targetName, col, status);
     handleClose();
   };
 
