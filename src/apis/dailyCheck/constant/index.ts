@@ -21,7 +21,7 @@ export const SHEET_CONFIG = {
     url: 'https://script.google.com/macros/s/AKfycbxT52WKSwAu2OHgWGn9fzGhnq6kB4NBediWo7yAG8OjAHj4KuGxebv2FFBG8iOb1d1y7A/exec',
   },
   ATTENDANCE: {
-    title: '출결 시스템',
+    title: '재능스스로교실 출결시스템',
     url: 'https://script.google.com/macros/s/AKfycbxT52WKSwAu2OHgWGn9fzGhnq6kB4NBediWo7yAG8OjAHj4KuGxebv2FFBG8iOb1d1y7A/exec',
   },
 };
