@@ -1,5 +1,7 @@
-import { CatIcon, Trash2Icon } from 'lucide-react';
+import { CatIcon, LinkIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
+
+import { LinkItem } from '@/types/project';
 
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
@@ -9,7 +11,11 @@ import { S } from '@/pages/ProjectEditor/components/DocumentTooltipList/style';
 import Modal from '@/pages/ProjectEditor/components/Modal';
 import TooltipList from '@/pages/ProjectItem/components/TooltipList';
 
-export default function DocumentTooltipList() {
+interface Props {
+  links: LinkItem[] | null;
+}
+
+export default function DocumentTooltipList({ links }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openDocumentLinkModal = () => setIsOpen(true);
@@ -18,9 +24,19 @@ export default function DocumentTooltipList() {
 
   return (
     <>
-      <ButtonWithIcon onClick={openDocumentLinkModal}>
+      <ButtonWithIcon size='100%' onClick={openDocumentLinkModal}>
         <S.TooltipListWrapper>
-          <TooltipList />
+          {links ? (
+            <TooltipList links={links} />
+          ) : (
+            <S.EmptyDocumentLinkContainer>
+              <S.IconContainer>
+                <LinkIcon />
+                <PlusIcon width='1.2rem' height='1.2rem' />
+              </S.IconContainer>
+              <S.AddDocumentLinkText>문서 외부 링크 추가</S.AddDocumentLinkText>
+            </S.EmptyDocumentLinkContainer>
+          )}
         </S.TooltipListWrapper>
       </ButtonWithIcon>
 
