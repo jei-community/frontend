@@ -22,15 +22,24 @@ export default function ProjectList() {
 
   const selectMyProject = () => setProjectList(mockMyProjectList.data);
 
+  const showSelectedProjects = (isMyProjectSelected: boolean) => {
+    if (isMyProjectSelected) selectMyProject();
+    else selectProjectAll();
+  };
+
   // 검색어를 기반으로 프로젝트 필터링
-  const filterProjects = (query: string) => setProjectList(projectList.filter(({ title }) => title.includes(query)));
+  const filterProjects = (query: string) => {
+    const filteredProjectList = projectList.filter(({ title }) => title.includes(query));
+
+    setProjectList(filteredProjectList);
+  };
 
   // 내 프로젝트만 보기 토글
   const toggleIsMyProjectSelected = () => {
-    setIsMyProjectSelected(!isMyProjectSelected);
+    const newIsMyProjectSelected = !isMyProjectSelected;
 
-    if (isMyProjectSelected) selectProjectAll();
-    else selectMyProject();
+    showSelectedProjects(newIsMyProjectSelected);
+    setIsMyProjectSelected(newIsMyProjectSelected);
   };
 
   return (
@@ -39,12 +48,7 @@ export default function ProjectList() {
         <S.HeaderContainer>
           <ProjectListToggle isMyProjectSelected={isMyProjectSelected} toggleIsMyProjectSelected={toggleIsMyProjectSelected} />
 
-          <Searchbar
-            isMyProjectSelected={isMyProjectSelected}
-            selectProjectAll={selectProjectAll}
-            selectMyProject={selectMyProject}
-            filterProjects={filterProjects}
-          />
+          <Searchbar isMyProjectSelected={isMyProjectSelected} showSelectedProjects={showSelectedProjects} filterProjects={filterProjects} />
         </S.HeaderContainer>
 
         <Divider />
