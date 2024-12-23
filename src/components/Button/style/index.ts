@@ -1,7 +1,7 @@
 import { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { ButtonColor, ButtonSize, ButtonVariant } from '../types';
+import type { ButtonColor, ButtonSize, ButtonVariant } from '../types';
 
 interface ButtonStyleProps {
   $variant: ButtonVariant;
