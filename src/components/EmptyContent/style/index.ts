@@ -25,7 +25,7 @@ const getFontStyle = (theme: Theme, size: EmptyContentSize) => {
 
 export const S = {
   /** 빈 내용 영역 컴포넌트를 감싸는 컨테이너 스타일 */
-  EmptyContentContainer: styled.button<EmptyContentStyleProps>`
+  EmptyContentContainer: styled.div<EmptyContentStyleProps>`
     display: flex;
     flex-direction: column;
     justify-content: center;
