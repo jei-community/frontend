@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import MDEditor from '@uiw/react-md-editor';
 
 export const S = {
   Container: styled.div({
@@ -54,4 +55,37 @@ export const S = {
     WebkitLineClamp: 5,
     WebkitBoxOrient: 'vertical',
   })),
+
+  Markdown: styled(MDEditor.Markdown)(({ theme }) => ({
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    padding: '1.6rem',
+    border: '1px solid',
+    borderColor: theme.colors.gray[100],
+    borderRadius: '0.8rem',
+    maxHeight: '16rem',
+    overflow: 'hidden',
+  })),
+
+  MarkdownWrapper: styled.div`
+    position: relative;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 1.6rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray[100]};
+    border-radius: 0.8rem;
+    max-height: 16rem;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8rem; /* Blur height */
+      background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      pointer-events: none; /* Allow clicks through the blur */
+    }
+  `,
 };
