@@ -3,20 +3,24 @@ import { PropsWithChildren } from 'react';
 import { TechStackData } from '@/types/project';
 
 import DraggableScroller from '@/components/DraggableScroll';
-import { S } from '@/components/TechStackList/style';
+import { S } from '@/components/TechStack/style';
 
 interface Props {
   techStacks: TechStackData[];
   display?: 'flex' | 'grid';
 }
 
+export default function TechStack({ children }: PropsWithChildren) {
+  return <S.Container>{children}</S.Container>;
+}
+
 function Title({ children }: PropsWithChildren) {
   return <S.PositionTitle>{children}</S.PositionTitle>;
 }
 
-export default function TechStackList({ techStacks, display = 'flex' }: Props) {
+function List({ techStacks, display = 'flex' }: Props) {
   return (
-    <S.PositionContainer>
+    <>
       {display === 'flex' ? (
         <S.TechStackImgFlexList>
           <DraggableScroller>
@@ -40,8 +44,9 @@ export default function TechStackList({ techStacks, display = 'flex' }: Props) {
           })}
         </S.TechStackImgGridList>
       )}
-    </S.PositionContainer>
+    </>
   );
 }
 
-TechStackList.Title = Title;
+TechStack.Title = Title;
+TechStack.List = List;

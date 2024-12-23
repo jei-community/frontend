@@ -3,8 +3,8 @@ import { RefObject, useState } from 'react';
 import { TechStackItem } from '@/types/project';
 
 import MoreButton from '@/components/MoreButton';
+import TechStackWithPosition from '@/components/TechStack';
 import TechStackContainer from '@/components/TechStackContainer';
-import TechStackList from '@/components/TechStackList';
 
 interface Props {
   ref: RefObject<HTMLHeadingElement | null>;
@@ -18,14 +18,18 @@ export default function TechStack({ ref, techStacks }: Props) {
 
   return (
     <TechStackContainer ref={ref}>
-      {techStacks.map(({ position, data }) => {
-        return (
-          <>
-            <TechStackList.Title>{position}</TechStackList.Title>
-            <TechStackList techStacks={data} display={isTechStackOpen ? 'grid' : 'flex'} />
-          </>
-        );
-      })}
+      <ul>
+        {techStacks.map(({ position, data }) => {
+          return (
+            <li key={Math.random()}>
+              <TechStackWithPosition>
+                <TechStackWithPosition.Title>{position}</TechStackWithPosition.Title>
+                <TechStackWithPosition.List techStacks={data} display={isTechStackOpen ? 'grid' : 'flex'} />
+              </TechStackWithPosition>
+            </li>
+          );
+        })}
+      </ul>
       <MoreButton isOpen={isTechStackOpen} onClick={handleToggleTechStack} />
     </TechStackContainer>
   );

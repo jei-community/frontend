@@ -1,8 +1,5 @@
 import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { useState } from 'react';
 import { Link } from 'react-router';
-
-import { mockMyProjectList, mockProjectList } from '@/mocks/data/project';
 
 import { PATH } from '@/constants/path';
 
@@ -12,25 +9,31 @@ import Divider from '@/components/Divider';
 import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
 import ProjectListToggle from '@/pages/ProjectList/components/ProjectListToggle';
 import Searchbar from '@/pages/ProjectList/components/Searchbar';
+import { useIsMyProjectSelected, useProjectList } from '@/pages/ProjectList/hooks';
 import { S } from '@/pages/ProjectList/style';
 
 export default function ProjectList() {
-  const [isMyProjectSelected, setIsMyProjectSelected] = useState(false);
-  const [projectList, setProjectList] = useState(mockProjectList.data);
+  const { projectList, updateProjectList, selectMyProject, selectProjectAll } = useProjectList();
+  const { isMyProjectSelected, updateIsMyProjectSelected } = useIsMyProjectSelected(false);
 
-  const selectProjectAll = () => setProjectList(mockProjectList.data);
-
-  const selectMyProject = () => setProjectList(mockMyProjectList.data);
-
-  // 검색어를 기반으로 프로젝트 필터링
-  const filterProjects = (query: string) => setProjectList(projectList.filter(({ title }) => title.includes(query)));
+  const showSelectedProjects = (isMyProjectSelected: boolean) => {
+    if (isMyProjectSelected) selectMyProject();
+    else selectProjectAll();
+  };
 
   // 내 프로젝트만 보기 토글
   const toggleIsMyProjectSelected = () => {
-    setIsMyProjectSelected(!isMyProjectSelected);
+    const newIsMyProjectSelected = !isMyProjectSelected;
 
-    if (isMyProjectSelected) selectProjectAll();
-    else selectMyProject();
+    showSelectedProjects(newIsMyProjectSelected);
+    updateIsMyProjectSelected(newIsMyProjectSelected);
+  };
+
+  // 검색어를 기반으로 프로젝트 필터링
+  const filterProjects = (query: string) => {
+    const filteredProjectList = projectList.filter(({ title }) => title.includes(query));
+
+    updateProjectList(filteredProjectList);
   };
 
   return (
@@ -39,12 +42,7 @@ export default function ProjectList() {
         <S.HeaderContainer>
           <ProjectListToggle isMyProjectSelected={isMyProjectSelected} toggleIsMyProjectSelected={toggleIsMyProjectSelected} />
 
-          <Searchbar
-            isMyProjectSelected={isMyProjectSelected}
-            selectProjectAll={selectProjectAll}
-            selectMyProject={selectMyProject}
-            filterProjects={filterProjects}
-          />
+          <Searchbar isMyProjectSelected={isMyProjectSelected} showSelectedProjects={showSelectedProjects} filterProjects={filterProjects} />
         </S.HeaderContainer>
 
         <Divider />
@@ -53,7 +51,7 @@ export default function ProjectList() {
           {projectList.map(({ id, title, thumbnailImageUrl, description, startDate, endDate, status }) => {
             return (
               <li key={id}>
-                <Link to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM(id)}>
+                <Link to={PATH.PROJECT.RELATIVE.LIST.ITEM.WITH_ID(id)}>
                   <ProjectCard
                     title={title}
                     thumbnailImageUrl={thumbnailImageUrl}

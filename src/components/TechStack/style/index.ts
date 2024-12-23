@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 export const S = {
-  PositionContainer: styled.div({
+  Container: styled.div({
     display: 'flex',
     flexDirection: 'column',
 
     gap: '1.6rem',
+    paddingBottom: '1.6rem',
   }),
 
   PositionTitle: styled.h4(({ theme }) => ({

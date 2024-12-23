@@ -15,6 +15,7 @@ import PostList from '@/pages/PostList';
 import PostPage from '@/pages/PostRouter';
 import ProjectEditor from '@/pages/ProjectEditor';
 import ProjectItem from '@/pages/ProjectItem';
+import ProjectItemRouter from '@/pages/ProjectItem/ProjectItemRouter';
 import ProjectList from '@/pages/ProjectList';
 import ProjectListRouter from '@/pages/ProjectList/router';
 import ProjectRouter from '@/pages/ProjectRouter';
@@ -35,9 +36,12 @@ export default function Router() {
           <Route index element={<Navigate to={PATH.PROJECT.ABSOLUTE.LIST.INDEX} replace />} />
           <Route path={PATH.PROJECT.RELATIVE.LIST.INDEX} element={<ProjectListRouter />}>
             <Route path='' element={<ProjectList />} />
-            <Route path={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM(':projectId')} element={<ProjectItem />} />
+            <Route path={PATH.PROJECT.RELATIVE.LIST.ITEM.INDEX} element={<ProjectItemRouter />}>
+              <Route path='' element={<ProjectItem />} />
+              <Route path={PATH.PROJECT.RELATIVE.LIST.ITEM.EDITOR} element={<ProjectEditor />} />
+            </Route>
           </Route>
-          <Route path={PATH.PROJECT.RELATIVE.EDITOR} element={<ProjectEditor />} />
+          <Route path={PATH.PROJECT.RELATIVE.CREATE} element={<ProjectEditor />} />
         </Route>
 
         <Route path={PATH.POSTS.INDEX} element={<PostPage />}>

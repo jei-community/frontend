@@ -27,7 +27,7 @@ export const getTodayCheck = (userName: string) => {
     userName,
   };
 
-  return get<TodayCheckResponse>(params);
+  return get<TodayCheckResponse[]>(params);
 };
 
 /** 일일점검 데이터 변경

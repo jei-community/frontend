@@ -9,7 +9,12 @@ import TextField from '@/components/TextField';
 import Modal from '@/pages/ProjectEditor/components/Modal';
 import { S } from '@/pages/ProjectEditor/components/TitleEditor/style';
 
-export default function MemberEditor() {
+interface Props {
+  startDate: string | null;
+  endDate: string | null;
+}
+
+export default function MemberAndDateEditor({ startDate, endDate }: Props) {
   // Modal 공통 컴포넌트, hook으로 교체할 예정
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,15 +33,15 @@ export default function MemberEditor() {
           })}
         </S.AvatarContainer>
         <S.MemberCountText>+n명</S.MemberCountText>
-        <Button size='icon' onClick={openMemberEditorModal}>
+        <Button size='icon' type='button' onClick={openMemberEditorModal}>
           <UserPlusIcon color='white' />
         </Button>
       </S.MemberInfoContainer>
 
       <S.DateWrapper>
-        <TextField placeholder='시작 날짜' heightSize='small' />
+        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' />
         <S.DateText> ~ </S.DateText>
-        <TextField placeholder='종료 날짜' heightSize='small' />
+        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' />
       </S.DateWrapper>
 
       {isOpen && (

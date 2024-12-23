@@ -12,7 +12,7 @@ export default function CancelButton() {
   };
 
   return (
-    <Button color='neutral' onClick={cancelEdit}>
+    <Button color='neutral' type='button' onClick={cancelEdit}>
       취소
     </Button>
   );

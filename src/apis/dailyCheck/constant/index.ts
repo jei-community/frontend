@@ -5,7 +5,7 @@ export const ACTION = {
   UPDATE_NOTE: 'postNoteForUser',
 };
 /** google script url */
-export const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwh8jAOocSZrmNfqghSkAJ0mCPnpUgPJg2sYiJBzXO9bq6QSkCjp36Nnd4uus3ktIuZDQ/exec';
+export const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmIWJcRgn3fMuSOBNY5MvTm1w1Op8c6MtSGupfN_MbgAMXx6QPFtl4dVXNypAaSVA59g/exec';
 
 /** 요청 헤더 */
 export const HEADER = {

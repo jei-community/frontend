@@ -10,12 +10,11 @@ import { S } from '@/pages/ProjectList/components/Searchbar/style';
 
 interface Props {
   isMyProjectSelected: boolean;
-  selectMyProject: () => void;
-  selectProjectAll: () => void;
+  showSelectedProjects: (isMyProjectSelected: boolean) => void;
   filterProjects: (query: string) => void;
 }
 
-export default function Searchbar({ isMyProjectSelected, selectMyProject, selectProjectAll, filterProjects }: Props) {
+export default function Searchbar({ isMyProjectSelected, showSelectedProjects, filterProjects }: Props) {
   const [value, setValue] = useState('');
   const navigate = useNavigate();
 
@@ -24,13 +23,7 @@ export default function Searchbar({ isMyProjectSelected, selectMyProject, select
     const query = event.target.value.trim();
     setValue(query);
 
-    // 검색어가 없을 때 선택된 프로젝트 목록 표시
-    const showSelectedProjects = () => {
-      if (isMyProjectSelected) selectMyProject();
-      else selectProjectAll();
-    };
-
-    if (!query) showSelectedProjects();
+    if (!query) showSelectedProjects(isMyProjectSelected);
     else filterProjects(query);
   };
 
@@ -41,7 +34,7 @@ export default function Searchbar({ isMyProjectSelected, selectMyProject, select
       <S.TextFieldWrapper>
         <TextField placeholder='검색할 프로젝트 이름을 입력해 주세요' heightSize='small' value={value} onChange={searchProject} />
       </S.TextFieldWrapper>
-      <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
+      <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.CREATE)}>
         프로젝트 생성
       </Button>
     </S.SearchContainer>
