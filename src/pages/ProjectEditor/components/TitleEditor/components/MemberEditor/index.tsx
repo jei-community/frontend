@@ -33,15 +33,15 @@ export default function MemberAndDateEditor({ startDate, endDate }: Props) {
           })}
         </S.AvatarContainer>
         <S.MemberCountText>+n명</S.MemberCountText>
-        <Button size='icon' onClick={openMemberEditorModal}>
+        <Button size='icon' type='button' onClick={openMemberEditorModal}>
           <UserPlusIcon color='white' />
         </Button>
       </S.MemberInfoContainer>
 
       <S.DateWrapper>
-        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} />
+        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' />
         <S.DateText> ~ </S.DateText>
-        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} />
+        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' />
       </S.DateWrapper>
 
       {isOpen && (

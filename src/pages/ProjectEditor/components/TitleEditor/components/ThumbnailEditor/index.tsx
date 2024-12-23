@@ -28,7 +28,7 @@ export default function ThumbnailEditor({ thumbnailImageUrl }: Props) {
 
   return (
     <ButtonWithIcon align='center' iconVariant='image' onClick={openFileUploader}>
-      <input ref={inputRef} type='file' accept='image/*' style={{ display: 'none' }} onChange={uploadThumbnail} />
+      <input ref={inputRef} type='file' accept='image/*' style={{ display: 'none' }} onChange={uploadThumbnail} name='thumbnail' />
       <S.Thumbnail src={typeof thumbnailSrc === 'string' ? thumbnailSrc : 'https://via.placeholder.com/100'} alt='thumbnail' />
     </ButtonWithIcon>
   );

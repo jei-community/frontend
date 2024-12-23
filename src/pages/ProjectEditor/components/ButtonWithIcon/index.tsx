@@ -18,7 +18,7 @@ export default function ButtonWithIcon({ size = 'fit-content', align = 'start', 
   };
 
   return (
-    <S.ButtonWithIcon $size={size} $align={align} {...props}>
+    <S.ButtonWithIcon type='button' $size={size} $align={align} {...props}>
       <S.IconWrapper>{ICONS[iconVariant]}</S.IconWrapper>
       <S.Background />
       {children}
