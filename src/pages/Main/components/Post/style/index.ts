@@ -56,36 +56,34 @@ export const S = {
     WebkitBoxOrient: 'vertical',
   })),
 
-  Markdown: styled(MDEditor.Markdown)(({ theme }) => ({
+  Markdown: styled(MDEditor.Markdown)({
     backgroundColor: '#ffffff',
     color: '#000000',
     padding: '1.6rem',
+    borderRadius: '0.8rem',
+    maxHeight: '16rem',
+    overflow: 'hidden',
+  }),
+
+  MarkdownWrapper: styled.button(({ theme }) => ({
+    position: 'relative',
+    backgroundColor: '#ffffff',
+    color: '#000000',
     border: '1px solid',
     borderColor: theme.colors.gray[100],
     borderRadius: '0.8rem',
     maxHeight: '16rem',
     overflow: 'hidden',
+    cursor: 'pointer',
+    '&:after': {
+      // eslint-disable-next-line quotes
+      content: "''",
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: '10rem',
+      background: 'linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%)',
+    },
   })),
-
-  MarkdownWrapper: styled.div`
-    position: relative;
-    background-color: #ffffff;
-    color: #000000;
-    padding: 1.6rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray[100]};
-    border-radius: 0.8rem;
-    max-height: 16rem;
-    overflow: hidden;
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 8rem; /* Blur height */
-      background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-      pointer-events: none; /* Allow clicks through the blur */
-    }
-  `,
 };

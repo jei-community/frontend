@@ -20,7 +20,7 @@ export default function PostItem({ name, position, title, description, date }: P
         </S.AuthorInfo.Wrapper>
         <S.AuthorInfo.Date>{date}</S.AuthorInfo.Date>
       </S.MetaWrapper>
-      <S.MarkdownWrapper>
+      <S.MarkdownWrapper onClick={() => console.log('go post detail')}>
         <S.Markdown
           source={description}
           components={{
