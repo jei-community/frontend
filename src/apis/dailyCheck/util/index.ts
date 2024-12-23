@@ -9,7 +9,7 @@ export const get = async <T>(params: Record<string, string | string[]>): Promise
 };
 
 /** Google Apps Script API POST 호출 함수 */
-export const post = async (params: Record<string, string | string[]>) => {
+export const post = async (params: Record<string, string | string[]>): Promise<Response> => {
   const url = createUrl(params);
 
   return await fetch(url, { ...HEADER });
