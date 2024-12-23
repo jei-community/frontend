@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import HtmlParser from '@/components/HtmlParser';
 
 import { STATUS } from '../../constant';
+import { DailyCheckStatus } from '../../type';
 import Tooltip from '../Tooltip';
 import CheckBox from './CheckBox';
 import { S } from './style';
@@ -34,8 +35,8 @@ export default function TBodyContent({ col, row, handleUpdateData }: Props) {
   const handleCheckTooltip = () => setIsCheckTooltipOpen((prev) => !prev);
 
   /** 일일점검 상태 키를 찾는다 */
-  const statusKey: keyof typeof STATUS =
-    (Object.keys(STATUS).find((key) => STATUS[key as keyof typeof STATUS] === row[col]) as keyof typeof STATUS) || 'INCOMPLETE';
+  const statusKey: DailyCheckStatus =
+    (Object.keys(STATUS).find((key) => STATUS[key as DailyCheckStatus] === row[col]) as DailyCheckStatus) ?? 'INCOMPLETE';
 
   useEffect(() => {
     /** 툴팁 외부 클릭 시 툴팁을을 닫는다. */
