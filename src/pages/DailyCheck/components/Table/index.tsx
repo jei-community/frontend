@@ -1,7 +1,7 @@
 import { DailyCheckResponse } from '@/apis/dailyCheck/type';
 
 import { COLUMN_WIDTHS } from '../../constant';
-import TBodyContent from './TBodyContent';
+import TBodyContent from './TBodyWrapper';
 import { S } from './style';
 
 interface Props {
