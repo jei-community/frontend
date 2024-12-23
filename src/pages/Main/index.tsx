@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router';
 
+import { PATH } from '@/constants/path';
+
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import DraggableScroller from '@/components/DraggableScroll';
@@ -33,13 +35,7 @@ export default function Main() {
 
           <S.CategoryTitle>
             <p>아티클</p>
-            <TextButton
-              color='neutral'
-              size='small'
-              onClick={() => {
-                navigate('/articles');
-              }}
-            >
+            <TextButton color='neutral' size='small' onClick={() => navigate(PATH.ARTICLES)}>
               {'더 보기 >'}
             </TextButton>
           </S.CategoryTitle>
@@ -55,13 +51,7 @@ export default function Main() {
 
           <S.CategoryTitle>
             <p>최신 포스트</p>
-            <TextButton
-              color='neutral'
-              size='small'
-              onClick={() => {
-                navigate('/posts/list');
-              }}
-            >
+            <TextButton color='neutral' size='small' onClick={() => navigate(PATH.POSTS.INDEX)}>
               {'더 보기 >'}
             </TextButton>
           </S.CategoryTitle>
