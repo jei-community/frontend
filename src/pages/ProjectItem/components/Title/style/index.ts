@@ -1,3 +1,6 @@
+import { Status } from '@/types/project';
+
+import { Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const S = {
@@ -38,19 +41,19 @@ export const S = {
     ...theme.typography.title,
   })),
 
-  Badge: styled.div(({ theme }) => ({
+  Badge: styled.div<{ $status: Status }>(({ theme, $status }) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
 
-    width: '6.4rem',
+    width: '9rem',
     height: '2.4rem',
 
     padding: '0.4rem 1.2rem',
 
     borderRadius: 40,
 
-    backgroundColor: theme.colors.success[500],
+    backgroundColor: generateStatusColor($status, theme),
   })),
 
   BadgeText: styled.p(({ theme }) => ({
@@ -89,8 +92,24 @@ export const S = {
     ...theme.typography.body4,
   })),
 
+  DataContainer: styled.div({
+    display: 'flex',
+    gap: '0.4rem',
+  }),
+
   DateText: styled.p(({ theme }) => ({
     color: theme.colors.gray[500],
     ...theme.typography.body1,
   })),
+};
+
+const generateStatusColor = (status: Status, theme: Theme) => {
+  switch (status) {
+    case 'LIVE':
+      return theme.colors.success[500];
+    case 'DEVELOP':
+      return theme.colors.warning[500];
+    case 'STOP':
+      return theme.colors.error[500];
+  }
 };

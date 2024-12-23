@@ -7,7 +7,14 @@ export const ACTION = {
 /** google script url */
 export const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwh8jAOocSZrmNfqghSkAJ0mCPnpUgPJg2sYiJBzXO9bq6QSkCjp36Nnd4uus3ktIuZDQ/exec';
 
-//TODO(지애) : MATH 이외 요청 url 수정 필요
+/** 요청 헤더 */
+export const HEADER = {
+  headers: {
+    'Content-Type': 'text/plain;charset=utf-8',
+  },
+};
+
+//TODO(지애) : 파일 id 수정 필요 (현재 테스트 파일 id)
 /** google script sheet config*/
 export const SHEET_CONFIG = {
   MATH: {

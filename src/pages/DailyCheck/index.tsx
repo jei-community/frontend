@@ -7,7 +7,7 @@ import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 
 import MainContent from './components/MainContent';
-import SideContent from './components/SIdeContent';
+import SideContent from './components/SideContent';
 import { useCurrSheetStore } from './store';
 import { S } from './style';
 

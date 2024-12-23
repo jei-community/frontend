@@ -5,6 +5,7 @@ import { postCellForUser } from '@/apis/dailyCheck';
 
 import { STATUS } from '../../constant';
 import { useCurrSheetStore } from '../../store';
+import { DailyCheckStatus } from '../../type';
 import { S } from './style';
 
 interface Props {
@@ -23,7 +24,7 @@ export default function Tooltip({ value, col, targetName, handleClose, handleUpd
   const incomplete = currentValue !== 'COMPLETE' && currentValue !== 'VACATION';
 
   /** 일일점검 상태 버튼을 클릭하면 실행된다. */
-  const handleCheckBoxClick = (key: keyof typeof STATUS) => {
+  const handleCheckBoxClick = (key: DailyCheckStatus) => {
     const status = STATUS[key];
     setCurrentValue(value);
     postCellForUser(currSheet, targetName, col, status);

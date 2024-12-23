@@ -1,4 +1,5 @@
 import { STATUS } from '../../constant';
+import { DailyCheckStatus } from '../../type';
 import CheckTooltip from './CheckTooltip';
 import MemoTooltip from './MemoTooltip';
 
@@ -17,7 +18,7 @@ interface Props {
  * TODO(지애) : 추후 공통 컴포넌트로 툴팁컨테이너 교체
  */
 export default function Tooltip({ type, row, col, targetName, handleClose, handleUpdateData }: Props) {
-  const value = type === 'MEMO' ? row[col] : (Object.keys(STATUS).find((key) => STATUS[key as keyof typeof STATUS] === row[col]) ?? 'INCOMPLETE');
+  const value = type === 'MEMO' ? row[col] : (Object.keys(STATUS).find((key) => STATUS[key as DailyCheckStatus] === row[col]) ?? 'INCOMPLETE');
 
   if (type === 'MEMO') return <MemoTooltip value={value} targetName={targetName} handleClose={handleClose} handleUpdateData={handleUpdateData} />;
 
