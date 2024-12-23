@@ -55,8 +55,8 @@ export const S = {
     width: 18.4rem;
     height: 32rem;
     display: flex;
-    item-align: center;
-    text-align: center;
+    align-items: center;
     justify-content: center;
+    text-align: center;
   `,
 };
