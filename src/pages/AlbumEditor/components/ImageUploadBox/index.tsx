@@ -3,6 +3,7 @@ import { ChangeEvent, DragEvent, HTMLAttributes, useEffect, useState } from 'rea
 
 import { FileInfo } from '@/types/album';
 
+import { MAX_FILE_SIZE, MAX_UPLOAD_LENGTH } from '../../constant';
 import { S } from './style';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -36,14 +37,14 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
   const handleAddFile = (file: File) => {
     // 파일 형식 제한 혹은 파일 개수 제한
     const validFormats = ['image/jpeg', 'image/jpg', 'image/png'];
-    if (!validFormats.includes(file.type) || uploadedFiles.length >= 5) {
+    if (!validFormats.includes(file.type) || uploadedFiles.length >= MAX_UPLOAD_LENGTH) {
       alert('사용할 수 없는 이미지 입니다.');
 
       return;
     }
     // 파일 용량 제한 확인
     const fileSizeMB = file.size / (1024 * 1024); // 바이트 단위를 MB로 변환
-    if (fileSizeMB > 5) {
+    if (fileSizeMB > MAX_FILE_SIZE) {
       alert('사용할 수 없는 이미지 입니다.');
 
       return;
@@ -109,12 +110,14 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
           <S.EmptyContent>
             <S.ImagePlusIcon />
             <p>사진을 여기 끌어다 놓거나, [+] 버튼을 선택해 주세요.</p>
-            <p>5MB 미만 / jpg, jpeg, png 파일 / 최대 5개</p>
+            <p>
+              {MAX_FILE_SIZE}MB 미만 / jpg, jpeg, png 파일 / 최대 {MAX_UPLOAD_LENGTH}개
+            </p>
           </S.EmptyContent>
         </S.EmptyFiles>
       )}
       <S.FileWrapper>
-        {uploadedFiles.length > 0 && uploadedFiles.length <= 5 && (
+        {uploadedFiles.length > 0 && uploadedFiles.length <= MAX_UPLOAD_LENGTH && (
           <>
             {uploadedFiles.map((file, index) => (
               <S.FileItem key={index}>
@@ -126,7 +129,7 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
             ))}
           </>
         )}
-        {uploadedFiles.length > 0 && uploadedFiles.length < 5 && (
+        {uploadedFiles.length > 0 && uploadedFiles.length < MAX_UPLOAD_LENGTH && (
           <S.AddFileWrapper>
             <S.HiddenInput key={inputKey} type='file' onChange={handleFileInput} />
             <ImagePlusIcon />
