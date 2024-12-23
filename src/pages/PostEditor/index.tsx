@@ -21,16 +21,20 @@ export default function PostEditor() {
     <>
       <Aside />
       <Content>
-        <S.PageTitle>새 포스트 등록</S.PageTitle>
-        <S.TextArea placeholder='제목을 입력해주세요.' value={title} onChange={handleChangeTitle} />
+        <S.ContentContainer>
+          <S.PageTitle>새 포스트 등록</S.PageTitle>
+          <S.TextArea placeholder='제목을 입력해주세요.' value={title} onChange={handleChangeTitle} />
 
-        <MarkdownEditor title={title} value={value} setValue={setValue} />
+          <MarkdownEditor title={title} value={value} setValue={setValue} />
+        </S.ContentContainer>
       </Content>
       <Aside>
-        <Button color='success' disabled={!title || !value}>
-          등록
-        </Button>
-        <Button color='neutral'>취소</Button>
+        <S.AsideContainer>
+          <Button color='success' disabled={!title || !value}>
+            등록
+          </Button>
+          <Button color='neutral'>취소</Button>
+        </S.AsideContainer>
       </Aside>
     </>
   );
