@@ -114,10 +114,12 @@ export const S = {
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
-    font-size: ${({ theme }) => theme.typography.body4};
     outline: none;
     cursor: pointer;
     transition: all 0.15s;
+
+    // 폰트 설정
+    ${({ theme, $variant }) => theme.typography[$variant === 'filled' ? 'body3' : 'body4']}
 
     // 모양, 색상, 로딩 상태별 버튼 모양 세팅
     ${({ theme, $variant, $color, $isLoading }) => {
