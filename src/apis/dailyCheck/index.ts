@@ -1,54 +1,101 @@
-import { ACTION, HEADER, SCRIPT_URL, SHEET_CONFIG } from './constant';
-import { DailyCheckResponse, SheetKey, TodayCheckResponse } from './type';
+import { DefaultError, UseMutationOptions, queryOptions } from '@tanstack/react-query';
 
-// TODO(지애) : React-Query로 관리하기
+import { ACTION, SHEET_CONFIG } from './constant';
+import { DailyCheckResponse, SheetKey, TodayCheckResponse } from './type';
+import { get, post } from './util';
 
 /** 일일점검 데이터 호출
- * @param key 구글 스크립트 키
+ * @param key 스크립트 유형
+ * @param userName 담당자 이름
  */
-export const getDailyCheck = async (key: SheetKey, name: string): Promise<DailyCheckResponse | null> => {
-  const fileId = encodeURIComponent(SHEET_CONFIG[key].id);
-  const userName = encodeURIComponent(name);
+export const getDailyCheck = (key: SheetKey, userName: string) => {
+  const params = {
+    fileId: SHEET_CONFIG[key].id,
+    userName,
+  };
 
-  const response = await fetch(`${SCRIPT_URL}?fileId=${fileId}&userName=${userName}`, HEADER);
-
-  return response.json();
-};
-
-/** 메인화면 내 일일점검 데이터 호출
- * @param userName 유저 이름
- */
-export const getTodayCheck = async (name: string): Promise<TodayCheckResponse | null> => {
-  const fileIds = Object.values(SHEET_CONFIG).map((item) => item.id);
-  const action = ACTION.TODAY;
-  const userName = encodeURIComponent(name);
-
-  const response = await fetch(`${SCRIPT_URL}?fileIds=${fileIds}&action=${action}&userName=${userName}`, HEADER);
-
-  return response.json();
+  return get<DailyCheckResponse>(params);
 };
 
 /** 일일점검 데이터 변경
- * @param userName 유저 이름
+ * @param userName 담당자 이름
+ */
+export const getTodayCheck = (userName: string) => {
+  const params = {
+    fileIds: Object.values(SHEET_CONFIG).map((item) => item.id),
+    action: ACTION.TODAY,
+    userName,
+  };
+
+  return get<TodayCheckResponse>(params);
+};
+
+/** 일일점검 데이터 변경
+ * @param key 스크립트 유형
+ * @param name 담당자 이름
  * @param colName 행의 이름
  * @param checkStatus 일일점검 체크 상태
  */
-export const postCellForUser = async (key: SheetKey, name: string, colName: string | number, checkStatus: string) => {
-  const fileId = encodeURIComponent(SHEET_CONFIG[key].id);
-  const action = ACTION.UPDATE_CELL;
-  const userName = encodeURIComponent(name);
+export const postCellForUser = (key: SheetKey, userName: string, colName: string, checkStatus: string) => {
+  const params = {
+    fileId: SHEET_CONFIG[key].id,
+    action: ACTION.UPDATE_CELL,
+    userName,
+    colName,
+    checkStatus,
+  };
 
-  await fetch(`${SCRIPT_URL}?fileId=${fileId}&action=${action}&userName=${userName}&colName=${colName}&checkStatus=${checkStatus}`, HEADER);
+  return post(params);
 };
 
 /** '구분' 셀의 노트 수정
- * @param userName 유저 이름
+ * @param key 스크립트 유형
+ * @param userName 담당자 이름
  * @param note 노트 내용
  */
-export const postNoteForUser = async (key: SheetKey, name: string, note: string) => {
-  const fileId = encodeURIComponent(SHEET_CONFIG[key].id);
-  const action = ACTION.UPDATE_NOTE;
-  const userName = encodeURIComponent(name);
+export const postNoteForUser = (key: SheetKey, userName: string, note: string) => {
+  const params = {
+    fileId: SHEET_CONFIG[key].id,
+    action: ACTION.UPDATE_NOTE,
+    userName,
+    note,
+  };
 
-  await fetch(`${SCRIPT_URL}?fileId=${fileId}&action=${action}&userName=${userName}&note=${note}`, HEADER);
+  return post(params);
 };
+
+//TODO(지애) : 추후 점검 후 사용
+/** 일일점검 API Query Factory */
+export const dailyCheckQueryFactory = {
+  /** 일일점검 전체 데이터를 반환 */
+  getDailyCheck: (key: SheetKey, userName: string) =>
+    queryOptions({
+      queryKey: [userName, key, 'dailyCheck'],
+      queryFn: () => getDailyCheck(key, userName),
+    }),
+  /** 일일점검 유저 당일 데이터를 반환 */
+  getTodayCheck: (userName: string) =>
+    queryOptions({
+      queryKey: [userName, 'todayCheck'],
+      queryFn: () => getTodayCheck(userName),
+    }),
+  /** 일일점검 상태 수정 */
+  getCellForUser: (key: SheetKey, userName: string, colName: string, CheckStatus: string) =>
+    mutationOptions({
+      mutationKey: ['updateCell'],
+      mutationFn: () => postCellForUser(key, userName, colName, CheckStatus),
+    }),
+  /** '구분' 열의 노트 수정 */
+  getNoteForUser: (key: SheetKey, userName: string, note: string) =>
+    mutationOptions({
+      mutationKey: ['updateNote'],
+      mutationFn: () => postNoteForUser(key, userName, note),
+    }),
+};
+
+/** mutation 옵션 설정 함수 */
+export function mutationOptions<TData = unknown, TError = DefaultError, TVariables = void, TContext = unknown>(
+  options: UseMutationOptions<TData, TError, TVariables, TContext>,
+): UseMutationOptions<TData, TError, TVariables, TContext> {
+  return options;
+}
