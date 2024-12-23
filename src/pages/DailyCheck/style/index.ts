@@ -12,4 +12,14 @@ export const S = {
     padding: '2.4rem 1.6rem',
     gap: '2.4rem',
   }),
+  /** 페이지 타이틀 */
+  PageTitle: styled.div(({ theme }) => ({
+    color: theme.colors.gray[500],
+    ...theme.typography.subtitle,
+    margin: '0 0 1rem 0',
+  })),
+  /** 일일점검 시트 타이틀 */
+  SheetTitle: styled.span(({ theme }) => ({
+    color: theme.colors.gray[900],
+  })),
 };
