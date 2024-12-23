@@ -4,17 +4,25 @@ const PROJECT = {
   RELATIVE: {
     LIST: {
       INDEX: 'list',
-      GET_PROJECT_ITEM: (id: string | number) => String(id),
+      ITEM: {
+        INDEX: ':projectId',
+        WITH_ID: (projectId: string | number) => String(projectId),
+        EDITOR: 'editor',
+      },
     },
-    EDITOR: 'editor',
+    CREATE: 'create',
   },
 
   ABSOLUTE: {
     LIST: {
       INDEX: '/project/list',
-      GET_PROJECT_ITEM: (id: string | number) => `/project/list/${id}`,
+      ITEM: {
+        INDEX: '/project/list/:projectId',
+        WITH_ID: (projectId: string | number) => `/project/list/${projectId}`,
+        EDITOR: '/project/list/:projectId/editor',
+      },
     },
-    EDITOR: '/project/editor',
+    CREATE: '/project/create',
   },
 };
 
@@ -24,7 +32,7 @@ export const PATH = {
   MAIN: '/',
   DAILY_CHECK: '/daily-check',
   ARTICLES: '/articles',
-  PROJECT: PROJECT,
+  PROJECT,
   POSTS: {
     INDEX: '/posts',
     LIST: 'list',

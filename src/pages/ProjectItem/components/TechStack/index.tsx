@@ -18,14 +18,16 @@ export default function TechStack({ ref, techStacks }: Props) {
 
   return (
     <TechStackContainer ref={ref}>
-      {techStacks.map(({ position, data }) => {
-        return (
-          <>
-            <TechStackList.Title>{position}</TechStackList.Title>
-            <TechStackList techStacks={data} display={isTechStackOpen ? 'grid' : 'flex'} />
-          </>
-        );
-      })}
+      <ul>
+        {techStacks.map(({ position, data }) => {
+          return (
+            <li key={Math.random()}>
+              <TechStackList.Title>{position}</TechStackList.Title>
+              <TechStackList techStacks={data} display={isTechStackOpen ? 'grid' : 'flex'} />
+            </li>
+          );
+        })}
+      </ul>
       <MoreButton isOpen={isTechStackOpen} onClick={handleToggleTechStack} />
     </TechStackContainer>
   );

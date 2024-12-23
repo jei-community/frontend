@@ -35,7 +35,7 @@ export default function ProjectList() {
             <Button size='icon'>
               <SearchIcon />
             </Button>
-            <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
+            <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.CREATE)}>
               프로젝트 생성
             </Button>
           </S.SearchContainer>
@@ -48,7 +48,7 @@ export default function ProjectList() {
             return (
               // TODO(증훈): 프로젝트 상세페이지로 연결
               <li key={index}>
-                <Link to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM('1')}>
+                <Link to={PATH.PROJECT.RELATIVE.LIST.ITEM.WITH_ID(index)}>
                   <ProjectCard />
                 </Link>
               </li>

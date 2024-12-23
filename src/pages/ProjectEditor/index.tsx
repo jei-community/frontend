@@ -7,7 +7,7 @@ import ProjectSideContainer from '@/components/ProjectSideContainer';
 import CancelButton from '@/pages/ProjectEditor/components/CancelButton';
 import DeleteButton from '@/pages/ProjectEditor/components/DeleteButton';
 import DescriptionEditor from '@/pages/ProjectEditor/components/DescriptionEditor';
-import DocumentTooltipList from '@/pages/ProjectEditor/components/DocumentTooltipList';
+// import DocumentTooltipList from '@/pages/ProjectEditor/components/DocumentTooltipList';
 import EnvEditor from '@/pages/ProjectEditor/components/EnvEditor';
 import SaveButton from '@/pages/ProjectEditor/components/SaveButton';
 import TechStackEditor from '@/pages/ProjectEditor/components/TechStackEditor';
@@ -29,7 +29,7 @@ export default function ProjectEditor() {
       </Content>
       <Aside>
         <ProjectSideContainer>
-          <DocumentTooltipList />
+          {/* <DocumentTooltipList /> */}
 
           <Divider />
 
