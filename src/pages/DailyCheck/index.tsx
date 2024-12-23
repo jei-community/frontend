@@ -6,6 +6,7 @@ import { SHEET_CONFIG } from '@/apis/dailyCheck/constant';
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 
+import Loading from './components/Loading';
 import MainContent from './components/MainContent';
 import SideContent from './components/SideContent';
 import { useCurrSheetStore } from './store';
@@ -27,8 +28,7 @@ export default function DailyCheck() {
           <S.SheetTitle>{SHEET_CONFIG[currSheet].title} </S.SheetTitle>
           일일점검
         </S.PageTitle>
-        {/* TODO(지애) : 로딩 컴포넌트 */}
-        <Suspense fallback={'loading...'}>
+        <Suspense fallback={<Loading />}>
           <MainContent dailyCheckPromise={dailyCheckPromise} userName={userName} />
         </Suspense>
       </Content>
