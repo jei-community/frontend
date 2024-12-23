@@ -3,6 +3,17 @@ import TextArea from '@/components/TextArea';
 import styled from '@emotion/styled';
 
 export const S = {
+  ContentContainer: styled.div({
+    padding: '2.4rem',
+  }),
+
+  AsideContainer: styled.div({
+    padding: '2.4rem 1.6rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.8rem',
+  }),
+
   PageTitle: styled.h1(({ theme }) => ({
     ...theme.typography.title,
     color: theme.colors.gray[800],
