@@ -25,8 +25,8 @@ export default function ProjectList() {
           <S.ToggleContainer>
             {/* 공통 토글 스위치 컴포넌트 구현되면 교체 예정 */}
             <input type='radio' checked={!isMyProjectSelected} onChange={toggleMyProjectSelected} />
-            <input type='radio' checked={isMyProjectSelected} onChange={toggleMyProjectSelected} />
-            <S.MyProjectText>내 프로젝트만 보기</S.MyProjectText>
+            <input type='radio' id='my-project' checked={isMyProjectSelected} onChange={toggleMyProjectSelected} />
+            <S.MyProjectLabelText htmlFor='my-project'>내 프로젝트만 보기</S.MyProjectLabelText>
           </S.ToggleContainer>
           <S.SearchContainer>
             <S.TextFieldWrapper>
