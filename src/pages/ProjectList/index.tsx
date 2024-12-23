@@ -1,55 +1,67 @@
-import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from 'lucide-react';
+import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
+
+import { mockMyProjectList, mockProjectList } from '@/mocks/data/project';
 
 import { PATH } from '@/constants/path';
 
-import Button from '@/components/Button';
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
-import TextField from '@/components/TextField';
 
 import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
+import ProjectListToggle from '@/pages/ProjectList/components/ProjectListToggle';
+import Searchbar from '@/pages/ProjectList/components/Searchbar';
 import { S } from '@/pages/ProjectList/style';
 
 export default function ProjectList() {
   const [isMyProjectSelected, setIsMyProjectSelected] = useState(false);
-  const navigate = useNavigate();
+  const [projectList, setProjectList] = useState(mockProjectList.data);
 
-  const toggleMyProjectSelected = () => setIsMyProjectSelected(!isMyProjectSelected);
+  const selectProjectAll = () => setProjectList(mockProjectList.data);
+
+  const selectMyProject = () => setProjectList(mockMyProjectList.data);
+
+  // 검색어를 기반으로 프로젝트 필터링
+  const filterProjects = (query: string) => setProjectList(projectList.filter(({ title }) => title.includes(query)));
+
+  // 내 프로젝트만 보기 토글
+  const toggleIsMyProjectSelected = () => {
+    setIsMyProjectSelected(!isMyProjectSelected);
+
+    if (isMyProjectSelected) selectProjectAll();
+    else selectMyProject();
+  };
 
   return (
     <Content>
       <S.Container>
         <S.HeaderContainer>
-          <S.ToggleContainer>
-            {/* 공통 토글 스위치 컴포넌트 구현되면 교체 예정 */}
-            <input type='radio' checked={!isMyProjectSelected} onChange={toggleMyProjectSelected} />
-            <input type='radio' id='my-project' checked={isMyProjectSelected} onChange={toggleMyProjectSelected} />
-            <S.MyProjectLabelText htmlFor='my-project'>내 프로젝트만 보기</S.MyProjectLabelText>
-          </S.ToggleContainer>
-          <S.SearchContainer>
-            <S.TextFieldWrapper>
-              <TextField placeholder='프로젝트명을 입력해 주세요' heightSize='small' />
-            </S.TextFieldWrapper>
-            <Button size='icon'>
-              <SearchIcon />
-            </Button>
-            <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.EDITOR)}>
-              프로젝트 생성
-            </Button>
-          </S.SearchContainer>
+          <ProjectListToggle isMyProjectSelected={isMyProjectSelected} toggleIsMyProjectSelected={toggleIsMyProjectSelected} />
+
+          <Searchbar
+            isMyProjectSelected={isMyProjectSelected}
+            selectProjectAll={selectProjectAll}
+            selectMyProject={selectMyProject}
+            filterProjects={filterProjects}
+          />
         </S.HeaderContainer>
 
         <Divider />
 
         <S.ProjectList>
-          {Array.from({ length: 6 }, (_, index) => {
+          {projectList.map(({ id, title, thumbnailImageUrl, description, startDate, endDate, status }) => {
             return (
-              // TODO(증훈): 프로젝트 상세페이지로 연결
-              <li key={index}>
-                <Link to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM('1')}>
-                  <ProjectCard />
+              <li key={id}>
+                <Link to={PATH.PROJECT.RELATIVE.LIST.GET_PROJECT_ITEM(id)}>
+                  <ProjectCard
+                    title={title}
+                    thumbnailImageUrl={thumbnailImageUrl}
+                    description={description}
+                    startDate={startDate}
+                    endDate={endDate}
+                    status={status}
+                  />
                 </Link>
               </li>
             );

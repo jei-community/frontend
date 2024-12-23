@@ -21,7 +21,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
       <S.RightContainer>
         <S.TitleContainer>
           <S.Title>{title}</S.Title>
-          <S.Badge>
+          <S.Badge $status={status}>
             <S.BadgeText>{STATUS_TEXT[status]}</S.BadgeText>
           </S.Badge>
         </S.TitleContainer>
