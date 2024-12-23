@@ -8,6 +8,7 @@ import DraggableScroller from '@/components/DraggableScroll';
 import TextButton from '@/components/TextButton';
 
 import { ArticleItem, MyProjectItem, PostItem } from './components';
+import DailyCheck from './components/DailyCheck';
 import { S } from './style';
 
 export default function Main() {
@@ -98,7 +99,7 @@ export default function Main() {
         </S.ContentContainer>
       </Content>
       <Aside>
-        <S.AsideContainer>1</S.AsideContainer>
+        <DailyCheck />
       </Aside>
     </>
   );
