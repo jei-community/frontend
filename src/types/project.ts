@@ -29,3 +29,17 @@ export interface ProjectDetails {
   };
   thumbnailImageUrl: string;
 }
+
+interface Pagination {
+  totalCount: number;
+  page: number;
+  limit: number;
+  hasNext: boolean;
+}
+
+export type ProjectListData = Omit<ProjectDetails, 'metadata'>[];
+
+export interface ProjectList {
+  data: ProjectListData;
+  pagination: Pagination;
+}
