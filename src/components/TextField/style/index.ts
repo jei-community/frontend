@@ -9,7 +9,7 @@ interface TextFieldStyleProps {
 }
 
 /** 텍스트 필드의 높이 사이즈 프로퍼티에 따른 리터럴 값 */
-const HEIGHT: { [key in TextFieldHeightSize]: string } = {
+const HEIGHT: Record<TextFieldHeightSize, string> = {
   small: '3.2rem',
   medium: '4rem',
   large: '4.4rem',

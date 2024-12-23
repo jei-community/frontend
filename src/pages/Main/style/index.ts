@@ -1,6 +1,17 @@
 import styled from '@emotion/styled';
 
 export const S = {
+  ContentContainer: styled.div({
+    padding: '2.4rem',
+  }),
+
+  AsideContainer: styled.div({
+    padding: '1.6rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2.4rem',
+  }),
+
   Container: styled.div({
     width: '100%',
     padding: '6.4rem',
@@ -9,6 +20,9 @@ export const S = {
     color: theme.colors.gray[900],
     ...theme.typography.subtitle,
     margin: '0 0 1rem 0',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   })),
 
   MyProject: {
