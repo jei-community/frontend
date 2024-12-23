@@ -1,23 +1,17 @@
 import { ImagePlusIcon, X } from 'lucide-react';
-import { DragEvent, HTMLAttributes, useEffect, useState } from 'react';
+import { ChangeEvent, DragEvent, HTMLAttributes, useEffect, useState } from 'react';
+
+import { FileInfo } from '@/types/album';
 
 import { S } from './style';
 
-interface FileInfo {
-  name: string;
-  size: string;
-  type: string;
-  imageUrl?: string;
-  file: File; // 실제 파일 객체 추가
-}
-
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   uploadedFiles: FileInfo[];
   onUpload: (file: FileInfo) => void;
   onDelete: (index: number) => void;
 }
 
-export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, children }: Props & HTMLAttributes<HTMLDivElement>) {
+export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, children }: Props) {
   const [isActive, setActive] = useState(false);
   const [inputKey, setInputKey] = useState(0);
   const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
@@ -76,7 +70,7 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
   };
 
   /** 파일 선택을 통한 입력 */
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
     if (!files || files.length === 0) return;
@@ -100,22 +94,6 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
     };
     reader.readAsDataURL(file);
   };
-
-  //   /** 이미지 편집중일 떄 뒤로가기 누르면 뜨는 모달에서 확인 버튼 클릭시 동작하는 함수 */
-  //   const handleCheckPrevYnModalConfirm = () => {
-  //     setIsOpenEditModal(false);
-  //     setIsOpenCheckPrevYnModal(false);
-  //   };
-  //   /** 이미지 편집중일 떄 뒤로가기 누르면 뜨는 모달에서 취소 버튼 클릭시 동작하는 함수 */
-  //   const handleCheckPrevYnModalCancel = () => {
-  //     setIsOpenCheckPrevYnModal(false);
-  //   };
-
-  //   /** 이미지 편집중일 떄 저장 버튼 눌렀을때 동작하는 함수 */
-  //   const handleImageEditSave = (editedFile: File) => {
-  //     setIsOpenEditModal(false);
-  //     addFile(editedFile);
-  //   };
 
   useEffect(() => {
     console.log(uploadedFiles);

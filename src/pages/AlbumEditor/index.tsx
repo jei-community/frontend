@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { FileInfo } from '@/types/album';
+
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
@@ -7,14 +9,6 @@ import TextArea from '@/components/TextArea';
 
 import ImageUploadBox from './components/ImageUploadBox';
 import { S } from './style';
-
-interface FileInfo {
-  name: string;
-  size: string;
-  type: string;
-  imageUrl?: string;
-  file: File; // 실제 파일 객체 추가
-}
 
 export default function AlbumEditor() {
   const [text, setText] = useState<string>(); // TextArea input값
