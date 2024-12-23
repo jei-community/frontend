@@ -1,0 +1,190 @@
+import { PropsWithChildren } from 'react';
+
+import { Global, ThemeProvider, css } from '@emotion/react';
+
+import theme from '../theme';
+
+export default function GlobalStyle({ children }: PropsWithChildren) {
+  return (
+    <ThemeProvider theme={theme}>
+      <Global styles={[ResetStyle, BaseStyle]} />
+      {children}
+    </ThemeProvider>
+  );
+}
+
+const ResetStyle = css`
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+  }
+  ol,
+  ul {
+    list-style: none;
+  }
+  blockquote,
+  q {
+    quotes: none;
+  }
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: '';
+    content: none;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+`;
+
+/**
+ * Pretendard 폰트 페이스를 반환하는 함수
+ * @returns 배열 형태의 폰트 페이스 템플릿 리터럴
+ */
+const getFontFaces = () => {
+  const weights = ['ExtraLight', 'Light', 'Regular', 'Medium', 'SemiBold', 'Bold', 'ExtraBold', 'Black'];
+  const fontFaces = weights.map(
+    (weight, index) => `
+      @font-face {
+        font-family: 'Pretendard';
+        font-weight: ${(index + 2) * 100};
+        font-display: swap;
+        src:
+          local('Pretendard ${weight}'),
+          url(../assets/fonts/woff2/Pretendard-${weight}.woff2) format('woff2');
+      }
+    `,
+  );
+
+  return fontFaces;
+};
+
+const BaseStyle = css`
+  ${getFontFaces()}
+
+  html {
+    font-size: 10px;
+    font-family: 'Pretendard', sans-serif;
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+  }
+`;

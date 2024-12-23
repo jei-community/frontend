@@ -1,0 +1,52 @@
+name: Deploy to AWS S3 and CloudFront
+
+on:
+  push:
+    branches:
+      - main # main 브랜치로 푸시될 때 실행
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설정 (npm 설치 및 프로젝트 환경 설정)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20 # 프로젝트에 맞는 Node.js 버전을 사용하세요
+          cache: 'npm'
+
+      # 3. 의존성 설치
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 프로젝트 빌드
+      - name: Build project
+        run: npm run build
+
+      # 5. AWS CLI 설치 및 환경 설정
+      - name: Configure AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2 # 배포 지역 설정 (서울 리전)
+
+      # 6. S3에 빌드 파일 업로드
+      - name: Upload to S3
+        run: |
+          aws s3 sync ./dist s3://every-dei-frontend \
+            --delete \
+            --cache-control "max-age=0, no-cache, no-store, must-revalidate"
+
+      # 7. CloudFront 캐시 무효화
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"

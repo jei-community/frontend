@@ -1,0 +1,1 @@
+export { techStacks } from './project';

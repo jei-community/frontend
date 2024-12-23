@@ -1,0 +1,54 @@
+name: Deploy ## 21
+
+# PR 관련 이벤트와 리뷰 제출 이벤트를 모두 감지
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [opened, reopened, synchronize, ready_for_review] # 원본 동작 유지
+  pull_request_review:
+    types: [submitted] # 리뷰 제출 이벤트 추가
+
+jobs:
+  # 원래 PR 관련 동작
+  notify_pr_event:
+    if: github.event_name == 'pull_request' # pull_request 이벤트일 때만 실행
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Google Chat on Pull Request
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          PR_USER_LOGIN="${{ github.event.pull_request.user.login }}"
+
+          # GitHub Actions의 시간은 UTC로 제공되므로, Asia/Seoul로 변환
+          CURRENT_TIME_KST=$(TZ="Asia/Seoul" date '+%Y-%m-%d %H:%M:%S')
+
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -d "{\"text\": \"🐬 [Platform-Monitoring]\n\n${PR_USER_LOGIN} 님이 Pull Request 를 생성하였습니다.\n\n- PR 제목: ${PR_TITLE}\n- PR 내용: ${PR_BODY}\n- 시각: ${CURRENT_TIME_KST}\"}" \
+          "${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}"
+
+  # PR 리뷰 알림 동작
+  notify_review_event:
+    if: github.event_name == 'pull_request_review' # pull_request_review 이벤트일 때만 실행
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Google Chat on Pull Request Review
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_USER_LOGIN="${{ github.event.pull_request.user.login }}"
+          REVIEWER_LOGIN="${{ github.event.review.user.login }}"
+          REVIEW_STATE="${{ github.event.review.state }}"
+          REVIEW_BODY="${{ github.event.review.body }}"
+
+          # GitHub Actions의 시간은 UTC로 제공되므로, Asia/Seoul로 변환
+          CURRENT_TIME_KST=$(TZ="Asia/Seoul" date '+%Y-%m-%d %H:%M:%S')
+
+          curl -X POST \
+          -H 'Content-Type: application/json' \
+          -d "{\"text\": \"🐬 [Platform-Monitoring]\n\n${REVIEWER_LOGIN} 님이 Pull Request 에 리뷰를 제출하였습니다.\n\n- PR 제목: ${PR_TITLE}\n- 리뷰 상태: ${REVIEW_STATE}\n- 리뷰 내용: ${REVIEW_BODY}\n- 시각: ${CURRENT_TIME_KST}\"}" \
+          "${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}"
