@@ -5,10 +5,20 @@ import Button from '@/components/Button';
 import Content from '@/components/Content';
 import TextArea from '@/components/TextArea';
 
+import ImageUploadBox from './components/ImageUploadBox';
 import { S } from './style';
+
+interface FileInfo {
+  name: string;
+  size: string;
+  type: string;
+  imageUrl?: string;
+  file: File; // 실제 파일 객체 추가
+}
 
 export default function AlbumEditor() {
   const [text, setText] = useState<string>(); // TextArea input값
+  const [uploadedFiles, setUploadedFiles] = useState<FileInfo[]>([]); // 업로드된 이미지들
 
   /**
    * 앨범 등록 함수
@@ -18,6 +28,16 @@ export default function AlbumEditor() {
     console.log('등록');
   };
 
+  /** 파일이 업로드되면 상태 업데이트 */
+  const handleFileUpload = (file: FileInfo) => {
+    setUploadedFiles([...uploadedFiles, file]);
+  };
+  /** 업로드 되어있는 파일 삭제 */
+  const handleFileDelete = (index: number) => {
+    const updatedFiles = uploadedFiles.filter((_, i) => i !== index);
+    setUploadedFiles(updatedFiles);
+  };
+
   return (
     <>
       <Aside />
@@ -25,13 +45,7 @@ export default function AlbumEditor() {
         <S.Container>
           <S.PageTitle>새 앨범 등록</S.PageTitle>
           <S.PageSubTitle>사진을 업로드해주세요. 최대 5장까지 추가할 수 있습니다.</S.PageSubTitle>
-          <S.ImageUploadBox>
-            <S.Image src='https://via.placeholder.com/160'></S.Image>
-            <S.Image src='https://via.placeholder.com/160'></S.Image>
-            <S.Image src='https://via.placeholder.com/160'></S.Image>
-            <S.Image src='https://via.placeholder.com/160'></S.Image>
-            <S.Image src='https://via.placeholder.com/160'></S.Image>
-          </S.ImageUploadBox>
+          <ImageUploadBox uploadedFiles={uploadedFiles} onUpload={handleFileUpload} onDelete={handleFileDelete} />
           <TextArea
             value={text}
             onChange={(e) => setText(e.target.value)}
