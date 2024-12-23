@@ -1,12 +1,12 @@
 import { createElement } from 'react';
 
 interface Props {
-  htmlString: string;
+  /** html 스트링 */ htmlString: string;
 }
 
 /** HTML 파서 컴포넌트 */
 export default function HtmlParser({ htmlString }: Props) {
-  const parseHtml = (html: string): React.ReactNode => {
+  const parseHtml = (html: string) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
