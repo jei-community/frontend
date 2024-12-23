@@ -6,7 +6,8 @@ import ItemsWrapper from './ItemsWrapper';
 import { S } from './style';
 
 //TODO(지애) : 임시 데이터 수정
-const userName = '임범규';
+const userName = '임범규'; // 데이터 있을 때
+// const userName = '전증훈'; // 데이터 없을 때
 
 /** 메인페이지 내 일일점검 컴포넌트 */
 export default function DailyCheck() {
