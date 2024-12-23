@@ -18,7 +18,7 @@ export const getDailyCheck = (key: SheetKey, userName: string) => {
 };
 
 /** 일일점검 데이터 변경
- * @param userName 담당자자 이름
+ * @param userName 담당자 이름
  */
 export const getTodayCheck = (userName: string) => {
   const params = {
