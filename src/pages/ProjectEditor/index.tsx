@@ -14,12 +14,12 @@ import ProjectSideContainer from '@/components/ProjectSideContainer';
 import CancelButton from '@/pages/ProjectEditor/components/CancelButton';
 import DeleteButton from '@/pages/ProjectEditor/components/DeleteButton';
 import DescriptionEditor from '@/pages/ProjectEditor/components/DescriptionEditor';
-// import DocumentTooltipList from '@/pages/ProjectEditor/components/DocumentTooltipList';
+import DocumentTooltipList from '@/pages/ProjectEditor/components/DocumentTooltipList';
 import EnvEditor from '@/pages/ProjectEditor/components/EnvEditor';
 import SaveButton from '@/pages/ProjectEditor/components/SaveButton';
 import TechStackEditor from '@/pages/ProjectEditor/components/TechStackEditor';
 import TitleEditor from '@/pages/ProjectEditor/components/TitleEditor';
-import styled from '@emotion/styled';
+import { S } from '@/pages/ProjectEditor/style';
 
 export default function ProjectEditor() {
   const { projectId } = useParams();
@@ -64,7 +64,7 @@ export default function ProjectEditor() {
         </Content>
         <Aside>
           <ProjectSideContainer>
-            {/* <DocumentTooltipList /> */}
+            <DocumentTooltipList links={projectId ? metadata.link : null} />
 
             <Divider />
 
@@ -81,10 +81,3 @@ export default function ProjectEditor() {
     </>
   );
 }
-
-const S = {
-  Form: styled.form({
-    display: 'flex',
-    width: '100%',
-  }),
-};
