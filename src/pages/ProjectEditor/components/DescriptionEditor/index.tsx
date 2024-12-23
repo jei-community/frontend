@@ -1,10 +1,14 @@
 import DescriptionContainer from '@/components/DescriptionContainer';
 import TextArea from '@/components/TextArea';
 
-export default function DescriptionEditor() {
+interface Props {
+  description: string | null;
+}
+
+export default function DescriptionEditor({ description }: Props) {
   return (
     <DescriptionContainer>
-      <TextArea placeholder='프로젝트 설명을 입력해 주세요' rows={5} />
+      <TextArea placeholder='프로젝트 설명을 입력해 주세요' rows={5} defaultValue={description ?? ''} />
     </DescriptionContainer>
   );
 }

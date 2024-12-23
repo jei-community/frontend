@@ -3,9 +3,13 @@ import { ChangeEvent, useRef, useState } from 'react';
 import ButtonWithIcon from '@/pages/ProjectEditor/components/ButtonWithIcon';
 import { S } from '@/pages/ProjectEditor/components/TitleEditor/style';
 
-export default function ThumbnailEditor() {
+interface Props {
+  thumbnailImageUrl: string | ArrayBuffer | null;
+}
+
+export default function ThumbnailEditor({ thumbnailImageUrl }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [thumbnailSrc, setThumbnailSrc] = useState<string | ArrayBuffer | null>(null);
+  const [thumbnailSrc, setThumbnailSrc] = useState<string | ArrayBuffer | null>(thumbnailImageUrl);
 
   const openFileUploader = () => {
     if (!inputRef.current) return;
