@@ -14,8 +14,9 @@ interface Props {
   /** 화면에 그려지는 데이터를 업데이트하는 함수 */ handleUpdateData: (title: string, col: string, value: string) => void;
 }
 
-//TODO(지애) : 임시 데이터
-const userName = '임범규';
+//TODO(지애) : 임시 데이터 교체
+const userName = '임범규'; // 데이터 있을 때
+// const userName = '전증훈'; // 데이터 없을 때
 
 /** 개별 일일점검 아이템 (프로젝트 단위) */
 export default function Item({ item, handleUpdateData }: Props) {

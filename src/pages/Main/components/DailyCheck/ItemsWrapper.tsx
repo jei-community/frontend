@@ -2,6 +2,8 @@ import { use, useMemo } from 'react';
 
 import { TodayCheckResponse } from '@/apis/dailyCheck/type';
 
+import EmptyContent from '@/components/EmptyContent';
+
 import Item from './Item';
 import { S } from './style';
 
@@ -31,9 +33,15 @@ export default function ItemsWrapper({ todayCheckPromise }: Props) {
 
   return (
     <S.ItemsWrapper>
-      {data.map((item, index) => {
-        return <Item item={item} key={index} handleUpdateData={handleUpdateData} />;
-      })}
+      {data.length > 0 ? (
+        data.map((item, index) => {
+          return <Item item={item} key={index} handleUpdateData={handleUpdateData} />;
+        })
+      ) : (
+        <S.EmptyContentWrapper>
+          <EmptyContent size='small'>담당 중인 일일점검이 없어요</EmptyContent>
+        </S.EmptyContentWrapper>
+      )}
     </S.ItemsWrapper>
   );
 }
