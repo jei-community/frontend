@@ -27,7 +27,7 @@ export default function Tooltip({ value, col, targetName, handleClose, handleUpd
   const handleCheckBoxClick = (key: DailyCheckStatus) => {
     const status = STATUS[key];
     setCurrentValue(value);
-    postCellForUser(currSheet, targetName, col, status);
+    postCellForUser(currSheet, targetName, col.toString(), status);
     handleUpdateData(targetName, col, status);
     handleClose();
   };
