@@ -13,7 +13,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const MediumAvatarAvatar: Story = {
+export const MediumAvatar: Story = {
   args: {
     src: 'https://i.pravatar.cc/64',
     size: 'medium',
