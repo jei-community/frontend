@@ -11,7 +11,7 @@ interface AvatarStyleProps {
 /**
  * 사이즈 props에 따른 아바타 크기
  */
-const SIZE: { [key in AvatarSize]: string } = {
+const SIZE: Record<AvatarSize, string> = {
   small: '3.2rem',
   medium: '4.8rem',
   large: '6.4rem',

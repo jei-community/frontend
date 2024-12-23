@@ -1,66 +1,70 @@
 import { useState } from 'react';
 
-import { techStacks } from '@/mocks/data';
+import { TechStackItem } from '@/types/project';
 
 import TechStackContainer from '@/components/TechStackContainer';
-import TechStackList from '@/components/TechStackList';
 
-import ButtonWithIcon from '@/pages/ProjectEditor/components/ButtonWithIcon';
 import Modal from '@/pages/ProjectEditor/components/Modal';
+import DefaultTechStacks from '@/pages/ProjectEditor/components/TechStackEditor/components/DefaultTechStacks';
+import EditableTechStacks from '@/pages/ProjectEditor/components/TechStackEditor/components/EditableTechStacks';
 import { S } from '@/pages/ProjectEditor/components/TechStackEditor/style';
 
-export default function TechStackEditor() {
-  // Modal 공통 컴포넌트, hook으로 교체할 예정
+interface Props {
+  techStacks: TechStackItem[] | null;
+}
+
+export default function TechStackEditor({ techStacks }: Props) {
+  // TODO(증훈): Modal 공통 컴포넌트, hook으로 교체할 예정
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
-
-  const openTechStackEditorModal = () => setIsOpen(true);
+  const [position, setPosition] = useState<string>('');
 
   const toggleTechStackSelection = (id: string | number) => {
     if (selectedTechStacks.includes(String(id))) setSelectedTechStacks(selectedTechStacks.filter((techStackId) => techStackId !== String(id)));
     else setSelectedTechStacks([...selectedTechStacks, String(id)]);
   };
 
-  const resetTechStackSelections = () => setSelectedTechStacks([]);
+  const openTechStackModal = (position: string) => {
+    setPosition(position);
+    setIsOpen(true);
+  };
 
   // const saveTechStack = () => {
-  //   // API 요청
+  //   // TODO(증훈): API 요청
 
   //   resetTechStackSelections();
   // };
 
   return (
-    <TechStackContainer>
-      <TechStackList.Title>Frontend</TechStackList.Title>
-      <ButtonWithIcon onClick={openTechStackEditorModal}>
-        <S.TechListWrapper>
-          <TechStackList techStacks={techStacks} display='flex' />
-        </S.TechListWrapper>
-      </ButtonWithIcon>
-      <TechStackList.Title>Backend</TechStackList.Title>
-      <ButtonWithIcon onClick={openTechStackEditorModal}>
-        <S.TechListWrapper>
-          <TechStackList techStacks={techStacks} display='flex' />
-        </S.TechListWrapper>
-      </ButtonWithIcon>
+    <>
+      <TechStackContainer>
+        {techStacks ? (
+          <EditableTechStacks techStacks={techStacks} openTechStackModal={openTechStackModal} />
+        ) : (
+          <DefaultTechStacks openTechStackModal={openTechStackModal} />
+        )}
+      </TechStackContainer>
 
       {isOpen && (
-        <Modal title={`기술 스택 (${'position'})`} close={() => setIsOpen(false)} onClose={resetTechStackSelections}>
+        <Modal title={`기술 스택 (${position})`} close={() => setIsOpen(false)} onClose={() => setSelectedTechStacks([])}>
+          {/* TODO(증훈): 아래 로직 techStack 이미지 불러오는 API로 교쳬 예정 */}
           <S.AllTechStackList>
-            {techStacks.map(({ src, alt }, index) => {
-              const id = String(index); // 실제 데이터 사용하기 전 임시 id
+            {techStacks
+              ?.find((techStack) => techStack.position === position)
+              ?.data.map(({ url, tag }, index) => {
+                const id = String(index); // 실제 데이터 사용하기 전 임시 id
 
-              return (
-                <li key={id}>
-                  <button onClick={() => toggleTechStackSelection(id)}>
-                    <S.TechStackImage $isSelected={selectedTechStacks.includes(id)} src={src} alt={alt} />
-                  </button>
-                </li>
-              );
-            })}
+                return (
+                  <li key={id}>
+                    <button onClick={() => toggleTechStackSelection(id)}>
+                      <S.TechStackImage $isSelected={selectedTechStacks.includes(id)} src={url} alt={tag} />
+                    </button>
+                  </li>
+                );
+              })}
           </S.AllTechStackList>
         </Modal>
       )}
-    </TechStackContainer>
+    </>
   );
 }
