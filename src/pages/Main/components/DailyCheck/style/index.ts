@@ -5,10 +5,11 @@ export const S = {
   Container: styled.div`
     display: flex;
     flex-direction: column;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: start;
-    items-align: start;
-    justify-content: center;
-    paddig: 1.6rem;
   `,
   /** 사이드 컨텐츠 타이틀 */
   Title: styled.p(({ theme }) => ({
@@ -45,6 +46,7 @@ export const S = {
     Description: styled.p(({ theme }) => ({
       color: theme.colors.gray[800],
       ...theme.typography.body3,
+      whiteSpace: 'pre-line',
       margin: '0 0 0.8rem 0',
     })),
   },
