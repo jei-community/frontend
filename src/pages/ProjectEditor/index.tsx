@@ -73,9 +73,13 @@ export default function ProjectEditor() {
 
               <CancelButton />
 
-              <Divider />
+              {projectId && (
+                <>
+                  <Divider />
 
-              <DeleteButton />
+                  <DeleteButton />
+                </>
+              )}
             </S.SideStickyContainer>
           </ProjectSideContainer>
         </Aside>
