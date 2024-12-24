@@ -25,8 +25,8 @@ export const S = {
     display: flex;
 
     width: 120rem;
+    height: max-content;
     min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
-    max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
     background-color: white;
 
