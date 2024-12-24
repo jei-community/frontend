@@ -68,13 +68,15 @@ export default function ProjectEditor() {
 
             <Divider />
 
-            <SaveButton />
+            <S.SideStickyContainer>
+              <SaveButton />
 
-            <CancelButton />
+              <CancelButton />
 
-            <Divider />
+              <Divider />
 
-            <DeleteButton />
+              <DeleteButton />
+            </S.SideStickyContainer>
           </ProjectSideContainer>
         </Aside>
       </S.Form>
