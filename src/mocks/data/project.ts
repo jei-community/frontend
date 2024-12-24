@@ -81,7 +81,7 @@ export const mockProjectDetails: ProjectDetails = {
     link: [
       {
         url: ['https://example.com'],
-        tag: 'GITLAB',
+        tag: 'gitlab',
       },
     ],
   },

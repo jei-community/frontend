@@ -1,6 +1,8 @@
 import { RefObject } from 'react';
 
-import { LinkItem } from '@/types/project';
+import { LinkItem, LinkType } from '@/types/project';
+
+import { ICONS } from '@/constants/link';
 
 import DraggableScroller from '@/components/DraggableScroll';
 
@@ -21,7 +23,7 @@ export default function TooltipList({ links, ref }: Props) {
           return (
             <li key={tag}>
               <S.TooltipContainer>
-                <S.TooltipImage src={tag} alt={`${tag} 이미지`} />
+                <S.TooltipImage src={ICONS[tag as LinkType]} alt={`${tag} 이미지`} />
               </S.TooltipContainer>
             </li>
           );

@@ -43,3 +43,5 @@ export interface ProjectList {
   data: ProjectListData;
   pagination: Pagination;
 }
+
+export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'spreadsheet';
