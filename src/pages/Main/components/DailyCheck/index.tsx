@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { getTodayCheck } from '@/apis/dailyCheck';
 
 import ItemsWrapper from './ItemsWrapper';
+import Loading from './Loading';
 import { S } from './style';
 
 //TODO(지애) : 임시 데이터 수정
@@ -17,7 +18,7 @@ export default function DailyCheck() {
   return (
     <S.Container>
       <S.Title>일일점검</S.Title>
-      <Suspense fallback={<div>'...로딩중이라고'</div>}>
+      <Suspense fallback={<Loading />}>
         <ItemsWrapper todayCheckPromise={TodayCheckPromise} />
       </Suspense>
     </S.Container>
