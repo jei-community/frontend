@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20 # 프로젝트에 맞는 Node.js 버전을 사용하세요
+          node-version: 20.11.1 # 프로젝트에 맞는 Node.js 버전을 사용하세요
           cache: 'npm'
 
       # 3. 의존성 설치

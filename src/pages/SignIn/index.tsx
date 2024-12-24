@@ -1,5 +1,5 @@
 import GlobalStyle from '@/styles/GlobalStyle';
-import Logo from '@/styles/assets/Images/logo_white.svg';
+import Logo from '@/styles/assets/images/logo_white.svg';
 
 import GoogleLogo from './assets/google-logo.svg';
 import { S } from './style';
