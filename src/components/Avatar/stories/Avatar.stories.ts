@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import Avatar from '..';
 
 const meta = {
+  title: 'Avatar',
   component: Avatar,
   tags: ['autodocs', '!dev'],
   args: { size: 'medium' },

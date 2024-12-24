@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Badge from '..';
 
 const meta = {
+  title: 'Badge',
   component: Badge,
   tags: ['autodocs', '!dev'],
   args: { size: 'medium', color: 'success', children: '서비스' },
