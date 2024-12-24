@@ -3,10 +3,12 @@ import { Suspense } from 'react';
 import { getTodayCheck } from '@/apis/dailyCheck';
 
 import ItemsWrapper from './ItemsWrapper';
+import Loading from './Loading';
 import { S } from './style';
 
 //TODO(지애) : 임시 데이터 수정
-const userName = '임범규';
+const userName = '임범규'; // 데이터 있을 때
+// const userName = '전증훈'; // 데이터 없을 때
 
 /** 메인페이지 내 일일점검 컴포넌트 */
 export default function DailyCheck() {
@@ -16,7 +18,7 @@ export default function DailyCheck() {
   return (
     <S.Container>
       <S.Title>일일점검</S.Title>
-      <Suspense fallback={<div>'...로딩중이라고'</div>}>
+      <Suspense fallback={<Loading />}>
         <ItemsWrapper todayCheckPromise={TodayCheckPromise} />
       </Suspense>
     </S.Container>

@@ -16,7 +16,7 @@ export default function ProjectTitleEditor({ title, status }: Props) {
     <S.TitleContainer>
       <TextField placeholder='프로젝트 이름을 입력해 주세요' heightSize='large' defaultValue={title ?? ''} name='title' />
       <S.Badge $status={status ?? 'STOP'}>
-        <S.BadgeText name='status'>{STATUS_TEXT[status ?? 'STOP']}</S.BadgeText>
+        <S.BadgeText>{STATUS_TEXT[status ?? 'STOP']}</S.BadgeText>
       </S.Badge>
     </S.TitleContainer>
   );

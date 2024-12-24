@@ -50,4 +50,13 @@ export const S = {
       margin: '0 0 0.8rem 0',
     })),
   },
+  /** 빈 콘텐츠 Wrapper */
+  EmptyContentWrapper: styled.div`
+    width: 18.4rem;
+    height: 32rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  `,
 };
