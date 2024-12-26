@@ -1,6 +1,5 @@
-import { ChevronDown, ChevronUp } from 'lucide-react';
-
 import Button from '@/components/Button';
+import TextButton from '@/components/TextButton';
 
 import styled from '@emotion/styled';
 
@@ -75,19 +74,12 @@ export const S = {
     color: theme.colors.gray[700],
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: '0.8rem',
   })),
 
-  ChevronUp: styled(ChevronUp)(({ theme }) => ({
-    width: '1.6rem',
-    height: '1.6rem',
-    color: theme.colors.gray[700],
-    marginLeft: '0.2rem',
-  })),
-  ChevronDown: styled(ChevronDown)(({ theme }) => ({
-    width: '1.6rem',
-    height: '1.6rem',
-    color: theme.colors.gray[700],
-    marginLeft: '0.2rem',
+  TextButton: styled(TextButton)(({ theme }) => ({
+    backgroundColor: theme.colors.gray[100],
   })),
 
   InputWrapper: styled.div({

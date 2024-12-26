@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router';
 
+import { DummyData } from '@/types/album';
+
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
@@ -7,37 +9,6 @@ import Profile from '@/components/Profile';
 
 import AlbumItem from './component/AlbumItem/AlbumItem';
 import { S } from './style';
-
-interface User {
-  id: string;
-  profileImageUrl: string | null;
-  name: string;
-  role: string;
-}
-
-interface Album {
-  id: string;
-  content: string;
-  date: Date;
-  photos: string[];
-}
-
-interface DataItem {
-  user: User;
-  albums: Album;
-}
-
-interface Pagination {
-  totalCount: number;
-  page: number;
-  limit: number;
-  hasNext: boolean;
-}
-
-interface DummyData {
-  data: DataItem[];
-  pagination: Pagination;
-}
 
 export default function AlbumList() {
   const navigate = useNavigate();
