@@ -12,3 +12,21 @@ export const throttle = (func: () => void, delay: number) => {
     }, delay);
   }
 };
+
+/**
+ * UTC 기준 날짜 데이터를 받아서 한국 시간대로 변환한 뒤 YYYY. MM. DD 형식의 날짜를 반환
+ * @param utcDate ISO 8601 형식의 UTC 날짜 문자열
+ * @returns YYYY. MM. DD 형식의 문자열
+ */
+export function formatKoreanDate(utcDate: Date): string {
+  // UTC 시간에 9시간 추가
+  const koreanTime = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
+
+  // 연도, 월, 일 추출
+  const year = koreanTime.getFullYear();
+  const month = String(koreanTime.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+  const day = String(koreanTime.getDate()).padStart(2, '0');
+
+  // YYYY. MM. DD 형식으로 반환
+  return `${year}. ${month}. ${day}`;
+}
