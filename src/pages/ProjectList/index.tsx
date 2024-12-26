@@ -8,7 +8,7 @@ import { useProjectList } from '@/pages/ProjectList/hooks';
 import { S } from '@/pages/ProjectList/style';
 
 export default function ProjectList() {
-  const { projectList, updateProjectList, selectMyProject, selectProjectAll } = useProjectList();
+  const { projectList, pagination, updateProjectList, selectMyProject, selectProjectAll } = useProjectList();
 
   return (
     <Content>
@@ -23,7 +23,7 @@ export default function ProjectList() {
         <Divider />
 
         {projectList && projectList.length ? (
-          <ProjectCardList projectList={projectList} />
+          <ProjectCardList projectList={projectList} pagination={pagination} />
         ) : (
           <S.EmptyWrapper>
             <EmptyContent size='large'>프로젝트가 없어요</EmptyContent>

@@ -38,7 +38,7 @@ export interface ProjectDetails {
   thumbnailImageUrl: string;
 }
 
-interface Pagination {
+export interface Pagination {
   totalCount: number;
   page: number;
   limit: number;

@@ -1,20 +1,24 @@
-import { ChevronFirstIcon, ChevronLastIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 
-import { ProjectListData } from '@/types/project';
+import { Pagination as PaginationType, ProjectListData } from '@/types/project';
 
 import { PATH } from '@/constants/path';
 
 import Divider from '@/components/Divider';
+import Pagination from '@/components/Pagination';
 
 import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
 import { S } from '@/pages/ProjectList/style';
 
 interface Props {
   projectList: ProjectListData;
+  pagination: PaginationType;
 }
 
-export default function ProjectCardList({ projectList }: Props) {
+export default function ProjectCardList({ projectList, pagination }: Props) {
+  const [currentPage, setCurrentPage] = useState(pagination.page);
+
   return (
     <>
       <S.ProjectList>
@@ -38,31 +42,13 @@ export default function ProjectCardList({ projectList }: Props) {
 
       <Divider />
 
-      <S.Pagination>
-        <S.PaginationButton>
-          <ChevronFirstIcon />
-        </S.PaginationButton>
-        <S.PaginationButton>
-          <ChevronLeftIcon />
-        </S.PaginationButton>
-        <S.PaginationNumberList>
-          {Array.from({ length: 9 }, (_, index) => {
-            return (
-              <li key={index}>
-                <S.PaginationButton>
-                  <S.PaginationNumber $isClicked={false}>{index + 1}</S.PaginationNumber>
-                </S.PaginationButton>
-              </li>
-            );
-          })}
-        </S.PaginationNumberList>
-        <S.PaginationButton>
-          <ChevronRightIcon />
-        </S.PaginationButton>
-        <S.PaginationButton>
-          <ChevronLastIcon />
-        </S.PaginationButton>
-      </S.Pagination>
+      <Pagination
+        totalCount={pagination.totalCount}
+        limit={pagination.limit}
+        page={currentPage}
+        hasNext={currentPage < Math.ceil(pagination.totalCount / pagination.limit)}
+        onPageChange={(newPage) => setCurrentPage(newPage)}
+      />
     </>
   );
 }
