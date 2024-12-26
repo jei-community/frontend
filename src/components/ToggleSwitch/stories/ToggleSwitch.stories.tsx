@@ -6,6 +6,7 @@ import { fn } from '@storybook/test';
 import ToggleSwitch from '..';
 
 const meta = {
+  title: 'ToggleSwitch',
   component: ToggleSwitch,
   tags: ['autodocs', '!dev'],
   args: { checked: false, disabled: false, onChange: fn() },

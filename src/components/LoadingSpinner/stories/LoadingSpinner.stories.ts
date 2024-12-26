@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import LoadingSpinner from '..';
 
 const meta = {
+  title: 'LoadingSpinner',
   component: LoadingSpinner,
   tags: ['autodocs', '!dev'],
   args: { size: 'small' },
