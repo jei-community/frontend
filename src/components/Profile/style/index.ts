@@ -4,7 +4,6 @@ export const S = {
   Container: styled.div({
     display: 'flex',
     flexDirection: 'column',
-    padding: '1.6rem',
   }),
 
   FlexWrapper: styled.div({

@@ -45,7 +45,7 @@ export default function AlbumItem({ user, albums }: Props) {
         <S.SelectedPhoto src={albums.photos[selectedPhoto]} />
         <S.PhotoList>
           {albums.photos.map((item, index) => {
-            return <S.PhotoItem src={item} onClick={() => handleSelectPhoto(index)} />;
+            return <S.PhotoItem src={item} onClick={() => handleSelectPhoto(index)} $isSelected={index === selectedPhoto} />;
           })}
         </S.PhotoList>
       </S.Content>

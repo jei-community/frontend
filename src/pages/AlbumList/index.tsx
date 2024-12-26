@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router';
+
 import Aside from '@/components/Aside';
+import Button from '@/components/Button';
 import Content from '@/components/Content';
 import Profile from '@/components/Profile';
 
@@ -37,6 +40,8 @@ interface DummyData {
 }
 
 export default function AlbumList() {
+  const navigate = useNavigate();
+
   const dummyData: DummyData = {
     data: [
       {
@@ -96,10 +101,28 @@ export default function AlbumList() {
     },
   };
 
+  /** 사진 업로드하기 클릭 메서드 */
+  const handleEditor = () => {
+    navigate('/albums/editor');
+  };
+
+  /** 내가 올린 앨범 보기 클릭 메서드 */
+  const handleMyAlbums = () => {
+    console.log('내가 올린 앨범 보기 클릭 메서드');
+  };
+
   return (
     <>
       <Aside>
-        <Profile />
+        <S.AsideContainer>
+          <Profile />
+          <S.ButtonWrapper>
+            <Button onClick={handleEditor}>사진 업로드하기</Button>
+            <Button onClick={handleMyAlbums} color='neutral'>
+              내가 올린 앨범 보기
+            </Button>
+          </S.ButtonWrapper>
+        </S.AsideContainer>
       </Aside>
       <Content>
         <S.ContentContainer>

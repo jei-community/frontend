@@ -36,12 +36,14 @@ export const S = {
 
   Content: styled.div({ display: 'flex', flexDirection: 'column' }),
   PhotoList: styled.div({ display: 'flex', columnGap: '1.6rem' }),
-  PhotoItem: styled.img(({ theme }) => ({
+  PhotoItem: styled.img<{ $isSelected: boolean }>(({ theme, $isSelected }) => ({
     width: '9.6rem',
     height: '9.6rem',
     borderRadius: '0.8rem',
     objectFit: 'contain',
     backgroundColor: theme.colors.primary[300],
+    border: $isSelected ? '3px solid' : 'none',
+    borderColor: $isSelected ? theme.colors.primary[500] : 'none',
   })),
 
   SelectedPhoto: styled.img({
