@@ -11,9 +11,11 @@ export interface TechStackItem {
   data: TechStackData[];
 }
 
+export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'spreadsheet';
+
 export interface LinkItem {
   url: string[];
-  tag: string;
+  tag: LinkType;
 }
 
 export interface ProjectDetails {
@@ -43,5 +45,3 @@ export interface ProjectList {
   data: ProjectListData;
   pagination: Pagination;
 }
-
-export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'spreadsheet';
