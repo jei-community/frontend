@@ -171,6 +171,11 @@ const BaseStyle = css`
     box-sizing: border-box;
   }
 
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   *,
   *::before,
   *::after {
