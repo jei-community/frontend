@@ -1,7 +1,8 @@
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
+import EmptyContent from '@/components/EmptyContent';
 
-import PostingLink from './components/PostingLink';
+import EditorLink from './components/EditorLink';
 import { S } from './style';
 
 /** 포스트 목록을 보여주는 페이지 */
@@ -12,12 +13,12 @@ export default function PostList() {
       <Content>
         <S.ContentContainer>
           {/* TODO(범규): 포스트 리스트 UI 구현 필요 */}
-          1234
+          <EmptyContent size='large'>볼 수 있는 포스트가 없어요.</EmptyContent>
         </S.ContentContainer>
       </Content>
       <Aside>
         <S.AsideContainer>
-          <PostingLink />
+          <EditorLink />
         </S.AsideContainer>
       </Aside>
     </>
