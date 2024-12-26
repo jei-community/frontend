@@ -1,3 +1,7 @@
+import { ChevronDown, ChevronUp } from 'lucide-react';
+
+import Button from '@/components/Button';
+
 import styled from '@emotion/styled';
 
 export const S = {
@@ -59,4 +63,40 @@ export const S = {
     ...theme.typography.body1,
     margin: '1.6rem 0',
   })),
+
+  Comment: styled.div({
+    backgroundColor: '#ff6666',
+    width: '100%',
+    height: '10rem',
+  }),
+
+  CommentArea: styled.span(({ theme }) => ({
+    ...theme.typography.body2,
+    color: theme.colors.gray[700],
+    display: 'flex',
+    alignItems: 'center',
+  })),
+
+  ChevronUp: styled(ChevronUp)(({ theme }) => ({
+    width: '1.6rem',
+    height: '1.6rem',
+    color: theme.colors.gray[700],
+    marginLeft: '0.2rem',
+  })),
+  ChevronDown: styled(ChevronDown)(({ theme }) => ({
+    width: '1.6rem',
+    height: '1.6rem',
+    color: theme.colors.gray[700],
+    marginLeft: '0.2rem',
+  })),
+
+  InputWrapper: styled.div({
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0.8rem',
+    gap: '0.8rem',
+  }),
+  Button: styled(Button)({
+    width: '9.6rem',
+  }),
 };
