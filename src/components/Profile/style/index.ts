@@ -4,6 +4,7 @@ export const S = {
   Container: styled.div({
     display: 'flex',
     flexDirection: 'column',
+    padding: '1.6rem',
   }),
 
   FlexWrapper: styled.div({
@@ -19,7 +20,7 @@ export const S = {
 
   Title: styled.p(({ theme }) => ({
     ...theme.typography.body2,
-    margin: '0.8rem 0 1.6rem 0',
+    marginBottom: '1.6rem',
   })),
 
   Name: styled.p(({ theme }) => ({

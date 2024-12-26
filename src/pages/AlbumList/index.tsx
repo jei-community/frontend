@@ -2,16 +2,111 @@ import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import Profile from '@/components/Profile';
 
+import AlbumItem from './component/AlbumItem/AlbumItem';
 import { S } from './style';
 
+interface User {
+  id: string;
+  profileImageUrl: string | null;
+  name: string;
+  role: string;
+}
+
+interface Album {
+  id: string;
+  content: string;
+  date: Date;
+  photos: string[];
+}
+
+interface DataItem {
+  user: User;
+  albums: Album;
+}
+
+interface Pagination {
+  totalCount: number;
+  page: number;
+  limit: number;
+  hasNext: boolean;
+}
+
+interface DummyData {
+  data: DataItem[];
+  pagination: Pagination;
+}
+
 export default function AlbumList() {
+  const dummyData: DummyData = {
+    data: [
+      {
+        user: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66af11',
+          profileImageUrl: 'https://via.placeholder.com/64',
+          name: '임범규',
+          role: '연구원',
+        },
+        albums: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          content: '대충 어디 가서 대충 찍은 사진',
+          date: new Date('2024-12-24T02:52:45.212Z'),
+          photos: ['https://via.placeholder.com/50', 'https://via.placeholder.com/50', 'https://via.placeholder.com/64'],
+        },
+      },
+      {
+        user: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66af11',
+          profileImageUrl: 'https://via.placeholder.com/64',
+          name: '김성찬',
+          role: '연구원',
+        },
+        albums: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa7',
+          content: '대충 어디 가서 대충 찍은 사진 두번쨰 글',
+          date: new Date('2024-12-24T07:52:45.212Z'),
+          photos: ['https://via.placeholder.com/50', 'https://via.placeholder.com/64', 'https://via.placeholder.com/160'],
+        },
+      },
+      {
+        user: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66af11',
+          profileImageUrl: 'https://via.placeholder.com/64',
+          name: '전증훈',
+          role: '연구원',
+        },
+        albums: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa8',
+          content: '메리 크리스마스입니다람쥐',
+          date: new Date('2024-12-24T07:52:45.212Z'),
+          photos: [
+            'https://via.placeholder.com/100',
+            'https://via.placeholder.com/50',
+            'https://via.placeholder.com/150',
+            'https://via.placeholder.com/50',
+            'https://via.placeholder.com/80',
+          ],
+        },
+      },
+    ],
+    pagination: {
+      totalCount: 0,
+      page: 0,
+      limit: 0,
+      hasNext: true,
+    },
+  };
+
   return (
     <>
       <Aside>
         <Profile />
       </Aside>
       <Content>
-        <S.ContentContainer>1234</S.ContentContainer>
+        <S.ContentContainer>
+          {dummyData?.data?.map((item) => {
+            return <AlbumItem key={item.albums.id} user={item.user} albums={item.albums} />;
+          })}
+        </S.ContentContainer>
       </Content>
       <Aside />
     </>
