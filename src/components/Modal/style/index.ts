@@ -33,13 +33,13 @@ export const S = {
   Header: styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
   `,
   /** 헤더 좌측의 제목 & 부제목 영역 스타일 */
   TitleArea: styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1.6rem;
+    gap: 0.4rem;
   `,
   /** 제목 스타일 */
   Title: styled.div`

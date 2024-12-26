@@ -8,8 +8,6 @@ export interface ModalProps extends PropsWithChildren {
   title: string;
   /** 모달 부제목 */
   subtitle?: string;
-  /** 모달 닫기 버튼 클릭 이벤트 핸들러 */
-  onClose: () => void;
   /** 모달 확인 버튼 클릭 이벤트 핸들러 */
   onConfirm?: () => void;
 }
