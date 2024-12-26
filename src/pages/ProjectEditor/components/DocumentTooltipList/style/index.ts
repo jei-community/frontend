@@ -60,7 +60,7 @@ export const S = {
     gap: '2.4rem',
   }),
 
-  DocumentIconButtonContainer: styled.div({
+  DocumentIconButtonList: styled.ul({
     display: 'flex',
 
     gap: '0.8rem',

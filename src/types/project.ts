@@ -13,8 +13,14 @@ export interface TechStackItem {
 
 export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'spreadsheet';
 
+export type Url = {
+  id: string;
+  url: string;
+};
+
 export interface LinkItem {
-  url: string[];
+  id: string;
+  url: Url[];
   tag: LinkType;
 }
 

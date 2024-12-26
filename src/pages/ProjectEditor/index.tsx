@@ -1,7 +1,9 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import { mockProjectConfigurations, mockProjectDetails } from '@/mocks/data/project';
+
+import { LinkItem } from '@/types/project';
 
 import { PATH } from '@/constants/path';
 
@@ -22,10 +24,11 @@ import TitleEditor from '@/pages/ProjectEditor/components/TitleEditor';
 import { S } from '@/pages/ProjectEditor/style';
 
 export default function ProjectEditor() {
-  const { projectId } = useParams();
   const { thumbnailImageUrl, title, status, startDate, endDate, description, metadata } = mockProjectDetails;
   const { configuration } = mockProjectConfigurations;
+  const { projectId } = useParams();
   const navigate = useNavigate();
+  const [linksToRender, setLinksToRender] = useState<LinkItem[] | null>(metadata.link);
 
   const submitProjectDetails = (event: FormEvent) => {
     event.preventDefault();
@@ -64,7 +67,7 @@ export default function ProjectEditor() {
         </Content>
         <Aside>
           <ProjectSideContainer>
-            <DocumentTooltipList links={projectId ? metadata.link : null} />
+            <DocumentTooltipList linksToRender={projectId ? linksToRender : null} setLinksToRender={setLinksToRender} />
 
             <Divider />
 
