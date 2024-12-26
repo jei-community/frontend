@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { ProjectDetails, ProjectList } from '@/types/project';
 
 export const techStacks = Array.from({ length: 20 }, () => ({
@@ -80,8 +82,9 @@ export const mockProjectDetails: ProjectDetails = {
     ],
     link: [
       {
-        url: ['https://example.com'],
-        tag: 'GITLAB',
+        id: uuidv4(),
+        url: [{ id: uuidv4(), url: 'https://example.com' }],
+        tag: 'gitlab',
       },
     ],
   },

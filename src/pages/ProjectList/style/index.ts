@@ -63,4 +63,12 @@ export const S = {
     color: $isClicked ? theme.colors.white : theme.colors.gray[800],
     ...theme.typography.body2,
   })),
+
+  EmptyWrapper: styled.div({
+    position: 'absolute',
+
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  }),
 };
