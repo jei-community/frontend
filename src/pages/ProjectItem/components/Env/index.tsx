@@ -14,7 +14,7 @@ export default function Env({ ref, configuration }: Props) {
 
   return (
     <EnvContainer ref={ref}>
-      <S.EnvBoard>
+      <S.EnvBoard $isEnvOpen={isEnvOpen}>
         {isEnvOpen ? <S.EnvText>{configuration}</S.EnvText> : <S.EnvButton onClick={() => setIsEnvOpen(!isEnvOpen)}>내용 표시</S.EnvButton>}
       </S.EnvBoard>
     </EnvContainer>
