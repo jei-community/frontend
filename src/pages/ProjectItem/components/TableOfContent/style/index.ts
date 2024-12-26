@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const S = {
   TableContainer: styled.div({
     position: 'sticky',
+
     top: '1.6rem',
   }),
 

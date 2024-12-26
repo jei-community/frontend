@@ -2,8 +2,6 @@ import { XIcon } from 'lucide-react';
 import { PropsWithChildren, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import Button from '@/components/Button';
-
 import styled from '@emotion/styled';
 
 interface Props extends PropsWithChildren {
@@ -42,9 +40,9 @@ export default function Modal({ title = '', hasClose = true, children, close, on
             <S.Header>
               <S.Title>{title}</S.Title>
               {hasClose && (
-                <Button variant='outlined' color='neutral' size='icon' onClick={close}>
-                  <XIcon />
-                </Button>
+                <button onClick={close}>
+                  <XIcon width='3.2rem' height='3.2rem' />
+                </button>
               )}
             </S.Header>
             <S.Body>{children}</S.Body>
