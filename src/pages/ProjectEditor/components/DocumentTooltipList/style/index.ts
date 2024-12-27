@@ -9,7 +9,9 @@ export const S = {
 
   Container: styled.div({
     display: 'flex',
+
     gap: '0.8rem',
+    paddingRight: '1.6rem',
   }),
 
   NameFieldWrapper: styled.div({
@@ -19,7 +21,13 @@ export const S = {
   LinkList: styled.ul({
     display: 'flex',
     flexDirection: 'column',
+
+    flex: 1,
+    width: '100%',
+
     gap: '0.8rem',
+
+    overflow: 'scroll',
   }),
 
   EmptyDocumentLinkContainer: styled.div({
@@ -40,4 +48,29 @@ export const S = {
     color: theme.colors.gray[500],
     ...theme.typography.body1,
   })),
+
+  ModalContainer: styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'end',
+
+    width: '100%',
+    height: '100%',
+
+    gap: '2.4rem',
+  }),
+
+  DocumentIconButtonList: styled.ul({
+    display: 'flex',
+
+    gap: '0.8rem',
+  }),
+
+  LinkEditBottom: styled.div({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+
+    width: '100%',
+  }),
 };

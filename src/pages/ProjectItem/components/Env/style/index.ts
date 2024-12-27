@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
 export const S = {
-  EnvBoard: styled.div(({ theme }) => ({
+  EnvBoard: styled.div<{ $isEnvOpen: boolean }>(({ theme, $isEnvOpen }) => ({
     position: 'relative',
 
-    minHeight: '9.6rem',
+    minHeight: $isEnvOpen ? 'fit-content' : '9.6rem',
 
     padding: '0.8rem 1.2rem',
 

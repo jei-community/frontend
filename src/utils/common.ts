@@ -12,3 +12,47 @@ export const throttle = (func: () => void, delay: number) => {
     }, delay);
   }
 };
+
+/**
+ * UTC 기준 날짜 데이터를 받아서 한국 시간대로 변환한 뒤 YYYY. MM. DD 형식의 날짜를 반환
+ * @param utcDate ISO 8601 형식의 UTC 날짜 문자열
+ * @returns YYYY. MM. DD 형식의 문자열
+ */
+export function formatKoreanDate(utcDate: Date): string {
+  // UTC 시간에 9시간 추가
+  const koreanTime = new Date(utcDate.getTime() + 9 * 60 * 60 * 1000);
+
+  // 연도, 월, 일 추출
+  const year = koreanTime.getFullYear();
+  const month = String(koreanTime.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+  const day = String(koreanTime.getDate()).padStart(2, '0');
+
+  // YYYY. MM. DD 형식으로 반환
+  return `${year}. ${month}. ${day}`;
+}
+
+/**
+ * 스크롤을 방지하고 현재 위치를 반환한다.
+ * @returns {number} 현재 스크롤 위치
+ */
+export const preventScroll = () => {
+  const currentScrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.style.top = `-${currentScrollY}px`; // 현재 스크롤 위치
+  document.body.style.overflowY = 'scroll';
+
+  return currentScrollY;
+};
+
+/**
+ * 스크롤을 허용하고, 스크롤 방지 함수에서 반환된 위치로 이동한다.
+ * @param prevScrollY 스크롤 방지 함수에서 반환된 스크롤 위치
+ */
+export const allowScroll = (prevScrollY: number) => {
+  document.body.style.position = '';
+  document.body.style.width = '';
+  document.body.style.top = '';
+  document.body.style.overflowY = '';
+  window.scrollTo(0, prevScrollY);
+};

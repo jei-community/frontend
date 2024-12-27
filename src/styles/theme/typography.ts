@@ -45,14 +45,14 @@ const typography = {
   caption1: {
     fontFamily: "'Pretendard', sans-serif",
     fontWeight: 400,
-    fontSize: '12px',
-    lineHeight: '18px',
+    fontSize: '10px',
+    lineHeight: '12px',
   },
   caption2: {
     fontFamily: "'Pretendard', sans-serif",
     fontWeight: 600,
-    fontSize: '12px',
-    lineHeight: '18px',
+    fontSize: '10px',
+    lineHeight: '12px',
   },
 };
 
