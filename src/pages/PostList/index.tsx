@@ -26,27 +26,24 @@ export default function PostList() {
   };
 
   const dummyData: DummyData = {
-    data: [
-      {
-        user: {
-          id: '3fa85f64-5717-4562-b3fc-2c963f66af11',
-          profileImageUrl: 'https://via.placeholder.com/64',
-          name: '임범규',
-          role: '연구원',
-        },
-        board: {
-          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-          content:
-            '### 이건 h3입니다!\n```jsx\nconst test = () => return Hello World!\n```\n기본 글씨\n## 이건 h2입니다!\n```jsx\nconst test = () => return Hello World!\n```\n기본 글씨\n# 이건 h1입니다!\n```jsx\nconst test = () => return Hello World!\n```\n기본 글씨',
-          date: new Date('2024-12-24T02:52:45.212Z'),
-          title: '마크다운 알아보기',
-        },
+    data: Array.from({ length: 3 }, (_, index) => ({
+      user: {
+        id: `user-${index}`,
+        profileImageUrl: `https://via.placeholder.com/64?text=User${index}`,
+        name: `사용자 ${index}`,
+        role: `역할 ${index}`,
       },
-    ],
+      board: {
+        id: `board-${index}`,
+        content: `### 게시물 내용 ${index}\n기본 글씨입니다.`,
+        date: new Date(),
+        title: `게시물 제목 ${index}`,
+      },
+    })),
     pagination: {
-      totalCount: 0,
-      page: 0,
-      limit: 0,
+      totalCount: 20,
+      page: 1,
+      limit: 5,
       hasNext: true,
     },
   };
