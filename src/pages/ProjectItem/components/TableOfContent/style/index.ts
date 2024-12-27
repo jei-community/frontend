@@ -1,10 +1,12 @@
+import { HEADER_HEIGHT } from '@/components/Layout/constants/style';
+
 import styled from '@emotion/styled';
 
 export const S = {
   TableContainer: styled.div({
     position: 'sticky',
 
-    top: '1.6rem',
+    top: `${1.6 + HEADER_HEIGHT}rem`,
   }),
 
   TableOfContentTitle: styled.h4(({ theme }) => ({

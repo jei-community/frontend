@@ -6,13 +6,20 @@ import styled from '@emotion/styled';
 
 export const S = {
   Header: styled.header(({ theme }) => ({
+    position: 'sticky',
+    top: '0',
+
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
 
     width: '100%',
-    height: `${HEADER_HEIGHT}rem`,
+    minHeight: `${HEADER_HEIGHT}rem`,
 
     borderBottom: `1px solid ${theme.colors.gray[200]}`,
+
+    backgroundColor: theme.colors.white,
+    zIndex: 1,
   })),
 
   Content: styled.div({

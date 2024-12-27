@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import Button from '..';
 
 const meta = {
+  title: 'Button',
   component: Button,
   tags: ['autodocs', '!dev'],
   args: { variant: 'filled', size: 'small', color: 'primary', disabled: false, isLoading: false, onClick: fn() },

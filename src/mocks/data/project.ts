@@ -39,7 +39,7 @@ export const mockProjectList: ProjectList = {
   data: projectItems,
 
   pagination: {
-    totalCount: 1,
+    totalCount: 66,
     page: 1,
     limit: 6,
     hasNext: false,

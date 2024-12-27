@@ -2,6 +2,8 @@ import { XIcon } from 'lucide-react';
 import { PropsWithChildren, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
+import { allowScroll, preventScroll } from '@/utils/common';
+
 import styled from '@emotion/styled';
 
 interface Props extends PropsWithChildren {
@@ -26,9 +28,11 @@ export default function Modal({ title = '', hasClose = true, children, close, on
     };
 
     document.addEventListener('mousedown', detectOutsideClick);
+    const prevScrollY = preventScroll();
 
     return () => {
       document.removeEventListener('mousedown', detectOutsideClick);
+      allowScroll(prevScrollY);
     };
   }, [close, onClose]);
 
@@ -65,6 +69,7 @@ const S = {
     height: '100vh',
 
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    zIndex: 2,
   }),
 
   Content: styled.div({

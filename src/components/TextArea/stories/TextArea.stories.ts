@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import TextArea from '..';
 
 const meta = {
+  title: 'TextArea',
   component: TextArea,
   tags: ['autodocs', '!dev'],
   args: { placeholder: 'TextArea', isError: false, disabled: false, onKeyDown: fn(), onFocus: fn(), onBlur: fn() },
