@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import TextField from '..';
 
 const meta = {
+  title: 'TextField',
   component: TextField,
   tags: ['autodocs', '!dev'],
   args: { heightSize: 'medium', placeholder: 'TextField', isError: false, disabled: false, onKeyDown: fn(), onFocus: fn(), onBlur: fn() },

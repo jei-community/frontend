@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import EmptyContent from '..';
 
 const meta = {
+  title: 'EmptyContent',
   component: EmptyContent,
   tags: ['autodocs', '!dev'],
   args: { size: 'small', children: '담당 중인 일일점검이 없어요' },
