@@ -15,4 +15,10 @@ export const S = {
     flexDirection: 'column',
     gap: '0.8rem',
   }),
+  EmptyWrapper: styled.div({
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  }),
 };
