@@ -1,11 +1,3 @@
-export interface FileInfo {
-  name: string;
-  size: string;
-  type: string;
-  file: File; // 실제 파일 객체 추가
-  imageUrl?: string;
-}
-
 export interface User {
   id: string;
   profileImageUrl: string | null;
@@ -13,16 +5,16 @@ export interface User {
   role: string;
 }
 
-export interface Album {
+export interface Board {
   id: string;
-  content: string;
   date: Date;
-  photos: string[];
+  title: string;
+  content: string;
 }
 
-export interface DataItem {
+export interface PostItem {
   user: User;
-  albums: Album;
+  board: Board;
 }
 
 export interface Pagination {
@@ -33,6 +25,6 @@ export interface Pagination {
 }
 
 export interface DummyData {
-  data: DataItem[];
+  data: PostItem[];
   pagination: Pagination;
 }

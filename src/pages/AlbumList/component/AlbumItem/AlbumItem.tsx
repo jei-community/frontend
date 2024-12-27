@@ -1,25 +1,13 @@
 import { useState } from 'react';
 
-import { formatKoreanDate } from '@/utils/common';
+import { formatRelativeDate } from '@/utils/common';
+
+import { Album, User } from '@/types/album';
 
 import Avatar from '@/components/Avatar';
 import TextArea from '@/components/TextArea';
 
 import { S } from './style';
-
-interface User {
-  id: string;
-  profileImageUrl: string | null;
-  name: string;
-  role: string;
-}
-
-interface Album {
-  id: string;
-  content: string;
-  date: Date;
-  photos: string[];
-}
 
 interface Props {
   user: User;
@@ -52,7 +40,7 @@ export default function AlbumItem({ user, albums }: Props) {
           <Avatar size='small' src={user.profileImageUrl ?? ''} />
           <S.User.Name>{user.name}</S.User.Name>
         </S.User.Wrapper>
-        <S.CreateTime>{formatKoreanDate(albums.date)}</S.CreateTime>
+        <S.CreateTime>{formatRelativeDate(albums.date)}</S.CreateTime>
       </S.Header>
       <S.Content>
         <S.SelectedPhoto src={albums.photos[selectedPhoto]} />
@@ -64,7 +52,10 @@ export default function AlbumItem({ user, albums }: Props) {
       </S.Content>
       <S.Text>{albums.content}</S.Text>
       <S.CommentArea>
-        댓글 3개 {isOpenCommentArea ? <S.ChevronUp onClick={handleOpenComentArea} /> : <S.ChevronDown onClick={handleOpenComentArea} />}
+        댓글 3개
+        <S.TextButton onClick={handleOpenComentArea} color='primary'>
+          {isOpenCommentArea ? '접기' : '펼치기'}
+        </S.TextButton>
       </S.CommentArea>
       {isOpenCommentArea && (
         <S.Comment>
