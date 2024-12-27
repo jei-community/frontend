@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-/** 요청 URL */
-const BASE_URL = 'https://api-dev.everydei.site';
+import { URLS } from '@/constants/api';
 
 /* 구글 로그인 요청 api */
-export const getGoogleLogin = () => {
-  const endPoint = BASE_URL + '/api/v1/auth/social-login/google';
+
+// TODO: 구글로그인, 토큰 재발급, 로그아웃
+export const loginToGoogle = () => {
   const form = document.createElement('form');
   form.setAttribute('method', 'GET'); // Send as a GET request.
-  form.setAttribute('action', endPoint);
+  form.setAttribute('action', URLS.GET_GOOGLE_LOGIN);
 
   const params: { [key: string]: string } = {
-    client_id: 'YOUR_CLIENT_ID',
+    client_id: '901914571110-q1iu7if7639jnapf43d20dgicbhoka77.apps.googleusercontent.com',
     redirect_uri: window.origin,
     response_type: 'token',
     scope: 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/calendar.readonly',
@@ -35,20 +35,19 @@ export const getGoogleLogin = () => {
 
 /** 토큰 재발급 api */
 export const postRefreshToken = async (refreshToken: string) => {
-  const body = {
-    refreshToken: refreshToken,
-  };
-  const response = await axios.post(BASE_URL + '/api/v1/auth/token-refresh', body);
+  const response = await axios.post(URLS.POST_REFRESH_TOKEN, {
+    refreshToken,
+  });
 
   return response.data;
 };
 
 /** 자동로그인 API */
 export const postAutoLogin = async () => {
-  const response = await axios.post(BASE_URL + '/api/v1/auth/auto-login');
+  const response = await axios.post(URLS.POST_AUTO_LOGIN);
 
   return response.data;
 };
 
 /** 로그아웃 API */
-export const postLogout = async () => await axios.post(BASE_URL + '/api/v1/auth/logout');
+export const postLogout = async () => await axios.post(URLS.POST_LOGOUT);
