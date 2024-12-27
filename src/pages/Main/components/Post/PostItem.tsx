@@ -1,3 +1,5 @@
+import { formatRelativeDate } from '@/utils/common';
+
 import { Thumbnail } from '../../assets';
 import { S } from './style';
 
@@ -6,8 +8,9 @@ interface Props {
   position: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
 }
+
 export default function PostItem({ name, position, title, description, date }: Props) {
   return (
     <S.Container>
@@ -18,7 +21,7 @@ export default function PostItem({ name, position, title, description, date }: P
           <S.AuthorInfo.Name>{name}</S.AuthorInfo.Name>
           <S.AuthorInfo.Position>{position}</S.AuthorInfo.Position>
         </S.AuthorInfo.Wrapper>
-        <S.AuthorInfo.Date>{date}</S.AuthorInfo.Date>
+        <S.AuthorInfo.Date>{formatRelativeDate(date)}</S.AuthorInfo.Date>
       </S.MetaWrapper>
       <S.MarkdownWrapper>
         <S.Markdown

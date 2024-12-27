@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { formatKoreanDate } from '@/utils/common';
+import { formatRelativeDate } from '@/utils/common';
 
 import { Album, User } from '@/types/album';
 
@@ -40,7 +40,7 @@ export default function AlbumItem({ user, albums }: Props) {
           <Avatar size='small' src={user.profileImageUrl ?? ''} />
           <S.User.Name>{user.name}</S.User.Name>
         </S.User.Wrapper>
-        <S.CreateTime>{formatKoreanDate(albums.date)}</S.CreateTime>
+        <S.CreateTime>{formatRelativeDate(albums.date)}</S.CreateTime>
       </S.Header>
       <S.Content>
         <S.SelectedPhoto src={albums.photos[selectedPhoto]} />

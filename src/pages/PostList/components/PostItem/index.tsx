@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { formatKoreanDate } from '@/utils/common';
+import { formatRelativeDate } from '@/utils/common';
 
 import { Board, User } from '@/types/post';
 
@@ -43,7 +43,7 @@ export default function PostItem({ user, board }: Props) {
             <S.User.Name>{user.name}</S.User.Name>
             <S.User.Position>{user.role}</S.User.Position>
           </S.User.Wrapper>
-          <S.CreateTime>{formatKoreanDate(board.date)}</S.CreateTime>
+          <S.CreateTime>{formatRelativeDate(board.date)}</S.CreateTime>
         </S.UserContainer>
       </S.Header>
       <S.MarkdownWrapper>
