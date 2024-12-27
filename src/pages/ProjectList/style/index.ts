@@ -36,34 +36,6 @@ export const S = {
     }
   `,
 
-  Pagination: styled.div({
-    display: 'flex',
-    justifyContent: 'center',
-
-    width: '100%',
-
-    gap: '0.8rem',
-  }),
-
-  PaginationNumberList: styled.ul({
-    display: 'flex',
-
-    gap: '0.8rem',
-  }),
-
-  PaginationButton: styled.button({
-    width: '3.2rem',
-    height: '3.2rem',
-
-    border: 'none',
-    backgroundColor: 'transparent',
-  }),
-
-  PaginationNumber: styled.p<{ $isClicked: boolean }>(({ theme, $isClicked }) => ({
-    color: $isClicked ? theme.colors.white : theme.colors.gray[800],
-    ...theme.typography.body2,
-  })),
-
   EmptyWrapper: styled.div({
     position: 'absolute',
 

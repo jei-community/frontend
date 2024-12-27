@@ -1,3 +1,5 @@
+import { HEADER_HEIGHT } from '@/components/Layout/constants/style';
+
 import styled from '@emotion/styled';
 
 export const S = {
@@ -8,7 +10,7 @@ export const S = {
 
   SideStickyContainer: styled.div({
     position: 'sticky',
-    top: '1.6rem',
+    top: `${1.6 + HEADER_HEIGHT}rem`,
 
     display: 'flex',
     flexDirection: 'column',

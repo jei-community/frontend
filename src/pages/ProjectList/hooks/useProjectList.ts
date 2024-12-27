@@ -13,5 +13,5 @@ export const useProjectList = () => {
 
   const updateProjectList = (newProjectList: ProjectListData) => setProjectList(newProjectList);
 
-  return { projectList, updateProjectList, selectProjectAll, selectMyProject };
+  return { projectList, pagination: mockProjectList.pagination, updateProjectList, selectProjectAll, selectMyProject };
 };
