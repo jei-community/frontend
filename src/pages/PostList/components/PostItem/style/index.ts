@@ -2,6 +2,7 @@ import Button from '@/components/Button';
 import TextButton from '@/components/TextButton';
 
 import styled from '@emotion/styled';
+import MDEditor from '@uiw/react-md-editor';
 
 export const S = {
   Container: styled.div(({ theme }) => ({
@@ -16,19 +17,41 @@ export const S = {
 
   Header: styled.div({
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  }),
+
+  TitleWrapper: styled.div({
+    display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
   }),
+  Title: styled.p(({ theme }) => ({
+    ...theme.typography.subtitle,
+    color: theme.colors.gray[900],
+  })),
 
+  UserContainer: styled.div({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '0.8rem 0 1.6rem 0px',
+  }),
   User: {
     Wrapper: styled.div({
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'space-between',
     }),
     Name: styled.span(({ theme }) => ({
       ...theme.typography.body2,
       color: theme.colors.gray[900],
       marginLeft: '0.8rem',
+    })),
+    Position: styled.span(({ theme }) => ({
+      ...theme.typography.body1,
+      color: theme.colors.gray[500],
+      marginLeft: '0.4rem',
     })),
   },
 
@@ -37,30 +60,34 @@ export const S = {
     color: theme.colors.gray[500],
   })),
 
-  Content: styled.div({ display: 'flex', flexDirection: 'column' }),
-  PhotoList: styled.div({ display: 'flex', columnGap: '1.6rem' }),
-  PhotoItem: styled.img<{ $isSelected: boolean }>(({ theme, $isSelected }) => ({
-    width: '9.6rem',
-    height: '9.6rem',
-    borderRadius: '0.8rem',
-    objectFit: 'contain',
-    backgroundColor: theme.colors.primary[300],
-    border: $isSelected ? '3px solid' : 'none',
-    borderColor: $isSelected ? theme.colors.primary[500] : 'none',
-  })),
-
-  SelectedPhoto: styled.img({
-    width: '100%',
-    height: '38.9rem',
-    borderRadius: '0.8rem',
-    objectFit: 'contain',
-    margin: '1.6rem 0',
+  MarkdownWrapper: styled.div({
+    position: 'relative',
   }),
-
-  Text: styled.span(({ theme }) => ({
-    color: theme.colors.gray[800],
-    ...theme.typography.body1,
-    margin: '1.6rem 0',
+  Markdown: styled(MDEditor.Markdown)<{ $isOpen: boolean }>(({ $isOpen }) => ({
+    padding: '1.6rem',
+    marginBottom: '1.6rem',
+    borderRadius: '0.8rem',
+    height: $isOpen ? '100%' : '12rem',
+    overflow: 'hidden',
+    // ::after로 그라데이션 추가
+    '&::after': !$isOpen
+      ? {
+          content: '""',
+          position: 'absolute',
+          bottom: '1.6rem',
+          left: 0,
+          width: '100%',
+          height: '8rem',
+          background: `
+          linear-gradient(
+            to bottom,
+            rgba(240,240,240, 0) 0%,
+            #F0F0F0 80%
+          )
+        `,
+          pointerEvents: 'none', // 이벤트 차단
+        }
+      : undefined,
   })),
 
   Comment: styled.div({
@@ -68,7 +95,6 @@ export const S = {
     width: '100%',
     height: '10rem',
   }),
-
   CommentArea: styled.span(({ theme }) => ({
     ...theme.typography.body2,
     color: theme.colors.gray[700],
