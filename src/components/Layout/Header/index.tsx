@@ -1,13 +1,24 @@
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+
+import { postLogout } from '@/apis/auth';
 
 import { PATH } from '@/constants/path';
 
-import Avatar from '@/components/Layout/Header/assets/avatar.svg';
+import Button from '@/components/Button';
 import Logo from '@/components/Layout/Header/assets/logo.svg';
 import { S } from '@/components/Layout/Header/style';
 
+import { useUserInfoStore } from '@/store';
+
 export default function Header() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { profileImageUrl } = useUserInfoStore();
+
+  const logout = async () => {
+    await postLogout();
+    navigate(PATH.SIGN_IN);
+  };
 
   return (
     <S.Header>
@@ -37,7 +48,12 @@ export default function Header() {
             </S.CustomLink>
           </S.LinkContainer>
         </S.LeftContainer>
-        <img src={Avatar} alt='avatar' />
+        <S.RightContainer>
+          <img src={profileImageUrl} alt='avatar' />
+          <Button size='small' onClick={logout}>
+            로그아웃
+          </Button>
+        </S.RightContainer>
       </S.Content>
     </S.Header>
   );

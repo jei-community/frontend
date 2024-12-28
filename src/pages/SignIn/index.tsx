@@ -14,7 +14,7 @@ import { S } from './style';
  * 로그인 페이지
  */
 export default function SignIn() {
-  if (localStorage.getItem('token')) return <Navigate to={PATH.MAIN} />;
+  if (localStorage.getItem('token')) return <Navigate to={PATH.PRIVATE_ROUTER} />;
 
   return (
     <GlobalStyle>

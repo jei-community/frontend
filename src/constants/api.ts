@@ -1,17 +1,22 @@
-export const BASE_URL = 'https://api-dev.everydei.site';
+export const BASE_URL = 'https://api-dev.everydei.site/api/v1';
 
 export const ENDPOINTS = {
-  GOOGLE_LOGIN: '/api/v1/auth/social-login/google',
-  REFRESH_TOKEN: '/api/v1/auth/token-refresh',
-  AUTO_LOGIN: '/api/v1/auth/auto-login',
-  LOGOUT: '/api/v1/auth/logout',
-  PROJECT_LIST: '/api/v1',
+  GOOGLE_LOGIN: '/social-login/google',
+  TOKEN_REFRESH: '/token-refresh',
+  AUTO_LOGIN: '/auto-login',
+  LOGOUT: '/logout',
+  PROJECT_LIST: '/projects',
 };
 
+const AUTH_PREFIX = '/auth';
+
 export const URLS = {
-  GET_GOOGLE_LOGIN: BASE_URL + ENDPOINTS.GOOGLE_LOGIN,
-  POST_REFRESH_TOKEN: BASE_URL + ENDPOINTS.REFRESH_TOKEN,
-  POST_AUTO_LOGIN: BASE_URL + ENDPOINTS.AUTO_LOGIN,
-  POST_LOGOUT: BASE_URL + ENDPOINTS.LOGOUT,
+  AUTH: {
+    GET_GOOGLE_LOGIN: BASE_URL + AUTH_PREFIX + ENDPOINTS.GOOGLE_LOGIN,
+    POST_TOKEN_REFRESH: BASE_URL + AUTH_PREFIX + ENDPOINTS.TOKEN_REFRESH,
+    POST_AUTO_LOGIN: BASE_URL + AUTH_PREFIX + ENDPOINTS.AUTO_LOGIN,
+    POST_LOGOUT: BASE_URL + AUTH_PREFIX + ENDPOINTS.LOGOUT,
+  },
+
   GET_PROJECT_LIST: BASE_URL + ENDPOINTS.PROJECT_LIST,
 };

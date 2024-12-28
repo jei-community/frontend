@@ -4,14 +4,19 @@ import { URLS } from '@/constants/api';
 
 /* 구글 로그인 요청 api */
 
-// TODO: 구글로그인, 토큰 재발급, 로그아웃
+const instance = axios.create({
+  withCredentials: true,
+});
+
+// TODO: 토큰 재발급, 로그아웃
+
 export const loginToGoogle = () => {
   const form = document.createElement('form');
   form.setAttribute('method', 'GET'); // Send as a GET request.
-  form.setAttribute('action', URLS.GET_GOOGLE_LOGIN);
+  form.setAttribute('action', URLS.AUTH.GET_GOOGLE_LOGIN);
 
   const params: { [key: string]: string } = {
-    client_id: '901914571110-q1iu7if7639jnapf43d20dgicbhoka77.apps.googleusercontent.com',
+    client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
     redirect_uri: window.origin,
     response_type: 'token',
     scope: 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/calendar.readonly',
@@ -34,20 +39,30 @@ export const loginToGoogle = () => {
 };
 
 /** 토큰 재발급 api */
-export const postRefreshToken = async (refreshToken: string) => {
-  const response = await axios.post(URLS.POST_REFRESH_TOKEN, {
-    refreshToken,
-  });
+export const postTokenRefresh = async () => {
+  const response = await instance.post(URLS.AUTH.POST_TOKEN_REFRESH);
 
   return response.data;
 };
 
 /** 자동로그인 API */
 export const postAutoLogin = async () => {
-  const response = await axios.post(URLS.POST_AUTO_LOGIN);
+  const response = await axios.post(URLS.AUTH.POST_AUTO_LOGIN, undefined, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 
   return response.data;
 };
 
 /** 로그아웃 API */
-export const postLogout = async () => await axios.post(URLS.POST_LOGOUT);
+export const postLogout = async () => {
+  await axios.post(URLS.AUTH.POST_LOGOUT, undefined, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+
+  localStorage.removeItem('token');
+};
