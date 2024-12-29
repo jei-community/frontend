@@ -43,7 +43,7 @@ export default function ButtonGroup({ items, onChange, ...p }: Props) {
 
   return (
     <S.ButtonGroupContainer ref={buttonGroupRef}>
-      <S.ButtonBackground $color={checkedItem.color} $offsetX={maxItemWidth * items.indexOf(checkedItem)} />
+      <S.ButtonBackground $color={checkedItem.color} $offsetX={maxItemWidth * items.findIndex((item) => item.value === checkedItem.value)} />
       {items.map((item) => (
         <S.Label key={item.value} $color={item.color} $checked={checkedItem.value === item.value}>
           <S.ActualRadioButton {...p} type='radio' onChange={() => handleChange(item)} name='button-group' />
