@@ -33,6 +33,7 @@ export const S = {
     height: 2.4rem;
     border-radius: 2.4rem;
     z-index: 1;
+    word-break: keep-all;
     cursor: pointer;
     transition: all 0.15s;
 
