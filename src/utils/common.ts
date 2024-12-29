@@ -32,6 +32,35 @@ export function formatKoreanDate(utcDate: Date): string {
 }
 
 /**
+ * 날짜를 포맷팅하는 함수
+ * @param utcDate - 포맷팅할 `Date` 객체
+ * @returns 포맷된 날짜 문자열
+ */
+export function formatRelativeDate(utcDate: Date): string {
+  // UTC 시간을 한국 표준시(KST)로 변환
+  const utc = new Date(utcDate);
+  const now = new Date();
+  const diffMs = now.getTime() - utc.getTime(); // 현재 시간과의 차이 (밀리초)
+  const diffMinutes = Math.floor(diffMs / (1000 * 60)); // 분 단위로 변환
+  const diffHours = Math.floor(diffMinutes / 60); // 시간 단위로 변환
+  const diffDays = Math.floor(diffHours / 24); // 일 단위로 변환
+
+  // 60분 이내
+  if (diffMinutes < 60) return `${diffMinutes}분 전`;
+  // 24시간 이내
+  if (diffHours < 24) return `${diffHours}시간 전`;
+  // 8일 이내
+  if (diffDays < 7) return `${diffDays}일 전`;
+
+  // 8일 이상
+  const year = utc.getFullYear();
+  const month = (utc.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1
+  const day = utc.getDate().toString().padStart(2, '0');
+
+  return `${year}. ${month}. ${day}`;
+}
+
+/**
  * 스크롤을 방지하고 현재 위치를 반환한다.
  * @returns {number} 현재 스크롤 위치
  */
