@@ -32,6 +32,12 @@ export const S = {
     })),
   },
 
+  HeaderRight: styled.div({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.6rem',
+  }),
+
   CreateTime: styled.span(({ theme }) => ({
     ...theme.typography.body3,
     color: theme.colors.gray[500],
@@ -43,10 +49,11 @@ export const S = {
     width: '9.6rem',
     height: '9.6rem',
     borderRadius: '0.8rem',
-    objectFit: 'contain',
+    objectFit: 'cover',
     backgroundColor: theme.colors.primary[300],
-    border: $isSelected ? '3px solid' : 'none',
-    borderColor: $isSelected ? theme.colors.primary[500] : 'none',
+    boxShadow: $isSelected
+      ? `0 0 0 3px ${theme.colors.primary[500]}` // 외부 테두리 추가
+      : 'none',
   })),
 
   SelectedPhoto: styled.img({

@@ -37,6 +37,12 @@ export const S = {
   AsideContainer: styled.div({
     padding: '2.4rem 1.6rem',
     display: 'flex',
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  }),
+  AsideButtonWrapper: styled.div({
+    display: 'flex',
     flexDirection: 'column',
     rowGap: '0.8rem',
   }),

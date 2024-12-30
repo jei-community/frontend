@@ -16,8 +16,8 @@ export interface User {
 export interface Album {
   id: string;
   content: string;
-  date: Date;
-  photos: string[];
+  createdAt: Date;
+  albumImageList: string[];
 }
 
 export interface DataItem {
