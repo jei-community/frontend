@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { formatRelativeDate } from '@/utils/common';
 
@@ -17,6 +18,7 @@ interface Props {
 
 export default function PostItem({ user, board }: Props) {
   const [isOpenPost, setIsOpenPost] = useState(false);
+  const navigate = useNavigate();
 
   /** 댓글, 포스트 오픈 여부 변경 */
   const handleOpenPost = () => {
@@ -28,12 +30,17 @@ export default function PostItem({ user, board }: Props) {
     console.log('댓글 등록');
   };
 
+  /** 포스트 수정 함수 */
+  const handleEdit = () => {
+    navigate('/posts/editor', { state: { id: board.id, title: board.title, content: board.content } });
+  };
+
   return (
     <S.Container>
       <S.Header>
         <S.TitleWrapper>
           <S.Title>{board.title}</S.Title>
-          <Button size='small' color='neutral'>
+          <Button size='small' color='neutral' onClick={handleEdit}>
             수정
           </Button>
         </S.TitleWrapper>

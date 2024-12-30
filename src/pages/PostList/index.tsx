@@ -1,3 +1,4 @@
+// import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
 import { useNavigate } from 'react-router';
 
 import { DummyData } from '@/types/post';
@@ -8,11 +9,25 @@ import Content from '@/components/Content';
 import EmptyContent from '@/components/EmptyContent';
 import Profile from '@/components/Profile';
 
+// import { useSuspenseQuery } from '@tanstack/react-query';
+
 import PostItem from './components/PostItem';
 import { S } from './style';
 
 /** 포스트 목록을 보여주는 페이지 */
 export default function PostList() {
+  // const { data } = useSuspenseQuery({
+  //   queryKey: ['postList'],
+  //   queryFn: () =>
+  //     getBoardList({
+  //       host: 'https://api-dev.everydei.site/api/v1',
+  //       headers: {
+  // Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //       },
+  //     }),
+  // });
+  // console.log(data);
+
   const navigate = useNavigate();
 
   /** 사진 업로드하기 클릭 메서드 */
