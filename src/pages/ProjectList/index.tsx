@@ -9,17 +9,12 @@ import { useProjectList } from '@/pages/ProjectList/hooks';
 import { S } from '@/pages/ProjectList/style';
 
 export default function ProjectList() {
-  const { projectList, pagination, updateProjectList, selectMyProject, selectProjectAll, setPage } = useProjectList();
+  const { projectList, pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword } = useProjectList();
 
   return (
     <Content>
       <S.Container>
-        <ProjectListHeader
-          projectList={projectList}
-          updateProjectList={updateProjectList}
-          selectMyProject={selectMyProject}
-          selectProjectAll={selectProjectAll}
-        />
+        <ProjectListHeader projectList={projectList} isMyProject={isMyProject} toggleIsMyProject={toggleIsMyProject} updateKeyword={updateKeyword} />
 
         <Divider />
 

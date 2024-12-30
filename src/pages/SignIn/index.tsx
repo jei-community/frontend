@@ -4,6 +4,7 @@ import { loginToGoogle } from '@/apis/auth';
 
 import { PATH } from '@/constants/path';
 
+import { useTokenStore } from '@/store';
 import GlobalStyle from '@/styles/GlobalStyle';
 import Logo from '@/styles/assets/images/logo_white.svg';
 
@@ -14,7 +15,8 @@ import { S } from './style';
  * 로그인 페이지
  */
 export default function SignIn() {
-  if (localStorage.getItem('token')) return <Navigate to={PATH.PRIVATE_ROUTER} />;
+  const { token } = useTokenStore();
+  if (token) return <Navigate to={PATH.PRIVATE_ROUTER} />;
 
   return (
     <GlobalStyle>
