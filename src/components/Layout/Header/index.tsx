@@ -4,6 +4,7 @@ import { postLogout } from '@/apis/auth';
 
 import { PATH } from '@/constants/path';
 
+import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import Logo from '@/components/Layout/Header/assets/logo.svg';
 import { S } from '@/components/Layout/Header/style';
@@ -49,7 +50,7 @@ export default function Header() {
           </S.LinkContainer>
         </S.LeftContainer>
         <S.RightContainer>
-          <img src={profileImageUrl} alt='avatar' />
+          <Avatar src={profileImageUrl} />
           <Button size='small' onClick={logout}>
             로그아웃
           </Button>

@@ -1,3 +1,5 @@
+import { PROJECT_RES } from 'everydei-api-dev/lib/dtos/project/project.response.dto';
+
 export type Status = 'LIVE' | 'DEVELOP' | 'STOP';
 export type StatusText = '서비스' | '개발' | '서비스 중단';
 
@@ -45,7 +47,7 @@ export interface Pagination {
   hasNext: boolean;
 }
 
-export type ProjectListData = Omit<ProjectDetails, 'metadata'>[];
+export type ProjectListData = PROJECT_RES.IProjectListDto[];
 
 export interface ProjectList {
   data: ProjectListData;
