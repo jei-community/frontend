@@ -2,23 +2,24 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import { ProjectAsset } from '@/types/project';
 
+import Modal from '@/components/Modal';
+import { useModalStore } from '@/components/Modal/store';
 import TechStack from '@/components/TechStack';
-// import Button from '@/components/Button';
 import TechStackContainer from '@/components/TechStackContainer';
 
 import ButtonWithIcon from '@/pages/ProjectEditor/components/ButtonWithIcon';
-import Modal from '@/pages/ProjectEditor/components/Modal';
 import { S } from '@/pages/ProjectEditor/components/TechStackEditor/style';
 import { TechStacksToRender } from '@/pages/ProjectEditor/type';
 
 interface Props {
-  techStackAssets: ProjectAsset[];
+  techStackAssets: ProjectAsset;
   techStacksToRender: TechStacksToRender;
   setTechStacksToRender: Dispatch<SetStateAction<TechStacksToRender>>;
 }
 
 export default function TechStackEditor({ techStackAssets, techStacksToRender, setTechStacksToRender }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { onOpenModal } = useModalStore();
+  const modalId = 'techStackEditorModal';
   const [position, setPosition] = useState<'frontend' | 'backend' | ''>('');
 
   const toggleTechStackSelection = (url: string) => {
@@ -39,7 +40,7 @@ export default function TechStackEditor({ techStackAssets, techStacksToRender, s
 
   const openTechStackModal = (newPosition: 'frontend' | 'backend') => {
     setPosition(newPosition);
-    setIsOpen(true);
+    onOpenModal(modalId);
   };
 
   return (
@@ -83,8 +84,8 @@ export default function TechStackEditor({ techStackAssets, techStacksToRender, s
         </TechStack>
       </TechStackContainer>
 
-      {isOpen && position && (
-        <Modal title={`기술 스택 (${position.toUpperCase()})`} close={() => setIsOpen(false)}>
+      {position && (
+        <Modal id={modalId} title={`기술 스택 (${position.toUpperCase()})`}>
           <S.ModalTechStackListContainer>
             <S.AllTechStackList>
               {techStackAssets.map(({ url, tag }) => (
@@ -99,11 +100,6 @@ export default function TechStackEditor({ techStackAssets, techStacksToRender, s
                 </li>
               ))}
             </S.AllTechStackList>
-            {/* <S.ConfirmButtonWrapper>
-              <Button size='medium' color='success' onClick={saveChanges}>
-                저장
-              </Button>
-            </S.ConfirmButtonWrapper> */}
           </S.ModalTechStackListContainer>
         </Modal>
       )}

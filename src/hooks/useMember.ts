@@ -1,6 +1,8 @@
 import { getProjectParticipantList } from 'everydei-api-dev/lib/apis/functional/projects/participants';
 
-import { BASE_URL } from '@/constants/api';
+import { getNestiaHeader } from '@/utils/api';
+
+import { QUERY_KEYS } from '@/constants/query';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -10,19 +12,11 @@ interface Props {
 
 export const useMember = ({ projectId }: Props = {}) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['member', projectId],
+    queryKey: [QUERY_KEYS.MEMBER, projectId],
     queryFn: () =>
-      getProjectParticipantList(
-        {
-          host: BASE_URL,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-        {
-          projectId,
-        },
-      ),
+      getProjectParticipantList(getNestiaHeader(), {
+        projectId,
+      }),
   });
 
   return { members: data };

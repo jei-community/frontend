@@ -1,7 +1,9 @@
 import { getProjectDetail } from 'everydei-api-dev/lib/apis/functional/projects/details';
 import { useParams } from 'react-router';
 
-import { BASE_URL } from '@/constants/api';
+import { getNestiaHeader } from '@/utils/api';
+
+import { QUERY_KEYS } from '@/constants/query';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -9,17 +11,8 @@ export const useProjectDetails = () => {
   const { projectId } = useParams();
   const isEdit = Boolean(projectId);
   const { data } = useQuery({
-    queryKey: ['projectDetails', projectId],
-    queryFn: () =>
-      getProjectDetail(
-        {
-          host: BASE_URL,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-        projectId ?? '',
-      ),
+    queryKey: [QUERY_KEYS.PROJECT_DETAILS, projectId],
+    queryFn: () => getProjectDetail(getNestiaHeader(), projectId ?? ''),
     enabled: isEdit,
   });
 

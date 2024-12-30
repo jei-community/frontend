@@ -1,14 +1,14 @@
+import { getProjectAssetList } from 'everydei-api-dev/lib/apis/functional/projects/assets';
 import { getProjectDetail } from 'everydei-api-dev/lib/apis/functional/projects/details';
 import { getProjectParticipantList } from 'everydei-api-dev/lib/apis/functional/projects/participants';
 import { PROJECT_RES } from 'everydei-api-dev/lib/dtos/project/project.response.dto';
-import { ProjectAssetEntity } from 'everydei-api-dev/lib/entities/project/project-asset.entity';
 
 export type Status = 'LIVE' | 'DEVELOP' | 'STOP';
 export type StatusText = '서비스' | '개발' | '서비스 중단';
 
 export type TechStackItem = PROJECT_RES.ProjectDetail.IProjectMetadataInput[] | null | undefined;
 export type LinkItem = PROJECT_RES.ProjectDetail.IProjectMetadataInput[] | null | undefined;
-export type ProjectAsset = Omit<ProjectAssetEntity, 'createdAt' | 'updatedAt' | 'deletedAt'>;
+export type ProjectAsset = getProjectAssetList.Output;
 export type Members = getProjectParticipantList.Output;
 
 export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'sheet';

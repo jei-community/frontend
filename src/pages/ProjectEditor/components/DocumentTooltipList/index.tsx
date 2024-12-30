@@ -10,7 +10,7 @@ import Modal from '@/pages/ProjectEditor/components/Modal';
 import TooltipList from '@/pages/ProjectItem/components/TooltipList';
 
 interface Props {
-  linkAssets: ProjectAsset[];
+  linkAssets: ProjectAsset;
   linksToRender: LinkItem;
   setLinksToRender: Dispatch<SetStateAction<LinkItem>>;
 }

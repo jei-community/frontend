@@ -12,8 +12,7 @@ export const S = {
   ModalTechStackListContainer: styled.div({
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    height: '100%',
+    minWidth: '80rem',
 
     gap: '2.4rem',
   }),

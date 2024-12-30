@@ -16,16 +16,17 @@ interface Props {
   startDate: string | null;
   endDate: string | null;
   members: Members;
+  setStatusToRender: Dispatch<SetStateAction<string>>;
   setMembersToRender: Dispatch<SetStateAction<Members>>;
 }
 
-export default function TitleEditor({ thumbnailImageUrl, title, status, startDate, endDate, members, setMembersToRender }: Props) {
+export default function TitleEditor({ thumbnailImageUrl, title, status, startDate, endDate, members, setMembersToRender, setStatusToRender }: Props) {
   return (
     <S.Container>
       <ThumbnailEditor thumbnailImageUrl={thumbnailImageUrl} />
 
       <S.RightContainer>
-        <ProjectTitleEditor title={title} status={status} />
+        <ProjectTitleEditor title={title} status={status} setStatusToRender={setStatusToRender} />
 
         <Divider />
 

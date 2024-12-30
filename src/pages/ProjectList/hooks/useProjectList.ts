@@ -1,7 +1,9 @@
 import { getProjectList } from 'everydei-api-dev/lib/apis/functional/projects';
 import { useState } from 'react';
 
-import { BASE_URL } from '@/constants/api';
+import { getNestiaHeader } from '@/utils/api';
+
+import { QUERY_KEYS } from '@/constants/query';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -12,17 +14,8 @@ export const useProjectList = () => {
   const query = { isMyProject, page, limit: 6 };
   if (keyword) Object.assign(query, { keyword });
   const { data } = useSuspenseQuery({
-    queryKey: ['projectList', query],
-    queryFn: () =>
-      getProjectList(
-        {
-          host: BASE_URL,
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        },
-        query,
-      ),
+    queryKey: [QUERY_KEYS.PROJECT_LIST, query],
+    queryFn: () => getProjectList(getNestiaHeader(), query),
   });
 
   const toggleIsMyProject = () => setIsMyProject(!isMyProject);
