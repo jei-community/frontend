@@ -4,9 +4,13 @@ import { S } from './style';
 import type { ButtonColor, ButtonSize, ButtonVariant } from './types';
 
 interface Props extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
+  /** 버튼의 모양 */
   variant?: ButtonVariant;
+  /** 버튼의 크기 (높이는 전부 `32px`) */
   size?: ButtonSize;
+  /** 버튼의 색상 */
   color?: ButtonColor;
+  /** 로딩 중인지 여부 */
   isLoading?: boolean;
 }
 

@@ -37,9 +37,7 @@ export default function PrivateRouter() {
     const verifyToken = async () => {
       try {
         if (token) {
-          const {
-            data: { userId, name, role, profileImageUrl },
-          } = await postAutoLogin();
+          const { userId, name, role, profileImageUrl } = await postAutoLogin();
           updateUserInfo({
             userId,
             name,

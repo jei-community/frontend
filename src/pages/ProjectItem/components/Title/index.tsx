@@ -1,7 +1,8 @@
 import { Status } from '@/types/project';
 
-import { STATUS_TEXT } from '@/constants/common';
+import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
 
+import Badge from '@/components/Badge';
 import Divider from '@/components/Divider';
 
 import { S } from '@/pages/ProjectItem/components/Title/style';
@@ -21,9 +22,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
       <S.RightContainer>
         <S.TitleContainer>
           <S.Title>{title}</S.Title>
-          <S.Badge $status={status}>
-            <S.BadgeText>{STATUS_TEXT[status]}</S.BadgeText>
-          </S.Badge>
+          <Badge color={BADGE_STATUS[status]}>{STATUS_TEXT[status]}</Badge>
         </S.TitleContainer>
 
         <Divider />
