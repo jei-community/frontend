@@ -11,12 +11,23 @@ import { useUserInfoStore } from '@/store';
 
 import { S } from './style';
 
+// interface Reply {
+//   id: number;
+//   createdAt: string;
+//   userId: string;
+//   content: string;
+//   profileImageUrl: string | null;
+//   role: string;
+//   childAlbumReplyList: Reply[]; // 대댓글 리스트
+// }
+
 interface Props {
   item: {
     albumImageList: { imageKey: string; imageUrl: string }[];
     content: string;
     createdAt: string;
     id: string;
+    // albumReplyList: Reply[] | null;
     user?: { id: string; name: string; profileImageUrl: string; role: string };
   };
 }
@@ -25,6 +36,7 @@ export default function AlbumItem({ item }: Props) {
   const navigate = useNavigate();
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [isOpenCommentArea, setIsOpenCommentArea] = useState(false);
+  const { userId } = useUserInfoStore();
 
   /** 상단에 보여줄 사진 변경 */
   const handleSelectPhoto = (index: number) => {
@@ -40,8 +52,8 @@ export default function AlbumItem({ item }: Props) {
   const handleRegisterReply = () => {
     console.log('댓글 등록');
   };
-  const { userId } = useUserInfoStore();
 
+  /** 앨범 수정 클릭 핸들러 */
   const handleEdit = () => {
     // FileInfo 타입에 맞추기 위해 변환
     const uploadedFiles = item.albumImageList.map((image) => {

@@ -18,7 +18,7 @@ export default function AlbumList() {
   const navigate = useNavigate();
   const [isMyAlbums, setIsMyAlbums] = useState(false);
 
-  const { userId } = useUserInfoStore(); // 사용자 ID를 가져옵니다.
+  const { userId } = useUserInfoStore();
   const { data } = useSuspenseQuery({
     queryKey: ['albumList'],
     queryFn: () =>

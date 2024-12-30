@@ -96,8 +96,12 @@ export default function AlbumEditor() {
   };
 
   /** 앨범 삭제 함수 */
-  const onDelete = () => {
-    deleteAlbum(connection, state.id);
+  const onDelete = async () => {
+    const isDelete = confirm('정말로 삭제하시겠습니까?');
+    if (isDelete) {
+      await deleteAlbum(connection, state.id);
+      navigate(-1);
+    }
   };
 
   /** 파일이 업로드되면 상태 업데이트 */
