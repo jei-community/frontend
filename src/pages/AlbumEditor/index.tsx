@@ -82,9 +82,19 @@ export default function AlbumEditor() {
         content: text === undefined ? null : text,
       };
 
-      if (pageStatus === 'register') await postAlbum(connection, albumRequestBody);
-      else await putAlbum(connection, state.id, albumRequestBody);
-      navigate(-1);
+      if (pageStatus === 'edit') {
+        const isEdit = confirm('정말로 수정하시겠습니까?');
+        if (isEdit) {
+          await putAlbum(connection, state.id, albumRequestBody);
+          navigate(-1);
+        }
+      } else {
+        const isRegister = confirm('등록하시겠습니까?');
+        if (isRegister) {
+          await postAlbum(connection, albumRequestBody);
+          navigate(-1);
+        }
+      }
     } catch (error) {
       console.error('Failed to register album:', error);
     }
