@@ -1,5 +1,5 @@
 import { ImagePlusIcon, X } from 'lucide-react';
-import { ChangeEvent, DragEvent, HTMLAttributes, useEffect, useState } from 'react';
+import { ChangeEvent, DragEvent, HTMLAttributes, useState } from 'react';
 
 import { FileInfo } from '@/types/album';
 
@@ -95,10 +95,6 @@ export default function ImageUploadBox({ uploadedFiles, onUpload, onDelete, chil
     };
     reader.readAsDataURL(file);
   };
-
-  useEffect(() => {
-    console.log(uploadedFiles);
-  }, [uploadedFiles]);
 
   return (
     <S.Container $isActive={isActive} onDragEnter={handleDragEnter} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
