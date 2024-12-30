@@ -1,9 +1,7 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 
-import { mockProjectConfigurations, mockProjectDetails } from '@/mocks/data/project';
-
-import { LinkItem } from '@/types/project';
+import { LinkItem, Members } from '@/types/project';
 
 import { PATH } from '@/constants/path';
 
@@ -13,22 +11,31 @@ import Divider from '@/components/Divider';
 import ProjectContentContainer from '@/components/ProjectContentContainer';
 import ProjectSideContainer from '@/components/ProjectSideContainer';
 
+import { useMember } from '@/hooks/useMember';
+
+import { useProjectDetails } from '@/hooks';
 import CancelButton from '@/pages/ProjectEditor/components/CancelButton';
 import DeleteButton from '@/pages/ProjectEditor/components/DeleteButton';
 import DescriptionEditor from '@/pages/ProjectEditor/components/DescriptionEditor';
 import DocumentTooltipList from '@/pages/ProjectEditor/components/DocumentTooltipList';
-import EnvEditor from '@/pages/ProjectEditor/components/EnvEditor';
 import SaveButton from '@/pages/ProjectEditor/components/SaveButton';
 import TechStackEditor from '@/pages/ProjectEditor/components/TechStackEditor';
 import TitleEditor from '@/pages/ProjectEditor/components/TitleEditor';
+import { useProjectAssets } from '@/pages/ProjectEditor/hooks';
 import { S } from '@/pages/ProjectEditor/style';
+import { TechStacksToRender } from '@/pages/ProjectEditor/type';
 
 export default function ProjectEditor() {
-  const { thumbnailImageUrl, title, status, startDate, endDate, description, metadata } = mockProjectDetails;
-  const { configuration } = mockProjectConfigurations;
-  const { projectId } = useParams();
+  const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links, isEdit } = useProjectDetails();
+  const { members } = useMember();
+  const [membersToRender, setMembersToRender] = useState<Members>(members);
+  const { techStackAssets, linkAssets } = useProjectAssets();
+  const [techStacksToRender, setTechStacksToRender] = useState<TechStacksToRender>({
+    frontend,
+    backend,
+  });
+  const [linksToRender, setLinksToRender] = useState<LinkItem>(links);
   const navigate = useNavigate();
-  const [linksToRender, setLinksToRender] = useState<LinkItem[] | null>(metadata.link);
 
   const submitProjectDetails = (event: FormEvent) => {
     event.preventDefault();
@@ -51,23 +58,29 @@ export default function ProjectEditor() {
         <Content>
           <ProjectContentContainer>
             <TitleEditor
-              thumbnailImageUrl={projectId ? thumbnailImageUrl : null}
-              title={projectId ? title : null}
-              status={projectId ? status : null}
-              startDate={projectId ? startDate : null}
-              endDate={projectId ? endDate : null}
+              thumbnailImageUrl={thumbnailImageUrl}
+              title={title}
+              status={status}
+              startDate={startDate}
+              endDate={endDate}
+              members={membersToRender}
+              setMembersToRender={setMembersToRender}
             />
 
-            <DescriptionEditor description={projectId ? description : null} />
+            <DescriptionEditor description={description} />
 
-            <TechStackEditor techStacks={projectId ? metadata.tech : null} />
+            <TechStackEditor
+              techStackAssets={techStackAssets}
+              techStacksToRender={techStacksToRender}
+              setTechStacksToRender={setTechStacksToRender}
+            />
 
-            <EnvEditor configuration={projectId ? configuration : null} />
+            {/* <EnvEditor configuration={projectId ? configuration : null} /> */}
           </ProjectContentContainer>
         </Content>
         <Aside>
           <ProjectSideContainer>
-            <DocumentTooltipList linksToRender={projectId ? linksToRender : null} setLinksToRender={setLinksToRender} />
+            <DocumentTooltipList linkAssets={linkAssets} linksToRender={linksToRender} setLinksToRender={setLinksToRender} />
 
             <Divider />
 
@@ -76,7 +89,7 @@ export default function ProjectEditor() {
 
               <CancelButton />
 
-              {projectId && (
+              {isEdit && (
                 <>
                   <Divider />
 

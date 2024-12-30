@@ -1,5 +1,5 @@
 import { getProjectList } from 'everydei-api-dev/lib/apis/functional/projects';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { BASE_URL } from '@/constants/api';
 
@@ -12,7 +12,7 @@ export const useProjectList = () => {
   const query = { isMyProject, page, limit: 6 };
   if (keyword) Object.assign(query, { keyword });
   const { data } = useSuspenseQuery({
-    queryKey: ['projectList', page],
+    queryKey: ['projectList', query],
     queryFn: () =>
       getProjectList(
         {
@@ -29,9 +29,5 @@ export const useProjectList = () => {
 
   const updateKeyword = (keyword: string) => setKeyword(keyword);
 
-  useEffect(() => {
-    updateKeyword('');
-  }, [isMyProject]);
-
-  return { projectList: data.data.items, pagination: data.data.pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword };
+  return { projectList: data.items, pagination: data.pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword };
 };

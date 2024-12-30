@@ -9,11 +9,26 @@ export const S = {
     backgroundColor: theme.colors.gray[100],
   })),
 
+  ModalTechStackListContainer: styled.div({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
+
+    gap: '2.4rem',
+  }),
+
   AllTechStackList: styled.ul({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(6.4rem, 1fr))',
     gap: '0.8rem',
     listStyle: 'none',
+    overflow: 'auto',
+  }),
+
+  ConfirmButtonWrapper: styled.div({
+    height: 'fit-content',
+    alignSelf: 'end',
   }),
 
   TechStackImage: styled.img<{ $isSelected: boolean }>(({ theme, $isSelected }) => ({

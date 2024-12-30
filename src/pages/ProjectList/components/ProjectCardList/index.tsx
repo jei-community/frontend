@@ -13,25 +13,23 @@ interface Props {
 
 export default function ProjectCardList({ projectList }: Props) {
   return (
-    <>
-      <S.ProjectList>
-        {projectList.map(({ id, title, thumbnailImageUrl, description, startDate, endDate, status }) => {
-          return (
-            <li key={id}>
-              <Link to={PATH.PROJECT.RELATIVE.LIST.ITEM.WITH_ID(id)}>
-                <ProjectCard
-                  title={title}
-                  thumbnailImageUrl={thumbnailImageUrl}
-                  description={description}
-                  startDate={startDate}
-                  endDate={endDate}
-                  status={status}
-                />
-              </Link>
-            </li>
-          );
-        })}
-      </S.ProjectList>
-    </>
+    <S.ProjectList>
+      {projectList.map(({ id, title, thumbnailImageUrl, description, startDate, endDate, status }) => {
+        return (
+          <li key={id}>
+            <Link to={PATH.PROJECT.RELATIVE.LIST.ITEM.WITH_ID(id)}>
+              <ProjectCard
+                title={title}
+                thumbnailImageUrl={thumbnailImageUrl}
+                description={description}
+                startDate={startDate}
+                endDate={endDate}
+                status={status}
+              />
+            </Link>
+          </li>
+        );
+      })}
+    </S.ProjectList>
   );
 }
