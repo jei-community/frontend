@@ -4,7 +4,9 @@ import { S } from './style';
 import type { TextButtonColor, TextButtonSize } from './types';
 
 interface Props extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
+  /** 텍스트 버튼의 색상 */
   color?: TextButtonColor;
+  /** 텍스트 버튼의 크기 */
   size?: TextButtonSize;
 }
 

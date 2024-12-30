@@ -7,7 +7,7 @@ export const techStacks = Array.from({ length: 20 }, () => ({
   tag: 'tech stack',
 }));
 
-export const members = Array.from({ length: 20 }, () => ({ name: '전증훈', position: '연구원' }));
+export const members = Array.from({ length: 20 }, () => ({ id: uuidv4(), name: '전증훈', position: '연구원' }));
 
 const projectItems: Omit<ProjectDetails, 'metadata'>[] = Array.from({ length: 6 }, (_, index) => {
   return {

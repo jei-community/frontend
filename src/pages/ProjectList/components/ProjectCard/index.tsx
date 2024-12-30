@@ -1,6 +1,8 @@
 import { Status } from '@/types/project';
 
-import { STATUS_TEXT } from '@/constants/common';
+import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
+
+import Badge from '@/components/Badge';
 
 import { S } from '@/pages/ProjectList/components/ProjectCard/style';
 
@@ -24,9 +26,7 @@ export default function ProjectCard({ title, thumbnailImageUrl, startDate, endDa
           <S.DateText>~</S.DateText>
           <S.DateText>{endDate}</S.DateText>
         </S.DateContainer>
-        <S.ProjectItemTitleStyle.Badge $status={status}>
-          <S.ProjectItemTitleStyle.BadgeText>{STATUS_TEXT[status]}</S.ProjectItemTitleStyle.BadgeText>
-        </S.ProjectItemTitleStyle.Badge>
+        <Badge color={BADGE_STATUS[status]}>{STATUS_TEXT[status]}</Badge>
       </S.ContentContainer>
       <S.Description>{description}</S.Description>
     </S.Container>

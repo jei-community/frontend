@@ -3,6 +3,7 @@ import { PropsWithChildren, TextareaHTMLAttributes } from 'react';
 import { S } from './style';
 
 interface Props extends PropsWithChildren<TextareaHTMLAttributes<HTMLTextAreaElement>> {
+  /** 입력 내용에 에러가 있는지 여부 */
   isError?: boolean;
 }
 

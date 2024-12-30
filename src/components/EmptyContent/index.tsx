@@ -4,6 +4,7 @@ import { S } from './style';
 import type { EmptyContentSize } from './types';
 
 interface Props extends PropsWithChildren {
+  /** 빈 내용 영역의 크기 */
   size?: EmptyContentSize;
 }
 

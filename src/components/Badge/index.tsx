@@ -4,7 +4,9 @@ import { S } from './style';
 import type { BadgeColor, BadgeSize } from './types';
 
 interface Props extends PropsWithChildren {
+  /** 뱃지의 크기 */
   size?: BadgeSize;
+  /** 뱃지의 색상 */
   color?: BadgeColor;
 }
 

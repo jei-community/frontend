@@ -1,6 +1,7 @@
 import { ProjectListData } from '@/types/project';
 
-import ProjectListToggle from '@/pages/ProjectList/components/ProjectListToggle';
+import ToggleSwitch from '@/components/ToggleSwitch';
+
 import Searchbar from '@/pages/ProjectList/components/Searchbar';
 import { useIsMyProjectSelected } from '@/pages/ProjectList/hooks';
 import { S } from '@/pages/ProjectList/style';
@@ -37,8 +38,10 @@ export default function ProjectListHeader({ projectList, updateProjectList, sele
 
   return (
     <S.HeaderContainer>
-      <ProjectListToggle isMyProjectSelected={isMyProjectSelected} toggleIsMyProjectSelected={toggleIsMyProjectSelected} />
-
+      <S.ButtonContainer>
+        <ToggleSwitch checked={isMyProjectSelected} onChange={toggleIsMyProjectSelected} />
+        <S.MyProjectLabelText>{isMyProjectSelected ? '전체 프로젝트 보기' : '내 프로젝트만 보기'}</S.MyProjectLabelText>
+      </S.ButtonContainer>
       <Searchbar isMyProjectSelected={isMyProjectSelected} showSelectedProjects={showSelectedProjects} filterProjects={filterProjects} />
     </S.HeaderContainer>
   );
