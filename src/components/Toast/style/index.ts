@@ -17,6 +17,7 @@ export const S = {
     right: 2%;
     min-width: 32rem;
     height: 4.8rem;
+    z-index: 1000;
     animation:
       popup 0.4s,
       fadeout 0.25s ${({ $duration }) => $duration}s forwards;
