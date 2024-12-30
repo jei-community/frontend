@@ -49,4 +49,11 @@ export const S = {
     color: $isFocused ? theme.colors.primary[500] : theme.colors.gray[800],
     ...theme.typography.body1,
   })),
+
+  RightContainer: styled.div({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '1.2rem',
+  }),
 };

@@ -1,24 +1,17 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 
-import { Pagination as PaginationType, ProjectListData } from '@/types/project';
+import { ProjectListData } from '@/types/project';
 
 import { PATH } from '@/constants/path';
-
-import Divider from '@/components/Divider';
-import Pagination from '@/components/Pagination';
 
 import ProjectCard from '@/pages/ProjectList/components/ProjectCard';
 import { S } from '@/pages/ProjectList/style';
 
 interface Props {
   projectList: ProjectListData;
-  pagination: PaginationType;
 }
 
-export default function ProjectCardList({ projectList, pagination }: Props) {
-  const [currentPage, setCurrentPage] = useState(pagination.page);
-
+export default function ProjectCardList({ projectList }: Props) {
   return (
     <>
       <S.ProjectList>
@@ -39,16 +32,6 @@ export default function ProjectCardList({ projectList, pagination }: Props) {
           );
         })}
       </S.ProjectList>
-
-      <Divider />
-
-      <Pagination
-        totalCount={pagination.totalCount}
-        limit={pagination.limit}
-        page={currentPage}
-        hasNext={currentPage < Math.ceil(pagination.totalCount / pagination.limit)}
-        onPageChange={(newPage) => setCurrentPage(newPage)}
-      />
     </>
   );
 }
