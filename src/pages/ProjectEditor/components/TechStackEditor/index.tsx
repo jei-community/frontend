@@ -14,7 +14,6 @@ interface Props {
 }
 
 export default function TechStackEditor({ techStacks }: Props) {
-  // TODO(증훈): Modal 공통 컴포넌트, hook으로 교체할 예정
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
   const [position, setPosition] = useState<string>('');
@@ -28,12 +27,6 @@ export default function TechStackEditor({ techStacks }: Props) {
     setPosition(position);
     setIsOpen(true);
   };
-
-  // const saveTechStack = () => {
-  //   // TODO(증훈): API 요청
-
-  //   resetTechStackSelections();
-  // };
 
   return (
     <>
