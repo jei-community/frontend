@@ -8,11 +8,18 @@ import type { ModalProps } from './types';
 /**
  * 공통 모달 컴포넌트
  */
-export default function Modal({ title, subtitle, onConfirm, children }: ModalProps) {
-  const { isOpened, onCloseModal } = useModalStore();
+export default function Modal({ id, title, subtitle, onConfirm, onCancel, children }: ModalProps) {
+  const { modalState, onCloseModal } = useModalStore();
+
+  /** 모달 열림 여부 */
+  const isOpened = modalState.isOpened && modalState.id === id;
 
   const handleConfirm = () => {
     onConfirm?.();
+    onCloseModal();
+  };
+  const handleCancel = () => {
+    onCancel?.();
     onCloseModal();
   };
 
@@ -37,9 +44,11 @@ export default function Modal({ title, subtitle, onConfirm, children }: ModalPro
               확인
             </Button>
           )}
-          <Button size='medium' onClick={onCloseModal}>
-            취소
-          </Button>
+          {onCancel && (
+            <Button size='medium' onClick={handleCancel}>
+              취소
+            </Button>
+          )}
         </S.Footer>
       </S.ModalContainer>
     </S.Overlay>,

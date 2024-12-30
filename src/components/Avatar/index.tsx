@@ -2,8 +2,11 @@ import { S } from './style';
 import type { AvatarSize } from './types';
 
 interface Props {
+  /** 아바타 이미지 URL */
   src?: string;
+  /** 아바타의 크기 */
   size?: AvatarSize;
+  /** 클릭 이벤트 핸들러 */
   onClick?: () => void;
 }
 
