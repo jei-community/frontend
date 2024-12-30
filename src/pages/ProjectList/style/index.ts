@@ -20,6 +20,16 @@ export const S = {
     width: '100%',
   }),
 
+  ButtonContainer: styled.div({
+    display: 'flex',
+    gap: '1.2rem',
+  }),
+
+  MyProjectLabelText: styled.label(({ theme }) => ({
+    color: theme.colors.gray[900],
+    ...theme.typography.body1,
+  })),
+
   ProjectList: styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);

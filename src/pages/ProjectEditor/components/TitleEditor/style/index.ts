@@ -15,11 +15,7 @@ export const S = {
     display: 'flex',
     flexDirection: 'column',
 
-    flex: 1,
-
     gap: '1.6rem',
-
-    overflow: 'auto',
   }),
 
   SearchBarContainer: styled.div({
@@ -34,7 +30,13 @@ export const S = {
     display: 'flex',
     flexDirection: 'column',
 
+    width: '36rem',
+    height: '31.2rem',
+
     gap: '0.8rem',
+    paddingRight: '1.6rem',
+
+    overflow: 'auto',
   }),
 
   CheckBoxContainer: styled.div({
@@ -50,6 +52,7 @@ export const S = {
     flex: 1,
 
     gap: '0.8rem',
+    cursor: 'pointer',
   }),
 
   NameText: styled.p(({ theme }) => ({
