@@ -27,9 +27,12 @@ const PROJECT = {
 };
 
 export const PATH = {
-  SIGN_IN: '/sign-in',
   APP: '/',
   MAIN: '/',
+  SWAGGER: '/api',
+  NOT_FOUND: '*',
+  SIGN_IN: '/sign-in',
+  PRIVATE_ROUTER: '/',
   DAILY_CHECK: '/daily-check',
   ARTICLES: '/articles',
   PROJECT,
@@ -43,6 +46,4 @@ export const PATH = {
     LIST: 'list',
     EDITOR: 'editor',
   },
-  SWAGGER: '/api',
-  NOT_FOUND: '*',
 };
