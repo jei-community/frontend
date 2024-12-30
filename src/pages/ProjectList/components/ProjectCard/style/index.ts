@@ -30,6 +30,7 @@ export const S = {
 
   Thumbnail: styled.img(({ theme }) => ({
     width: '100%',
+    height: '31.2rem',
 
     borderRadius: 8,
 

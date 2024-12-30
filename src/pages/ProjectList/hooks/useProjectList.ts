@@ -33,7 +33,5 @@ export const useProjectList = () => {
     updateKeyword('');
   }, [isMyProject]);
 
-  console.log(data, `.items = ${data.items}`);
-
   return { projectList: data.data.items, pagination: data.data.pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword };
 };
