@@ -8,13 +8,12 @@ import { QUERY_KEYS } from '@/constants/query';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCreateProjectMutation = () => {
-  const mutation = useMutation({
+  return useMutation({
     mutationKey: [QUERY_KEYS.PROJECT_LIST],
     mutationFn: async (body: PROJECT_REQ.Body.IPostProject) => {
       return await postProject(getNestiaHeader(), body);
     },
+
     onError: () => alert('프로젝트 생성에 실패했습니다'),
   });
-
-  return mutation;
 };

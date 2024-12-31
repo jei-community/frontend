@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import { formatToYYYYMMDD } from '@/utils/common';
 
@@ -24,12 +24,14 @@ import SaveButton from '@/pages/ProjectEditor/components/SaveButton';
 import TechStackEditor from '@/pages/ProjectEditor/components/TechStackEditor';
 import TitleEditor from '@/pages/ProjectEditor/components/TitleEditor';
 import { useCreateProjectMutation, usePresignedUrlMutation } from '@/pages/ProjectEditor/hooks';
+import { useEditProjectMutation } from '@/pages/ProjectEditor/hooks/useEditProjectMutation';
 import { useUploadS3Mutation } from '@/pages/ProjectEditor/hooks/usePresignedUrlMutation';
 import { useProjectAssets } from '@/pages/ProjectEditor/hooks/useProjectAssets';
 import { S } from '@/pages/ProjectEditor/style';
 import { TechStacksToRender } from '@/pages/ProjectEditor/type';
 
 export default function ProjectEditor() {
+  const { projectId } = useParams();
   const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links, isEdit } = useProjectDetails();
   const [statusToRender, setStatusToRender] = useState<string>(status);
   const { members } = useMember();
@@ -43,7 +45,8 @@ export default function ProjectEditor() {
   const navigate = useNavigate();
   const presignedMutation = usePresignedUrlMutation();
   const uploadS3Mutation = useUploadS3Mutation();
-  const projectMutation = useCreateProjectMutation();
+  const createProjectMutation = useCreateProjectMutation();
+  const editProjectMutation = useEditProjectMutation();
 
   const submitProjectDetails = async (event: FormEvent) => {
     event.preventDefault();
@@ -51,23 +54,32 @@ export default function ProjectEditor() {
     const formData = new FormData(event.target as HTMLFormElement);
     const { title, thumbnail, description, startDate, endDate } = Object.fromEntries(formData.entries());
 
-    // 1. Presigned URL 생성
-    const presignedResult = await presignedMutation.mutateAsync({ type: 'PROJECT_THUMBNAIL' });
+    let thumbnailUrlToSave = thumbnailImageUrl;
 
-    // 2. 파일 S3 업로드
-    await uploadS3Mutation.mutateAsync({
-      url: presignedResult.url,
-      file: thumbnail as File,
-    });
+    // Presigned URL 생성 및 파일 업로드가 필요한 경우
+    if (thumbnail && thumbnail instanceof File && thumbnail.size !== 0 && thumbnail.name !== '') {
+      // 기존 thumbnailImageUrl와 같지 않은 경우에만 Presigned URL 요청
+      const presignedResult = await presignedMutation.mutateAsync({ type: 'PROJECT_THUMBNAIL' });
 
-    // 3. 프로젝트 저장 확인
+      // S3 업로드
+      await uploadS3Mutation.mutateAsync({
+        url: presignedResult.url,
+        file: thumbnail,
+      });
+
+      // 새로 저장할 썸네일 URL 설정
+      thumbnailUrlToSave = presignedResult.fileName;
+    }
+
+    // 저장 확인
     if (confirm('저장하시겠습니까?')) {
-      // 4. 프로젝트 생성 요청
       const filteredParticipantList = membersToRender.filter((member) => member.isJoin).map((member) => member.id);
-      const projectResult = await projectMutation.mutateAsync({
+
+      // 최종 프로젝트 데이터 생성
+      const newProjectDetail = {
         title,
         description,
-        thumbnailImageUrl: presignedResult.fileName ?? null,
+        thumbnailImageUrl: thumbnailUrlToSave ?? null,
         participantList: filteredParticipantList.length ? filteredParticipantList : null,
         metadata: {
           frontend: techStacksToRender.frontend?.map(({ id }) => id) ?? null,
@@ -77,10 +89,19 @@ export default function ProjectEditor() {
         status: statusToRender ?? status ?? 'LIVE',
         startDate: formatToYYYYMMDD(new Date(String(startDate))),
         endDate: formatToYYYYMMDD(new Date(String(endDate))),
-      });
+      };
 
-      // 5. 네비게이션
-      navigate(projectResult ? PATH.PROJECT.ABSOLUTE.LIST.ITEM.WITH_ID(projectResult.newProjectId) : PATH.PROJECT.ABSOLUTE.LIST.INDEX);
+      let newProjectId = projectId;
+
+      if (isEdit) {
+        await editProjectMutation.mutateAsync(newProjectDetail);
+      } else {
+        const projectResult = await createProjectMutation.mutateAsync(newProjectDetail);
+        newProjectId = projectResult.newProjectId;
+      }
+
+      // 네비게이션 이동
+      navigate(newProjectId ? PATH.PROJECT.ABSOLUTE.LIST.ITEM.WITH_ID(newProjectId) : PATH.PROJECT.ABSOLUTE.LIST.INDEX);
     }
   };
 
@@ -118,7 +139,7 @@ export default function ProjectEditor() {
             <Divider />
 
             <S.SideStickyContainer>
-              <SaveButton />
+              <SaveButton isEdit={isEdit} />
 
               <CancelButton />
 

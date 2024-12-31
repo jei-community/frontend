@@ -62,7 +62,7 @@ export default function MemberAndDateEditor({ startDate, endDate, members, setMe
           {parsedMembers.map(({ id, profileImageUrl }) => {
             return (
               <li key={id}>
-                <Avatar src={profileImageUrl} />
+                <Avatar src={profileImageUrl} size='small' />
               </li>
             );
           })}
@@ -93,7 +93,7 @@ export default function MemberAndDateEditor({ startDate, endDate, members, setMe
                 <li key={id}>
                   <S.CheckBoxContainer>
                     <S.LabelContainer htmlFor={id}>
-                      <S.Avatar src={profileImageUrl} />
+                      <Avatar src={profileImageUrl} size='small' />
                       <S.NameText>{name}</S.NameText>
                       <S.PositionText>{role}</S.PositionText>
                     </S.LabelContainer>

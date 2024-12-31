@@ -1,9 +1,13 @@
 import Button from '@/components/Button';
 
-export default function SaveButton() {
+interface Props {
+  isEdit: boolean;
+}
+
+export default function SaveButton({ isEdit }: Props) {
   return (
-    <Button color='success' type='submit'>
-      저장
+    <Button color={isEdit ? 'warning' : 'success'} type='submit'>
+      {isEdit ? '수정' : '저장'}
     </Button>
   );
 }
