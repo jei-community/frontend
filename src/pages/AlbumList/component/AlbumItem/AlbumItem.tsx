@@ -3,6 +3,7 @@ import { deleteAlbumReply, postAlbumReply } from 'everydei-api-dev/lib/apis/func
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import { getNestiaHeader } from '@/utils/api';
 import { formatRelativeDate } from '@/utils/common';
 
 import Avatar from '@/components/Avatar';
@@ -25,13 +26,8 @@ export default function AlbumItem({ item }: Props) {
   const [comment, setComment] = useState<string>('');
   const { userId } = useUserInfoStore();
 
-  // API 헤더
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** API 헤더 */
+  const connection = getNestiaHeader();
 
   /** 상단에 보여줄 사진 변경 */
   const handleSelectPhoto = (index: number) => {

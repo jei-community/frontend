@@ -3,6 +3,7 @@ import { deleteBoardReply, postBoardReply } from 'everydei-api-dev/lib/apis/func
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import { getNestiaHeader } from '@/utils/api';
 import { formatRelativeDate } from '@/utils/common';
 
 import Avatar from '@/components/Avatar';
@@ -25,13 +26,8 @@ export default function PostItem({ item }: Props) {
 
   const { userId } = useUserInfoStore();
 
-  // API 헤더
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** API 헤더 */
+  const connection = getNestiaHeader();
 
   /** 댓글, 포스트 오픈 여부 변경 */
   const handleOpenPost = () => {
