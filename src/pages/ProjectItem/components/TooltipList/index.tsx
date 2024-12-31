@@ -2,14 +2,12 @@ import { RefObject } from 'react';
 
 import { LinkItem } from '@/types/project';
 
-import { ICONS } from '@/constants/link';
-
 import DraggableScroller from '@/components/DraggableScroll';
 
 import { S } from '@/pages/ProjectItem/components/TooltipList/style';
 
 interface Props {
-  links: LinkItem[];
+  links: LinkItem;
   ref?: RefObject<HTMLUListElement | null>;
 }
 
@@ -17,11 +15,11 @@ export default function TooltipList({ links, ref }: Props) {
   return (
     <S.TooltipList ref={ref}>
       <DraggableScroller>
-        {links.map((link) => {
+        {links?.map(({ id, url, tag }) => {
           return (
-            <li key={link.tag}>
+            <li key={id}>
               <S.TooltipContainer>
-                <S.TooltipImage src={ICONS[link.tag]} alt={`${link.tag} 이미지`} />
+                <S.TooltipImage src={url} alt={`${tag} 이미지`} />
               </S.TooltipContainer>
             </li>
           );
