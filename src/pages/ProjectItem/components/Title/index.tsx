@@ -1,3 +1,5 @@
+import { useParams } from 'react-router';
+
 import { Status } from '@/types/project';
 
 import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
@@ -18,7 +20,8 @@ interface Props {
 }
 
 export default function Title({ thumbnailImageUrl, title, status, startDate, endDate }: Props) {
-  const { members } = useMember();
+  const { projectId } = useParams();
+  const { members } = useMember({ projectId });
   const parsedMembers = members.filter((member) => member.isJoin);
 
   return (
