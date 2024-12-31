@@ -183,6 +183,7 @@ const BaseStyle = css`
   }
 
   a {
+    display: block;
     text-decoration: none;
   }
 
