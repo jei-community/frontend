@@ -17,6 +17,15 @@ export const S = {
     borderRadius: 8,
   }),
 
+  EmptyThumbnail: styled.div(({ theme }) => ({
+    width: '10rem',
+    height: '10rem',
+
+    borderRadius: 8,
+
+    backgroundColor: theme.colors.gray[200],
+  })),
+
   RightContainer: styled.div({
     display: 'flex',
     flexDirection: 'column',

@@ -63,6 +63,7 @@ export const S = {
       width: '18.8rem',
       height: '3.9rem',
       gap: '1.9rem',
+      cursor: 'pointer',
     }),
     /** 구글로그인 버튼 로고 스타일 */
     Logo: styled.img({

@@ -1,17 +1,26 @@
+import { getProjectList } from 'everydei-api-dev/lib/apis/functional/projects';
 import { useState } from 'react';
 
-import { mockMyProjectList, mockProjectList } from '@/mocks/data/project';
+import { getNestiaHeader } from '@/utils/api';
 
-import { ProjectListData } from '@/types/project';
+import { QUERY_KEYS } from '@/constants/query';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const useProjectList = () => {
-  const [projectList, setProjectList] = useState(mockProjectList.data);
+  const [isMyProject, setIsMyProject] = useState(false);
+  const [keyword, setKeyword] = useState('');
+  const [page, setPage] = useState(1);
+  const query = { isMyProject, page, limit: 6 };
+  if (keyword) Object.assign(query, { keyword });
+  const { data } = useSuspenseQuery({
+    queryKey: [QUERY_KEYS.PROJECT_LIST, query],
+    queryFn: () => getProjectList(getNestiaHeader(), query),
+  });
 
-  const selectProjectAll = () => setProjectList(mockProjectList.data);
+  const toggleIsMyProject = () => setIsMyProject(!isMyProject);
 
-  const selectMyProject = () => setProjectList(mockMyProjectList.data);
+  const updateKeyword = (keyword: string) => setKeyword(keyword);
 
-  const updateProjectList = (newProjectList: ProjectListData) => setProjectList(newProjectList);
-
-  return { projectList, pagination: mockProjectList.pagination, updateProjectList, selectProjectAll, selectMyProject };
+  return { projectList: data.items, pagination: data.pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword };
 };

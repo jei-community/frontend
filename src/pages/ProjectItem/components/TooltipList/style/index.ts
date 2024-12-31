@@ -11,6 +11,8 @@ export const S = {
   TooltipContainer: styled.div({}),
 
   TooltipImage: styled.img({
+    width: '3.2rem',
+    height: '3.2rem',
     maxWidth: '3.2rem',
     maxHeight: '3.2rem',
   }),

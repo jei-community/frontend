@@ -85,3 +85,12 @@ export const allowScroll = (prevScrollY: number) => {
   document.body.style.overflowY = '';
   window.scrollTo(0, prevScrollY);
 };
+
+export const formatToYYYYMMDD = (dateString: string | Date) => {
+  const date = new Date(dateString);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+
+  return `${yyyy}-${mm}-${dd}`;
+};

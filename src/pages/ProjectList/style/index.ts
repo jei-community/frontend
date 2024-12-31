@@ -20,13 +20,19 @@ export const S = {
     width: '100%',
   }),
 
+  ToggleContainer: styled.div({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.2rem',
+  }),
+
   ButtonContainer: styled.div({
     display: 'flex',
     gap: '1.2rem',
   }),
 
-  MyProjectLabelText: styled.label(({ theme }) => ({
-    color: theme.colors.gray[900],
+  MyProjectLabelText: styled.label<{ $isMyProject: boolean }>(({ theme, $isMyProject }) => ({
+    color: $isMyProject ? theme.colors.gray[900] : theme.colors.gray[300],
     ...theme.typography.body1,
   })),
 

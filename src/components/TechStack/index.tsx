@@ -1,12 +1,12 @@
 import { PropsWithChildren } from 'react';
 
-import { TechStackData } from '@/types/project';
+import { TechStackItem } from '@/types/project';
 
 import DraggableScroller from '@/components/DraggableScroll';
 import { S } from '@/components/TechStack/style';
 
 interface Props {
-  techStacks: TechStackData[];
+  techStacks?: TechStackItem | null;
   display?: 'flex' | 'grid';
 }
 
@@ -24,9 +24,9 @@ function List({ techStacks, display = 'flex' }: Props) {
       {display === 'flex' ? (
         <S.TechStackImgFlexList>
           <DraggableScroller>
-            {techStacks.map(({ url, tag }, index) => {
+            {techStacks?.map(({ url, tag }) => {
               return (
-                <li key={index}>
+                <li key={url}>
                   <S.TechStackImg src={url} alt={`${tag} 이미지`} />
                 </li>
               );
@@ -35,9 +35,9 @@ function List({ techStacks, display = 'flex' }: Props) {
         </S.TechStackImgFlexList>
       ) : (
         <S.TechStackImgGridList>
-          {techStacks.map(({ url, tag }, index) => {
+          {techStacks?.map(({ url, tag }) => {
             return (
-              <li key={index}>
+              <li key={url}>
                 <S.TechStackImg src={url} alt={`${tag} 이미지`} />
               </li>
             );
