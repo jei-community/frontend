@@ -6,33 +6,5 @@ export interface FileInfo {
   imageUrl?: string;
 }
 
-export interface User {
-  id: string;
-  profileImageUrl: string | null;
-  name: string;
-  role: string;
-}
-
-export interface Album {
-  id: string;
-  content: string;
-  createdAt: Date;
-  albumImageList: string[];
-}
-
-export interface DataItem {
-  user: User;
-  albums: Album;
-}
-
-export interface Pagination {
-  totalCount: number;
-  page: number;
-  limit: number;
-  hasNext: boolean;
-}
-
-export interface DummyData {
-  data: DataItem[];
-  pagination: Pagination;
-}
+export type Role = 'USER' | 'ADMIN';
+export type RoleText = '연구원' | '선임 연구원';

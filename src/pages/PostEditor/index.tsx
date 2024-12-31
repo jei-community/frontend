@@ -2,6 +2,8 @@ import { deleteBoard, postBoard, putBoard } from 'everydei-api-dev/lib/apis/func
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { getNestiaHeader } from '@/utils/api';
+
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
@@ -24,12 +26,8 @@ export default function PostEditor() {
   const [title, setTitle] = useState<string>(state?.title ?? '');
   const [value, setValue] = useState<string | undefined>(state?.content ?? '');
 
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** API 헤더 */
+  const connection = getNestiaHeader();
 
   /** 제목 입력값이 변경될 때 호출되는 핸들러 */
   const handleChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

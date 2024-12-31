@@ -1,9 +1,12 @@
 import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
-import { deleteBoardReply, postBoardReply } from 'everydei-api-dev/lib/apis/functional/boards/replies';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { formatRelativeDate } from '@/utils/common';
+
+import { Role } from '@/types/album';
+
+import { ROLE_TEXT } from '@/constants/common';
 
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
@@ -11,6 +14,7 @@ import TextArea from '@/components/TextArea';
 
 import { useUserInfoStore } from '@/store';
 
+import { useDeleteBoardReplyMutation, usePostBoardReplyMutation } from '../../hooks';
 import { S } from './style';
 
 type BoardItem = getBoardList.Output[number];
@@ -25,13 +29,11 @@ export default function PostItem({ item }: Props) {
 
   const { userId } = useUserInfoStore();
 
-  // API 헤더
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** 댓글 작성 mutate */
+  const postBoardReplyMutation = usePostBoardReplyMutation();
+
+  /** 댓글 삭제 mutate */
+  const deleteReplyMutation = useDeleteBoardReplyMutation();
 
   /** 댓글, 포스트 오픈 여부 변경 */
   const handleOpenPost = () => {
@@ -41,12 +43,15 @@ export default function PostItem({ item }: Props) {
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
     const postBoardReplyBody = { content: comment, boardReplyId: null };
-    postBoardReply(connection, item.id, postBoardReplyBody);
+    postBoardReplyMutation.mutate({ itemId: item.id, body: postBoardReplyBody });
+    setComment('');
   };
 
   /** 댓글 삭제 함수 */
   const handleDeleteReply = (replyId: number) => {
-    deleteBoardReply(connection, item.id, replyId);
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deleteReplyMutation.mutate({ boardId: item.id, replyId: replyId });
+    }
   };
 
   /** 포스트 수정 함수 */
@@ -65,9 +70,9 @@ export default function PostItem({ item }: Props) {
         </S.TitleWrapper>
         <S.UserContainer>
           <S.User.Wrapper>
-            <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
-            <S.User.Name>{item.user?.name}</S.User.Name>
-            <S.User.Position>{item.user?.role}</S.User.Position>
+            <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+            <S.User.Name>{item.user.name}</S.User.Name>
+            <S.User.Position>{ROLE_TEXT[item.user.role as Role]}</S.User.Position>
           </S.User.Wrapper>
           <S.CreateTime>{formatRelativeDate(new Date(item.createdAt))}</S.CreateTime>
         </S.UserContainer>
@@ -94,9 +99,9 @@ export default function PostItem({ item }: Props) {
           {item.boardReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
-                <S.Comment.UserName>{item.user?.name}</S.Comment.UserName>
-                <S.Comment.UserPosition>{item.user?.role}</S.Comment.UserPosition>
+                <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{ROLE_TEXT[item.user.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (
                   <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
                     삭제
