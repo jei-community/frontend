@@ -5,6 +5,7 @@ export const QUERY_KEYS = {
   MEMBER: 'member',
   PRESIGNED_URL: 'presignedUrl',
 
+  MAIN: 'main',
   BOARD_LIST: 'boardList',
   ALBUM_LIST: 'albumList',
 };

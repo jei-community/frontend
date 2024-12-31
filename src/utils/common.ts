@@ -45,6 +45,8 @@ export function formatRelativeDate(utcDate: Date): string {
   const diffHours = Math.floor(diffMinutes / 60); // 시간 단위로 변환
   const diffDays = Math.floor(diffHours / 24); // 일 단위로 변환
 
+  // 1분 이내
+  if (diffMinutes < 1) return '방금 전';
   // 60분 이내
   if (diffMinutes < 60) return `${diffMinutes}분 전`;
   // 24시간 이내

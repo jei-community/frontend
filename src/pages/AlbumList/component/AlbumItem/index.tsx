@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router';
 
 import { formatRelativeDate } from '@/utils/common';
 
+import { Role } from '@/types/album';
+
+import { ROLE_TEXT } from '@/constants/common';
+
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import TextArea from '@/components/TextArea';
@@ -122,7 +126,7 @@ export default function AlbumItem({ item }: Props) {
               <S.Comment.UserWrapper>
                 <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
                 <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
-                <S.Comment.UserPosition>{item.user.role}</S.Comment.UserPosition>
+                <S.Comment.UserPosition>{ROLE_TEXT[item.user.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (
                   <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
                     삭제
