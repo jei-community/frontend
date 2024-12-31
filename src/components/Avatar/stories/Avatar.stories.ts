@@ -31,6 +31,7 @@ export const LargeUnclickableAvatar: Story = {
 
 export const SmallDefaultAvatar: Story = {
   args: {
+    src: 'https://i.pravatar.cc/64',
     size: 'small',
     onClick: fn(),
   },
