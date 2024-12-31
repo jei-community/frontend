@@ -40,7 +40,7 @@ export default function Searchbar({ updateKeyword }: Props) {
           value={keyword}
         />
       </S.TextFieldWrapper>
-      <Button onClick={searchProject}>
+      <Button size='icon' onClick={searchProject}>
         <SearchIcon />
       </Button>
       <Button size='large' onClick={() => navigate(PATH.PROJECT.ABSOLUTE.CREATE)}>

@@ -16,11 +16,3 @@ export const URLS = {
     POST_LOGOUT: BASE_URL + AUTH_PREFIX + ENDPOINTS.LOGOUT,
   },
 };
-
-// 네스티아 용
-export const CONNECTION = {
-  host: BASE_URL,
-  header: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  },
-};

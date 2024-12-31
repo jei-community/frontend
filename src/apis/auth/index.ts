@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { getHeader } from '@/utils/api';
+
 import { URLS } from '@/constants/api';
 
 /* 구글 로그인 요청 api */
@@ -48,9 +50,7 @@ export const postTokenRefresh = async () => {
 /** 자동로그인 API */
 export const postAutoLogin = async () => {
   const response = await axios.post(URLS.AUTH.POST_AUTO_LOGIN, undefined, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
+    headers: getHeader(),
   });
 
   return response.data;
@@ -59,9 +59,7 @@ export const postAutoLogin = async () => {
 /** 로그아웃 API */
 export const postLogout = async () => {
   await axios.post(URLS.AUTH.POST_LOGOUT, undefined, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
+    headers: getHeader(),
   });
 
   localStorage.removeItem('token');

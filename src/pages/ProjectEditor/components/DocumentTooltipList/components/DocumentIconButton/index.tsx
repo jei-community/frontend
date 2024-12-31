@@ -1,18 +1,16 @@
-import { LinkType } from '@/types/project';
-
 import { FigmaAdder, GitlabAdder, PresentationAdder, SpreadsheetAdder, XdAdder } from '@/pages/ProjectEditor/components/DocumentTooltipList/assets';
 
 interface Props {
-  tag: LinkType;
-  addNewUrlToLinksToRender: (tag: LinkType) => void;
+  tag: string;
+  addNewUrlToLinksToRender: (tag: string) => void;
 }
 
 export default function DocumentIconButton({ tag, addNewUrlToLinksToRender }: Props) {
-  const ICON = {
+  const ICON: Record<string, string> = {
     gitlab: GitlabAdder,
     figma: FigmaAdder,
     presentation: PresentationAdder,
-    spreadsheet: SpreadsheetAdder,
+    sheets: SpreadsheetAdder,
     xd: XdAdder,
   };
 
