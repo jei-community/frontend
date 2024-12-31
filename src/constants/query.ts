@@ -4,4 +4,7 @@ export const QUERY_KEYS = {
   PROJECT_ASSETS: 'projectAssets',
   MEMBER: 'member',
   PRESIGNED_URL: 'presignedUrl',
+
+  BOARD_LIST: 'boardList',
+  ALBUM_LIST: 'albumList',
 };
