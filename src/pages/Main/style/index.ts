@@ -27,9 +27,11 @@ export const S = {
 
   MyProject: {
     Wrapper: styled.div({
+      position: 'relative',
       display: 'flex',
       columnGap: '1.6rem',
-      maxWidth: '100%',
+      width: '100%',
+      minHeight: '16rem',
     }),
     Item: styled.div(({ theme }) => ({
       flex: '0 0 auto',
@@ -66,5 +68,13 @@ export const S = {
     height: '1px',
     backgroundColor: theme.colors.gray[200], // 구분선 색상 설정
     margin: '2.4rem 0', // 구분선의 위/아래 여백
+  })),
+
+  EmptyWrapper: styled.div<{ $minHeight: number }>(({ $minHeight }) => ({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: `${$minHeight}rem`, // $minHeight를 동적으로 적용
   })),
 };

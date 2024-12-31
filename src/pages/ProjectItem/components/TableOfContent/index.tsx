@@ -6,22 +6,19 @@ interface FocusedScroll {
   link: boolean;
   description: boolean;
   techStack: boolean;
-  env: boolean;
 }
 
 interface Props {
   linkRef: RefObject<HTMLUListElement | null>;
   descriptionRef: RefObject<HTMLHeadingElement | null>;
   techStackRef: RefObject<HTMLHeadingElement | null>;
-  envRef: RefObject<HTMLHeadingElement | null>;
 }
 
-export default function TableOfContent({ linkRef, descriptionRef, techStackRef, envRef }: Props) {
+export default function TableOfContent({ linkRef, descriptionRef, techStackRef }: Props) {
   const [focusedScroll, setFocusedScroll] = useState<FocusedScroll>({
     link: true,
     description: false,
     techStack: false,
-    env: false,
   });
 
   const handleScrollTo = (ref: RefObject<HTMLElement | null>, to: 'link' | 'description' | 'techStack' | 'env') => {
@@ -33,7 +30,6 @@ export default function TableOfContent({ linkRef, descriptionRef, techStackRef, 
       link: to === 'link',
       description: to === 'description',
       techStack: to === 'techStack',
-      env: to === 'env',
     });
   };
 
@@ -49,9 +45,6 @@ export default function TableOfContent({ linkRef, descriptionRef, techStackRef, 
         </S.TableOfContentButton>
         <S.TableOfContentButton onClick={() => handleScrollTo(techStackRef, 'techStack')}>
           <S.TableOfContentText $isFocus={focusedScroll.techStack}>기술 스택</S.TableOfContentText>
-        </S.TableOfContentButton>
-        <S.TableOfContentButton onClick={() => handleScrollTo(envRef, 'env')}>
-          <S.TableOfContentText $isFocus={focusedScroll.env}>환경 번수</S.TableOfContentText>
         </S.TableOfContentButton>
       </S.TableOfContentContainer>
     </S.TableContainer>

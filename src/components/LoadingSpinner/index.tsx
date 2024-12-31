@@ -2,6 +2,7 @@ import { S } from './style';
 import type { LoadingSpinnerSize } from './types';
 
 interface Props {
+  /** 로딩 스피너의 크기 */
   size?: LoadingSpinnerSize;
 }
 

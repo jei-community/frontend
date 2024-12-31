@@ -1,68 +1,106 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { TechStackItem } from '@/types/project';
+import { ProjectAsset } from '@/types/project';
 
+import Modal from '@/components/Modal';
+import { useModalStore } from '@/components/Modal/store';
+import TechStack from '@/components/TechStack';
 import TechStackContainer from '@/components/TechStackContainer';
 
-import Modal from '@/pages/ProjectEditor/components/Modal';
-import DefaultTechStacks from '@/pages/ProjectEditor/components/TechStackEditor/components/DefaultTechStacks';
-import EditableTechStacks from '@/pages/ProjectEditor/components/TechStackEditor/components/EditableTechStacks';
+import ButtonWithIcon from '@/pages/ProjectEditor/components/ButtonWithIcon';
 import { S } from '@/pages/ProjectEditor/components/TechStackEditor/style';
+import { TechStacksToRender } from '@/pages/ProjectEditor/type';
 
 interface Props {
-  techStacks: TechStackItem[] | null;
+  techStackAssets: ProjectAsset;
+  techStacksToRender: TechStacksToRender;
+  setTechStacksToRender: Dispatch<SetStateAction<TechStacksToRender>>;
 }
 
-export default function TechStackEditor({ techStacks }: Props) {
-  // TODO(증훈): Modal 공통 컴포넌트, hook으로 교체할 예정
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedTechStacks, setSelectedTechStacks] = useState<string[]>([]);
-  const [position, setPosition] = useState<string>('');
+export default function TechStackEditor({ techStackAssets, techStacksToRender, setTechStacksToRender }: Props) {
+  const { onOpenModal } = useModalStore();
+  const modalId = 'techStackEditorModal';
+  const [position, setPosition] = useState<'frontend' | 'backend' | ''>('');
 
-  const toggleTechStackSelection = (id: string | number) => {
-    if (selectedTechStacks.includes(String(id))) setSelectedTechStacks(selectedTechStacks.filter((techStackId) => techStackId !== String(id)));
-    else setSelectedTechStacks([...selectedTechStacks, String(id)]);
+  const toggleTechStackSelection = (url: string) => {
+    if (!position) return;
+
+    const selectedTechStacks = techStacksToRender[position] || [];
+    const isSelected = selectedTechStacks.some((stack) => stack.url === url);
+
+    const updatedTechStacks = isSelected
+      ? selectedTechStacks.filter((stack) => stack.url !== url) // 선택 해제
+      : [...selectedTechStacks, techStackAssets.find((asset) => asset.url === url)!]; // 선택 추가
+
+    setTechStacksToRender({
+      ...techStacksToRender,
+      [position]: updatedTechStacks,
+    });
   };
 
-  const openTechStackModal = (position: string) => {
-    setPosition(position);
-    setIsOpen(true);
+  const openTechStackModal = (newPosition: 'frontend' | 'backend') => {
+    setPosition(newPosition);
+    onOpenModal(modalId);
   };
-
-  // const saveTechStack = () => {
-  //   // TODO(증훈): API 요청
-
-  //   resetTechStackSelections();
-  // };
 
   return (
     <>
       <TechStackContainer>
-        {techStacks ? (
-          <EditableTechStacks techStacks={techStacks} openTechStackModal={openTechStackModal} />
-        ) : (
-          <DefaultTechStacks openTechStackModal={openTechStackModal} />
-        )}
+        <TechStack>
+          {techStacksToRender.frontend ? (
+            <>
+              <TechStack.Title>FRONTEND</TechStack.Title>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('frontend')}>
+                <TechStack.List techStacks={techStacksToRender.frontend} display={'grid'} />
+              </ButtonWithIcon>
+            </>
+          ) : (
+            <>
+              <TechStack.Title>FRONTEND</TechStack.Title>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('frontend')}>
+                <S.TechListWrapper>
+                  <div style={{ height: '100px' }} />
+                </S.TechListWrapper>
+              </ButtonWithIcon>
+            </>
+          )}
+          {techStacksToRender.backend ? (
+            <>
+              <TechStack.Title>BACKEND</TechStack.Title>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('backend')}>
+                <TechStack.List techStacks={techStacksToRender.backend} display={'grid'} />
+              </ButtonWithIcon>
+            </>
+          ) : (
+            <>
+              <TechStack.Title>BACKEND</TechStack.Title>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('backend')}>
+                <S.TechListWrapper>
+                  <div style={{ height: '100px' }} />
+                </S.TechListWrapper>
+              </ButtonWithIcon>
+            </>
+          )}
+        </TechStack>
       </TechStackContainer>
 
-      {isOpen && (
-        <Modal title={`기술 스택 (${position})`} close={() => setIsOpen(false)} onClose={() => setSelectedTechStacks([])}>
-          {/* TODO(증훈): 아래 로직 techStack 이미지 불러오는 API로 교쳬 예정 */}
-          <S.AllTechStackList>
-            {techStacks
-              ?.find((techStack) => techStack.position === position)
-              ?.data.map(({ url, tag }, index) => {
-                const id = String(index); // 실제 데이터 사용하기 전 임시 id
-
-                return (
-                  <li key={id}>
-                    <button onClick={() => toggleTechStackSelection(id)}>
-                      <S.TechStackImage $isSelected={selectedTechStacks.includes(id)} src={url} alt={tag} />
-                    </button>
-                  </li>
-                );
-              })}
-          </S.AllTechStackList>
+      {position && (
+        <Modal id={modalId} title={`기술 스택 (${position.toUpperCase()})`}>
+          <S.ModalTechStackListContainer>
+            <S.AllTechStackList>
+              {techStackAssets.map(({ url, tag }) => (
+                <li key={url}>
+                  <button onClick={() => toggleTechStackSelection(url)}>
+                    <S.TechStackImage
+                      $isSelected={Boolean(techStacksToRender[position]?.some((stack) => stack.url === url))}
+                      src={url}
+                      alt={tag ?? ''}
+                    />
+                  </button>
+                </li>
+              ))}
+            </S.AllTechStackList>
+          </S.ModalTechStackListContainer>
         </Modal>
       )}
     </>

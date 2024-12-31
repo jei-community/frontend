@@ -171,6 +171,11 @@ const BaseStyle = css`
     box-sizing: border-box;
   }
 
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   *,
   *::before,
   *::after {
@@ -178,6 +183,7 @@ const BaseStyle = css`
   }
 
   a {
+    display: block;
     text-decoration: none;
   }
 
@@ -186,5 +192,6 @@ const BaseStyle = css`
     margin: 0;
     border: none;
     background: none;
+    cursor: pointer;
   }
 `;

@@ -2,11 +2,12 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const S = {
-  ButtonWithIcon: styled.button<{ $size: string; $align: string }>`
+  ButtonWithIcon: styled.button<{ $widthSize: string; $heightSize: string; $align: string }>`
     position: relative;
     background-color: transparent;
 
-    width: ${({ $size }) => $size};
+    width: ${({ $widthSize }) => $widthSize};
+    height: ${({ $heightSize }) => $heightSize};
 
     cursor: pointer;
 

@@ -1,19 +1,26 @@
+import { getProjectAssetList } from 'everydei-api-dev/lib/apis/functional/projects/assets';
+import { getProjectDetail } from 'everydei-api-dev/lib/apis/functional/projects/details';
+import { getProjectParticipantList } from 'everydei-api-dev/lib/apis/functional/projects/participants';
+import { PROJECT_RES } from 'everydei-api-dev/lib/dtos/project/project.response.dto';
+
 export type Status = 'LIVE' | 'DEVELOP' | 'STOP';
 export type StatusText = '서비스' | '개발' | '서비스 중단';
 
-export interface TechStackData {
+export type TechStackItem = PROJECT_RES.ProjectDetail.IProjectMetadataInput[] | null | undefined;
+export type LinkItem = PROJECT_RES.ProjectDetail.IProjectMetadataInput[] | null | undefined;
+export type ProjectAsset = getProjectAssetList.Output;
+export type Members = getProjectParticipantList.Output;
+
+export type LinkType = 'gitlab' | 'figma' | 'xd' | 'presentation' | 'sheet';
+
+export type Url = {
+  id: string;
   url: string;
-  tag: string;
-}
+};
 
-export interface TechStackItem {
-  position: string;
-  data: TechStackData[];
-}
-
-export interface LinkItem {
-  url: string[];
-  tag: string;
+export interface Link {
+  id: string;
+  items: string[];
 }
 
 export interface ProjectDetails {
@@ -23,21 +30,18 @@ export interface ProjectDetails {
   description: string;
   startDate: string;
   endDate: string;
-  metadata: {
-    tech: TechStackItem[];
-    link: LinkItem[];
-  };
+  metadata: Pick<getProjectDetail.Output, 'projectMetadata'>;
   thumbnailImageUrl: string;
 }
 
-interface Pagination {
+export interface Pagination {
   totalCount: number;
   page: number;
   limit: number;
   hasNext: boolean;
 }
 
-export type ProjectListData = Omit<ProjectDetails, 'metadata'>[];
+export type ProjectListData = PROJECT_RES.IProjectListDto[];
 
 export interface ProjectList {
   data: ProjectListData;

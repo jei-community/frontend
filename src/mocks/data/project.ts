@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { ProjectDetails, ProjectList } from '@/types/project';
 
 export const techStacks = Array.from({ length: 20 }, () => ({
@@ -5,7 +7,7 @@ export const techStacks = Array.from({ length: 20 }, () => ({
   tag: 'tech stack',
 }));
 
-export const members = Array.from({ length: 20 }, () => ({ name: '전증훈', position: '연구원' }));
+export const members = Array.from({ length: 20 }, () => ({ id: uuidv4(), name: '전증훈', position: '연구원' }));
 
 const projectItems: Omit<ProjectDetails, 'metadata'>[] = Array.from({ length: 6 }, (_, index) => {
   return {
@@ -37,7 +39,7 @@ export const mockProjectList: ProjectList = {
   data: projectItems,
 
   pagination: {
-    totalCount: 1,
+    totalCount: 66,
     page: 1,
     limit: 6,
     hasNext: false,
@@ -80,8 +82,9 @@ export const mockProjectDetails: ProjectDetails = {
     ],
     link: [
       {
-        url: ['https://example.com'],
-        tag: 'GITLAB',
+        id: uuidv4(),
+        url: [{ id: uuidv4(), url: 'https://example.com' }],
+        tag: 'gitlab',
       },
     ],
   },

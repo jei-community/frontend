@@ -16,7 +16,7 @@ export const S = {
     border: 1px solid;
     border-color: ${({ theme }) => theme.colors.gray[200]};
 
-    border-radius: 16;
+    border-radius: 16px;
 
     &:hover {
       box-shadow: 0 0 0.8rem ${({ theme }) => theme.colors.gray[300]};
@@ -30,6 +30,7 @@ export const S = {
 
   Thumbnail: styled.img(({ theme }) => ({
     width: '100%',
+    height: '31.2rem',
 
     borderRadius: 8,
 

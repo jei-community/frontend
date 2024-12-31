@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import Avatar from '..';
 
 const meta = {
+  title: 'Avatar',
   component: Avatar,
   tags: ['autodocs', '!dev'],
   args: { size: 'medium' },
@@ -13,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const MediumAvatarAvatar: Story = {
+export const MediumAvatar: Story = {
   args: {
     src: 'https://i.pravatar.cc/64',
     size: 'medium',

@@ -9,24 +9,22 @@ export const S = {
     flexDirection: 'column',
     alignItems: 'center',
 
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
   }),
 
   Wrapper: styled.div({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-
-    overflowY: 'auto',
   }),
 
   ContentContainer: styled.div`
     display: flex;
 
     width: 120rem;
+    height: max-content;
     min-height: calc(100dvh - ${HEADER_HEIGHT}rem);
-    max-height: calc(100dvh - ${HEADER_HEIGHT}rem);
 
     background-color: white;
 

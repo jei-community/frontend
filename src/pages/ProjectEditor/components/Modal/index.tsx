@@ -2,7 +2,7 @@ import { XIcon } from 'lucide-react';
 import { PropsWithChildren, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import Button from '@/components/Button';
+import { allowScroll, preventScroll } from '@/utils/common';
 
 import styled from '@emotion/styled';
 
@@ -28,9 +28,11 @@ export default function Modal({ title = '', hasClose = true, children, close, on
     };
 
     document.addEventListener('mousedown', detectOutsideClick);
+    const prevScrollY = preventScroll();
 
     return () => {
       document.removeEventListener('mousedown', detectOutsideClick);
+      allowScroll(prevScrollY);
     };
   }, [close, onClose]);
 
@@ -42,9 +44,9 @@ export default function Modal({ title = '', hasClose = true, children, close, on
             <S.Header>
               <S.Title>{title}</S.Title>
               {hasClose && (
-                <Button variant='outlined' color='neutral' size='icon' onClick={close}>
-                  <XIcon />
-                </Button>
+                <button onClick={close}>
+                  <XIcon width='3.2rem' height='3.2rem' />
+                </button>
               )}
             </S.Header>
             <S.Body>{children}</S.Body>
@@ -67,6 +69,7 @@ const S = {
     height: '100vh',
 
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    zIndex: 2,
   }),
 
   Content: styled.div({

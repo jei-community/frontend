@@ -6,6 +6,7 @@ import { fn } from '@storybook/test';
 import Checkbox from '..';
 
 const meta = {
+  title: 'Checkbox',
   component: Checkbox,
   tags: ['autodocs', '!dev'],
   args: { checked: false, disabled: false, onChange: fn() },

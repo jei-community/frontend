@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import TextButton from '..';
 
 const meta = {
+  title: 'TextButton',
   component: TextButton,
   tags: ['autodocs', '!dev'],
   args: { color: 'primary', size: 'medium', disabled: false, children: 'TextButton', onClick: fn() },
