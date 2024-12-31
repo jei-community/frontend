@@ -24,7 +24,7 @@ export default function DocumentTooltipList({ linkAssets, linksToRender, setLink
 
   return (
     <>
-      <ButtonWithIcon size='100%' onClick={openDocumentLinkModal}>
+      <ButtonWithIcon widthSize='100%' onClick={openDocumentLinkModal}>
         <S.TooltipListWrapper>{linksToRender ? <TooltipList links={linksToRender} /> : <EmptyLink />}</S.TooltipListWrapper>
       </ButtonWithIcon>
 

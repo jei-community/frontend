@@ -50,14 +50,14 @@ export default function TechStackEditor({ techStackAssets, techStacksToRender, s
           {techStacksToRender.frontend ? (
             <>
               <TechStack.Title>FRONTEND</TechStack.Title>
-              <ButtonWithIcon size='100%' onClick={() => openTechStackModal('frontend')}>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('frontend')}>
                 <TechStack.List techStacks={techStacksToRender.frontend} display={'grid'} />
               </ButtonWithIcon>
             </>
           ) : (
             <>
               <TechStack.Title>FRONTEND</TechStack.Title>
-              <ButtonWithIcon size='100%' onClick={() => openTechStackModal('frontend')}>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('frontend')}>
                 <S.TechListWrapper>
                   <div style={{ height: '100px' }} />
                 </S.TechListWrapper>
@@ -67,14 +67,14 @@ export default function TechStackEditor({ techStackAssets, techStacksToRender, s
           {techStacksToRender.backend ? (
             <>
               <TechStack.Title>BACKEND</TechStack.Title>
-              <ButtonWithIcon size='100%' onClick={() => openTechStackModal('backend')}>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('backend')}>
                 <TechStack.List techStacks={techStacksToRender.backend} display={'grid'} />
               </ButtonWithIcon>
             </>
           ) : (
             <>
               <TechStack.Title>BACKEND</TechStack.Title>
-              <ButtonWithIcon size='100%' onClick={() => openTechStackModal('backend')}>
+              <ButtonWithIcon widthSize='100%' onClick={() => openTechStackModal('backend')}>
                 <S.TechListWrapper>
                   <div style={{ height: '100px' }} />
                 </S.TechListWrapper>
