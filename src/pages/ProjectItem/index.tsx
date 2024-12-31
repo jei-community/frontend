@@ -1,16 +1,14 @@
 import { useRef } from 'react';
 
-import { mockProjectConfigurations, mockProjectDetails } from '@/mocks/data/project';
-
 import Aside from '@/components/Aside';
 import Content from '@/components/Content';
 import Divider from '@/components/Divider';
 import ProjectContentContainer from '@/components/ProjectContentContainer';
 import ProjectSideContainer from '@/components/ProjectSideContainer';
 
+import { useProjectDetails } from '@/hooks';
 import Description from '@/pages/ProjectItem/components/Description';
 import EditorLink from '@/pages/ProjectItem/components/EditorLink';
-import Env from '@/pages/ProjectItem/components/Env';
 import TableOfContent from '@/pages/ProjectItem/components/TableOfContent';
 import TechStack from '@/pages/ProjectItem/components/TechStack';
 import Title from '@/pages/ProjectItem/components/Title';
@@ -20,9 +18,7 @@ export default function ProjectItem() {
   const linkRef = useRef<HTMLUListElement | null>(null);
   const descriptionRef = useRef<HTMLHeadingElement | null>(null);
   const techStackRef = useRef<HTMLHeadingElement | null>(null);
-  const envRef = useRef<HTMLHeadingElement | null>(null);
-  const { thumbnailImageUrl, title, status, startDate, endDate, description, metadata } = mockProjectDetails;
-  const { configuration } = mockProjectConfigurations;
+  const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links } = useProjectDetails();
 
   return (
     <>
@@ -32,17 +28,17 @@ export default function ProjectItem() {
 
           <Description ref={descriptionRef} description={description} />
 
-          <TechStack ref={techStackRef} techStacks={metadata.tech} />
+          <TechStack ref={techStackRef} frontend={frontend} backend={backend} />
 
-          <Env ref={envRef} configuration={configuration} />
+          {/* <Env ref={envRef} configuration={configuration} /> */}
         </ProjectContentContainer>
       </Content>
       <Aside>
         <ProjectSideContainer>
-          <TooltipList ref={linkRef} links={metadata.link} />
+          <TooltipList ref={linkRef} links={links} />
           <EditorLink />
           <Divider />
-          <TableOfContent linkRef={linkRef} descriptionRef={descriptionRef} techStackRef={techStackRef} envRef={envRef} />
+          <TableOfContent linkRef={linkRef} descriptionRef={descriptionRef} techStackRef={techStackRef} />
         </ProjectSideContainer>
       </Aside>
     </>
