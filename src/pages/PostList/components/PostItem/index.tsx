@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router';
 
 import { formatRelativeDate } from '@/utils/common';
 
+import { Role } from '@/types/album';
+
+import { ROLE_TEXT } from '@/constants/common';
+
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import TextArea from '@/components/TextArea';
@@ -66,9 +70,9 @@ export default function PostItem({ item }: Props) {
         </S.TitleWrapper>
         <S.UserContainer>
           <S.User.Wrapper>
-            <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
-            <S.User.Name>{item.user?.name}</S.User.Name>
-            <S.User.Position>{item.user?.role}</S.User.Position>
+            <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+            <S.User.Name>{item.user.name}</S.User.Name>
+            <S.User.Position>{ROLE_TEXT[item.user.role as Role]}</S.User.Position>
           </S.User.Wrapper>
           <S.CreateTime>{formatRelativeDate(new Date(item.createdAt))}</S.CreateTime>
         </S.UserContainer>
@@ -95,9 +99,9 @@ export default function PostItem({ item }: Props) {
           {item.boardReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
-                <S.Comment.UserName>{item.user?.name}</S.Comment.UserName>
-                <S.Comment.UserPosition>{item.user?.role}</S.Comment.UserPosition>
+                <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{ROLE_TEXT[item.user.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (
                   <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
                     삭제
