@@ -74,9 +74,9 @@ export default function MemberAndDateEditor({ startDate, endDate, members, setMe
       </S.MemberInfoContainer>
 
       <S.DateWrapper>
-        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' />
+        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' required />
         <S.DateText> ~ </S.DateText>
-        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' />
+        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' required />
       </S.DateWrapper>
 
       <Modal id={modalId} title='프로젝트 참여 팀원' onConfirm={() => console.log('')}>

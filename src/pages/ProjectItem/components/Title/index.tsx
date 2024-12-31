@@ -44,11 +44,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
             </S.AvatarContainer>
             {Boolean(parsedMembers.length) && <S.MemberCountText>{parsedMembers.length}명</S.MemberCountText>}
           </S.MemberInfoContainer>
-          <S.DataContainer>
-            <S.DateText>{startDate}</S.DateText>
-            <S.DateText>~</S.DateText>
-            <S.DateText>{endDate}</S.DateText>
-          </S.DataContainer>
+          {/\d/.test(startDate) && /\d/.test(endDate) && <S.DateText>{`${startDate} ~ ${endDate}`}</S.DateText>}
         </S.MemberAndDateContainer>
       </S.RightContainer>
     </S.Container>

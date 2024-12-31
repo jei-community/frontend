@@ -27,7 +27,7 @@ export default function ProjectTitleEditor({ title, status, setStatusToRender }:
 
   return (
     <S.TitleContainer>
-      <TextField placeholder='프로젝트 이름을 입력해 주세요' heightSize='large' defaultValue={title ?? ''} name='title' />
+      <TextField placeholder='프로젝트 이름을 입력해 주세요' heightSize='large' defaultValue={title ?? ''} name='title' required />
       <S.ButtonGroupWrapper>
         <ButtonGroup items={items} onChange={(item) => updateStatus(item)} />
       </S.ButtonGroupWrapper>
