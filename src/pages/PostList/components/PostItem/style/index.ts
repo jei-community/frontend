@@ -90,30 +90,55 @@ export const S = {
       : undefined,
   })),
 
-  Comment: styled.div({
-    backgroundColor: '#ff6666',
-    width: '100%',
-    height: '10rem',
-  }),
-  CommentArea: styled.span(({ theme }) => ({
-    ...theme.typography.body2,
-    color: theme.colors.gray[700],
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: '0.8rem',
-  })),
+  Comment: {
+    Wrapper: styled.div({
+      width: '100%',
+      height: '100%',
+      minHeight: '10rem',
+    }),
+    OpenController: styled.span(({ theme }) => ({
+      ...theme.typography.body2,
+      color: theme.colors.gray[700],
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    })),
+    InputWrapper: styled.div({
+      display: 'flex',
+      alignItems: 'center',
+      margin: '1.6rem 0.8rem',
+      gap: '0.8rem',
+    }),
+    ItemWrapper: styled.div({ margin: '0.8rem 0' }),
+    UserWrapper: styled.div({
+      display: 'flex',
+      alignItems: 'center',
+    }),
+    UserName: styled.span(({ theme }) => ({
+      ...theme.typography.body2,
+      color: theme.colors.gray[900],
+      margin: '0 0.4rem 0 0.8rem',
+    })),
+    UserPosition: styled.span(({ theme }) => ({
+      ...theme.typography.body1,
+      color: theme.colors.gray[500],
+      marginRight: '0.8rem',
+    })),
+    DeleteButton: styled(TextButton)(({ theme }) => ({
+      backgroundColor: theme.colors.gray[100],
+      ...theme.typography.body4,
+    })),
+    Content: styled.span(({ theme }) => ({
+      color: theme.colors.gray[800],
+      ...theme.typography.body1,
+      margin: '1.6rem 0 0 4rem',
+    })),
+  },
 
   TextButton: styled(TextButton)(({ theme }) => ({
     backgroundColor: theme.colors.gray[100],
   })),
 
-  InputWrapper: styled.div({
-    display: 'flex',
-    alignItems: 'center',
-    margin: '0.8rem',
-    gap: '0.8rem',
-  }),
   Button: styled(Button)({
     width: '9.6rem',
   }),
