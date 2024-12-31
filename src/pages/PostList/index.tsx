@@ -2,6 +2,8 @@ import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import { QUERY_KEYS } from '@/constants/query';
+
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
@@ -20,7 +22,7 @@ export default function PostList() {
 
   const { userId } = useUserInfoStore();
   const { data } = useSuspenseQuery({
-    queryKey: ['postList'],
+    queryKey: [QUERY_KEYS.BOARD_LIST],
     queryFn: () =>
       getBoardList({
         host: 'https://api-dev.everydei.site/api/v1',

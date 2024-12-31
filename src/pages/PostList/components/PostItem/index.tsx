@@ -1,9 +1,7 @@
 import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
-import { deleteBoardReply, postBoardReply } from 'everydei-api-dev/lib/apis/functional/boards/replies';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { getNestiaHeader } from '@/utils/api';
 import { formatRelativeDate } from '@/utils/common';
 
 import Avatar from '@/components/Avatar';
@@ -12,6 +10,7 @@ import TextArea from '@/components/TextArea';
 
 import { useUserInfoStore } from '@/store';
 
+import { useDeleteBoardReplyMutation, usePostBoardReplyMutation } from '../../hooks';
 import { S } from './style';
 
 type BoardItem = getBoardList.Output[number];
@@ -26,8 +25,11 @@ export default function PostItem({ item }: Props) {
 
   const { userId } = useUserInfoStore();
 
-  /** API 헤더 */
-  const connection = getNestiaHeader();
+  /** 댓글 작성 mutate */
+  const postBoardReplyMutation = usePostBoardReplyMutation();
+
+  /** 댓글 삭제 mutate */
+  const deleteReplyMutation = useDeleteBoardReplyMutation();
 
   /** 댓글, 포스트 오픈 여부 변경 */
   const handleOpenPost = () => {
@@ -37,12 +39,14 @@ export default function PostItem({ item }: Props) {
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
     const postBoardReplyBody = { content: comment, boardReplyId: null };
-    postBoardReply(connection, item.id, postBoardReplyBody);
+    postBoardReplyMutation.mutate({ itemId: item.id, body: postBoardReplyBody });
   };
 
   /** 댓글 삭제 함수 */
   const handleDeleteReply = (replyId: number) => {
-    deleteBoardReply(connection, item.id, replyId);
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deleteReplyMutation.mutate({ boardId: item.id, replyId: replyId });
+    }
   };
 
   /** 포스트 수정 함수 */
