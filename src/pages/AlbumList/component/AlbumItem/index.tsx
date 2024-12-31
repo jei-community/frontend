@@ -1,5 +1,4 @@
 import { getAlbumList } from 'everydei-api-dev/lib/apis/functional/albums';
-import { deleteAlbumReply, postAlbumReply } from 'everydei-api-dev/lib/apis/functional/albums/replies';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -11,6 +10,7 @@ import TextArea from '@/components/TextArea';
 
 import { useUserInfoStore } from '@/store';
 
+import { useDeleteAlbumReplyMutation, usePostAlbumReplyMutation } from '../../hooks';
 import { S } from './style';
 
 type BoardItem = getAlbumList.Output[number];
@@ -23,15 +23,14 @@ export default function AlbumItem({ item }: Props) {
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [isOpenCommentArea, setIsOpenCommentArea] = useState(false);
   const [comment, setComment] = useState<string>('');
-  const { userId } = useUserInfoStore();
 
-  // API 헤더
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** 댓글 작성 mutate */
+  const postAlbumReplyMutation = usePostAlbumReplyMutation();
+
+  /** 댓글 삭제 mutate */
+  const deleteAlbumReplyMutation = useDeleteAlbumReplyMutation();
+
+  const { userId } = useUserInfoStore();
 
   /** 상단에 보여줄 사진 변경 */
   const handleSelectPhoto = (index: number) => {
@@ -46,12 +45,15 @@ export default function AlbumItem({ item }: Props) {
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
     const postAlbumReplyBody = { content: comment, albumReplyId: null };
-    postAlbumReply(connection, item.id, postAlbumReplyBody);
+    postAlbumReplyMutation.mutate({ itemId: item.id, body: postAlbumReplyBody });
+    setComment('');
   };
 
   /** 댓글 삭제 함수 */
   const handleDeleteReply = (replyId: number) => {
-    deleteAlbumReply(connection, item.id, replyId);
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deleteAlbumReplyMutation.mutate({ albumId: item.id, replyId: replyId });
+    }
   };
 
   /** 앨범 수정 클릭 핸들러 */
