@@ -34,7 +34,7 @@ export default function ProjectEditor() {
   const { projectId } = useParams();
   const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links, isEdit } = useProjectDetails();
   const [statusToRender, setStatusToRender] = useState<string>(status);
-  const { members } = useMember();
+  const { members } = useMember({ projectId });
   const [membersToRender, setMembersToRender] = useState<Members>(members);
   const { techStackAssets, linkAssets } = useProjectAssets();
   const [techStacksToRender, setTechStacksToRender] = useState<TechStacksToRender>({
@@ -51,29 +51,28 @@ export default function ProjectEditor() {
   const submitProjectDetails = async (event: FormEvent) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    const { title, thumbnail, description, startDate, endDate } = Object.fromEntries(formData.entries());
+    const filteredParticipantList = membersToRender.filter((member) => member.isJoin).map((member) => member.id);
 
-    let thumbnailUrlToSave = thumbnailImageUrl;
-
-    // Presigned URL 생성 및 파일 업로드가 필요한 경우
-    if (thumbnail && thumbnail instanceof File && thumbnail.size !== 0 && thumbnail.name !== '') {
-      // 기존 thumbnailImageUrl와 같지 않은 경우에만 Presigned URL 요청
-      const presignedResult = await presignedMutation.mutateAsync({ type: 'PROJECT_THUMBNAIL' });
-
-      // S3 업로드
-      await uploadS3Mutation.mutateAsync({
-        url: presignedResult.url,
-        file: thumbnail,
-      });
-
-      // 새로 저장할 썸네일 URL 설정
-      thumbnailUrlToSave = presignedResult.fileName;
-    }
-
-    // 저장 확인
     if (confirm('저장하시겠습니까?')) {
-      const filteredParticipantList = membersToRender.filter((member) => member.isJoin).map((member) => member.id);
+      const formData = new FormData(event.target as HTMLFormElement);
+      const { title, thumbnail, description, startDate, endDate } = Object.fromEntries(formData.entries());
+
+      let thumbnailUrlToSave = thumbnailImageUrl;
+
+      // Presigned URL 생성 및 파일 업로드가 필요한 경우
+      if (thumbnail && thumbnail instanceof File && thumbnail.size !== 0 && thumbnail.name !== '') {
+        // 기존 thumbnailImageUrl와 같지 않은 경우에만 Presigned URL 요청
+        const presignedResult = await presignedMutation.mutateAsync({ type: 'PROJECT_THUMBNAIL' });
+
+        // S3 업로드
+        await uploadS3Mutation.mutateAsync({
+          url: presignedResult.url,
+          file: thumbnail,
+        });
+
+        // 새로 저장할 썸네일 URL 설정
+        thumbnailUrlToSave = presignedResult.fileName;
+      }
 
       // 최종 프로젝트 데이터 생성
       const newProjectDetail = {
