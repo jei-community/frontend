@@ -16,12 +16,12 @@ interface TooltipArrowProps {
 export const S = {
   TooltipOuterContainer: styled.div`
     position: relative;
+    z-index: 100;
   `,
   TooltipInnerContainer: styled.div<TooltipPositionProps>`
     position: absolute;
     top: ${({ $y }) => `${$y / 10}rem`};
     left: ${({ $x }) => `${$x / 10}rem`};
-    z-index: 100;
     display: flex;
     flex-direction: column;
   `,

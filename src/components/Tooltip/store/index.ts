@@ -10,6 +10,8 @@ interface TooltipState {
   x: number;
   /** 툴팁 Y 좌표 (화살표 끝 기준) */
   y: number;
+  /** 툴팁을 표시할 요소 */
+  el: Element | null;
 }
 
 /** 툴팁 Zustand 스토어 인터페이스 */
@@ -24,13 +26,13 @@ interface TooltipContextState {
 
 /** 툴팁 Zustand 스토어 */
 export const useTooltipStore = create<TooltipContextState>((set) => {
-  const defaultState: TooltipState = { id: null, isEnabled: false, x: 0, y: 0 };
+  const defaultState: TooltipState = { id: null, isEnabled: false, x: 0, y: 0, el: null };
 
   return {
     tooltipState: defaultState,
     onShowTooltip: (id, el) => {
-      const { width, height } = el.getBoundingClientRect();
-      set({ tooltipState: { id, isEnabled: true, x: width / 2, y: height } });
+      const { x, width, bottom } = el.getBoundingClientRect();
+      set({ tooltipState: { id, isEnabled: true, x: x + width / 2 + scrollX, y: bottom + scrollY, el } });
     },
     onHideTooltip: () => set({ tooltipState: defaultState }),
   };
