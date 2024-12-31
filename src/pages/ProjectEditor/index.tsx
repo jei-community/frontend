@@ -83,12 +83,20 @@ export default function ProjectEditor() {
         metadata: {
           frontend: techStacksToRender.frontend?.map(({ id }) => id) ?? null,
           backend: techStacksToRender.backend?.map(({ id }) => id) ?? null,
-          link: linksToRender?.map(({ id, items }) => ({ id, items: items ?? [] })) ?? null,
+          link:
+            linksToRender
+              ?.map(({ id, items }) => ({
+                id,
+                items: items?.filter((item) => item.trim() !== '') ?? [], // 빈 문자열 제거
+              }))
+              .filter(({ items }) => items && items.length > 0) ?? null, // items가 빈 배열이면 제외
         },
         status: statusToRender ?? status ?? 'LIVE',
         startDate: formatToYYYYMMDD(new Date(String(startDate))),
         endDate: formatToYYYYMMDD(new Date(String(endDate))),
       };
+
+      console.log(newProjectDetail.metadata.link);
 
       let newProjectId = projectId;
 
