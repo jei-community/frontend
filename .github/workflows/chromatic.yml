@@ -1,6 +1,9 @@
 name: 'Chromatic Deployment'
 
-on: push
+on:
+  push:
+    branches:
+      - main # main 브랜치로 푸시될 때 실행
 
 jobs:
   chromatic:
