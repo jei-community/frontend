@@ -1,27 +1,35 @@
-# Workflow name
 name: 'Chromatic Deployment'
 
-# Event for the workflow
 on: push
 
-# List of jobs
 jobs:
   chromatic:
     name: 'Run Chromatic'
     runs-on: ubuntu-latest
-    # Job steps
     steps:
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
+      # 1. Checkout the code
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: npm run build-storybook
-      #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@latest
-        # Options required for Chromatic's GitHub Action
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
+          node-version: 20.11.1
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      # 4. Build Storybook
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      # 5. Run Chromatic
+      - uses: chromaui/action@latest
+        with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
