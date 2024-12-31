@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useTooltipStore } from './store';
 import { S } from './style';
@@ -47,7 +48,6 @@ export default function Tooltip({ id, arrowPosition = 'top-center', content, chi
 
     // TODO(성찬): 첫 렌더링 시 offsetX 값이 일시적으로 0이 되는 현상 해결
     const { width } = tooltipRef.current.getBoundingClientRect();
-    const { offsetHeight, nextElementSibling } = tooltipRef.current;
 
     // 툴팁이 왼쪽 위 기준으로 정렬되어 있으므로, `arrowPosition`별 오프셋 값 설정
     setOffset(() => {
@@ -60,7 +60,7 @@ export default function Tooltip({ id, arrowPosition = 'top-center', content, chi
       else _x = width / 2;
 
       if (arrowPosition.includes('top')) _y = 0;
-      else _y = offsetHeight + (nextElementSibling?.clientHeight ?? 0) + 4;
+      else _y = (tooltipRef.current?.offsetHeight ?? 0) + (tooltipState.el?.scrollHeight ?? 0) + 4;
 
       return { x: _x, y: _y };
     });
@@ -68,27 +68,33 @@ export default function Tooltip({ id, arrowPosition = 'top-center', content, chi
     return () => {
       window.removeEventListener('click', handleHideTooltip);
     };
-  }, [handleHideTooltip, arrowPosition]);
+  }, [handleHideTooltip, arrowPosition, tooltipState.el]);
 
   return (
     <S.TooltipOuterContainer>
-      {isEnabled && arrowPosition.includes('bottom') && (
-        <S.TooltipInnerContainer ref={tooltipRef} id={id} $x={tooltipState.x - offset.x} $y={tooltipState.y - offset.y}>
-          <S.TooltipContent>{content}</S.TooltipContent>
-          <S.TooltipArrowContainer $arrowPosition={arrowPosition}>
-            <S.TooltipArrow $arrowPosition={arrowPosition} />
-          </S.TooltipArrowContainer>
-        </S.TooltipInnerContainer>
-      )}
+      {isEnabled &&
+        arrowPosition.includes('bottom') &&
+        createPortal(
+          <S.TooltipInnerContainer ref={tooltipRef} id={id} $x={tooltipState.x - offset.x} $y={tooltipState.y - offset.y}>
+            <S.TooltipContent>{content}</S.TooltipContent>
+            <S.TooltipArrowContainer $arrowPosition={arrowPosition}>
+              <S.TooltipArrow $arrowPosition={arrowPosition} />
+            </S.TooltipArrowContainer>
+          </S.TooltipInnerContainer>,
+          document.body,
+        )}
       {children}
-      {isEnabled && arrowPosition.includes('top') && (
-        <S.TooltipInnerContainer ref={tooltipRef} id={id} $x={tooltipState.x - offset.x} $y={tooltipState.y - offset.y}>
-          <S.TooltipArrowContainer $arrowPosition={arrowPosition}>
-            <S.TooltipArrow $arrowPosition={arrowPosition} />
-          </S.TooltipArrowContainer>
-          <S.TooltipContent>{content}</S.TooltipContent>
-        </S.TooltipInnerContainer>
-      )}
+      {isEnabled &&
+        arrowPosition.includes('top') &&
+        createPortal(
+          <S.TooltipInnerContainer ref={tooltipRef} id={id} $x={tooltipState.x - offset.x} $y={tooltipState.y - offset.y}>
+            <S.TooltipArrowContainer $arrowPosition={arrowPosition}>
+              <S.TooltipArrow $arrowPosition={arrowPosition} />
+            </S.TooltipArrowContainer>
+            <S.TooltipContent>{content}</S.TooltipContent>
+          </S.TooltipInnerContainer>,
+          document.body,
+        )}
     </S.TooltipOuterContainer>
   );
 }

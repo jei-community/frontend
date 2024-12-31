@@ -17,7 +17,7 @@ function TooltipWithHooks({ id, arrowPosition = 'top-center', children, content 
   const { onShowTooltip } = useTooltipStore();
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '240px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Tooltip id={id} arrowPosition={arrowPosition} content={content}>
         <Button size='large' onClick={(e) => onShowTooltip(id, e.currentTarget)}>
           {children}
