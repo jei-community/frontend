@@ -1,3 +1,5 @@
+import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
+import { deleteBoardReply, postBoardReply } from 'everydei-api-dev/lib/apis/functional/boards/replies';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -7,39 +9,29 @@ import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import TextArea from '@/components/TextArea';
 
+import { useUserInfoStore } from '@/store';
+
 import { S } from './style';
 
-// interface Reply {
-//   id: number;
-//   createdAt: string;
-//   userId: string;
-//   content: string;
-//   profileImageUrl: string | null;
-//   role: string;
-//   childBoardReplyList: Reply[]; // 대댓글 리스트
-// }
-
-interface User {
-  id: string;
-  name: string;
-  profileImageUrl: string | null;
-  role: string;
-}
-
+type BoardItem = getBoardList.Output[number];
 interface Props {
-  item: {
-    id: string;
-    createdAt: string;
-    title: string;
-    content: string;
-    user?: User; // 사용자 정보 (옵션)
-    // boardReplyList: Reply[] | null;
-  };
+  item: BoardItem;
 }
 
 export default function PostItem({ item }: Props) {
   const [isOpenPost, setIsOpenPost] = useState(false);
+  const [comment, setComment] = useState<string>('');
   const navigate = useNavigate();
+
+  const { userId } = useUserInfoStore();
+
+  // API 헤더
+  const connection = {
+    host: 'https://api-dev.everydei.site/api/v1',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
 
   /** 댓글, 포스트 오픈 여부 변경 */
   const handleOpenPost = () => {
@@ -48,7 +40,13 @@ export default function PostItem({ item }: Props) {
 
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
-    console.log('댓글 등록');
+    const postBoardReplyBody = { content: comment, boardReplyId: null };
+    postBoardReply(connection, item.id, postBoardReplyBody);
+  };
+
+  /** 댓글 삭제 함수 */
+  const handleDeleteReply = (replyId: number) => {
+    deleteBoardReply(connection, item.id, replyId);
   };
 
   /** 포스트 수정 함수 */
@@ -78,21 +76,37 @@ export default function PostItem({ item }: Props) {
         <S.Markdown source={item.content} $isOpen={isOpenPost} />
       </S.MarkdownWrapper>
 
-      <S.CommentArea>
-        댓글 3개
+      <S.Comment.OpenController>
+        댓글 {item.boardReplyList.length}개
         <S.TextButton onClick={handleOpenPost} color='primary'>
           {isOpenPost ? '접기' : '펼치기'}
         </S.TextButton>
-      </S.CommentArea>
+      </S.Comment.OpenController>
       {isOpenPost && (
-        <S.Comment>
-          <S.InputWrapper>
-            <TextArea placeholder='댓글을 입력해주세요.' />
+        <S.Comment.Wrapper>
+          <S.Comment.InputWrapper>
+            <TextArea placeholder='댓글을 입력해주세요.' value={comment} onChange={(e) => setComment(e.target.value)} />
             <S.Button size='small' onClick={handleRegisterReply}>
               등록
             </S.Button>
-          </S.InputWrapper>
-        </S.Comment>
+          </S.Comment.InputWrapper>
+          {/* 댓글 리스트 출력 */}
+          {item.boardReplyList?.map((reply) => (
+            <S.Comment.ItemWrapper key={reply.id}>
+              <S.Comment.UserWrapper>
+                <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{item.user?.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{item.user?.role}</S.Comment.UserPosition>
+                {reply.userId === userId && (
+                  <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
+                    삭제
+                  </S.Comment.DeleteButton>
+                )}
+              </S.Comment.UserWrapper>
+              <S.Comment.Content>{reply.content}</S.Comment.Content>
+            </S.Comment.ItemWrapper>
+          ))}
+        </S.Comment.Wrapper>
       )}
     </S.Container>
   );

@@ -1,3 +1,5 @@
+import { getAlbumList } from 'everydei-api-dev/lib/apis/functional/albums';
+import { deleteAlbumReply, postAlbumReply } from 'everydei-api-dev/lib/apis/functional/albums/replies';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -11,32 +13,25 @@ import { useUserInfoStore } from '@/store';
 
 import { S } from './style';
 
-// interface Reply {
-//   id: number;
-//   createdAt: string;
-//   userId: string;
-//   content: string;
-//   profileImageUrl: string | null;
-//   role: string;
-//   childAlbumReplyList: Reply[]; // 대댓글 리스트
-// }
-
+type BoardItem = getAlbumList.Output[number];
 interface Props {
-  item: {
-    albumImageList: { imageKey: string; imageUrl: string }[];
-    content: string;
-    createdAt: string;
-    id: string;
-    // albumReplyList: Reply[] | null;
-    user?: { id: string; name: string; profileImageUrl: string; role: string };
-  };
+  item: BoardItem;
 }
 
 export default function AlbumItem({ item }: Props) {
   const navigate = useNavigate();
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [isOpenCommentArea, setIsOpenCommentArea] = useState(false);
+  const [comment, setComment] = useState<string>('');
   const { userId } = useUserInfoStore();
+
+  // API 헤더
+  const connection = {
+    host: 'https://api-dev.everydei.site/api/v1',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  };
 
   /** 상단에 보여줄 사진 변경 */
   const handleSelectPhoto = (index: number) => {
@@ -50,7 +45,13 @@ export default function AlbumItem({ item }: Props) {
 
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
-    console.log('댓글 등록');
+    const postAlbumReplyBody = { content: comment, albumReplyId: null };
+    postAlbumReply(connection, item.id, postAlbumReplyBody);
+  };
+
+  /** 댓글 삭제 함수 */
+  const handleDeleteReply = (replyId: number) => {
+    deleteAlbumReply(connection, item.id, replyId);
   };
 
   /** 앨범 수정 클릭 핸들러 */
@@ -79,12 +80,12 @@ export default function AlbumItem({ item }: Props) {
     <S.Container>
       <S.Header>
         <S.User.Wrapper>
-          <Avatar size='small' src={item.user?.profileImageUrl ?? ''} />
-          <S.User.Name>{item.user?.name}</S.User.Name>
+          <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+          <S.User.Name>{item.user.name}</S.User.Name>
         </S.User.Wrapper>
         <S.HeaderRight>
           <S.CreateTime>{formatRelativeDate(new Date(item.createdAt))}</S.CreateTime>
-          {userId === item.user?.id && (
+          {userId === item.user.id && (
             <Button color='neutral' size='small' onClick={handleEdit}>
               수정
             </Button>
@@ -101,20 +102,35 @@ export default function AlbumItem({ item }: Props) {
       </S.Content>
       <S.Text>{item.content}</S.Text>
       <S.CommentArea>
-        댓글 3개
+        댓글 {item.albumReplyList.length}개
         <S.TextButton onClick={handleOpenComentArea} color='primary'>
           {isOpenCommentArea ? '접기' : '펼치기'}
         </S.TextButton>
       </S.CommentArea>
       {isOpenCommentArea && (
-        <S.Comment>
-          <S.InputWrapper>
-            <TextArea placeholder='댓글을 입력해주세요.' />
+        <S.Comment.Wrapper>
+          <S.Comment.InputWrapper>
+            <TextArea placeholder='댓글을 입력해주세요.' value={comment} onChange={(e) => setComment(e.target.value)} />
             <S.Button size='small' onClick={handleRegisterReply}>
               등록
             </S.Button>
-          </S.InputWrapper>
-        </S.Comment>
+          </S.Comment.InputWrapper>
+          {item.albumReplyList?.map((reply) => (
+            <S.Comment.ItemWrapper key={reply.id}>
+              <S.Comment.UserWrapper>
+                <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{item.user.role}</S.Comment.UserPosition>
+                {reply.userId === userId && (
+                  <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
+                    삭제
+                  </S.Comment.DeleteButton>
+                )}
+              </S.Comment.UserWrapper>
+              <S.Comment.Content>{reply.content}</S.Comment.Content>
+            </S.Comment.ItemWrapper>
+          ))}
+        </S.Comment.Wrapper>
       )}
     </S.Container>
   );

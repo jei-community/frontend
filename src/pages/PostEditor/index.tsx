@@ -38,10 +38,12 @@ export default function PostEditor() {
 
   /** 수정 혹은 등록 버튼 클릭 핸들러 */
   const handleConfirm = () => {
-    const isEdit = confirm('정말로 수정하시겠습니까?');
-    if (isEdit) {
-      if (state) editPost();
-      else postPost();
+    if (state) {
+      const isEdit = confirm('정말로 수정하시겠습니까?');
+      if (isEdit) editPost();
+    } else {
+      const isRegister = confirm('등록하시겠습니까?');
+      if (isRegister) postPost();
     }
   };
 
