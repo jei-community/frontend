@@ -40,6 +40,7 @@ export default function PostItem({ item }: Props) {
   const handleRegisterReply = () => {
     const postBoardReplyBody = { content: comment, boardReplyId: null };
     postBoardReplyMutation.mutate({ itemId: item.id, body: postBoardReplyBody });
+    setComment('');
   };
 
   /** 댓글 삭제 함수 */

@@ -46,6 +46,7 @@ export default function AlbumItem({ item }: Props) {
   const handleRegisterReply = () => {
     const postAlbumReplyBody = { content: comment, albumReplyId: null };
     postAlbumReplyMutation.mutate({ itemId: item.id, body: postAlbumReplyBody });
+    setComment('');
   };
 
   /** 댓글 삭제 함수 */
