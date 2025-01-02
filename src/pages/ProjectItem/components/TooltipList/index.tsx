@@ -30,7 +30,7 @@ export default function TooltipList({ links, ref, locked }: Props) {
               <S.LinkList>
                 {items?.map((item: string) => {
                   return (
-                    <Button key={item} color='primary' size='full'>
+                    <Button key={item} onClick={() => window.open(item)} color='primary' size='full'>
                       {item}
                     </Button>
                   );
