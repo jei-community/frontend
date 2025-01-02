@@ -13,8 +13,10 @@ import TableOfContent from '@/pages/ProjectItem/components/TableOfContent';
 import TechStack from '@/pages/ProjectItem/components/TechStack';
 import Title from '@/pages/ProjectItem/components/Title';
 import TooltipList from '@/pages/ProjectItem/components/TooltipList';
+import { useUserInfoStore } from '@/store';
 
 export default function ProjectItem() {
+  const { role } = useUserInfoStore();
   const linkRef = useRef<HTMLUListElement | null>(null);
   const descriptionRef = useRef<HTMLHeadingElement | null>(null);
   const techStackRef = useRef<HTMLHeadingElement | null>(null);
@@ -36,7 +38,7 @@ export default function ProjectItem() {
       <Aside>
         <ProjectSideContainer>
           <TooltipList ref={linkRef} links={links} />
-          <EditorLink />
+          {role === 'ADMIN' && <EditorLink />}
           <Divider />
           <TableOfContent
             linkRef={linkRef}
