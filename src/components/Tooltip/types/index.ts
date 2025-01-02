@@ -13,4 +13,6 @@ export interface TooltipProps extends PropsWithChildren {
   arrowPosition?: TooltipArrowPosition;
   /** 툴팁 안에 표시할 컨텐츠 */
   content: ReactNode;
+  /** 툴팁 잠금 여부 (툴팁을 여는 요소를 클릭해도 열리지 않음) */
+  locked?: boolean;
 }
