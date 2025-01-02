@@ -7,7 +7,13 @@ import ScrollToTop from '@/components/ScrollToTop';
 import GlobalStyle from '@/styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 export default function App() {
   return (
