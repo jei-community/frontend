@@ -1,8 +1,9 @@
-import { SearchIcon, UserPlusIcon } from 'lucide-react';
-import { useState } from 'react';
+import { UserPlusIcon } from 'lucide-react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { members } from '@/mocks/data/project';
+import { Members } from '@/types/project';
 
+import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
 import Modal from '@/components/Modal';
@@ -14,72 +15,87 @@ import { S } from '@/pages/ProjectEditor/components/TitleEditor/style';
 interface Props {
   startDate: string | null;
   endDate: string | null;
+  members: Members;
+  setMembersToRender: Dispatch<SetStateAction<Members>>;
 }
 
-export default function MemberAndDateEditor({ startDate, endDate }: Props) {
+export default function MemberAndDateEditor({ startDate, endDate, members, setMembersToRender }: Props) {
+  const [searchValue, setSearchValue] = useState('');
+  const [searchedMembers, setSearchedMembers] = useState<Members>(members); // 검색된 멤버 목록
   const { onOpenModal } = useModalStore();
-  const [checkedMembers, setCheckedMembers] = useState<string[]>([]);
+  const modalId = 'editMember';
+  const parsedMembers = members.filter((member) => member.isJoin);
 
-  const deleteMember = (id: string) => {
-    setCheckedMembers((prev) => prev.filter((prevId) => prevId !== id));
+  // 검색어 변경 시 검색 결과 업데이트
+  useEffect(() => {
+    const filteredMembers = members.filter(
+      (member) =>
+        member.name.toLowerCase().includes(searchValue.toLowerCase()) || // 이름 검색
+        member.role.toLowerCase().includes(searchValue.toLowerCase()), // 역할 검색 (선택 사항)
+    );
+    setSearchedMembers(filteredMembers);
+  }, [searchValue, members]); // 검색어와 members 상태가 변경될 때 실행
+
+  const searchMember = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.currentTarget.value);
   };
 
   const addMember = (id: string) => {
-    setCheckedMembers((prev) => [...prev, id]);
+    setMembersToRender((prev) => prev.map((member) => (member.id === id ? { ...member, isJoin: true } : member)));
+  };
+
+  const deleteMember = (id: string) => {
+    setMembersToRender((prev) => prev.map((member) => (member.id === id ? { ...member, isJoin: false } : member)));
   };
 
   const toggleCheckbox = (id: string) => {
-    if (checkedMembers.includes(id)) deleteMember(id);
-    else addMember(id);
+    if (members.find((member) => member.id === id)?.isJoin) {
+      deleteMember(id);
+    } else {
+      addMember(id);
+    }
   };
 
   return (
     <S.MemberAndDateContainer>
       <S.MemberInfoContainer>
         <S.AvatarContainer>
-          {Array.from({ length: 5 }, (_, index) => {
-            return (
-              <li key={index}>
-                <S.Avatar src='https://via.placeholder.com/50' alt='avatar' />
-              </li>
-            );
-          })}
+          {parsedMembers.map(({ id, profileImageUrl }) => (
+            <li key={id}>
+              <Avatar src={profileImageUrl} size='small' />
+            </li>
+          ))}
         </S.AvatarContainer>
-        <S.MemberCountText>+n명</S.MemberCountText>
-        <Button size='icon' type='button' onClick={onOpenModal}>
+        {Boolean(parsedMembers.length) && <S.MemberCountText>{parsedMembers.length}명</S.MemberCountText>}
+        <Button size='icon' type='button' onClick={() => onOpenModal(modalId)}>
           <UserPlusIcon color='white' />
         </Button>
       </S.MemberInfoContainer>
 
       <S.DateWrapper>
-        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' />
+        <TextField placeholder='시작 날짜' heightSize='small' defaultValue={startDate ?? ''} name='startDate' required />
         <S.DateText> ~ </S.DateText>
-        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' />
+        <TextField placeholder='종료 날짜' heightSize='small' defaultValue={endDate ?? ''} name='endDate' required />
       </S.DateWrapper>
 
-      <Modal title='프로젝트 참여 팀원' onConfirm={() => console.log('')}>
+      <Modal id={modalId} title='프로젝트 참여 팀원' onConfirm={() => console.log('')}>
         <S.ModalContentContainer>
           <S.SearchBarContainer>
-            <TextField placeholder='팀원 이름을 입력해 주세요' heightSize='small' />
-            <Button size='icon'>
-              <SearchIcon />
-            </Button>
+            <TextField value={searchValue} placeholder='팀원 이름을 입력해 주세요' heightSize='small' onChange={searchMember} />
           </S.SearchBarContainer>
           <S.MemberList>
-            {members.map(({ id, name, position }) => {
-              return (
-                <li key={id}>
-                  <S.CheckBoxContainer>
-                    <S.LabelContainer htmlFor={id}>
-                      <S.Avatar src='https://via.placeholder.com/32' />
-                      <S.NameText>{name}</S.NameText>
-                      <S.PositionText>{position}</S.PositionText>
-                    </S.LabelContainer>
-                    <Checkbox id={id} checked={checkedMembers.includes(id)} onChange={() => toggleCheckbox(id)} />
-                  </S.CheckBoxContainer>
-                </li>
-              );
-            })}
+            {searchedMembers.map(({ id, profileImageUrl, name, role, isJoin }) => (
+              <li key={id}>
+                <S.CheckBoxContainer>
+                  <S.LabelContainer htmlFor={id}>
+                    <Avatar src={profileImageUrl} size='small' />
+                    <S.NameText>{name}</S.NameText>
+                    <S.PositionText>{role}</S.PositionText>
+                  </S.LabelContainer>
+                  <Checkbox id={id} checked={isJoin} onChange={() => toggleCheckbox(id)} />
+                </S.CheckBoxContainer>
+              </li>
+            ))}
           </S.MemberList>
         </S.ModalContentContainer>
       </Modal>

@@ -45,6 +45,8 @@ export function formatRelativeDate(utcDate: Date): string {
   const diffHours = Math.floor(diffMinutes / 60); // 시간 단위로 변환
   const diffDays = Math.floor(diffHours / 24); // 일 단위로 변환
 
+  // 1분 이내
+  if (diffMinutes < 1) return '방금 전';
   // 60분 이내
   if (diffMinutes < 60) return `${diffMinutes}분 전`;
   // 24시간 이내
@@ -84,4 +86,13 @@ export const allowScroll = (prevScrollY: number) => {
   document.body.style.top = '';
   document.body.style.overflowY = '';
   window.scrollTo(0, prevScrollY);
+};
+
+export const formatToYYYYMMDD = (dateString: string | Date) => {
+  const date = new Date(dateString);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+
+  return `${yyyy}-${mm}-${dd}`;
 };

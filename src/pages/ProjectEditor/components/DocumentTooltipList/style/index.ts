@@ -14,6 +14,11 @@ export const S = {
     paddingRight: '1.6rem',
   }),
 
+  Icon: styled.img({
+    width: '3.2rem',
+    height: '3.2rem',
+  }),
+
   NameFieldWrapper: styled.div({
     width: '20rem',
   }),

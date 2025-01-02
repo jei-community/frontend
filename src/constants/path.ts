@@ -34,7 +34,6 @@ export const PATH = {
   SIGN_IN: '/sign-in',
   PRIVATE_ROUTER: '/',
   DAILY_CHECK: '/daily-check',
-  ARTICLES: '/articles',
   PROJECT,
   POSTS: {
     INDEX: '/posts',

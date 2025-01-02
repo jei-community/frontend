@@ -2,6 +2,10 @@ import { getAlbumList } from 'everydei-api-dev/lib/apis/functional/albums';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import { getNestiaHeader } from '@/utils/api';
+
+import { QUERY_KEYS } from '@/constants/query';
+
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
@@ -11,7 +15,7 @@ import Profile from '@/components/Profile';
 import { useUserInfoStore } from '@/store';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import AlbumItem from './component/AlbumItem/AlbumItem';
+import AlbumItem from './component/AlbumItem';
 import { S } from './style';
 
 export default function AlbumList() {
@@ -20,14 +24,8 @@ export default function AlbumList() {
 
   const { userId } = useUserInfoStore();
   const { data } = useSuspenseQuery({
-    queryKey: ['albumList'],
-    queryFn: () =>
-      getAlbumList({
-        host: 'https://api-dev.everydei.site/api/v1',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      }),
+    queryKey: [QUERY_KEYS.ALBUM_LIST],
+    queryFn: () => getAlbumList(getNestiaHeader()),
   });
 
   /** 사진 업로드하기 클릭 메서드 */

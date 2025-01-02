@@ -114,6 +114,7 @@ export const S = {
     justify-content: center;
     align-items: center;
     border-radius: 0.4rem;
+    padding: 0 ${({ $size }) => ($size === 'full' ? '1.6rem' : 0)};
     outline: none;
     cursor: pointer;
     transition: all 0.15s;

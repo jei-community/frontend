@@ -172,7 +172,7 @@ const BaseStyle = css`
   }
 
   body {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 
@@ -183,6 +183,7 @@ const BaseStyle = css`
   }
 
   a {
+    display: block;
     text-decoration: none;
   }
 

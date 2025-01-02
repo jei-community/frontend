@@ -17,6 +17,15 @@ export const S = {
     borderRadius: 8,
   }),
 
+  EmptyThumbnail: styled.div(({ theme }) => ({
+    width: '10rem',
+    height: '10rem',
+
+    borderRadius: 8,
+
+    backgroundColor: theme.colors.gray[200],
+  })),
+
   RightContainer: styled.div({
     display: 'flex',
     flexDirection: 'column',
@@ -72,11 +81,6 @@ export const S = {
     color: theme.colors.gray[800],
     ...theme.typography.body4,
   })),
-
-  DataContainer: styled.div({
-    display: 'flex',
-    gap: '0.4rem',
-  }),
 
   DateText: styled.p(({ theme }) => ({
     color: theme.colors.gray[500],

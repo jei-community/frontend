@@ -24,13 +24,15 @@ export default function DailyCheck() {
   return (
     <>
       <Content>
-        <S.PageTitle>
-          <S.SheetTitle>{SHEET_CONFIG[currSheet].title} </S.SheetTitle>
-          일일점검
-        </S.PageTitle>
-        <Suspense fallback={<Loading />}>
-          <MainContent dailyCheckPromise={dailyCheckPromise} userName={userName} />
-        </Suspense>
+        <S.Container>
+          <S.PageTitle>
+            <S.SheetTitle>{SHEET_CONFIG[currSheet].title} </S.SheetTitle>
+            일일점검
+          </S.PageTitle>
+          <Suspense fallback={<Loading />}>
+            <MainContent dailyCheckPromise={dailyCheckPromise} userName={userName} />
+          </Suspense>
+        </S.Container>
       </Content>
       <Aside>
         <SideContent />

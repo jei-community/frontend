@@ -3,6 +3,8 @@ import { postS3PresignedUrl } from 'everydei-api-dev/lib/apis/functional/aws/s3/
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { getNestiaHeader } from '@/utils/api';
+
 import { FileInfo } from '@/types/album';
 
 import Aside from '@/components/Aside';
@@ -27,13 +29,8 @@ export default function AlbumEditor() {
   const [uploadedFiles, setUploadedFiles] = useState<FileInfo[]>(state?.uploadedImages ?? []); // 업로드된 이미지들
   const [oldFilesLength, setOldFilesLength] = useState(state?.uploadedImages.length ?? 0);
 
-  // API 헤더
-  const connection = {
-    host: 'https://api-dev.everydei.site/api/v1',
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  };
+  /** API 헤더 */
+  const connection = getNestiaHeader();
 
   /** Presigned URL을 발급받은 후 파일을 업로드하는 함수 */
   const uploadFileToS3 = async (url: string, file: FileInfo) => {
@@ -59,7 +56,7 @@ export default function AlbumEditor() {
       type: 'ALBUM_IMAGE',
     };
 
-    // TODO: oldFilesLength만큼 앞에서 제외하고 호출
+    // oldFilesLength만큼 앞에서 제외하고 호출
     const presignedUrlRequests = uploadedFiles.slice(oldFilesLength).map(() => postS3PresignedUrl(connection, presignedUrlRequestBody));
 
     try {
@@ -82,9 +79,19 @@ export default function AlbumEditor() {
         content: text === undefined ? null : text,
       };
 
-      if (pageStatus === 'register') await postAlbum(connection, albumRequestBody);
-      else await putAlbum(connection, state.id, albumRequestBody);
-      navigate(-1);
+      if (pageStatus === 'edit') {
+        const isEdit = confirm('정말로 수정하시겠습니까?');
+        if (isEdit) {
+          await putAlbum(connection, state.id, albumRequestBody);
+          navigate(-1);
+        }
+      } else {
+        const isRegister = confirm('등록하시겠습니까?');
+        if (isRegister) {
+          await postAlbum(connection, albumRequestBody);
+          navigate(-1);
+        }
+      }
     } catch (error) {
       console.error('Failed to register album:', error);
     }

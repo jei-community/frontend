@@ -2,31 +2,46 @@ import { RefObject } from 'react';
 
 import { LinkItem } from '@/types/project';
 
-import { ICONS } from '@/constants/link';
-
-import DraggableScroller from '@/components/DraggableScroll';
+import Button from '@/components/Button';
+import Tooltip from '@/components/Tooltip';
+import { useTooltipStore } from '@/components/Tooltip/store';
 
 import { S } from '@/pages/ProjectItem/components/TooltipList/style';
 
 interface Props {
-  links: LinkItem[];
+  links: LinkItem;
   ref?: RefObject<HTMLUListElement | null>;
+  locked?: boolean;
 }
 
-export default function TooltipList({ links, ref }: Props) {
+export default function TooltipList({ links, ref, locked }: Props) {
+  const { onShowTooltip } = useTooltipStore();
+
   return (
     <S.TooltipList ref={ref}>
-      <DraggableScroller>
-        {links.map((link) => {
-          return (
-            <li key={link.tag}>
-              <S.TooltipContainer>
-                <S.TooltipImage src={ICONS[link.tag]} alt={`${link.tag} 이미지`} />
-              </S.TooltipContainer>
-            </li>
-          );
-        })}
-      </DraggableScroller>
+      {links?.map(({ id, url, tag, items }) => {
+        return (
+          <Tooltip
+            key={id}
+            id={id}
+            arrowPosition='top-right'
+            locked={locked}
+            content={
+              <S.LinkList>
+                {items?.map((item: string) => {
+                  return (
+                    <Button key={item} color='primary' size='full'>
+                      {item}
+                    </Button>
+                  );
+                })}
+              </S.LinkList>
+            }
+          >
+            <S.TooltipImage src={url} alt={`${tag} 이미지`} onClick={(event) => onShowTooltip(id, event.currentTarget)} />
+          </Tooltip>
+        );
+      })}
     </S.TooltipList>
   );
 }

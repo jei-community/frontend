@@ -27,15 +27,16 @@ function ModalWithHooks({ id, title, subtitle, onConfirm, onCancel, children }: 
 
 const meta = {
   title: 'Modal',
-  component: ModalWithHooks,
+  component: Modal,
   tags: ['autodocs', '!dev'],
   args: { id: 'test', title: 'Title', subtitle: 'Subtitle', onConfirm: fn(), onCancel: fn(), children: 'Content' },
-} satisfies Meta<typeof ModalWithHooks>;
+} satisfies Meta<typeof Modal>;
 
 export default meta;
 
-type Story = StoryObj<typeof ModalWithHooks>;
+type Story = StoryObj<typeof Modal>;
 
 export const DefaultModal: Story = {
-  args: { id: 'test', title: 'Title', subtitle: 'Subtitle', children: 'Content' },
+  args: { id: 'test', title: 'Title', subtitle: 'Subtitle' },
+  render: (arg) => <ModalWithHooks {...arg}>Content</ModalWithHooks>,
 };
