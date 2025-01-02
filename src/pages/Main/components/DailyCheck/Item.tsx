@@ -7,22 +7,20 @@ import { SheetKey, TodayCheckResponse } from '@/apis/dailyCheck/type';
 import Button from '@/components/Button';
 import HtmlParser from '@/components/HtmlParser';
 
+import { useUserInfoStore } from '@/store';
+
 import { S } from './style';
 
 interface Props {
   /** 일일점검 프로젝트 정보 */ item: TodayCheckResponse;
   /** 화면에 그려지는 데이터를 업데이트하는 함수 */ handleUpdateData: (title: string, col: string, value: string) => void;
 }
-
-//TODO(지애) : 임시 데이터 교체
-const userName = '임범규'; // 데이터 있을 때
-// const userName = '전증훈'; // 데이터 없을 때
-
 /** 개별 일일점검 아이템 (프로젝트 단위) */
 export default function Item({ item, handleUpdateData }: Props) {
   /** 오늘 날짜(일) */
   const today = new Date().getDate().toString();
   const [isChecked, setIsChecked] = useState(item.data[today] === 'O');
+  const { name: userName } = useUserInfoStore();
 
   /** 체크 버튼을 클릭하면 동작한다. */
   const handleCheckBtnClick = () => {
