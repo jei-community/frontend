@@ -53,7 +53,7 @@ export default function AlbumList() {
           <S.ButtonWrapper>
             <Button onClick={handleEditor}>사진 업로드하기</Button>
             <Button onClick={handleMyAlbums} color='neutral'>
-              {isMyAlbums ? '전체 앨범 보기' : '내가 올린 앨범 보기'}
+              {isMyAlbums ? '전체 추억 보기' : '내가 올린 추억 보기'}
             </Button>
           </S.ButtonWrapper>
         </S.AsideContainer>
@@ -62,7 +62,7 @@ export default function AlbumList() {
         <S.ContentContainer>
           {filteredData?.length === 0 ? (
             <S.EmptyWrapper>
-              <EmptyContent size='large'>{isMyAlbums ? '올린 앨범이 없어요' : '볼 수 있는 앨범이 없어요.'}</EmptyContent>
+              <EmptyContent size='large'>{isMyAlbums ? '올린 추억이 없어요' : '볼 수 있는 추억이 없어요.'}</EmptyContent>
             </S.EmptyWrapper>
           ) : (
             filteredData?.map((item) => {
