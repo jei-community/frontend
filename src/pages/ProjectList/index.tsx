@@ -11,6 +11,11 @@ import { S } from '@/pages/ProjectList/style';
 export default function ProjectList() {
   const { projectList, pagination, isMyProject, setPage, toggleIsMyProject, updateKeyword } = useProjectList();
 
+  const onPageChange = (newPage: number) => {
+    window.scrollTo(0, 0);
+    setPage(newPage);
+  };
+
   return (
     <Content>
       <S.Container>
@@ -29,7 +34,7 @@ export default function ProjectList() {
               limit={pagination.limit}
               page={pagination.page}
               hasNext={pagination.hasNext}
-              onPageChange={(newPage) => setPage(newPage)}
+              onPageChange={onPageChange}
             />
           </>
         ) : (

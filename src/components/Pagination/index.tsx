@@ -18,9 +18,7 @@ export default function Pagination({ totalCount, page, limit, hasNext, onPageCha
   const start = Math.max(page - 4, 1);
   const end = Math.min(start + 8, totalPages);
 
-  const handlePageChange = (newPage: number) => {
-    onPageChange(newPage);
-  };
+  const handlePageChange = (newPage: number) => onPageChange(newPage);
 
   return (
     <S.Container>
