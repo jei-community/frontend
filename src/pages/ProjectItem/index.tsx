@@ -38,7 +38,12 @@ export default function ProjectItem() {
           <TooltipList ref={linkRef} links={links} />
           <EditorLink />
           <Divider />
-          <TableOfContent linkRef={linkRef} descriptionRef={descriptionRef} techStackRef={techStackRef} />
+          <TableOfContent
+            linkRef={linkRef}
+            descriptionRef={descriptionRef}
+            techStackRef={techStackRef}
+            hasTechStackContent={Boolean(frontend || backend)}
+          />
         </ProjectSideContainer>
       </Aside>
     </>

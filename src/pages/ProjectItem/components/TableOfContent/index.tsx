@@ -12,9 +12,10 @@ interface Props {
   linkRef: RefObject<HTMLUListElement | null>;
   descriptionRef: RefObject<HTMLHeadingElement | null>;
   techStackRef: RefObject<HTMLHeadingElement | null>;
+  hasTechStackContent: boolean;
 }
 
-export default function TableOfContent({ linkRef, descriptionRef, techStackRef }: Props) {
+export default function TableOfContent({ linkRef, descriptionRef, techStackRef, hasTechStackContent }: Props) {
   const [focusedScroll, setFocusedScroll] = useState<FocusedScroll>({
     link: true,
     description: false,
@@ -43,9 +44,11 @@ export default function TableOfContent({ linkRef, descriptionRef, techStackRef }
         <S.TableOfContentButton onClick={() => handleScrollTo(descriptionRef, 'description')}>
           <S.TableOfContentText $isFocus={focusedScroll.description}>프로젝트 설명</S.TableOfContentText>
         </S.TableOfContentButton>
-        <S.TableOfContentButton onClick={() => handleScrollTo(techStackRef, 'techStack')}>
-          <S.TableOfContentText $isFocus={focusedScroll.techStack}>기술 스택</S.TableOfContentText>
-        </S.TableOfContentButton>
+        {hasTechStackContent && (
+          <S.TableOfContentButton onClick={() => handleScrollTo(techStackRef, 'techStack')}>
+            <S.TableOfContentText $isFocus={focusedScroll.techStack}>기술 스택</S.TableOfContentText>
+          </S.TableOfContentButton>
+        )}
       </S.TableOfContentContainer>
     </S.TableContainer>
   );
