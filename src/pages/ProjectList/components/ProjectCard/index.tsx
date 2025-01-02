@@ -3,6 +3,7 @@ import { Status } from '@/types/project';
 import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
 
 import Badge from '@/components/Badge';
+import ProjectThumbnail from '@/components/ProjectThumbnail';
 
 import { S } from '@/pages/ProjectList/components/ProjectCard/style';
 
@@ -19,7 +20,7 @@ export default function ProjectCard({ title, thumbnailImageUrl, startDate, endDa
   return (
     <S.Container>
       <S.Title>{title}</S.Title>
-      <S.Thumbnail src={thumbnailImageUrl}></S.Thumbnail>
+      <ProjectThumbnail src={thumbnailImageUrl} alt={`${title} 썸네일`} size='large' />
       <S.ContentContainer>
         <S.DateContainer>
           <S.DateText>{startDate}</S.DateText>
