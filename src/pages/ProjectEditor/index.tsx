@@ -87,9 +87,15 @@ export default function ProjectEditor() {
             linksToRender
               ?.map(({ id, items }) => ({
                 id,
-                items: items?.filter((item) => item.trim() !== '') ?? [], // 빈 문자열 제거
+                items: items
+                  ?.filter((item) => item.trim() !== '') // 빈 문자열 제거
+                  .map((item) => (item.startsWith('http://') || item.startsWith('https://') ? item : `https://${item}`)), // 상대 경로에 https:// 추가
               }))
-              .filter(({ items }) => items && items.length > 0) ?? null, // items가 빈 배열이면 제외
+              .filter(({ items }) => items && items.length > 0)
+              .map(({ id, items }) => ({
+                id,
+                items: items ?? [], // undefined인 경우 빈 배열로 설정
+              })) ?? null, // items가 빈 배열이면 제외
         },
         status: statusToRender ?? status ?? 'LIVE',
         startDate: formatToYYYYMMDD(new Date(String(startDate))),
