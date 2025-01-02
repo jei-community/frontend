@@ -14,7 +14,7 @@ import { useUserInfoStore } from '@/store';
 export default function Header() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { profileImageUrl } = useUserInfoStore();
+  const { userId, profileImageUrl } = useUserInfoStore();
 
   const logout = async () => {
     await postLogout();
@@ -46,12 +46,14 @@ export default function Header() {
             </S.CustomLink>
           </S.LinkContainer>
         </S.LeftContainer>
-        <S.RightContainer>
-          <Avatar src={profileImageUrl} />
-          <Button size='small' onClick={logout}>
-            로그아웃
-          </Button>
-        </S.RightContainer>
+        {userId && (
+          <S.RightContainer>
+            <Avatar src={profileImageUrl} />
+            <Button size='small' onClick={logout}>
+              로그아웃
+            </Button>
+          </S.RightContainer>
+        )}
       </S.Content>
     </S.Header>
   );

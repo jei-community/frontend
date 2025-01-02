@@ -12,8 +12,8 @@ export const useProjectDetails = () => {
   const isEdit = Boolean(projectId);
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEYS.PROJECT_DETAILS, projectId],
-    queryFn: () => getProjectDetail(getNestiaHeader(), projectId ?? ''),
     enabled: isEdit,
+    queryFn: () => getProjectDetail(getNestiaHeader(), projectId ?? ''),
   });
 
   return {
