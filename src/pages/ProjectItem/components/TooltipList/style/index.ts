@@ -17,6 +17,7 @@ export const S = {
     height: '3.2rem',
     maxWidth: '3.2rem',
     maxHeight: '3.2rem',
+    cursor: 'pointer',
   }),
 
   LinkList: styled.ul({
