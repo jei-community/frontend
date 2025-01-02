@@ -141,7 +141,7 @@ export default function AlbumEditor() {
       <Aside>
         <S.AsideContainer>
           <S.AsideButtonWrapper>
-            <Button color='success' onClick={() => onConfirm(state ? 'edit' : 'register')}>
+            <Button color='success' onClick={() => onConfirm(state ? 'edit' : 'register')} disabled={uploadedFiles.length === 0}>
               {state ? '수정' : '등록'}
             </Button>
             <Button color='neutral' onClick={onBack}>
