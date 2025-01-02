@@ -1,14 +1,12 @@
-import { deleteBoard, postBoard, putBoard } from 'everydei-api-dev/lib/apis/functional/boards';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-
-import { getNestiaHeader } from '@/utils/api';
 
 import Aside from '@/components/Aside';
 import Button from '@/components/Button';
 import Content from '@/components/Content';
 
 import MarkdownEditor from './components/MarkdownEditor';
+import { useDeleteBoardMutation, useEditBoardMutation, usePostBoardMutation } from './hooks';
 import { S } from './style';
 
 interface State {
@@ -26,8 +24,12 @@ export default function PostEditor() {
   const [title, setTitle] = useState<string>(state?.title ?? '');
   const [value, setValue] = useState<string | undefined>(state?.content ?? '');
 
-  /** API 헤더 */
-  const connection = getNestiaHeader();
+  /** 게시글 수정 mutate */
+  const editBoardMutation = useEditBoardMutation();
+  /** 게시글 등록 mutate */
+  const postBoardMutation = usePostBoardMutation();
+  /** 게시글 삭제 mutate */
+  const deleteBoardMutation = useDeleteBoardMutation();
 
   /** 제목 입력값이 변경될 때 호출되는 핸들러 */
   const handleChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,10 +40,18 @@ export default function PostEditor() {
   const handleConfirm = () => {
     if (state) {
       const isEdit = confirm('정말로 수정하시겠습니까?');
-      if (isEdit) editPost();
+      if (isEdit) {
+        const body = { title: title, content: value };
+        editBoardMutation.mutate({ itemId: location?.state?.id, body: body });
+        navigate('/posts/list');
+      }
     } else {
       const isRegister = confirm('등록하시겠습니까?');
-      if (isRegister) postPost();
+      if (isRegister) {
+        const body = { title: title, content: value };
+        postBoardMutation.mutate({ body: body });
+        navigate('/posts/list');
+      }
     }
   };
 
@@ -54,38 +64,8 @@ export default function PostEditor() {
   const handleDelete = async () => {
     const isDelete = confirm('정말로 삭제하시겠습니까?');
     if (isDelete) {
-      await deleteBoard(connection, state.id);
-      navigate(-1);
-    }
-  };
-
-  /** 수정 API */
-  const editPost = async () => {
-    const boardId = location?.state?.id;
-    const body = {
-      title: title,
-      content: value,
-    };
-
-    try {
-      await putBoard(connection, boardId, body);
-      navigate(-1);
-    } catch (error) {
-      console.error('Failed to update post: ', error);
-    }
-  };
-  /** 등록 API */
-  const postPost = async () => {
-    const body = {
-      title: title,
-      content: value,
-    };
-
-    try {
-      await postBoard(connection, body);
-      navigate(-1);
-    } catch (error) {
-      console.error('Failed to update post: ', error);
+      deleteBoardMutation.mutate(location?.state?.id);
+      navigate('/posts/list');
     }
   };
 

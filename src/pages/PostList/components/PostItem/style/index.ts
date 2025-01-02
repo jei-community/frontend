@@ -67,7 +67,7 @@ export const S = {
     padding: '1.6rem',
     marginBottom: '1.6rem',
     borderRadius: '0.8rem',
-    height: $isOpen ? '100%' : '12rem',
+    maxHeight: $isOpen ? '100%' : '12rem',
     overflow: 'hidden',
     // ::after로 그라데이션 추가
     '&::after': !$isOpen
