@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, RefObject } from 'react';
 
 import { TechStackItem } from '@/types/project';
 
@@ -6,6 +6,7 @@ import DraggableScroller from '@/components/DraggableScroll';
 import { S } from '@/components/TechStack/style';
 
 interface Props {
+  ref?: RefObject<HTMLUListElement | null>;
   techStacks?: TechStackItem | null;
   display?: 'flex' | 'grid';
 }
@@ -18,11 +19,11 @@ function Title({ children }: PropsWithChildren) {
   return <S.PositionTitle>{children}</S.PositionTitle>;
 }
 
-function List({ techStacks, display = 'flex' }: Props) {
+function List({ ref, techStacks, display = 'flex' }: Props) {
   return (
     <>
       {display === 'flex' ? (
-        <S.TechStackImgFlexList>
+        <S.TechStackImgFlexList ref={ref}>
           <DraggableScroller>
             {techStacks?.map(({ url, tag }) => {
               return (
