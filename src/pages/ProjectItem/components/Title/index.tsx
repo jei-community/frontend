@@ -6,6 +6,7 @@ import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
 
 import Avatar from '@/components/Avatar';
 import Badge from '@/components/Badge';
+import DateText from '@/components/DateText';
 import Divider from '@/components/Divider';
 import ProjectThumbnail from '@/components/ProjectThumbnail';
 
@@ -48,7 +49,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
             </S.AvatarContainer>
             {Boolean(parsedMembers.length) && <S.MemberCountText>{parsedMembers.length}명</S.MemberCountText>}
           </S.MemberInfoContainer>
-          {/\d/.test(startDate) && /\d/.test(endDate) && <S.DateText>{`${startDate} ~ ${endDate}`}</S.DateText>}
+          <DateText startDate={startDate} endDate={endDate} />
         </S.MemberAndDateContainer>
       </S.RightContainer>
     </S.Container>
