@@ -172,7 +172,7 @@ const BaseStyle = css`
   }
 
   body {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 

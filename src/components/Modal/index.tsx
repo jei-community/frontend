@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 
 import Button from '../Button';
-import { useDisableScroll } from './hooks/useDisableScroll';
 import { useModalStore } from './store';
 import { S } from './style';
 import type { ModalProps } from './types';
@@ -14,9 +13,6 @@ export default function Modal({ id, title, subtitle, onConfirm, onCancel, childr
 
   /** 모달 열림 여부 */
   const isOpened = modalState.isOpened && modalState.id === id;
-
-  // 모달이 열렸을 때 스크롤 방지
-  useDisableScroll(isOpened);
 
   const handleConfirm = () => {
     onConfirm?.();
