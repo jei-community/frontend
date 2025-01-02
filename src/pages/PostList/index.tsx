@@ -1,6 +1,6 @@
 import { getBoardList } from 'everydei-api-dev/lib/apis/functional/boards';
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 import { QUERY_KEYS } from '@/constants/query';
 
@@ -21,6 +21,8 @@ export default function PostList() {
   const [isMyPosts, setIsMyPosts] = useState(false);
 
   const { userId } = useUserInfoStore();
+  const location = useLocation();
+
   const { data } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.BOARD_LIST],
     queryFn: () =>
@@ -46,6 +48,22 @@ export default function PostList() {
 
   // 내가 쓴 포스트 보기 여부에 따른 데이터 관리
   const filteredData = isMyPosts ? data?.filter((item) => item.user.id === userId) : data;
+  useEffect(() => {
+    if (location) {
+      const targetId = location.state.scrollToId;
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+
+        const offset = 64 + 16; // 헤더 높이 + 여백만큼 추가 이동
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: elementPosition - offset,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [location]);
 
   return (
     <>
@@ -68,7 +86,11 @@ export default function PostList() {
             </S.EmptyWrapper>
           ) : (
             filteredData?.map((item) => {
-              return <PostItem key={item.id} item={item} />;
+              return (
+                <div id={item.id} key={item.id}>
+                  <PostItem key={item.id} item={item} />
+                </div>
+              );
             })
           )}
         </S.ContentContainer>

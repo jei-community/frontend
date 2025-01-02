@@ -13,11 +13,12 @@ interface Props {
   title: string;
   description: string;
   date: Date;
+  onClick: () => void;
 }
 
-export default function PostItem({ name, position, title, description, date }: Props) {
+export default function PostItem({ name, position, title, description, date, onClick }: Props) {
   return (
-    <S.Container>
+    <S.Container onClick={onClick}>
       <S.Title>{title}</S.Title>
       <S.MetaWrapper>
         <S.AuthorInfo.Wrapper>
