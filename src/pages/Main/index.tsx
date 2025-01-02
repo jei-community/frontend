@@ -47,6 +47,10 @@ export default function Main() {
       }),
   });
 
+  const onClickPostItem = (id: string) => {
+    navigate('/posts/list', { state: { scrollToId: id } });
+  };
+
   return (
     <>
       <Aside>
@@ -94,6 +98,7 @@ export default function Main() {
                     title={item.board.title}
                     description={item.board.content}
                     date={item.board.createdAt}
+                    onClick={() => onClickPostItem(item.board.id)}
                   />
                 );
               })}
