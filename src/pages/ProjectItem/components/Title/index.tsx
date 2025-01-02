@@ -7,6 +7,7 @@ import { BADGE_STATUS, STATUS_TEXT } from '@/constants/common';
 import Avatar from '@/components/Avatar';
 import Badge from '@/components/Badge';
 import Divider from '@/components/Divider';
+import ProjectThumbnail from '@/components/ProjectThumbnail';
 
 import { useMember } from '@/hooks';
 import { S } from '@/pages/ProjectItem/components/Title/style';
@@ -26,7 +27,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
 
   return (
     <S.Container>
-      <S.Thumbnail src={thumbnailImageUrl} alt={`${title} 썸네일 이미지`} />
+      <ProjectThumbnail src={thumbnailImageUrl} alt={`${title} 썸네일 이미지`} />
       <S.RightContainer>
         <S.TitleContainer>
           <S.Title>{title}</S.Title>
@@ -40,7 +41,7 @@ export default function Title({ thumbnailImageUrl, title, status, startDate, end
               {parsedMembers.map(({ id, profileImageUrl }) => {
                 return (
                   <li key={id}>
-                    <Avatar src={profileImageUrl} />
+                    <Avatar src={profileImageUrl} size='small' />
                   </li>
                 );
               })}
