@@ -48,20 +48,22 @@ export default function PostList() {
 
   // 내가 쓴 포스트 보기 여부에 따른 데이터 관리
   const filteredData = isMyPosts ? data?.filter((item) => item.user.id === userId) : data;
-  useEffect(() => {
-    if (location) {
-      const targetId = location.state.scrollToId;
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
 
-        const offset = 64 + 16; // 헤더 높이 + 여백만큼 추가 이동
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-          top: elementPosition - offset,
-          behavior: 'smooth',
-        });
-      }
+  //
+  useEffect(() => {
+    if (!location.state || !location.state.scrollToId) return;
+
+    const targetId = location.state.scrollToId;
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+
+      const offset = 64 + 16; // 헤더 높이 + 여백만큼 추가 이동
+      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth',
+      });
     }
   }, [location]);
 
