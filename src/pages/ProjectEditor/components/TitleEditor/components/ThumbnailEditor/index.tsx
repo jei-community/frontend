@@ -1,5 +1,7 @@
 import { ChangeEvent, useRef, useState } from 'react';
 
+import ProjectThumbnail from '@/components/ProjectThumbnail';
+
 import ButtonWithIcon from '@/pages/ProjectEditor/components/ButtonWithIcon';
 import { S } from '@/pages/ProjectEditor/components/TitleEditor/style';
 
@@ -29,7 +31,7 @@ export default function ThumbnailEditor({ thumbnailImageUrl }: Props) {
   return (
     <ButtonWithIcon align='center' iconVariant='image' onClick={openFileUploader}>
       <input ref={inputRef} type='file' accept='image/*' style={{ display: 'none' }} onChange={uploadThumbnail} name='thumbnail' />
-      {thumbnailSrc ? <S.Thumbnail src={String(thumbnailSrc)} alt='thumbnail' /> : <S.EmptyThumbnail />}
+      {thumbnailSrc ? <ProjectThumbnail src={String(thumbnailSrc)} alt='thumbnail' size='small' /> : <S.EmptyThumbnail />}
     </ButtonWithIcon>
   );
 }
