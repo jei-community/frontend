@@ -31,15 +31,15 @@ export default function LinkItem({ linksToRender, item, url, tag, index, setLink
     setLinksToRender(updatedLinks);
   };
 
-  const updateTag = (newTag: string) => {
-    const updatedLinks = linksToRender?.map((link) => {
-      if (link.tag !== tag) return link;
+  // const updateTag = (newTag: string) => {
+  //   const updatedLinks = linksToRender?.map((link) => {
+  //     if (link.tag !== tag) return link;
 
-      return { ...link, tag: newTag };
-    });
+  //     return { ...link, tag: newTag };
+  //   });
 
-    setLinksToRender(updatedLinks);
-  };
+  //   setLinksToRender(updatedLinks);
+  // };
 
   const deleteItem = () => {
     const updatedLinks = linksToRender
@@ -61,9 +61,9 @@ export default function LinkItem({ linksToRender, item, url, tag, index, setLink
       <button>
         <S.Icon src={url} alt={tag} />
       </button>
-      <S.NameFieldWrapper>
+      {/* <S.NameFieldWrapper>
         <TextField heightSize='small' placeholder='링크 이름을 입력해 주세요' value={tag} onChange={(e) => updateTag(e.target.value)} />
-      </S.NameFieldWrapper>
+      </S.NameFieldWrapper> */}
       <TextField heightSize='small' placeholder='https://' value={item} onChange={(e) => updateItem(e.target.value)} />
       <Button color='error' size='icon' onClick={deleteItem}>
         <Trash2Icon />
