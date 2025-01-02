@@ -6,7 +6,6 @@ import App from '@/App';
 import AlbumEditor from '@/pages/AlbumEditor';
 import AlbumList from '@/pages/AlbumList';
 import AlbumPage from '@/pages/AlbumsRouter';
-import Articles from '@/pages/Articles';
 import DailyCheck from '@/pages/DailyCheck';
 import Main from '@/pages/Main';
 import NotFound from '@/pages/NotFound';
@@ -33,7 +32,6 @@ export default function Router() {
         <Route path={PATH.APP} element={<App />}>
           <Route path={PATH.MAIN} element={<Main />} />
           <Route path={PATH.DAILY_CHECK} element={<DailyCheck />} />
-          <Route path={PATH.ARTICLES} element={<Articles />} />
 
           {/* Project 페이지 */}
           <Route path={PATH.PROJECT.INDEX} element={<ProjectRouter />}>
