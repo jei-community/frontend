@@ -3,6 +3,7 @@ import { RefObject, useState } from 'react';
 import DescriptionContainer from '@/components/DescriptionContainer';
 import MoreButton from '@/components/MoreButton';
 
+import { useIsMoreButtonVisible } from '@/pages/ProjectItem/components/Description/hooks';
 import { S } from '@/pages/ProjectItem/components/Description/style';
 
 interface Props {
@@ -10,16 +11,18 @@ interface Props {
   description: string;
 }
 
-// TODO(증훈): 서버 데이터로 교체
-export default function Description({ ref, description }: Props) {
+export default function Description({ description, ref }: Props) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const isMoreButtonVisible = useIsMoreButtonVisible({ ref, description });
 
   const handleToggleDescription = () => setIsDescriptionOpen(!isDescriptionOpen);
 
   return (
-    <DescriptionContainer ref={ref}>
-      <S.DescriptionText $isOpen={isDescriptionOpen}>{description}</S.DescriptionText>
-      <MoreButton isOpen={isDescriptionOpen} onClick={handleToggleDescription} />
+    <DescriptionContainer>
+      <S.DescriptionText ref={ref} $isOpen={isDescriptionOpen}>
+        {description}
+      </S.DescriptionText>
+      {isMoreButtonVisible && <MoreButton isOpen={isDescriptionOpen} onClick={handleToggleDescription} />}
     </DescriptionContainer>
   );
 }
