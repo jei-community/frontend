@@ -1,5 +1,9 @@
 import { formatRelativeDate } from '@/utils/common';
 
+import { Role } from '@/types/album';
+
+import { ROLE_TEXT } from '@/constants/common';
+
 import { Thumbnail } from '../../assets';
 import { S } from './style';
 
@@ -19,7 +23,7 @@ export default function PostItem({ name, position, title, description, date }: P
         <S.AuthorInfo.Wrapper>
           <S.AuthorInfo.Avatar src={Thumbnail} />
           <S.AuthorInfo.Name>{name}</S.AuthorInfo.Name>
-          <S.AuthorInfo.Position>{position}</S.AuthorInfo.Position>
+          <S.AuthorInfo.Position>{ROLE_TEXT[position as Role]}</S.AuthorInfo.Position>
         </S.AuthorInfo.Wrapper>
         <S.AuthorInfo.Date>{formatRelativeDate(date)}</S.AuthorInfo.Date>
       </S.MetaWrapper>
