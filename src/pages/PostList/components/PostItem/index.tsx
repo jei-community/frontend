@@ -74,7 +74,7 @@ export default function PostItem({ item }: Props) {
         </S.TitleWrapper>
         <S.UserContainer>
           <S.User.Wrapper>
-            <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+            <Avatar size='small' src={item.user.profileImageUrl} />
             <S.User.Name>{item.user.name}</S.User.Name>
             <S.User.Position>{ROLE_TEXT[item.user.role as Role]}</S.User.Position>
           </S.User.Wrapper>
@@ -103,7 +103,7 @@ export default function PostItem({ item }: Props) {
           {item.boardReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={reply.profileImageUrl ?? ''} />
+                <Avatar size='small' src={reply.profileImageUrl} />
                 <S.Comment.UserName>{reply.name}</S.Comment.UserName>
                 <S.Comment.UserPosition>{ROLE_TEXT[reply.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (

@@ -13,6 +13,7 @@ import EmptyContent from '@/components/EmptyContent';
 import Profile from '@/components/Profile';
 import TextButton from '@/components/TextButton';
 
+import { IMAGE_URL } from '@/assets';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { MyProjectItem, PostItem } from './components';
@@ -69,7 +70,11 @@ export default function Main() {
             ) : (
               <S.MyProject.Wrapper>
                 {data.projectList.map((item, index) => {
-                  return <MyProjectItem key={index} status={item.status} thumbnail={item.thumbnailImageUrl} title={item.title} />;
+                  return (
+                    <button key={index} onClick={() => navigate(`/project/list/${item.id}`)}>
+                      <MyProjectItem status={item.status} thumbnail={item.thumbnailImageUrl ?? IMAGE_URL.FILE_BOX} title={item.title} />
+                    </button>
+                  );
                 })}
               </S.MyProject.Wrapper>
             )}
@@ -94,6 +99,7 @@ export default function Main() {
                   <PostItem
                     key={index}
                     name={item.user.name}
+                    profileImageUrl={item.user.profileImageUrl}
                     position={item.user.role}
                     title={item.board.title}
                     description={item.board.content}

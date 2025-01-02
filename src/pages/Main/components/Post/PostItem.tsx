@@ -4,11 +4,11 @@ import { Role } from '@/types/album';
 
 import { ROLE_TEXT } from '@/constants/common';
 
-import { Thumbnail } from '../../assets';
 import { S } from './style';
 
 interface Props {
   name: string;
+  profileImageUrl: string;
   position: string;
   title: string;
   description: string;
@@ -16,13 +16,13 @@ interface Props {
   onClick: () => void;
 }
 
-export default function PostItem({ name, position, title, description, date, onClick }: Props) {
+export default function PostItem({ name, profileImageUrl, position, title, description, date, onClick }: Props) {
   return (
     <S.Container onClick={onClick}>
       <S.Title>{title}</S.Title>
       <S.MetaWrapper>
         <S.AuthorInfo.Wrapper>
-          <S.AuthorInfo.Avatar src={Thumbnail} />
+          <S.AuthorInfo.Avatar src={profileImageUrl} />
           <S.AuthorInfo.Name>{name}</S.AuthorInfo.Name>
           <S.AuthorInfo.Position>{ROLE_TEXT[position as Role]}</S.AuthorInfo.Position>
         </S.AuthorInfo.Wrapper>

@@ -88,7 +88,7 @@ export default function AlbumItem({ item }: Props) {
     <S.Container>
       <S.Header>
         <S.User.Wrapper>
-          <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
+          <Avatar size='small' src={item.user.profileImageUrl} />
           <S.User.Name>{item.user.name}</S.User.Name>
         </S.User.Wrapper>
         <S.HeaderRight>
@@ -126,7 +126,7 @@ export default function AlbumItem({ item }: Props) {
           {item.albumReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={reply.profileImageUrl ?? ''} />
+                <Avatar size='small' src={reply.profileImageUrl} />
                 <S.Comment.UserName>{reply.name}</S.Comment.UserName>
                 <S.Comment.UserPosition>{ROLE_TEXT[reply.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (

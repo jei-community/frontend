@@ -30,7 +30,7 @@ export const S = {
       height: '3.2rem',
       borderRadius: '100%',
       objectFit: 'contain',
-      marginRight: '2px',
+      marginRight: '8px',
     }),
     Name: styled.span(({ theme }) => ({
       ...theme.typography.body2,
