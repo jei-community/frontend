@@ -127,7 +127,7 @@ export default function AlbumEditor() {
       <Aside />
       <Content>
         <S.Container>
-          <S.PageTitle>{state ? '앨범 수정' : '새 앨범 등록'}</S.PageTitle>
+          <S.PageTitle>{state ? '추억 수정' : '새로운 추억 등록'}</S.PageTitle>
           <S.PageSubTitle>사진을 업로드해주세요. 최대 5장까지 추가할 수 있습니다.</S.PageSubTitle>
           <ImageUploadBox uploadedFiles={uploadedFiles} onUpload={handleFileUpload} onDelete={handleFileDelete} />
           <TextArea

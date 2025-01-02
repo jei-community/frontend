@@ -42,7 +42,7 @@ export default function Header() {
               포스트
             </S.CustomLink>
             <S.CustomLink to={PATH.ALBUMS.INDEX} $isFocused={pathname === `${PATH.ALBUMS.INDEX}/list`}>
-              앨범
+              추억 저장소
             </S.CustomLink>
           </S.LinkContainer>
         </S.LeftContainer>
