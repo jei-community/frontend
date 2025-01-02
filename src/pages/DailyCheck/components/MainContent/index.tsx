@@ -2,8 +2,10 @@ import { use, useMemo } from 'react';
 
 import { DailyCheckResponse } from '@/apis/dailyCheck/type';
 
+import EmptyContent from '@/components/EmptyContent';
+
 import Table from '../Table';
-import EmptyContent from './EmptyContent';
+import { S } from './style';
 
 interface Props {
   dailyCheckPromise: Promise<DailyCheckResponse | null>;
@@ -20,6 +22,15 @@ export default function MainContent({ dailyCheckPromise, userName }: Props) {
     return JSON.parse(JSON.stringify(originalData));
   }, [originalData]); //화면에 바로 반영되도록 데이터 복사해서 사용
 
-  // TODO(지애) EmptyComponent를 공통 컴포넌트로 교체
-  return <>{data ? <Table data={data} userName={userName} /> : <EmptyContent />}</>;
+  return (
+    <>
+      {data ? (
+        <Table data={data} userName={userName} />
+      ) : (
+        <S.EmptyContentContainer>
+          <EmptyContent size='large'>해야 할 일일점검이 없어요</EmptyContent>
+        </S.EmptyContentContainer>
+      )}
+    </>
+  );
 }
