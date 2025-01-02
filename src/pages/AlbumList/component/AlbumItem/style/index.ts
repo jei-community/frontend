@@ -50,7 +50,7 @@ export const S = {
     height: '9.6rem',
     borderRadius: '0.8rem',
     objectFit: 'cover',
-    backgroundColor: theme.colors.primary[300],
+    backgroundColor: theme.colors.white,
     boxShadow: $isSelected
       ? `0 0 0 3px ${theme.colors.primary[500]}` // 외부 테두리 추가
       : 'none',
