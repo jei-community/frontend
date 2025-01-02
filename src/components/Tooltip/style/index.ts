@@ -16,7 +16,7 @@ interface TooltipArrowProps {
 export const S = {
   TooltipOuterContainer: styled.div`
     position: relative;
-    z-index: 100;
+    z-index: 1;
   `,
   TooltipInnerContainer: styled.div<TooltipPositionProps>`
     position: absolute;
