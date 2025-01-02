@@ -42,9 +42,11 @@ export default function PostItem({ item }: Props) {
 
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
-    const postBoardReplyBody = { content: comment, boardReplyId: null };
-    postBoardReplyMutation.mutate({ itemId: item.id, body: postBoardReplyBody });
-    setComment('');
+    if (comment) {
+      const postBoardReplyBody = { content: comment, boardReplyId: null };
+      postBoardReplyMutation.mutate({ itemId: item.id, body: postBoardReplyBody });
+      setComment('');
+    } else alert('댓글을 입력해주세요.');
   };
 
   /** 댓글 삭제 함수 */
@@ -64,9 +66,11 @@ export default function PostItem({ item }: Props) {
       <S.Header>
         <S.TitleWrapper>
           <S.Title>{item.title}</S.Title>
-          <Button size='small' color='neutral' onClick={handleEdit}>
-            수정
-          </Button>
+          {userId === item.user.id && (
+            <Button color='neutral' size='small' onClick={handleEdit}>
+              수정
+            </Button>
+          )}
         </S.TitleWrapper>
         <S.UserContainer>
           <S.User.Wrapper>
@@ -99,9 +103,9 @@ export default function PostItem({ item }: Props) {
           {item.boardReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
-                <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
-                <S.Comment.UserPosition>{ROLE_TEXT[item.user.role as Role]}</S.Comment.UserPosition>
+                <Avatar size='small' src={reply.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{reply.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{ROLE_TEXT[reply.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (
                   <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
                     삭제

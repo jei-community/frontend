@@ -48,9 +48,11 @@ export default function AlbumItem({ item }: Props) {
 
   /** 댓글 등록 함수 */
   const handleRegisterReply = () => {
-    const postAlbumReplyBody = { content: comment, albumReplyId: null };
-    postAlbumReplyMutation.mutate({ itemId: item.id, body: postAlbumReplyBody });
-    setComment('');
+    if (comment) {
+      const postAlbumReplyBody = { content: comment, albumReplyId: null };
+      postAlbumReplyMutation.mutate({ itemId: item.id, body: postAlbumReplyBody });
+      setComment('');
+    } else alert('댓글을 입력해주세요.');
   };
 
   /** 댓글 삭제 함수 */
@@ -124,9 +126,9 @@ export default function AlbumItem({ item }: Props) {
           {item.albumReplyList?.map((reply) => (
             <S.Comment.ItemWrapper key={reply.id}>
               <S.Comment.UserWrapper>
-                <Avatar size='small' src={item.user.profileImageUrl ?? ''} />
-                <S.Comment.UserName>{item.user.name}</S.Comment.UserName>
-                <S.Comment.UserPosition>{ROLE_TEXT[item.user.role as Role]}</S.Comment.UserPosition>
+                <Avatar size='small' src={reply.profileImageUrl ?? ''} />
+                <S.Comment.UserName>{reply.name}</S.Comment.UserName>
+                <S.Comment.UserPosition>{ROLE_TEXT[reply.role as Role]}</S.Comment.UserPosition>
                 {reply.userId === userId && (
                   <S.Comment.DeleteButton color='neutral' onClick={() => handleDeleteReply(reply.id)}>
                     삭제
