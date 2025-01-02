@@ -32,7 +32,7 @@ import { TechStacksToRender } from '@/pages/ProjectEditor/type';
 
 export default function ProjectEditor() {
   const { projectId } = useParams();
-  const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links, isEdit } = useProjectDetails();
+  const { title, thumbnailImageUrl, status, startDate, endDate, description, frontend, backend, links, isEdit, isLoading } = useProjectDetails();
   const [statusToRender, setStatusToRender] = useState<string>(status);
   const { members } = useMember({ projectId });
   const [membersToRender, setMembersToRender] = useState<Members>(members);
@@ -57,7 +57,7 @@ export default function ProjectEditor() {
       const formData = new FormData(event.target as HTMLFormElement);
       const { title, thumbnail, description, startDate, endDate } = Object.fromEntries(formData.entries());
 
-      let thumbnailUrlToSave = thumbnailImageUrl;
+      let thumbnailUrlToSave = thumbnailImageUrl?.split('/').pop();
 
       // Presigned URL 생성 및 파일 업로드가 필요한 경우
       if (thumbnail && thumbnail instanceof File && thumbnail.size !== 0 && thumbnail.name !== '') {
@@ -96,8 +96,6 @@ export default function ProjectEditor() {
         endDate: formatToYYYYMMDD(new Date(String(endDate))),
       };
 
-      console.log(newProjectDetail.metadata.link);
-
       let newProjectId = projectId;
 
       if (isEdit) {
@@ -112,55 +110,51 @@ export default function ProjectEditor() {
     }
   };
 
+  if (isLoading) return null;
+
   return (
-    <>
-      <S.Form onSubmit={submitProjectDetails}>
-        <Content>
-          <ProjectContentContainer>
-            <TitleEditor
-              thumbnailImageUrl={thumbnailImageUrl}
-              title={title}
-              status={status}
-              startDate={startDate}
-              endDate={endDate}
-              members={membersToRender}
-              setStatusToRender={setStatusToRender}
-              setMembersToRender={setMembersToRender}
-            />
+    <S.Form onSubmit={submitProjectDetails}>
+      <Content>
+        <ProjectContentContainer>
+          <TitleEditor
+            thumbnailImageUrl={thumbnailImageUrl}
+            title={title}
+            status={status}
+            startDate={startDate}
+            endDate={endDate}
+            members={membersToRender}
+            setStatusToRender={setStatusToRender}
+            setMembersToRender={setMembersToRender}
+          />
 
-            <DescriptionEditor description={description} />
+          <DescriptionEditor description={description} />
 
-            <TechStackEditor
-              techStackAssets={techStackAssets}
-              techStacksToRender={techStacksToRender}
-              setTechStacksToRender={setTechStacksToRender}
-            />
+          <TechStackEditor techStackAssets={techStackAssets} techStacksToRender={techStacksToRender} setTechStacksToRender={setTechStacksToRender} />
 
-            {/* <EnvEditor configuration={projectId ? configuration : null} /> */}
-          </ProjectContentContainer>
-        </Content>
-        <Aside>
-          <ProjectSideContainer>
-            <DocumentTooltipList linkAssets={linkAssets} linksToRender={linksToRender} setLinksToRender={setLinksToRender} />
+          {/* <EnvEditor configuration={projectId ? configuration : null} /> */}
+        </ProjectContentContainer>
+      </Content>
+      <Aside>
+        <ProjectSideContainer>
+          <DocumentTooltipList linkAssets={linkAssets} linksToRender={linksToRender} setLinksToRender={setLinksToRender} />
 
-            <Divider />
+          <Divider />
 
-            <S.SideStickyContainer>
-              <SaveButton isEdit={isEdit} />
+          <S.SideStickyContainer>
+            <SaveButton isEdit={isEdit} />
 
-              <CancelButton />
+            <CancelButton />
 
-              {isEdit && (
-                <>
-                  <Divider />
+            {isEdit && (
+              <>
+                <Divider />
 
-                  <DeleteButton />
-                </>
-              )}
-            </S.SideStickyContainer>
-          </ProjectSideContainer>
-        </Aside>
-      </S.Form>
-    </>
+                <DeleteButton />
+              </>
+            )}
+          </S.SideStickyContainer>
+        </ProjectSideContainer>
+      </Aside>
+    </S.Form>
   );
 }

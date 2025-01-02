@@ -12,7 +12,6 @@ interface Props {
   /** 데이터를 업데이트하는 함수 */ handleUpdateData: (targetName: string, targetCol: string | number, value: string) => void;
 }
 
-//TODO(지애) : userName 설정
 /**
  * 툴팁 컴포넌트 (임시)
  * TODO(지애) : 추후 공통 컴포넌트로 툴팁컨테이너 교체

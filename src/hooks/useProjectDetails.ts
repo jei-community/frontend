@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 export const useProjectDetails = () => {
   const { projectId } = useParams();
   const isEdit = Boolean(projectId);
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEYS.PROJECT_DETAILS, projectId],
     queryFn: () => getProjectDetail(getNestiaHeader(), projectId ?? ''),
     enabled: isEdit,
@@ -28,5 +28,6 @@ export const useProjectDetails = () => {
     links: data?.projectMetadata?.link,
     metadata: data?.projectMetadata,
     isEdit,
+    isLoading,
   };
 };

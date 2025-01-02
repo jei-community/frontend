@@ -6,7 +6,7 @@ interface Props {
 
 export default function SaveButton({ isEdit }: Props) {
   return (
-    <Button color={isEdit ? 'warning' : 'success'} type='submit'>
+    <Button color='success' type='submit'>
       {isEdit ? '수정' : '저장'}
     </Button>
   );

@@ -8,11 +8,11 @@ import type { TooltipProps } from './types';
 /**
  * 툴팁 컴포넌트
  */
-export default function Tooltip({ id, arrowPosition = 'top-center', content, children }: TooltipProps) {
+export default function Tooltip({ id, arrowPosition = 'top-center', content, locked, children }: TooltipProps) {
   const { tooltipState, onHideTooltip } = useTooltipStore();
 
   /** 툴팁 열림 여부 */
-  const isEnabled = tooltipState.isEnabled && tooltipState.id === id;
+  const isEnabled = tooltipState.isEnabled && tooltipState.id === id && !locked;
   /** 툴팁 요소 */
   const tooltipRef = useRef<HTMLDivElement>(null);
   /** 툴팁의 오프셋 값 */

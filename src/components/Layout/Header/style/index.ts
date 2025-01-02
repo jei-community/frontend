@@ -19,7 +19,7 @@ export const S = {
     borderBottom: `1px solid ${theme.colors.gray[200]}`,
 
     backgroundColor: theme.colors.white,
-    zIndex: 1,
+    zIndex: 2,
   })),
 
   Content: styled.div({

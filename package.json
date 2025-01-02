@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.14.0",
     "@tanstack/react-query": "^5.62.3",
     "@uiw/react-md-editor": "^4.0.5",
-    "everydei-api-dev": "^0.3.0",
+    "everydei-api-dev": "^0.3.2",
     "lucide-react": "^0.468.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",

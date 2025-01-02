@@ -17,6 +17,8 @@ export default function TechStack({ ref, frontend, backend }: Props) {
 
   const handleToggleTechStack = () => setIsTechStackOpen(!isTechStackOpen);
 
+  if (!frontend && !backend) return null;
+
   return (
     <TechStackContainer ref={ref}>
       <TechStackWithPosition>

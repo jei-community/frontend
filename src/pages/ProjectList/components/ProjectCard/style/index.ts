@@ -24,6 +24,12 @@ export const S = {
   `,
 
   Title: styled.h2(({ theme }) => ({
+    display: '-webkit-box',
+
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    WebkitLineClamp: 1,
+
     color: theme.colors.gray[800],
     ...theme.typography.subtitle,
   })),
@@ -40,22 +46,19 @@ export const S = {
   ContentContainer: styled.div({
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
 
     width: '100%',
   }),
 
-  DateContainer: styled.div({
-    display: 'flex',
-    gap: '0.4rem',
+  BadgeContainer: styled.div({
+    marginLeft: 'auto', // Badge를 항상 오른쪽 끝으로 이동
   }),
-
-  DateText: styled.p(({ theme }) => ({
-    color: theme.colors.gray[500],
-    ...theme.typography.body3,
-  })),
 
   Description: styled.p(({ theme }) => ({
     display: '-webkit-box',
+
+    flex: 1,
 
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden',

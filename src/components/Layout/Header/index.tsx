@@ -38,14 +38,11 @@ export default function Header() {
             <S.CustomLink to={PATH.DAILY_CHECK} $isFocused={pathname === PATH.DAILY_CHECK}>
               일일점검
             </S.CustomLink>
-            <S.CustomLink to={PATH.ARTICLES} $isFocused={pathname === PATH.ARTICLES}>
-              아티클
-            </S.CustomLink>
             <S.CustomLink to={PATH.POSTS.INDEX} $isFocused={pathname === `${PATH.POSTS.INDEX}/list`}>
               포스트
             </S.CustomLink>
             <S.CustomLink to={PATH.ALBUMS.INDEX} $isFocused={pathname === `${PATH.ALBUMS.INDEX}/list`}>
-              앨범
+              추억 저장소
             </S.CustomLink>
           </S.LinkContainer>
         </S.LeftContainer>
