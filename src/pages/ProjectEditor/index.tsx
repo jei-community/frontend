@@ -57,7 +57,7 @@ export default function ProjectEditor() {
       const formData = new FormData(event.target as HTMLFormElement);
       const { title, thumbnail, description, startDate, endDate } = Object.fromEntries(formData.entries());
 
-      let thumbnailUrlToSave = thumbnailImageUrl;
+      let thumbnailUrlToSave = thumbnailImageUrl?.split('/').pop();
 
       // Presigned URL 생성 및 파일 업로드가 필요한 경우
       if (thumbnail && thumbnail instanceof File && thumbnail.size !== 0 && thumbnail.name !== '') {
@@ -95,8 +95,6 @@ export default function ProjectEditor() {
         startDate: formatToYYYYMMDD(new Date(String(startDate))),
         endDate: formatToYYYYMMDD(new Date(String(endDate))),
       };
-
-      console.log(newProjectDetail.metadata.link);
 
       let newProjectId = projectId;
 
