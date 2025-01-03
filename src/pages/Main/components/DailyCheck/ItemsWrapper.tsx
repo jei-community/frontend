@@ -1,23 +1,22 @@
-import { use, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import { TodayCheckResponse } from '@/apis/dailyCheck/type';
 
 import EmptyContent from '@/components/EmptyContent';
 
 import Item from './Item';
+import { useTodayCheck } from './store';
 import { S } from './style';
 
 interface Props {
-  /** 당일 일일점검 항목 요청 함수 */ todayCheckPromise: Promise<TodayCheckResponse[]>;
+  data: TodayCheckResponse[] | undefined;
 }
+
 /**
  * 일일점검 아이템들을 감싸는 컴포넌트
  */
-export default function ItemsWrapper({ todayCheckPromise }: Props) {
-  const originalData = use(todayCheckPromise);
-  const data = useMemo<TodayCheckResponse[]>(() => {
-    return JSON.parse(JSON.stringify(originalData));
-  }, [originalData]); //화면에 바로 반영되도록 데이터 복사해서 사용
+export default function ItemsWrapper({ data }: Props) {
+  const { todayCheckData, setTodayCheckData } = useTodayCheck();
 
   /**
    * 일일점검 데이터를 업데이트한다.
@@ -26,15 +25,33 @@ export default function ItemsWrapper({ todayCheckPromise }: Props) {
    * @param value 수정할 값
    * @returns
    */
-  const handleUpdateData = (title: string, col: string, value: string) =>
-    data.forEach((el) => {
-      if (el.title === title) el.data[col] = value;
-    });
+  const handleUpdateData = (title: string, col: string, value: string) => {
+    if (!todayCheckData) return;
+    setTodayCheckData(
+      todayCheckData.map((el) => {
+        if (el.title === title) {
+          return {
+            ...el,
+            data: {
+              ...el.data,
+              [col]: value,
+            },
+          };
+        }
+
+        return el;
+      }),
+    );
+  };
+
+  useEffect(() => {
+    if (data) setTodayCheckData(data);
+  }, [data, setTodayCheckData]);
 
   return (
     <S.ItemsWrapper>
-      {data.length > 0 ? (
-        data.map((item, index) => {
+      {todayCheckData && todayCheckData.length > 0 ? (
+        todayCheckData.map((item, index) => {
           return <Item item={item} key={index} handleUpdateData={handleUpdateData} />;
         })
       ) : (

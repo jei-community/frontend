@@ -1,25 +1,34 @@
-import { Suspense } from 'react';
+import { useEffect } from 'react';
 
-import { getTodayCheck } from '@/apis/dailyCheck';
+import { getDailyCheck, getTodayCheck } from '@/apis/dailyCheck';
 
+import { useDailyCheckListStore } from '@/pages/DailyCheck/store';
 import { useUserInfoStore } from '@/store';
+import { useQuery } from '@tanstack/react-query';
 
 import ItemsWrapper from './ItemsWrapper';
 import Loading from './Loading';
+import { useTodayCheck } from './store';
 import { S } from './style';
 
 /** 메인페이지 내 일일점검 컴포넌트 */
 export default function DailyCheck() {
   const { name: userName } = useUserInfoStore();
-  /** 로그인한 유저의 당일 일일점검 데이터 요청 */
-  const TodayCheckPromise = getTodayCheck(userName);
+  const { dailyCheckData, setDailyCheckData } = useDailyCheckListStore();
+  const { todayCheckData } = useTodayCheck();
+  const { data, isLoading } = useQuery({ queryKey: ['todayCheck', userName], queryFn: () => getTodayCheck(userName), enabled: !todayCheckData });
+
+  // 일일점검 리스트 데이터를 미리 받아온다.
+  useEffect(() => {
+    getDailyCheck('MATH', userName).then((data) => {
+      if (!dailyCheckData) setDailyCheckData(data);
+    });
+  }, [dailyCheckData, setDailyCheckData, userName]);
 
   return (
     <S.Container>
       <S.Title>일일점검</S.Title>
-      <Suspense fallback={<Loading />}>
-        <ItemsWrapper todayCheckPromise={TodayCheckPromise} />
-      </Suspense>
+      {isLoading ? <Loading /> : <ItemsWrapper data={data} />}
     </S.Container>
   );
 }
