@@ -11,8 +11,7 @@ interface Props {
  * 테이블 컴포넌트
  */
 export default function Table({ userName }: Props) {
-  const dailyCheckData = useDailyCheckListStore((state) => state.dailyCheckData);
-  const setDailyCheckData = useDailyCheckListStore((state) => state.setDailyCheckData);
+  const { dailyCheckData, setDailyCheckData } = useDailyCheckListStore();
 
   /** 데이터를 업데이트 한다.
    * @param data 업데이트할 데이터
@@ -42,7 +41,7 @@ export default function Table({ userName }: Props) {
             ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody key={JSON.stringify(dailyCheckData ? dailyCheckData.data : null)}>
         {dailyCheckData &&
           dailyCheckData.data.map((row, rowIndex) => (
             <S.TBody.Tr $isMyInfo={row['담당자'] === userName} key={`tb-${rowIndex}`}>

@@ -1,23 +1,22 @@
 import { useEffect } from 'react';
 
-import { getTodayCheck } from '@/apis/dailyCheck';
+import { TodayCheckResponse } from '@/apis/dailyCheck/type';
 
 import EmptyContent from '@/components/EmptyContent';
-
-import { useUserInfoStore } from '@/store';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 import Item from './Item';
 import { useTodayCheck } from './store';
 import { S } from './style';
 
+interface Props {
+  data: TodayCheckResponse[] | undefined;
+}
+
 /**
  * 일일점검 아이템들을 감싸는 컴포넌트
  */
-export default function ItemsWrapper() {
+export default function ItemsWrapper({ data }: Props) {
   const { todayCheckData, setTodayCheckData } = useTodayCheck();
-  const { name: userName } = useUserInfoStore();
-  const { data } = useSuspenseQuery({ queryKey: ['todayCheck', userName], queryFn: () => getTodayCheck(userName) });
 
   /**
    * 일일점검 데이터를 업데이트한다.

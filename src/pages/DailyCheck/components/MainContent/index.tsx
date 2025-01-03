@@ -1,28 +1,28 @@
 import { useEffect } from 'react';
 
-import { getDailyCheck } from '@/apis/dailyCheck';
+import { DailyCheckResponse } from '@/apis/dailyCheck/type';
 
 import EmptyContent from '@/components/EmptyContent';
 
 import { useUserInfoStore } from '@/store';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { useCurrSheetStore, useDailyCheckListStore } from '../../store';
+import { useDailyCheckListStore } from '../../store';
 import Table from '../Table';
 import { S } from './style';
+
+interface Props {
+  /** 일일점검 데이터 */
+  data: DailyCheckResponse | undefined;
+}
 
 /**
  * 메인 컨텐츠
  */
-export default function MainContent() {
+export default function MainContent({ data }: Props) {
   const { name: userName } = useUserInfoStore();
-  const { currSheet } = useCurrSheetStore();
-
-  const { data } = useSuspenseQuery({ queryKey: ['dailyCheck', userName, currSheet], queryFn: () => getDailyCheck(currSheet ?? 'MATH', userName) });
   const { dailyCheckData, setDailyCheckData } = useDailyCheckListStore();
-
   useEffect(() => {
-    if (data) setDailyCheckData(data);
+    if (data && !dailyCheckData) setDailyCheckData(data);
   }, [dailyCheckData, data, setDailyCheckData]);
 
   return (
