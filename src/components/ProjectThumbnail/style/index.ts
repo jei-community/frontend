@@ -20,7 +20,7 @@ const thumbnailSizes = {
 
 export const S = {
   Thumbnail: styled.img<{ $size: Size }>`
-    border-radius: 8px;
+    border-radius: 0.8rem;
 
     ${({ $size }) => thumbnailSizes[$size] || thumbnailSizes.default}
   `,

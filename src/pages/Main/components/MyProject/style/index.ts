@@ -21,8 +21,8 @@ export const S = {
     width: '12.8rem',
     height: '12.8rem',
     borderRadius: '1.2rem',
-    objectFit: 'contain',
-    backgroundColor: theme.colors.primary[300],
+    objectFit: 'cover',
+    backgroundColor: theme.colors.white,
   })),
 
   StatusBox: styled.div<StatusBoxProps>(({ $bgColor, $textColor, theme }) => ({

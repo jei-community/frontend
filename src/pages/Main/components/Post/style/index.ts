@@ -4,13 +4,13 @@ import MDEditor from '@uiw/react-md-editor';
 export const S = {
   Container: styled.div({
     width: '100%',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+    boxShadow: '0px 0.2rem 0.4rem rgba(0, 0, 0, 0.2)',
     padding: '2.4rem',
     borderRadius: '0.8rem',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
     ':hover': {
-      transform: 'translateY(-4px)',
-      boxShadow: '0px 6px 8px rgba(0, 0, 0, 0.2)',
+      transform: 'translateY(-0.4rem)',
+      boxShadow: '0px 0.4rem 0.6rem rgba(0, 0, 0, 0.2)',
     },
   }),
 
@@ -29,8 +29,8 @@ export const S = {
       width: '3.2rem',
       height: '3.2rem',
       borderRadius: '100%',
-      objectFit: 'contain',
-      marginRight: '2px',
+      objectFit: 'cover',
+      marginRight: '0.8rem',
     }),
     Name: styled.span(({ theme }) => ({
       ...theme.typography.body2,

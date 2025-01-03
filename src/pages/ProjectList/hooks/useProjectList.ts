@@ -18,7 +18,10 @@ export const useProjectList = () => {
     queryFn: () => getProjectList(getNestiaHeader(), query),
   });
 
-  const toggleIsMyProject = () => setIsMyProject(!isMyProject);
+  const toggleIsMyProject = () => {
+    setPage(1);
+    setIsMyProject(!isMyProject);
+  };
 
   const updateKeyword = (keyword: string) => setKeyword(keyword);
 

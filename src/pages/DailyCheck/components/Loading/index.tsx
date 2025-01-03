@@ -8,7 +8,7 @@ import { S } from './style';
 export default function Loading() {
   return (
     <S.Wrapper>
-      <LoadingSpinner size='large' />;
+      <LoadingSpinner size='large' />
     </S.Wrapper>
   );
 }

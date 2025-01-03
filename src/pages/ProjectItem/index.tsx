@@ -37,9 +37,18 @@ export default function ProjectItem() {
       </Content>
       <Aside>
         <ProjectSideContainer>
-          <TooltipList ref={linkRef} links={links} />
-          {role === 'ADMIN' && <EditorLink />}
-          <Divider />
+          {links && Boolean(links.length) && (
+            <>
+              <TooltipList ref={linkRef} links={links} />
+              <Divider />
+            </>
+          )}
+          {role === 'ADMIN' && (
+            <>
+              <EditorLink />
+              <Divider />
+            </>
+          )}
           <TableOfContent
             linkRef={linkRef}
             descriptionRef={descriptionRef}
