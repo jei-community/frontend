@@ -35,9 +35,9 @@ export const S = {
       0 1px 1px var(--color-border-default, #d0d7de)
     `,
     backgroundColor: 'var(--color-canvas-default, #ffffff)',
-    borderRadius: '4px',
-    padding: '8px',
-    marginBottom: '16px',
+    borderRadius: '0.4rem',
+    padding: '0.8rem',
+    marginBottom: '1.6rem',
     ...theme.typography.subtitle,
   })),
 };
