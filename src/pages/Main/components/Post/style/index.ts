@@ -29,7 +29,7 @@ export const S = {
       width: '3.2rem',
       height: '3.2rem',
       borderRadius: '100%',
-      objectFit: 'contain',
+      objectFit: 'cover',
       marginRight: '8px',
     }),
     Name: styled.span(({ theme }) => ({
